@@ -1,0 +1,5 @@
+home=com.FunFinder360.Controller.HomeController
+join=com.FunFinder360.Controller.MemberJoinController
+login=com.FunFinder360.Controller.MemberLoginController
+findId=com.FunFinder360.Controller.MemberFindIdController
+findPassword=com.FunFinder360.Controller.MemberFindPasswordController
