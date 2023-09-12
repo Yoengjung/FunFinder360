@@ -12,3 +12,4 @@ joinSelect=com.FunFinder360.Controller.SelectJoinController
 
 #문의
 commonQuestionsList=com.FunFinder360.Controller.CommonQuestionsController.CQListController
+commonQuestionsDetail=com.FunFinder360.Controller.CommonQuestionsController.CQDetailController

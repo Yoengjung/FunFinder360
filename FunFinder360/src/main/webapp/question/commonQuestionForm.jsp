@@ -11,12 +11,12 @@
 	margin-top: 130px;
 	width: 100%;
 	height: 100%;
-	background-color: red;
 }
 
 .container h2 {
 	margin-bottom: 30px;
 }
+
 .table-head-box {
 	text-align: center;
 }
@@ -28,17 +28,30 @@
 .no-head {
 	width: 10%;
 }
+
 .title-head {
+	text-align: left;
 	width: 50%;
 }
+
 .registrant-head {
 	width: 10%;
 }
+
 .posted-date-head {
 	width: 20%;
 }
+
 .readhit-head {
 	width: 10%;
+}
+
+.title-box {
+	text-align: left;
+}
+
+.title-box a {
+	color: #3366FF;
 }
 </style>
 </head>
@@ -56,15 +69,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td class="table-body-box">1</td>
-					<td class="table-body-box">Doe</td>
-					<td class="table-body-box">관리자</td>
-					<td class="table-body-box">2020-10-20</td>
-					<td class="table-body-box">2</td>
-				</tr>
+				<c:forEach var="qeustion" items="${requestScope.commonQuestionData}">
+					<tr>
+						<td class="table-body-box">${qeustion.question_id}</td>
+						<td class="table-body-box title-box">
+							<a href="<%=notWithFormTag%>commonQuestionsDetail&qeustion_id=${qeustion.question_id}">${qeustion.title}</a>
+						</td>
+						<td class="table-body-box">${qeustion.userId}</td>
+						<td class="table-body-box">${qeustion.postedDate}</td>
+						<td class="table-body-box">${qeustion.readhit}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	${requestScope.pageInfo.pagingHtml}
 </body>
 </html>

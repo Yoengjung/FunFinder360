@@ -37,4 +37,11 @@ public class SuperClass implements SuperController {
 		}
 	}
 	
+	public String getUrlInfomation(String todoCommmand) {
+		String appName = this.request.getContextPath() ;
+		String mappingName = "/FunFinder360" ;
+		String text = appName + mappingName + "?command=" + todoCommmand ;
+		return text ;
+	}
+	
 }
