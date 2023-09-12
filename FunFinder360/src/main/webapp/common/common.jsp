@@ -92,7 +92,7 @@ hr {
 	left: 30px;
 }
 
-.category-menu-dropdown {
+.menu-dropdown {
 	position: relative;
 }
 
@@ -114,7 +114,7 @@ hr {
 }
 
 /* 호버 시 드롭다운 내용 활성화 */
-.category-menu-dropdown:hover .dropdown-content {
+.menu-dropdown:hover .dropdown-content {
 	display: block;
 }
 
@@ -134,8 +134,6 @@ hr {
 .a-tag:hover {
 	color: black;
 }
-
-
 
 .company-info-container {
 	position: absolute;
@@ -168,7 +166,7 @@ hr {
 		<a href="<%=notWithFormTag%>home" id="logo">FunFinder360</a>
 		<nav>
 			<ul>
-				<div class="category-menu-dropdown">
+				<div class="menu-dropdown">
 					<a href="#" class="menu-a-tag">카테고리</a>
 					<div class="dropdown-content">
 						<a href="#">스포츠 - 야외활동</a>
@@ -184,16 +182,26 @@ hr {
 				<li>
 					<a href="#" class="menu-a-tag">검색</a>
 				</li>
-				<li>
+				<!-- 로그인 유저가 업주 시 이벤트 항목 추가 -->
+				<div class="menu-dropdown">
 					<a href="#" class="menu-a-tag">마이페이지</a>
-				</li>
-				<li>
+					<div class="dropdown-content">
+						<a href="#">내 게시물</a>
+						<a href="#">게시물 수익</a>
+						<a href="#">즐겨찾기 목록</a>
+						<a href="#">회원 정보</a>
+					</div>
+				</div>
+
+				<div class="menu-dropdown">
 					<a href="#" class="menu-a-tag">문의</a>
-				</li>
+					<div class="dropdown-content">
+						<a href="<%=notWithFormTag%>commonQuestionsList">자주 묻는 질문</a>
+						<a href="#">개인 문의</a>
+					</div>
+				</div>
 			</ul>
 		</nav>
 	</div>
-
-	
 </body>
 </html>

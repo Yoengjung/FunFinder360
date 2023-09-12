@@ -77,6 +77,12 @@
 	position: relative;
 	height: 100%;
 }
+
+.foot-container {
+	position: absolute;
+	bottom: 100px;
+	width: 100%;
+}
 </style>
 </head>
 <body>
@@ -98,6 +104,24 @@
 				</div>
 			</div>
 		</div>
+		<div class="foot-container">
+			<hr>
+			<div class="company-info-container">
+				<ul>
+					<li>
+						<span>회사 이름: ${applicationScope.companyInfoMap.companyName}</span>
+						<span>회사 주소: ${applicationScope.companyInfoMap.address}</span>
+						<span>전화번호: ${applicationScope.companyInfoMap.phoneNumber}</span>
+					</li>
+					<li>
+						<span>이메일: ${applicationScope.companyInfoMap.email}</span>
+						<span>설립일: ${applicationScope.companyInfoMap.establishmentDate}</span>
+						<span>사업자등록번호: ${applicationScope.companyInfoMap.businessRegistrationNumber}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
+
 </body>
 </html>

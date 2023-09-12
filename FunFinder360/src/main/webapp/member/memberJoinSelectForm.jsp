@@ -78,6 +78,11 @@
 	height: 100%;
 }
 
+.foot-container {
+	position: absolute;
+	bottom: 100px;
+	width: 100%;
+}
 </style>
 </head>
 <body>
@@ -87,13 +92,35 @@
 			<div class="select-container">
 				<div class="select-container">
 					<div class="select-item1">
-						<a href="<%=notWithFormTag%>PersonalJoin" class="select-login-a"><span>개인 회원가입</span></a>
+						<a href="<%=notWithFormTag%>PersonalJoin" class="select-login-a">
+							<span>개인 회원가입</span>
+						</a>
 					</div>
 					<div class="select-item2">
-						<a href="<%=notWithFormTag%>OwnerJoin" class="select-login-a"><span>업주 회원가입</span></a>
+						<a href="<%=notWithFormTag%>OwnerJoin" class="select-login-a">
+							<span>업주 회원가입</span>
+						</a>
 					</div>
 				</div>
 			</div>
+		</div>
+
+	</div>
+	<div class="foot-container">
+		<hr>
+		<div class="company-info-container">
+			<ul>
+				<li>
+					<span>회사 이름: ${applicationScope.companyInfoMap.companyName}</span>
+					<span>회사 주소: ${applicationScope.companyInfoMap.address}</span>
+					<span>전화번호: ${applicationScope.companyInfoMap.phoneNumber}</span>
+				</li>
+				<li>
+					<span>이메일: ${applicationScope.companyInfoMap.email}</span>
+					<span>설립일: ${applicationScope.companyInfoMap.establishmentDate}</span>
+					<span>사업자등록번호: ${applicationScope.companyInfoMap.businessRegistrationNumber}</span>
+				</li>
+			</ul>
 		</div>
 	</div>
 </body>
