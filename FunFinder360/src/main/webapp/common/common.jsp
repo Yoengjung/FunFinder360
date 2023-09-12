@@ -163,10 +163,10 @@ hr {
 		<div class="login-container">
 			<ul>
 				<li>
-					<a href="<%=notWithFormTag%>login" class="a-tag">login</a>
+					<a href="<%=notWithFormTag%>loginSelect" class="a-tag">login</a>
 				</li>
 				<li>
-					<a href="<%=notWithFormTag%>join" class="a-tag">join</a>
+					<a href="<%=notWithFormTag%>joinSelect" class="a-tag">join</a>
 				</li>
 			</ul>
 		</div>

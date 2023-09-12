@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.FunFinder360.Bean.Model.Member;
 import com.oreilly.servlet.MultipartRequest;
 
-public class MemberJoinController extends SuperClass {
+public class MemberPersonalJoinController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
-		super.goToPage("/member/memberJoinForm.jsp");
+		super.goToPage("/member/memberPersonalJoinForm.jsp");
 	}
 
 	@Override

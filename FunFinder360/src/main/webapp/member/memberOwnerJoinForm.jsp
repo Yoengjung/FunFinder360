@@ -13,12 +13,19 @@
 		const id = $("#id").val();
 		const password = $("#password").val();
 		const passwordConfirm = $("#passwordConfirm").val();
+		const username = $("#username").val();
+		const businessName = $("#businessName").val();
+		const businessType = $("input[name='businessType']:checked").val()
+		const businessNumber = $("#businessNumber").val();
+		const phoneNumber = $("#phoneNumber").val();
 		const email = $("#email").val();
 		const profileImage = $("#profileImage").val();
 
 		const idPattern = /^[a-zA-Z0-9]{6,20}$/;
 		const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,20}$/;
+		const businessPattern = /^\d{3}-\d{2}-\d{5}$/;
 		const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+		const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
 
 		if (id == "") {
 			var element = document.getElementById("id-empty-alert-message");
@@ -76,6 +83,93 @@
 			confirmElement.style.display = "none";
 		}
 
+		if (username == "") {
+			var emptyElement = document
+					.getElementById("username-empty-alert-message");
+			emptyElement.style.display = "block";
+			return false;
+		} else {
+			var emptyElement = document
+					.getElementById("username-empty-alert-message");
+			emptyElement.style.display = "none";
+		}
+		if (username.length < 2) {
+			var emptyElement = document
+					.getElementById("username-alert-message-tag");
+			emptyElement.style.display = "block";
+			return false;
+		} else {
+			var emptyElement = document
+					.getElementById("username-alert-message-tag");
+			emptyElement.style.display = "none";
+		}
+
+		if (businessName == "") {
+			var emptyElement = document
+					.getElementById("business-name-empty-alert-message");
+			emptyElement.style.display = "block";
+			return false;
+		} else {
+			var emptyElement = document
+					.getElementById("business-name-empty-alert-message");
+			emptyElement.style.display = "none";
+		}
+
+		if (businessType == "") {
+			var emptyElement = document
+					.getElementById("businessType-empty-alert-message");
+			emptyElement.style.display = "block";
+			return false;
+		} else {
+			var emptyElement = document
+					.getElementById("businessType-empty-alert-message");
+			emptyElement.style.display = "none";
+		}
+
+		if (businessNumber == "") {
+			var emptyElement = document
+					.getElementById("businessNumber-empty-alert-message");
+			emptyElement.style.display = "block";
+			return false;
+		} else {
+			var emptyElement = document
+					.getElementById("businessNumber-empty-alert-message");
+			emptyElement.style.display = "none";
+		}
+
+		if (!businessPattern.test(businessNumber)) {
+			var element = document
+					.getElementById("businessNumber-alert-message-tag");
+			element.style.display = "block";
+			return false;
+		} else {
+			var element = document
+					.getElementById("businessNumber-alert-message-tag");
+			element.style.display = "none";
+		}
+
+		if (phoneNumber == "") {
+			var emptyElement = document
+					.getElementById("phoneNumber-empty-alert-message");
+			emptyElement.style.display = "block";
+			return false;
+		} else {
+			var emptyElement = document
+					.getElementById("phoneNumber-empty-alert-message");
+			emptyElement.style.display = "none";
+		}
+
+		if (!phoneRegex.test(phoneNumber)) {
+			var element = document
+					.getElementById("phoneNumber-alert-message-tag");
+			element.style.display = "block";
+			return false;
+		} else {
+			var element = document
+					.getElementById("phoneNumber-alert-message-tag");
+			element.style.display = "none";
+		}
+
 		if (email == "") {
 			var emptyElement = document
 					.getElementById("email-empty-alert-message-tag");
@@ -97,7 +191,6 @@
 					.getElementById("email-alert-message-tag");
 			invalidElement.style.display = "none";
 		}
-
 	}
 </script>
 <style>
@@ -187,13 +280,58 @@ textarea {
 	display: none;
 	color: red;
 }
+
+#username-alert-message-tag {
+	display: none;
+	color: red;
+}
+
+#username-empty-alert-message {
+	display: none;
+	color: red;
+}
+
+#email-alert-message-tag {
+	display: none;
+	color: red;
+}
+
+#phoneNumber-alert-message-tag {
+	display: none;
+	color: red;
+}
+
+#phoneNumber-empty-alert-message {
+	display: none;
+	color: red;
+}
+
+#business-name-empty-alert-message {
+	display: none;
+	color: red;
+}
+
+#businessType-empty-alert-message {
+	display: none;
+	color: red;
+}
+
+#businessNumber-alert-message-tag {
+	display: none;
+	color: red;
+}
+
+#businessNumber-empty-alert-message {
+	display: none;
+	color: red;
+}
 </style>
 </head>
 <body>
 	<div class="container">
 		<div class="join-container">
 			<div class="join-form">
-				<h2>회원가입</h2>
+				<h2>업주 회원가입</h2>
 				<form action="<%=withFormTag%>" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="command" value="join">
 					<ul>
@@ -213,6 +351,51 @@ textarea {
 							<input class="form-control" type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호 확인">
 							<p id="passwordConfirm-alert-message-tag">비밀번호가 일치하지 않습니다.</p>
 						</li>
+						<li>
+							<span>이름</span>
+							<span style="color: red">*</span>
+							<input class="form-control" type="text" id="username" name="username" autocomplete="off" placeholder="이름 입력">
+							<p id="username-alert-message-tag">허용되지 않는 문자가 있거나 최소 2글자이어야 합니다.</p>
+							<p id="username-empty-alert-message">이름은 필수 입력 사항입니다.</p>
+						</li>
+						<li>
+							<span>사업이름</span>
+							<span style="color: red">*</span>
+							<input class="form-control" type="text" id="businessName" name="businessName" autocomplete="off" placeholder="사업이름 입력">
+							<p id="business-name-empty-alert-message">사업이름은 필수 입력 사항입니다.</p>
+						</li>
+
+						<li>
+							<span>사업 구분</span>
+							<span style="color: red">*</span>
+							<div class="form-check">
+								<input type="radio" class="form-check-input" id="businessTypeRadio1" name="businessType" value="personalBusiness" checked>
+								개인 사업자 <label class="form-check-label" for="radio1"></label>
+							</div>
+							<div class="form-check">
+								<input type="radio" class="form-check-input" id="businessTypeRadio2" name="businessType" value="corporateBusiness">
+								법인 <label class="form-check-label" for="radio2"></label>
+							</div>
+							<p id="businessType-empty-alert-message">사업 구분은 필수 선택 사항입니다.</p>
+						</li>
+
+						<li>
+							<span>사업자등록번호</span>
+							<span style="color: red">*</span>
+							<input class="form-control" type="text" id="businessNumber" name="businessNumber" autocomplete="off" placeholder="사업자등록번호 입력">
+							<p id="businessNumber-alert-message-tag">유효하지 않는 사업자등록번호입니다. 000-00-00000 형식으로 입력해야 합니다.</p>
+							<p id="businessNumber-empty-alert-message">사업자등록번호는 필수 입력 사항입니다.</p>
+						</li>
+
+						<li>
+							<span>전화번호</span>
+							<span style="color: red">*</span>
+							<input class="form-control" type="text" id="phoneNumber" name="phoneNumber" autocomplete="off" placeholder="전화번호 입력">
+							<p id="phoneNumber-alert-message-tag">유효하지 않는 전화번호입니다. 000-0000-0000 형식으로 입력해야 합니다.</p>
+							<p id="phoneNumber-empty-alert-message">전화번호는 필수 입력 사항입니다.</p>
+						</li>
+
+
 						<li>
 							<span>이메일주소</span>
 							<span style="color: red">*</span>

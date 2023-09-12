@@ -83,14 +83,14 @@
 <body>
 	<div class="container">
 		<div class="login-form-container">
-			<h2>로그인</h2>
+			<h2>회원가입</h2>
 			<div class="select-container">
 				<div class="select-container">
 					<div class="select-item1">
-						<a href="<%=notWithFormTag%>PersonalLogin" class="select-login-a"><span>개인 로그인</span></a>
+						<a href="<%=notWithFormTag%>PersonalJoin" class="select-login-a"><span>개인 회원가입</span></a>
 					</div>
 					<div class="select-item2">
-						<a href="<%=notWithFormTag%>OwnerLogin" class="select-login-a"><span>업주 로그인</span></a>
+						<a href="<%=notWithFormTag%>OwnerJoin" class="select-login-a"><span>업주 회원가입</span></a>
 					</div>
 				</div>
 			</div>

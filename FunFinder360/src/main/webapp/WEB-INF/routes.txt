@@ -1,5 +1,11 @@
 home=com.FunFinder360.Controller.HomeController
-join=com.FunFinder360.Controller.MemberJoinController
-login=com.FunFinder360.Controller.MemberLoginController
+
+#member
+PersonalJoin=com.FunFinder360.Controller.MemberPersonalJoinController
+PersonalLogin=com.FunFinder360.Controller.MemberPersonalLoginController
+OwnerJoin=com.FunFinder360.Controller.MemberOwnerJoinController
+OwnerLogin=com.FunFinder360.Controller.MemberOwnerLoginController
 findId=com.FunFinder360.Controller.MemberFindIdController
 findPassword=com.FunFinder360.Controller.MemberFindPasswordController
+loginSelect=com.FunFinder360.Controller.SelectLoginController
+joinSelect=com.FunFinder360.Controller.SelectJoinController

@@ -64,7 +64,7 @@
 <body>
 	<div class="container">
 		<div class="login-form-container">
-			<h2>로그인</h2>
+			<h2>업주 로그인</h2>
 			<form action="FunFinder360" method="post">
 				<input type="hidden" name="command" value="login">
 				<input type="text" class="form-control" name="id" id="id" placeholder="아이디 또는 이메일" autocomplete="off">
