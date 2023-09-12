@@ -77,7 +77,6 @@
 	position: relative;
 	height: 100%;
 }
-
 </style>
 </head>
 <body>
@@ -87,10 +86,14 @@
 			<div class="select-container">
 				<div class="select-container">
 					<div class="select-item1">
-						<a href="<%=notWithFormTag%>PersonalLogin" class="select-login-a"><span>개인 로그인</span></a>
+						<a href="<%=notWithFormTag%>PersonalLogin" class="select-login-a">
+							<span>개인 로그인</span>
+						</a>
 					</div>
 					<div class="select-item2">
-						<a href="<%=notWithFormTag%>OwnerLogin" class="select-login-a"><span>업주 로그인</span></a>
+						<a href="<%=notWithFormTag%>OwnerLogin" class="select-login-a">
+							<span>업주 로그인</span>
+						</a>
 					</div>
 				</div>
 			</div>

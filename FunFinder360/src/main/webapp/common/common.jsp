@@ -15,7 +15,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 body {
 	margin: 0px;
 	width: 100vw;
-	height: 100vh;
 }
 
 ul {
@@ -136,14 +135,7 @@ hr {
 	color: black;
 }
 
-.foot-container {
-	position: absolute;
-	width: 100%;
-	hieght: 100px;
-	bottom: 0;
-	background-color: red;
-	width: 100%;
-}
+
 
 .company-info-container {
 	position: absolute;
@@ -202,23 +194,6 @@ hr {
 		</nav>
 	</div>
 
-	<div class="foot-container">
-		<hr>
-		<div class="company-info-container">
-			<ul>
-				<li>
-					<span>회사 이름: ${applicationScope.companyInfoMap.companyName}</span>
-					<span>회사 주소: ${applicationScope.companyInfoMap.address}</span>
-					<span>전화번호: ${applicationScope.companyInfoMap.phoneNumber}</span>
-				</li>
-				<li>
-					<span>이메일: ${applicationScope.companyInfoMap.email}</span>
-					<span>설립일: ${applicationScope.companyInfoMap.establishmentDate}</span>
-					<span>사업자등록번호: ${applicationScope.companyInfoMap.businessRegistrationNumber}</span>
-				</li>
-			</ul>
-		</div>
-
-	</div>
+	
 </body>
 </html>

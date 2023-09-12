@@ -5,6 +5,30 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<script>
+
+$(document).ready(function() {
+})
+
+function validation () {
+	const id = $("#id").val();
+	const password = $("#password").val();
+	
+	if(id == "") {
+		alert("아이디가 입력되지 않았습니다.");
+		$("#id").focus();
+		return false;
+	}
+	
+	if(password == "") {
+		alert("비밀번호가 입력되지 않았습니다.");
+		$("#password").focus();
+		return false;
+	}
+	
+}
+</script>
+
 <style>
 .container {
 	position: absolute;
@@ -92,7 +116,7 @@
 						</ul>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-secondary">로그인</button>
+				<button type="submit" class="btn btn-secondary" onclick="return validation()">로그인</button>
 			</form>
 		</div>
 	</div>
