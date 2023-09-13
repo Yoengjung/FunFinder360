@@ -153,6 +153,24 @@ hr {
 .dropdown-1 {
 	min-width: 170px;
 }
+
+.container-fluid {
+	position: relative;
+	top: 50px;
+	font-size: 25px;
+}
+
+.navbar-expand-sm .navbar-nav {
+	flex-direction: row;
+	float: right;
+	position: absolute;
+	right: 50px;
+}
+
+
+.nav-link {
+	margin: 0 20px;
+}
 </style>
 </head>
 <body>
@@ -182,35 +200,40 @@ hr {
 		</div>
 		<hr>
 	</div>
-	<div class="menu-container">
-		<a href="<%=notWithFormTag%>home" id="logo">FunFinder360</a>
-		<nav class="navbar">
-			<ul>
-				<div class="menu-dropdown">
-					<a href="#" class="menu-a-tag">카테고리</a>
-					<div class="dropdown-content">
-						<a href="#">스포츠 - 야외활동</a> <a href="#">문화 - 엔터테인먼트</a> <a href="#">음식과 요리</a> <a href="#">교육 - 학습</a> <a href="#">여행 - 모험</a> <a href="#">사회 - 봉사활동</a> <a href="#">게임 - 취미</a> <a href="#">뷰티 - 건강</a>
-					</div>
-				</div>
-				<li>
-					<a href="#" class="menu-a-tag">검색</a>
-				</li>
-				<!-- 로그인 유저가 업주 시 이벤트 항목 추가 -->
-				<div class="menu-dropdown">
-					<a href="#" class="menu-a-tag">마이페이지</a>
-					<div class="dropdown-content">
-						<a href="#">내 게시물</a> <a href="#">게시물 수익</a> <a href="#">즐겨찾기 목록</a> <a href="#">회원 정보</a>
-					</div>
-				</div>
-
-				<div class="menu-dropdown">
-					<a href="#" class="menu-a-tag">문의</a>
-					<div class="dropdown-content dropdown-1">
-						<a href="<%=notWithFormTag%>commonQuestionsList">자주 묻는 질문</a> <a href="#">개인 문의</a>
-					</div>
-				</div>
-			</ul>
-		</nav>
-	</div>
+	<nav class="navbar navbar-expand-sm ">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Logo</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Link</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Link</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Link</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Dropdown</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href="#">Link</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Another link</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">A third link</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 </body>
 </html>
