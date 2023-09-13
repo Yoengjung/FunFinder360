@@ -8,13 +8,12 @@ public class MemberPersonalUser {
 	private String phoneNumber;
 	private String email;
 	private String bio = null;
-	private String profile_image = null;
 	private String registration_date;
-	
-	public MemberPersonalUser () {}
 
+	public MemberPersonalUser () {}
+	
 	public MemberPersonalUser(String userId, String password, String username, String birth, String phoneNumber,
-			String email, String bio, String profile_image, String registration_date) {
+			String email, String bio, String registration_date) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -23,15 +22,14 @@ public class MemberPersonalUser {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.bio = bio;
-		this.profile_image = profile_image;
 		this.registration_date = registration_date;
 	}
 
 	@Override
 	public String toString() {
 		return "MemberPersonalUser [userId=" + userId + ", password=" + password + ", username=" + username + ", birth="
-				+ birth + ", phoneNumber=" + phoneNumber + ", email=" + email + ", bio=" + bio + ", profile_image=" + profile_image
-				+ ", registration_date=" + registration_date + "]";
+				+ birth + ", phoneNumber=" + phoneNumber + ", email=" + email + ", bio=" + bio + ", registration_date="
+				+ registration_date + "]";
 	}
 
 	public String getUserId() {
@@ -90,14 +88,6 @@ public class MemberPersonalUser {
 		this.bio = bio;
 	}
 
-	public String getProfileImage() {
-		return profile_image;
-	}
-
-	public void setProfileImage(String profile_image) {
-		this.profile_image = profile_image;
-	}
-
 	public String getRegistration_date() {
 		return registration_date;
 	}
@@ -105,7 +95,5 @@ public class MemberPersonalUser {
 	public void setRegistration_date(String registration_date) {
 		this.registration_date = registration_date;
 	}
-	
-	
-	
+
 }

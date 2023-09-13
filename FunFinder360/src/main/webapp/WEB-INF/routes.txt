@@ -10,6 +10,9 @@ findPassword=com.FunFinder360.Controller.MemberFindPasswordController
 loginSelect=com.FunFinder360.Controller.SelectLoginController
 joinSelect=com.FunFinder360.Controller.SelectJoinController
 
+#로그아웃
+logout=com.FunFinder360.Controller.Member.MeberLogoutController
+
 #문의
 commonQuestionsList=com.FunFinder360.Controller.CommonQuestionsController.CQListController
 commonQuestionsDetail=com.FunFinder360.Controller.CommonQuestionsController.CQDetailController

@@ -19,7 +19,6 @@ public class MemberOwnerLoginController extends SuperClass {
 		
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		System.out.println(id + "/" + password);
 		
 		MemberOwnerDao dao = new MemberOwnerDao();
 		MemberOwner bean = null;
@@ -37,11 +36,9 @@ public class MemberOwnerLoginController extends SuperClass {
 			
 			super.goToPage(PREFIX + "memberOwnerLoginForm.jsp");
 
-		}else { // 로그인 성공
-			// session 영역에 나의 로그인 정보를 저장합니다.
+		}else { 
+			session.removeAttribute("alertMessage");
 			super.session.setAttribute("loginfo", bean);
-			
-			// 홈 화면으로 이동합니다. 차후 상품 목록 페이지로 갈 예정
 			new HomeController().doGet(request, response);
 		}
 	}

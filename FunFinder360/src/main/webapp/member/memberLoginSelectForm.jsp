@@ -54,10 +54,9 @@
 	{
 	display: block;
 	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+	top: 30%;
+	transform: translateY(-35%);
 	font-size: 20px;
-	top: 50%;
 }
 
 .select-container .select-item1:hover {
@@ -83,6 +82,11 @@
 	bottom: 100px;
 	width: 100%;
 }
+
+.icon-tag {
+	font-size: 75px;
+	top: 35%;
+}
 </style>
 </head>
 <body>
@@ -92,14 +96,11 @@
 			<div class="select-container">
 				<div class="select-container">
 					<div class="select-item1">
-						<a href="<%=notWithFormTag%>PersonalLogin" class="select-login-a">
-							<span>개인 로그인</span>
+						<a href="<%=notWithFormTag%>PersonalLogin" class="select-login-a"> <span class="material-symbols-outlined icon-tag" style="font-size: 80px;"> person </span> <span>개인 로그인</span>
 						</a>
 					</div>
 					<div class="select-item2">
-						<a href="<%=notWithFormTag%>OwnerLogin" class="select-login-a">
-							<span>업주 로그인</span>
-						</a>
+						<a href="<%=notWithFormTag%>OwnerLogin" class="select-login-a"><span class="material-symbols-outlined" style="font-size: 80px;"> apartment </span> <span>업주 로그인</span> </a>
 					</div>
 				</div>
 			</div>

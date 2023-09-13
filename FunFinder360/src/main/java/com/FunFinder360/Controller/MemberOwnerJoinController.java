@@ -4,8 +4,8 @@ package com.FunFinder360.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.FunFinder360.Bean.Model.Member;
-import com.oreilly.servlet.MultipartRequest;
+import com.FunFinder360.Bean.Dao.MemberPersonalUserDao;
+import com.FunFinder360.Bean.Model.MemberOwner;
 
 public class MemberOwnerJoinController extends SuperClass {
 	@Override
@@ -18,26 +18,42 @@ public class MemberOwnerJoinController extends SuperClass {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		super.doPost(request, response);
 
-		MultipartRequest multipart = (MultipartRequest) request.getAttribute("multpart");
+		MemberOwner bean = new MemberOwner();
 
-		String id = multipart.getParameter("id");
-		String password = multipart.getParameter("password");
-		String email = multipart.getParameter("email");
-		String introduction = multipart.getParameter("introduction");
-		String profileImage = multipart.getFilesystemName("profileImage");
+		String id = request.getParameter("id");
 
-		System.out.println("id : " + id);
-		System.out.println("password : " + password);
-		System.out.println("email : " + email);
-		System.out.println("introduction : " + introduction);
-		System.out.println("profile : " + profileImage);
+		MemberPersonalUserDao dao = new MemberPersonalUserDao();
 
-		Member member = new Member();
+		try {
+			boolean status = dao.duplicationOwnerIdCheck(id);
 
-		member.setId(id);
-		member.setPassword(password);
-		member.setEmail(email);
-		member.setIntroduction(introduction);
-		member.setProfileImage(profileImage);
+			if (status) {
+				bean.setUserId(request.getParameter("id"));
+				bean.setPassword(request.getParameter("password"));
+				bean.setUserName(request.getParameter("username"));
+				bean.setBusinessName(request.getParameter("businessName"));
+				bean.setBusinessType(request.getParameter("businessType"));
+				bean.setBusinessNumber(Integer.parseInt(request.getParameter("businessNumber")));
+				bean.setPhoneNumber(request.getParameter("phoneNumber"));
+				bean.setEmail(request.getParameter("email"));
+				bean.setBio(request.getParameter("bio"));
+
+				try {
+					dao.insertOwnerJoinData(bean);
+					session.removeAttribute("alertMessage");
+					super.goToPage("member/memberOwnerLoginForm.jsp");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				String message = "이미 회원인 아이디입니다.";
+				super.setAlertMessage(message);
+				super.goToPage("member/memberOwnerJoinForm.jsp");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

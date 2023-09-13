@@ -1,39 +1,49 @@
 package com.FunFinder360.Bean.Model;
 
 public class MemberOwner {
-	private String user_id;
+	private String userId;
 	private String password;
-	private String username;
-	private String Business_Name;
-	private String Business_Type;
-	private Integer Business_Number;
-	private Integer PhoneNumber;
+	private String userName;
+	private String businessName;
+	private String businessType;
+	private int businessNumber;
+	private String phoneNumber;
 	private String email;
-	private String registration_date;
+	private String bio;
+	private String registrationDate;
 
 	public MemberOwner() {
 	}
 
-	public MemberOwner(String user_id, String password, String username, String business_Name, String business_Type,
-			Integer business_Number, Integer phoneNumber, String email, String registration_date) {
+	public MemberOwner(String userId, String password, String userName, String businessName, String businessType,
+			int businessNumber, String phoneNumber, String email, String bio, String registrationDate) {
 		super();
-		this.user_id = user_id;
+		this.userId = userId;
 		this.password = password;
-		this.username = username;
-		Business_Name = business_Name;
-		Business_Type = business_Type;
-		Business_Number = business_Number;
-		PhoneNumber = phoneNumber;
+		this.userName = userName;
+		this.businessName = businessName;
+		this.businessType = businessType;
+		this.businessNumber = businessNumber;
+		this.phoneNumber = phoneNumber;
 		this.email = email;
-		this.registration_date = registration_date;
+		this.bio = bio;
+		this.registrationDate = registrationDate;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	@Override
+	public String toString() {
+		return "MemberOwner [userId=" + userId + ", password=" + password + ", userName=" + userName + ", businessName="
+				+ businessName + ", businessType=" + businessType + ", businessNumber=" + businessNumber
+				+ ", phoneNumber=" + phoneNumber + ", email=" + email + ", bio=" + bio + ", registrationDate="
+				+ registrationDate + "]";
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getPassword() {
@@ -44,44 +54,44 @@ public class MemberOwner {
 		this.password = password;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getBusiness_Name() {
-		return Business_Name;
+	public String getBusinessName() {
+		return businessName;
 	}
 
-	public void setBusiness_Name(String business_Name) {
-		Business_Name = business_Name;
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
 	}
 
-	public String getBusiness_Type() {
-		return Business_Type;
+	public String getBusinessType() {
+		return businessType;
 	}
 
-	public void setBusiness_Type(String business_Type) {
-		Business_Type = business_Type;
+	public void setBusinessType(String businessType) {
+		this.businessType = businessType;
 	}
 
-	public Integer getBusiness_Number() {
-		return Business_Number;
+	public int getBusinessNumber() {
+		return businessNumber;
 	}
 
-	public void setBusiness_Number(Integer business_Number) {
-		Business_Number = business_Number;
+	public void setBusinessNumber(int businessNumber) {
+		this.businessNumber = businessNumber;
 	}
 
-	public Integer getPhoneNumber() {
-		return PhoneNumber;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhoneNumber(Integer phoneNumber) {
-		PhoneNumber = phoneNumber;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getEmail() {
@@ -92,12 +102,20 @@ public class MemberOwner {
 		this.email = email;
 	}
 
-	public String getRegistration_date() {
-		return registration_date;
+	public String getBio() {
+		return bio;
 	}
 
-	public void setRegistration_date(String registration_date) {
-		this.registration_date = registration_date;
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public String getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(String registrationDate) {
+		this.registrationDate = registrationDate;
 	}
 
 }

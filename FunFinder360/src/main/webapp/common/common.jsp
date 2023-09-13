@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./bootstrap.jsp"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <%
 String appName = request.getContextPath();
@@ -151,7 +151,7 @@ hr {
 }
 
 .dropdown-1 {
-	min-width: 170px; 
+	min-width: 170px;
 }
 </style>
 </head>
@@ -159,32 +159,37 @@ hr {
 <body>
 	<div class="top-container">
 		<div class="login-container">
-			<ul>
-				<li>
-					<a href="<%=notWithFormTag%>loginSelect" class="a-tag">login</a>
-				</li>
-				<li>
-					<a href="<%=notWithFormTag%>joinSelect" class="a-tag">join</a>
-				</li>
-			</ul>
+			<c:if test="${empty sessionScope.loginfo}">
+				<ul>
+					<li>
+						<a href="<%=notWithFormTag%>loginSelect" class="a-tag">login</a>
+					</li>
+					<li>
+						<a href="<%=notWithFormTag%>joinSelect" class="a-tag">join</a>
+					</li>
+				</ul>
+			</c:if>
+			<c:if test="${not empty sessionScope.loginfo}">
+				<ul>
+					<li>
+						<span>${sessionScope.loginfo.username}</span>
+					</li>
+					<li>
+						<a href="<%=notWithFormTag%>logout" class="a-tag">logout</a>
+					</li>
+				</ul>
+			</c:if>
 		</div>
 		<hr>
 	</div>
 	<div class="menu-container">
 		<a href="<%=notWithFormTag%>home" id="logo">FunFinder360</a>
-		<nav>
+		<nav class="navbar">
 			<ul>
 				<div class="menu-dropdown">
 					<a href="#" class="menu-a-tag">카테고리</a>
 					<div class="dropdown-content">
-						<a href="#">스포츠 - 야외활동</a>
-						<a href="#">문화 - 엔터테인먼트</a>
-						<a href="#">음식과 요리</a>
-						<a href="#">교육 - 학습</a>
-						<a href="#">여행 - 모험</a>
-						<a href="#">사회 - 봉사활동</a>
-						<a href="#">게임 - 취미</a>
-						<a href="#">뷰티 - 건강</a>
+						<a href="#">스포츠 - 야외활동</a> <a href="#">문화 - 엔터테인먼트</a> <a href="#">음식과 요리</a> <a href="#">교육 - 학습</a> <a href="#">여행 - 모험</a> <a href="#">사회 - 봉사활동</a> <a href="#">게임 - 취미</a> <a href="#">뷰티 - 건강</a>
 					</div>
 				</div>
 				<li>
@@ -194,18 +199,14 @@ hr {
 				<div class="menu-dropdown">
 					<a href="#" class="menu-a-tag">마이페이지</a>
 					<div class="dropdown-content">
-						<a href="#">내 게시물</a>
-						<a href="#">게시물 수익</a>
-						<a href="#">즐겨찾기 목록</a>
-						<a href="#">회원 정보</a>
+						<a href="#">내 게시물</a> <a href="#">게시물 수익</a> <a href="#">즐겨찾기 목록</a> <a href="#">회원 정보</a>
 					</div>
 				</div>
 
 				<div class="menu-dropdown">
 					<a href="#" class="menu-a-tag">문의</a>
 					<div class="dropdown-content dropdown-1">
-						<a href="<%=notWithFormTag%>commonQuestionsList">자주 묻는 질문</a>
-						<a href="#">개인 문의</a>
+						<a href="<%=notWithFormTag%>commonQuestionsList">자주 묻는 질문</a> <a href="#">개인 문의</a>
 					</div>
 				</div>
 			</ul>

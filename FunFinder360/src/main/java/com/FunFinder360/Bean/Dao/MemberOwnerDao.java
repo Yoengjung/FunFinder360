@@ -12,7 +12,7 @@ public class MemberOwnerDao extends SuperDao {
 		ResultSet rs = null;
 
 		String sql = " select * from Owner_Users";
-		sql += " where user_id = ? and password = ?";
+		sql += " where userid = ? and password = ?";
 
 		connection = super.getConnection();
 		pstmt = connection.prepareStatement(sql);
@@ -43,15 +43,15 @@ public class MemberOwnerDao extends SuperDao {
 	private MemberOwner getBeanData(ResultSet rs) throws Exception {
 		MemberOwner bean = new MemberOwner();
 
-		bean.setUser_id(rs.getString("user_id"));
+		bean.setUserId(rs.getString("userid"));
 		bean.setPassword(rs.getString("password"));
-		bean.setUsername(rs.getString("username"));
-		bean.setBusiness_Name(rs.getString("Business_Name"));
-		bean.setBusiness_Type(rs.getString("Business_Type"));
-		bean.setBusiness_Number(Integer.valueOf(rs.getInt("Business_Number"))); // 확인하기
-		bean.setPhoneNumber(Integer.valueOf(rs.getInt("PhoneNumber")));
+		bean.setUserName(rs.getString("username"));
+		bean.setBusinessName(rs.getString("BusinessName"));
+		bean.setBusinessType(rs.getString("BusinessType"));
+		bean.setBusinessNumber(Integer.valueOf(rs.getInt("BusinessNumber")));
+		bean.setPhoneNumber(rs.getString("PhoneNumber"));
 		bean.setEmail(rs.getString("email"));
-		bean.setRegistration_date(String.valueOf(rs.getDate("registration_date")));
+		bean.setRegistrationDate(String.valueOf(rs.getDate("registrationDate")));
 
 		return bean;
 	}

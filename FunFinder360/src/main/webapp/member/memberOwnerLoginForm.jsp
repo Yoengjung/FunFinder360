@@ -82,6 +82,9 @@ function validation () {
 .text-menu ul li span {
 	margin-right: 3px;
 }
+.login-fail-tag {
+	color: red;
+}
 
 </style>
 </head>
@@ -95,6 +98,7 @@ function validation () {
 				<br>
 				<input type="password" class="form-control" name="password" id="password" placeholder="비밀번호">
 				<br>
+				<p class="login-fail-tag">${sessionScope.alertmessage}</p>
 				<div class="form-type-checkbox">
 					<div class="form_items">
 						<input type="checkbox">
@@ -111,7 +115,7 @@ function validation () {
 								<span>|</span>
 							</li>
 							<li>
-								<a href="<%=notWithFormTag%>join">회원가입</a>
+								<a href="<%=notWithFormTag%>OwnerJoin">회원가입</a>
 							</li>
 						</ul>
 					</div>

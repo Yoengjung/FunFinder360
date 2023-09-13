@@ -18,7 +18,6 @@
 		const birthDate = $("#birthDate").val();
 		const phoneNumber = $("#phoneNumber").val();
 		const email = $("#email").val();
-		const profileImage = $("#profileImage").val();
 
 		const idPattern = /^[a-zA-Z0-9]{6,20}$/;
 		const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,20}$/;
@@ -300,6 +299,10 @@ textarea {
 	bottom: 100px;
 	width: 100%;
 }
+
+.errorMessage {
+	color: red;
+}
 </style>
 </head>
 <body>
@@ -307,8 +310,8 @@ textarea {
 		<div class="join-container">
 			<div class="join-form">
 				<h2>개인 회원가입</h2>
-				<form action="<%=withFormTag%>" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="command" value="join">
+				<form action="<%=withFormTag%>" method="post">
+					<input type="hidden" name="command" value="PersonalJoin">
 					<ul>
 						<li>
 							<span>아이디</span>
@@ -316,6 +319,7 @@ textarea {
 							<input class="form-control" type="text" id="id" name="id" autocomplete="off" placeholder="영문, 숫자, 6 ~ 20자">
 							<p id="id-alert-message-tag">아이디는 영문, 숫자로 구성되어야 하며 6 ~ 20자 이어야 합니다.</p>
 							<p id="id-empty-alert-message">아이디는 필수 입력 사항입니다.</p>
+							<p class="errorMessage">${sessonScope.alertMessage}</p>
 						</li>
 						<li>
 							<span>비밀번호</span>
@@ -359,11 +363,7 @@ textarea {
 						</li>
 						<li>
 							<span>자기소개</span>
-							<textarea class="form-control" id="introduction" name="introduction" placeholder="간단한 자기소개를 입력해주세요."></textarea>
-						</li>
-						<li>
-							<span>프로필 이미지</span>
-							<input type="file" class="form-control" id="profileImage" name="profileImage">
+							<textarea class="form-control" id="bao" name="bao" placeholder="간단한 자기소개를 입력해주세요."></textarea>
 						</li>
 						<li>
 							<button class="btn btn-secondary" type="submit" onclick="return validation()">회원가입</button>
@@ -373,23 +373,23 @@ textarea {
 			</div>
 		</div>
 		<div class="foot-container">
-		<hr>
-		<div class="company-info-container">
-			<ul>
-				<li>
-					<span>회사 이름: ${applicationScope.companyInfoMap.companyName}</span>
-					<span>회사 주소: ${applicationScope.companyInfoMap.address}</span>
-					<span>전화번호: ${applicationScope.companyInfoMap.phoneNumber}</span>
-				</li>
-				<li>
-					<span>이메일: ${applicationScope.companyInfoMap.email}</span>
-					<span>설립일: ${applicationScope.companyInfoMap.establishmentDate}</span>
-					<span>사업자등록번호: ${applicationScope.companyInfoMap.businessRegistrationNumber}</span>
-				</li>
-			</ul>
-		</div>
+			<hr>
+			<div class="company-info-container">
+				<ul>
+					<li>
+						<span>회사 이름: ${applicationScope.companyInfoMap.companyName}</span>
+						<span>회사 주소: ${applicationScope.companyInfoMap.address}</span>
+						<span>전화번호: ${applicationScope.companyInfoMap.phoneNumber}</span>
+					</li>
+					<li>
+						<span>이메일: ${applicationScope.companyInfoMap.email}</span>
+						<span>설립일: ${applicationScope.companyInfoMap.establishmentDate}</span>
+						<span>사업자등록번호: ${applicationScope.companyInfoMap.businessRegistrationNumber}</span>
+					</li>
+				</ul>
+			</div>
 
-	</div>
+		</div>
 	</div>
 </body>
 </html>

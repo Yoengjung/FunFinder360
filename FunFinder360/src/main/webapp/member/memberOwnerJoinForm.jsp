@@ -23,7 +23,6 @@
 
 		const idPattern = /^[a-zA-Z0-9]{6,20}$/;
 		const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,20}$/;
-		const businessPattern = /^\d{3}-\d{2}-\d{5}$/;
 		const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 		const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
 
@@ -137,7 +136,7 @@
 			emptyElement.style.display = "none";
 		}
 
-		if (!businessPattern.test(businessNumber)) {
+		if (businessNumber.length != 10) {
 			var element = document
 					.getElementById("businessNumber-alert-message-tag");
 			element.style.display = "block";
@@ -331,6 +330,9 @@ textarea {
 	bottom: 100px;
 	width: 100%;
 }
+.errorMessage {
+	color: red;
+}
 </style>
 </head>
 <body>
@@ -338,8 +340,8 @@ textarea {
 		<div class="join-container">
 			<div class="join-form">
 				<h2>업주 회원가입</h2>
-				<form action="<%=withFormTag%>" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="command" value="join">
+				<form action="<%=withFormTag%>" method="post">
+					<input type="hidden" name="command" value="OwnerJoin">
 					<ul>
 						<li>
 							<span>아이디</span>
@@ -347,6 +349,7 @@ textarea {
 							<input class="form-control" type="text" id="id" name="id" autocomplete="off" placeholder="영문, 숫자, 6 ~ 20자">
 							<p id="id-alert-message-tag">아이디는 영문, 숫자로 구성되어야 하며 6 ~ 20자 이어야 합니다.</p>
 							<p id="id-empty-alert-message">아이디는 필수 입력 사항입니다.</p>
+							<p class="errorMessage">${sessionScope.alertMessage}</p>
 						</li>
 						<li>
 							<span>비밀번호</span>
@@ -375,11 +378,11 @@ textarea {
 							<span>사업 구분</span>
 							<span style="color: red">*</span>
 							<div class="form-check">
-								<input type="radio" class="form-check-input" id="businessTypeRadio1" name="businessType" value="personalBusiness" checked>
+								<input type="radio" class="form-check-input" id="businessTypeRadio1" name="businessType" value="개인 사업자" checked>
 								개인 사업자 <label class="form-check-label" for="radio1"></label>
 							</div>
 							<div class="form-check">
-								<input type="radio" class="form-check-input" id="businessTypeRadio2" name="businessType" value="corporateBusiness">
+								<input type="radio" class="form-check-input" id="businessTypeRadio2" name="businessType" value="법인">
 								법인 <label class="form-check-label" for="radio2"></label>
 							</div>
 							<p id="businessType-empty-alert-message">사업 구분은 필수 선택 사항입니다.</p>
@@ -389,7 +392,7 @@ textarea {
 							<span>사업자등록번호</span>
 							<span style="color: red">*</span>
 							<input class="form-control" type="text" id="businessNumber" name="businessNumber" autocomplete="off" placeholder="사업자등록번호 입력">
-							<p id="businessNumber-alert-message-tag">유효하지 않는 사업자등록번호입니다. 000-00-00000 형식으로 입력해야 합니다.</p>
+							<p id="businessNumber-alert-message-tag">유효하지 않는 사업자등록번호입니다. 사업자등록번호는 10자리입니다.</p>
 							<p id="businessNumber-empty-alert-message">사업자등록번호는 필수 입력 사항입니다.</p>
 						</li>
 
@@ -410,12 +413,8 @@ textarea {
 							<p id="email-alert-message-tag">유효한 이메일 주소를 입력해주세요</p>
 						</li>
 						<li>
-							<span>자기소개</span>
+							<span>사업소개</span>
 							<textarea class="form-control" id="introduction" name="introduction" placeholder="간단한 자기소개를 입력해주세요."></textarea>
-						</li>
-						<li>
-							<span>프로필 이미지</span>
-							<input type="file" class="form-control" id="profileImage" name="profileImage">
 						</li>
 						<li>
 							<button class="btn btn-secondary" type="submit" onclick="return validation()">회원가입</button>
