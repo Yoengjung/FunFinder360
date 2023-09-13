@@ -1,5 +1,7 @@
 package com.FunFinder360.Controller.CommonQuestionsController;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,24 +13,28 @@ public class CQDetailController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
-		
-		int qeustion_id = Integer.parseInt(request.getParameter("qeustion_id"));
-		
+
+		int question_id = Integer.parseInt(request.getParameter("question_id"));
+
 		CommonQuestionDao dao = new CommonQuestionDao();
-		
+
+		List<CommonQuestion> lists = null;
+
 		try {
-			CommonQuestion bean = dao.getDataByQuestionId(qeustion_id);
-			
-			request.setAttribute("commonQuestionData", bean);
+			int totalRecodeCount = dao.getTotalRecordCount(null, null);
+			lists = dao.getDataByQuestionId(question_id, totalRecodeCount);
+
+			request.setAttribute("commonQuestionData", lists);
+			request.setAttribute("totalRecodeCount", totalRecodeCount);
 			super.goToPage("question/commonQuestionDetailForm.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		super.doPost(request, response);
 	}
-	
+
 }

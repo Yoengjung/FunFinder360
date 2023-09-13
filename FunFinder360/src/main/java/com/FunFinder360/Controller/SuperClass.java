@@ -44,4 +44,8 @@ public class SuperClass implements SuperController {
 		return text ;
 	}
 	
+	public void setAlertMessage(String message) {
+		session.setAttribute("alertMessage", message);
+	}
+	
 }

@@ -1,10 +1,11 @@
 package com.FunFinder360.Controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.FunFinder360.Bean.Dao.MemberPersonalUserDao;
 import com.FunFinder360.Bean.Model.Member;
+import com.FunFinder360.Bean.Model.MemberPersonalUser;
 import com.oreilly.servlet.MultipartRequest;
 
 public class MemberPersonalJoinController extends SuperClass {
@@ -18,26 +19,28 @@ public class MemberPersonalJoinController extends SuperClass {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		super.doPost(request, response);
 
-		MultipartRequest multipart = (MultipartRequest) request.getAttribute("multpart");
+		MultipartRequest mr = (MultipartRequest) request.getAttribute("multpart");
 
-		String id = multipart.getParameter("id");
-		String password = multipart.getParameter("password");
-		String email = multipart.getParameter("email");
-		String introduction = multipart.getParameter("introduction");
-		String profileImage = multipart.getFilesystemName("profileImage");
+		MemberPersonalUser bean = new MemberPersonalUser();
 
-		System.out.println("id : " + id);
-		System.out.println("password : " + password);
-		System.out.println("email : " + email);
-		System.out.println("introduction : " + introduction);
-		System.out.println("profile : " + profileImage);
+		bean.setUserId(mr.getParameter("id"));
+		bean.setPassword(mr.getParameter("password"));
+		bean.setUsername(mr.getParameter("username"));
+		bean.setBirth(mr.getParameter("birthDate"));
+		bean.setPhoneNumber(mr.getParameter("phoneNumber"));
+		bean.setEmail(mr.getParameter("email"));
+		bean.setBio(mr.getParameter("introduction"));
+		bean.setProfileImage(mr.getFilesystemName("profileImage"));
 
-		Member member = new Member();
+		MemberPersonalUserDao dao = new MemberPersonalUserDao();
 
-		member.setId(id);
-		member.setPassword(password);
-		member.setEmail(email);
-		member.setIntroduction(introduction);
-		member.setProfileImage(profileImage);
+		try {
+			dao.insertJoinData(bean);
+			
+			super.goToPage("member/memberPersonalLoginForm.jsp");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }

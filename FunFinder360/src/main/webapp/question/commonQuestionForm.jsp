@@ -53,13 +53,17 @@
 .title-box a {
 	color: #3366FF;
 }
+
+.title-box a:hover {
+	text-decoration: underline;
+}
 </style>
 </head>
 <body>
 	<div class="container">
 		<h2>자주 묻는 질문</h2>
 		<table class="table">
-			<thead class="table-success">
+			<thead class="table-dark">
 				<tr>
 					<th class="table-head-box no-head">순번</th>
 					<th class="table-head-box title-head">제목</th>
@@ -69,15 +73,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="qeustion" items="${requestScope.commonQuestionData}">
+				<c:forEach var="question" items="${requestScope.commonQuestionData}">
 					<tr>
-						<td class="table-body-box">${qeustion.question_id}</td>
+						<td class="table-body-box">${question.question_id}</td>
 						<td class="table-body-box title-box">
-							<a href="<%=notWithFormTag%>commonQuestionsDetail&qeustion_id=${qeustion.question_id}">${qeustion.title}</a>
+							<a href="<%=notWithFormTag%>commonQuestionsDetail&question_id=${question.question_id}">${question.title}</a>
 						</td>
-						<td class="table-body-box">${qeustion.userId}</td>
-						<td class="table-body-box">${qeustion.postedDate}</td>
-						<td class="table-body-box">${qeustion.readhit}</td>
+						<td class="table-body-box">${question.userId}</td>
+						<td class="table-body-box">${question.postedDate}</td>
+						<td class="table-body-box">${question.readhit}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -67,7 +67,6 @@ a {
 	width: 100%;
 	height: 50px;
 	position: relative;
-	right: 0;
 	top: 60px;
 }
 
@@ -75,6 +74,7 @@ a {
 	justify-content: center;
 	display: flex;
 	float: right;
+	right: 30px;
 	position: relative;
 	top: 9px;
 }
@@ -92,7 +92,7 @@ hr {
 #logo {
 	font-size: 30px;
 	position: absolute;
-	left: 30px;
+	left: 200px;
 }
 
 .menu-dropdown {
@@ -114,6 +114,7 @@ hr {
 	background-color: #FFFFFF;
 	border: 1px solid #CCCCCC;
 	z-index: 1;
+	left: 9px;
 }
 
 /* 호버 시 드롭다운 내용 활성화 */
@@ -147,6 +148,10 @@ hr {
 
 .company-info-container ul li span {
 	margin: 0 20px;
+}
+
+.dropdown-1 {
+	min-width: 170px; 
 }
 </style>
 </head>
@@ -198,7 +203,7 @@ hr {
 
 				<div class="menu-dropdown">
 					<a href="#" class="menu-a-tag">문의</a>
-					<div class="dropdown-content">
+					<div class="dropdown-content dropdown-1">
 						<a href="<%=notWithFormTag%>commonQuestionsList">자주 묻는 질문</a>
 						<a href="#">개인 문의</a>
 					</div>

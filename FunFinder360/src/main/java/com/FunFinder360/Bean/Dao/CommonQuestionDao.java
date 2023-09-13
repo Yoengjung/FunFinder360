@@ -122,8 +122,6 @@ public class CommonQuestionDao extends SuperDao {
 		sql += " ) ";
 		sql += " where ranking between ? and ? ";
 
-		
-
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pageInfo.getBeginRow());
 		pstmt.setInt(2, pageInfo.getEndRow());
@@ -150,26 +148,56 @@ public class CommonQuestionDao extends SuperDao {
 
 	}
 
-	public CommonQuestion getDataByQuestionId(int qeustion_id) throws Exception{
+	public List<CommonQuestion> getDataByQuestionId(int question_id, int totalRecodeCount) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 		
-		String sql = "select * from common_question where question_id = ?";
+		String updateSql = "update common_question set readHit = readhit + 1 where question_id = ?";
 		
-		pstmt = conn.prepareStatement(sql);
+		pstmt = conn.prepareStatement(updateSql);
 		
-		pstmt.setInt(1, qeustion_id);
+		pstmt.setInt(1, question_id);
 		
-		rs = pstmt.executeQuery();
+		pstmt.executeUpdate();
 		
-		CommonQuestion bean = null;
+		List<CommonQuestion> lists = new ArrayList<CommonQuestion>();
 		
-		if(rs.next()) {
-			bean = getBeanData(rs);
+		try {
+			String sql = "select * from common_question where question_id = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, question_id);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				lists.add(getBeanData(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		
+
+		String sql = "";
+		if (question_id <= 1) {
+			sql = "select * from  common_question where question_id = ?";
+			pstmt.setInt(1, question_id + 1);
+		} else if (question_id >= totalRecodeCount) {
+			sql = "select * from common_question where question_id = ?";
+			pstmt.setInt(1, question_id - 1);
+		} else {
+			sql = "select * from (select * from common_question order by question_id) where question_id in (?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, question_id - 1);
+			pstmt.setInt(2, question_id + 1);
+		}
+
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
 		if (rs != null) {
 			rs.close();
 		}
@@ -179,7 +207,7 @@ public class CommonQuestionDao extends SuperDao {
 		if (conn != null) {
 			conn.close();
 		}
-		return bean;
+		return lists;
 	}
 
 }
