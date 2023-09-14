@@ -102,15 +102,17 @@
 	var imageCount = 0;
 
 	function contentAdd() {
+		scrollToBottom()
 		const textarea = document.createElement('textarea');
 		textarea.name = 'content' + contentCount;
 		textarea.className = "form-control content-container";
-		const contentContainer = document.querySelector('.container');
+		const contentContainer = document.querySelector('.content-container-class');
 		contentContainer.appendChild(textarea);
 		contentCount++;
 	}
 
 	function imageAdd() {
+		scrollToBottom()
 		const textarea = document.createElement('input');
 		const imgTag = document.createElement("img");
 		textarea.name = 'image' + imageCount;
@@ -123,7 +125,7 @@
 		imgTag.alt = "미리보기 이미지";
 		imgTag.style = "max-height: 500px; display: inline-block; left: 50%;position: relative;transform: translateX(-50%);margin-top: 30px; display: none;";
 
-		const contentContainer = document.querySelector('.container');
+		const contentContainer = document.querySelector('.content-container-class');
 		contentContainer.appendChild(textarea);
 		contentContainer.appendChild(imgTag);
 
@@ -151,7 +153,29 @@
 			imgTag.src = '';
 		}
 	}
-	
+	$(document).ready(function () {
+	    const btnContainer = $('#content-controll-container');
+	    const windowHeight = $(window).height();
+	    const containerHeight = btnContainer.outerHeight();
+
+	    btnContainer.css({ 'position': 'fixed', 'bottom': '0' });
+
+	    $('#btn').click(function () {
+	        $('html, body').animate({ scrollTop: windowHeight + containerHeight }, 1000);
+	    });
+	});
+
+
+	function scrollToBottom() {
+	    const windowHeight = window.innerHeight;
+	    const documentHeight = document.documentElement.scrollHeight;
+	    const scrollTo = documentHeight - windowHeight;
+	    
+	    window.scrollTo({
+	        top: scrollTo,
+	        behavior: "smooth" // 애니메이션 효과를 부여합니다.
+	    });
+	}
 </script>
 <style>
 .container {
@@ -322,12 +346,12 @@ form ul li {
 
 .content-controll-container {
 	position: relative;
-	top: 20px;
-	text-align: center;
-	top: 20px;
+    text-align: center;
+    top: 70px;
+    margin-bottom: 100px;
 }
 
- .content-container{
+.content-container {
 	position: relative;
 	margin-bottom: 10px;
 	top: 50px;
@@ -343,7 +367,12 @@ form ul li {
 input[type="file"] {
 	margin-top: 70px;
 }
+
+.btn-success {
+	margin-left: 10px;
+}
 </style>
+
 <body>
 	<div class="container">
 		<h2>활동 등록</h2>
@@ -551,6 +580,9 @@ input[type="file"] {
 					</li>
 				</ul>
 			</div>
+			<div class="content-container-class">
+			
+			</div>
 			<div class="content-controll-container">
 				<button type="button" class="btn btn-primary" onclick="contentAdd()">
 					<span class="material-symbols-outlined" style="vertical-align: middle;"> add_circle </span>
@@ -558,9 +590,9 @@ input[type="file"] {
 				<button type="button" class="btn btn-primary" style="margin-left: 10px;" onclick="imageAdd()">
 					<span class="material-symbols-outlined" style="vertical-align: middle;"> photo_camera </span>
 				</button>
-
+				<button type="submit" class="btn btn-success">저장</button>
 			</div>
-			<button type="submit" class="btn btn-success">저장</button>
+
 		</form>
 	</div>
 </body>
