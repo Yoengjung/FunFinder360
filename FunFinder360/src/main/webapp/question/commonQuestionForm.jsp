@@ -57,6 +57,24 @@
 .title-box a:hover {
 	text-decoration: underline;
 }
+
+.input-group {
+	width: 300px;
+}
+
+.form-select {
+	width: 200px;
+}
+
+.search-form {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.keyword-input-box {
+	margin: 0 20px;
+}
 </style>
 </head>
 <body>
@@ -86,6 +104,22 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<div class="search-container">
+			<div class="search-in-container">
+				<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
+					<input type="hidden" name="command" value="prList">
+					<select id="mode" name="mode" class="form-select">
+						<option value="all" selected="selected">--- 선택해 주세요 ---
+						<option value="name">제목
+						<option value="company">내용
+					</select>
+					<div class="input-group">
+						<input class="keyword-input-box form-control" type="text" name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">
+					</div>
+					<button type="submit" class="btn btn-default form-control-sm search-btn" onclick="">검색</button>
+				</form>
+			</div>
+		</div>
 	</div>
 	${requestScope.pageInfo.pagingHtml}
 </body>

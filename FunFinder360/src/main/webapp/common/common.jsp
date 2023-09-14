@@ -9,6 +9,17 @@ String mappingName = "/FunFinder360";
 String withFormTag = appName + mappingName;
 String notWithFormTag = appName + mappingName + "?command=";
 %>
+
+<c:set var="loginSuccessCheck" value="0"></c:set>
+<c:if test="${not empty sessionScope.loginfo}">
+	<c:if test="${sessionScope.loginfo.userId == 'admin1'}">
+		<c:set var="loginSuccessCheck" value="2"></c:set>
+	</c:if>
+	<c:if test="${sessionScope.loginfo.userId != 'admin1'}">
+		<c:set var="loginSuccessCheck" value="1"></c:set>
+	</c:if>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -156,20 +167,31 @@ hr {
 
 .container-fluid {
 	position: relative;
-	top: 50px;
-	font-size: 25px;
+	font-size: 20px;
 }
 
 .navbar-expand-sm .navbar-nav {
 	flex-direction: row;
 	float: right;
 	position: absolute;
-	right: 50px;
+	right: 70px;
 }
-
 
 .nav-link {
 	margin: 0 20px;
+}
+
+.dropdown-item {
+	text-align: center;
+}
+
+.navbar {
+	top: 50px;
+}
+
+.navbar-brand {
+	font-size: 30px;
+	left: 30px;
 }
 </style>
 </head>
@@ -202,35 +224,110 @@ hr {
 	</div>
 	<nav class="navbar navbar-expand-sm ">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Logo</a>
+			<a class="navbar-brand" href="<%=notWithFormTag%>home">FunFinder360</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
+						<a class="nav-link" href="<%=notWithFormTag%>activityInsert">활동 등록</a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Dropdown</a>
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">카테고리</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a class="dropdown-item" href="#">Link</a>
+								<a class="dropdown-item" href="#">문화 - 엔터테인먼트</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="#">Another link</a>
+								<a class="dropdown-item" href="#">음식 - 요리</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="#">A third link</a>
+								<a class="dropdown-item" href="#">교육 - 학습</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">여행 - 모험</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">사회 - 봉사</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">게임 - 취미</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">뷰티 - 건강</a>
 							</li>
 						</ul>
 					</li>
+
+
+					<li class="nav-item">
+						<a class="nav-link" href="#">검색</a>
+					</li>
+					<c:if test="${loginSuccessCheck == 2}">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">데이터 관리</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="<%=notWithFormTag%>memberList">회원 데이터</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">회원별 수익 데이터</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="<%=notWithFormTag%>activityList">회원 활동 데이터</a>
+								</li>
+							</ul>
+						</li>
+					</c:if>
+					<c:if test="${loginSuccessCheck != 2}">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">마이페이지</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="#">내 활동</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">게시물 수익</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">즐겨찾기 목록</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="<%=notWithFormTag%>memberDetail">회원 정보</a>
+								</li>
+							</ul>
+						</li>
+					</c:if>
+					<c:if test="${loginSuccessCheck == 2}">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">문의</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="<%=notWithFormTag%>commonQuestionsList">자주 묻는 질문</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="<%=notWithFormTag%>questionsList">개인 문의</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="<%=notWithFormTag%>commonQuestionsInsert">공통 질문 작성</a>
+								</li>
+							</ul>
+						</li>
+					</c:if>
+					<c:if test="${loginSuccessCheck != 2}">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">문의</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="<%=notWithFormTag%>commonQuestionsList">자주 묻는 질문</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="<%=notWithFormTag%>questionsList">개인 문의</a>
+								</li>
+							</ul>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

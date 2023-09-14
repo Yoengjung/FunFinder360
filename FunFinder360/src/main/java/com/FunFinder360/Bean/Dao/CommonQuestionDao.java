@@ -28,12 +28,13 @@ public class CommonQuestionDao extends SuperDao {
 		while (rs.next()) {
 			CommonQuestion bean = new CommonQuestion();
 
-			bean.setQuestion_id(rs.getInt("question_id"));
-			bean.setUserId(rs.getString("user_id"));
+			bean.setQuestionId(rs.getInt("questionId"));
+			bean.setUserId(rs.getString("userId"));
 			bean.setTitle(rs.getString("title"));
 			bean.setContent(rs.getString("content"));
-			bean.setPostedDate(rs.getString("posted_date"));
 			bean.setReadhit(rs.getInt("readHit"));
+			bean.setPostedDate(rs.getString("postedDate"));
+			
 
 			lists.add(bean);
 		}
@@ -92,12 +93,12 @@ public class CommonQuestionDao extends SuperDao {
 	private CommonQuestion getBeanData(ResultSet rs) throws Exception {
 		CommonQuestion bean = new CommonQuestion();
 
-		bean.setQuestion_id(rs.getInt("question_id"));
-		bean.setUserId(rs.getString("user_id"));
+		bean.setQuestionId(rs.getInt("questionId"));
+		bean.setUserId(rs.getString("userId"));
 		bean.setTitle(rs.getString("title"));
 		bean.setContent(rs.getString("content"));
-		bean.setPostedDate(rs.getString("posted_date"));
 		bean.setReadhit(rs.getInt("readHit"));
+		bean.setPostedDate(rs.getString("postedDate"));
 
 		return bean;
 	}
@@ -107,8 +108,8 @@ public class CommonQuestionDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = " select question_id, user_id, title, content, posted_date, readhit "
-				+ "from (select question_id, user_id, title, content, posted_date, readhit, rank() over(order by question_id asc) as ranking "
+		String sql = " select questionId, userId, title, content, readhit postedDate "
+				+ "from (select questionId, userId, title, content, readhit, postedDate, rank() over(order by questionId asc) as ranking "
 				+ "from common_question";
 
 		String mode = pageInfo.getMode();
@@ -153,7 +154,7 @@ public class CommonQuestionDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 		
-		String updateSql = "update common_question set readHit = readhit + 1 where question_id = ?";
+		String updateSql = "update common_question set readHit = readhit + 1 where questionId = ?";
 		
 		pstmt = conn.prepareStatement(updateSql);
 		
@@ -164,7 +165,7 @@ public class CommonQuestionDao extends SuperDao {
 		List<CommonQuestion> lists = new ArrayList<CommonQuestion>();
 		
 		try {
-			String sql = "select * from common_question where question_id = ?";
+			String sql = "select * from common_question where questionId = ?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, question_id);
@@ -180,13 +181,13 @@ public class CommonQuestionDao extends SuperDao {
 
 		String sql = "";
 		if (question_id <= 1) {
-			sql = "select * from  common_question where question_id = ?";
+			sql = "select * from  common_question where questionId = ?";
 			pstmt.setInt(1, question_id + 1);
 		} else if (question_id >= totalRecodeCount) {
-			sql = "select * from common_question where question_id = ?";
+			sql = "select * from common_question where questionId = ?";
 			pstmt.setInt(1, question_id - 1);
 		} else {
-			sql = "select * from (select * from common_question order by question_id) where question_id in (?, ?)";
+			sql = "select * from (select * from common_question order by question_id) where questionId in (?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, question_id - 1);
 			pstmt.setInt(2, question_id + 1);

@@ -33,7 +33,7 @@ public class MemberPersonalLoginController extends SuperClass {
 		if (bean == null) {
 			String message = "로그인 정보가 잘못 되었습니다.";
 			
-			request.setAttribute("errorMessage", message);
+			super.setAlertMessage(message);
 			
 			super.goToPage("/member/memberPersonalLoginForm.jsp");
 			

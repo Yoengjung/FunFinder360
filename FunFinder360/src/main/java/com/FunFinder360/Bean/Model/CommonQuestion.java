@@ -1,7 +1,7 @@
 package com.FunFinder360.Bean.Model;
 
 public class CommonQuestion {
-	private int question_id;
+	private int questionId;
 	private String userId;
 	private String title;
 	private String content;
@@ -13,7 +13,7 @@ public class CommonQuestion {
 	public CommonQuestion(int question_id, String userId, String title, String content, String postedDate,
 			int readhit) {
 		super();
-		this.question_id = question_id;
+		this.questionId = question_id;
 		this.userId = userId;
 		this.title = title;
 		this.content = content;
@@ -23,16 +23,16 @@ public class CommonQuestion {
 
 	@Override
 	public String toString() {
-		return "CommonQuestion [question_id=" + question_id + ", userId=" + userId + ", title=" + title + ", content="
+		return "CommonQuestion [question_id=" + questionId + ", userId=" + userId + ", title=" + title + ", content="
 				+ content + ", postedDate=" + postedDate + ", readhit=" + readhit + "]";
 	}
 
-	public int getQuestion_id() {
-		return question_id;
+	public int getQuestionId() {
+		return questionId;
 	}
 
-	public void setQuestion_id(int question_id) {
-		this.question_id = question_id;
+	public void setQuestionId(int questionId) {
+		this.questionId = questionId;
 	}
 
 	public String getUserId() {
@@ -74,6 +74,8 @@ public class CommonQuestion {
 	public void setReadhit(int readhit) {
 		this.readhit = readhit;
 	}
+
+	
 	
 	
 }
