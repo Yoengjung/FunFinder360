@@ -98,55 +98,60 @@
 							}
 						});
 			});
-
 	var contentCount = 0;
 	var imageCount = 0;
+
 	function contentAdd() {
 		const textarea = document.createElement('textarea');
-
-		// textarea의 속성을 설정합니다.
-		textarea.name = 'content' + contentCount; // 필요한 속성을 추가하세요.
-		textarea.className = "form-control content-container"
-
-		// 새로운 textarea를 어딘가에 추가합니다.
-		const contentContainer = document.querySelector('.container'); // textarea를 추가할 컨테이너를 선택합니다.
+		textarea.name = 'content' + contentCount;
+		textarea.className = "form-control content-container";
+		const contentContainer = document.querySelector('.container');
 		contentContainer.appendChild(textarea);
-
+		contentCount++;
 	}
 
 	function imageAdd() {
 		const textarea = document.createElement('input');
+		const imgTag = document.createElement("img");
+		textarea.name = 'image' + imageCount;
+		textarea.className = "form-control image-container";
+		textarea.type = "file";
+		textarea.id = "image" + imageCount;
 
-		// textarea의 속성을 설정합니다.
-		textarea.name = 'image' + imageCount; // 필요한 속성을 추가하세요.
-		textarea.className = "form-control image-container"
-		textarea.type = "file"
-		textarea.onchange = "handleImageUpload(this)"
+		imgTag.name = "previewImage";
+		imgTag.id = "previewImage";
+		imgTag.alt = "미리보기 이미지";
+		imgTag.style = "max-height: 500px; display: inline-block; left: 50%;position: relative;transform: translateX(-50%);margin-top: 30px; display: none;";
 
-		// 새로운 textarea를 어딘가에 추가합니다.
-		const contentContainer = document.querySelector('.container'); // textarea를 추가할 컨테이너를 선택합니다.
+		const contentContainer = document.querySelector('.container');
 		contentContainer.appendChild(textarea);
+		contentContainer.appendChild(imgTag);
+
+		imageCount++;
+
+		// 이미지 파일 업로드가 변경될 때 미리보기 처리
+		$(textarea).on('change', function(event) {
+			handleImageUpload(this, imgTag);
+		});
 	}
-	function handleImageUpload(input) {
+
+	function handleImageUpload(input, imgTag) {
 		const file = input.files[0];
 		if (file) {
 			const reader = new FileReader();
 
 			reader.onload = function(e) {
-				const imagePreviewContainer = document
-						.getElementById('image-preview-container');
-				const imagePreview = document.createElement('img');
-				imagePreview.src = e.target.result;
-				imagePreview.style.maxWidth = '200px'; // 이미지 미리보기의 최대 너비 설정 (원하는 크기로 변경 가능)
-
-				// 이미지 미리보기 영역에 추가
-				imagePreviewContainer.innerHTML = '';
-				imagePreviewContainer.appendChild(imagePreview);
+				imgTag.style.display = 'block';
+				imgTag.src = e.target.result;
 			};
 
 			reader.readAsDataURL(file);
+		} else {
+			imgTag.style.display = 'none';
+			imgTag.src = '';
 		}
 	}
+	
 </script>
 <style>
 .container {
@@ -322,7 +327,7 @@ form ul li {
 	top: 20px;
 }
 
-textarea {
+ .content-container{
 	position: relative;
 	margin-bottom: 10px;
 	top: 50px;
@@ -555,6 +560,7 @@ input[type="file"] {
 				</button>
 
 			</div>
+			<button type="submit" class="btn btn-success">저장</button>
 		</form>
 	</div>
 </body>
