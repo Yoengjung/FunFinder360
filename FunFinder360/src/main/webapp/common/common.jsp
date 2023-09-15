@@ -240,7 +240,7 @@ hr {
 								<a class="dropdown-item" href="#">문화 - 엔터테인먼트</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="#">음식 - 요리</a>
+								<a class="dropdown-item" href="<%=notWithFormTag%>footActivites">음식 - 요리</a>
 							</li>
 							<li>
 								<a class="dropdown-item" href="#">교육 - 학습</a>

@@ -26,3 +26,5 @@ activityInsert=com.FunFinder360.Controller.Activity.ActivityInsertController
 #관리자
 memberList=com.FunFinder360.Controller.Memer.MemberListController
 activityList=com.FunFinder360.Controller.Activity.ActivityListController
+
+footActivites=com.FunFinder360.Controller.FoodActivityController.FoodActivityListController

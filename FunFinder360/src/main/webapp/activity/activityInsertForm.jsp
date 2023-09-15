@@ -185,6 +185,7 @@
 		});
 	}
 
+	var districtValue = "";
 	function validation() {
 		const title = $('#title').val()
 		const category = $("#category").val()
@@ -202,7 +203,7 @@
 		const hour = $('#hour').val()
 		const minute = $('#minute').val()
 		const rating = $("#rating").val()
-
+		
 		var districtCheck = 0;
 
 		console.log(title);
@@ -225,29 +226,42 @@
 		}
 		if (district1 != "지역") {
 			districtCheck = 1;
+			districtValue = district1;
 		} else if (district2 != "지역") {
 			districtCheck = 1;
+			districtValue = district2;
 		} else if (district3 != "지역") {
 			districtCheck = 1;
+			districtValue = district3;
 		} else if (district4 != "지역") {
 			districtCheck = 1;
+			districtValue = district4;
 		} else if (district5 != "지역") {
 			districtCheck = 1;
+			districtValue = district5;
 		} else if (district6 != "지역") {
 			districtCheck = 1;
+			districtValue = district6;
 		} else if (district7 != "지역") {
 			districtCheck = 1;
+			districtValue = district7;
 		} else if (district8 != "지역") {
 			districtCheck = 1;
+			districtValue = district8;
 		} else if (district9 != "지역") {
 			districtCheck = 1;
+			districtValue = district9;
 		} else if (district10 != "지역") {
 			districtCheck = 1;
+			districtValue = district10;
 		} else if (districtCheck == 0) {
 			alert("장소는 필수 선택 사항입니다.");
 			return false;
 		}
-
+		
+		const inputElement = document.getElementById('districtValue');
+		inputElement.value = districtValue;
+		
 		if (hour == "-") {
 			alert("소요시간은 필수 선택 사항입니다.")
 			$('#hour').focus();
@@ -274,7 +288,6 @@
 			alert("이미지는 필수 입력 사항입니다. 버튼을 클릭하여 내용을 작성해주세요.")
 			return false;
 		}
-
 	}
 </script>
 <style>
@@ -495,9 +508,17 @@ input[type="file"] {
 
 <body>
 	<div class="container">
-		<div class="alert alert-warning">
-			<strong>${sessionScope.alertMessage}</strong>
-		</div>
+		<c:if test="${empty sessionScope.alertMessage}">
+			<div class="alert alert-danger" style="display:none;">
+				${sessionScope.alertMessage}
+			</div>
+		</c:if>
+		<c:if test="${not empty sessionScope.alertMessage}">
+			<div class="alert alert-danger" style="display:block;">
+				${sessionScope.alertMessage}
+			</div>
+		</c:if>
+
 		<h2>활동 등록</h2>
 
 		<form action="<%=withFormTag%>" method="post" enctype="multipart/form-data">
@@ -654,8 +675,10 @@ input[type="file"] {
 							<option value="제주시">제주시</option>
 							<option value="서귀포시">서귀포시</option>
 						</select>
+						<input type="hidden" name="districtValue" id ="districtValue" value="">
 						<input class="form-control detail-location" type="text" name="detail-location" id="detail-location" autocomplete="off" placeholder="상세 주소">
 					</li>
+					
 					<li class="time-container">
 						<span id="time-span">소요 시간</span>
 						<select class="form-select hour-select" name="hour" id="hour">

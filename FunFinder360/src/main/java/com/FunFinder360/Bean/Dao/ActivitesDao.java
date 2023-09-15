@@ -2,6 +2,7 @@ package com.FunFinder360.Bean.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import com.FunFinder360.Bean.Model.PersonalActivity;
@@ -66,6 +67,42 @@ public class ActivitesDao extends SuperDao {
 			conn.close();
 		}
 		return status;
+	}
+
+	public int GetTotalRecordCount(String mode, String keyword) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = "select count(*) as cnt from personal_activitis";
+
+		if (mode == null || mode.equals("all")) {
+
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%'";
+		}
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
 	}
 
 }

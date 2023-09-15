@@ -42,10 +42,14 @@ public class ActivityInsertController extends SuperClass {
 		
 		PersonalActivity personalActivity = new PersonalActivity();
 		
+		String district = mr.getParameter("districtValue");
+		
+		System.out.println(" --- " + district);
+		
 		personalActivity.setUserId(userId);
 		personalActivity.setActivityName(mr.getParameter("title"));
 		personalActivity.setCategory(mr.getParameter("category"));
-		personalActivity.setLocation(mr.getParameter("province") + " " + mr.getParameter("district"));
+		personalActivity.setLocation(mr.getParameter("province") + " " + mr.getParameter("districtValue"));
 		personalActivity.setLocationDetail(mr.getParameter("detail-location"));
 		personalActivity.setDuration(time);
 		personalActivity.setCost(Integer.parseInt(mr.getParameter("cost")));
@@ -80,6 +84,7 @@ public class ActivityInsertController extends SuperClass {
 				super.setAlertMessage("활동 등록에 실패했습니다.");
 				new ActivityInsertController().doGet(request, response);
 			} else {
+				super.session.removeAttribute("alertMessage");
 				super.goToPage("common/main.jsp");
 			}
 			
