@@ -10,7 +10,9 @@ public class MemberPersonalLoginController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
-
+		
+		super.session.removeAttribute("alertMessage");
+		
 		super.goToPage("/member/memberPersonalLoginForm.jsp");
 	}
 

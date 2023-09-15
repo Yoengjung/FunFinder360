@@ -27,7 +27,7 @@ public class MainServlet extends HttpServlet {
 	private Map<String, String> settingMap = null;
 	private Map<String, String> companyInfoMap = null;
 
-	private String profileUploadPath = null;
+	private String imageUploadWebPath = null;
 	private static final long serialVersionUID = 1L;
 
 	public MainServlet() {
@@ -46,13 +46,20 @@ public class MainServlet extends HttpServlet {
 		String settingPathName = application.getRealPath(settingFile);
 		settingMap = Utility.getSettingMap(settingPathName);
 
-		application.setAttribute("settingMap", settingMap);
+		application.setAttribute("settingMap", this.settingMap);
 
 		String companyInfoFile = config.getInitParameter("companyInfoTex");
 		String companyInfoPathName = application.getRealPath(companyInfoFile);
 		companyInfoMap = Utility.getCompanyInfoData(companyInfoPathName);
 
-		application.setAttribute("companyInfoMap", companyInfoMap);
+		application.setAttribute("companyInfoMap", this.companyInfoMap);
+		
+		String tempPath = settingMap.get("uploadPath");
+		if (tempPath == null) {
+			tempPath = "image";
+		}
+		
+		this.imageUploadWebPath = application.getRealPath(tempPath);
 	}
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
@@ -65,12 +72,12 @@ public class MainServlet extends HttpServlet {
 
 		if (command == null) {
 			System.out.println("command is null");
-			MultipartRequest multpart = Utility.getMultipartRequest(request, this.profileUploadPath);
-			if (multpart != null) {
-				command = multpart.getParameter("command");
-				request.setAttribute("multpart", multpart);
+			MultipartRequest mr = Utility.getMultipartRequest(request, this.imageUploadWebPath);
+			if (mr != null) {
+				command = mr.getParameter("command");
+				request.setAttribute("mr", mr);
 			} else {
-				System.out.println("multpartReqeust objet is null");
+				System.out.println("multpartRequest object is null");
 			}
 		}
 		SuperController controller = routersMap.get(command);

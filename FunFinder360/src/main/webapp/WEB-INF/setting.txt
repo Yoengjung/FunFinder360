@@ -1,1 +1,1 @@
-profileImagePath=profileImage
+uploadPath=upload

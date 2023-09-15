@@ -64,14 +64,15 @@ public class Utility {
 	}
 
 	public static MultipartRequest getMultipartRequest(HttpServletRequest request, String uploadPath) {
-		MultipartRequest mr = null;
-		int maxPostSize = 10485760;
+		// 이미지 업로드에 필요한 멀티 파트 객체 생성 -> 반환
+		int maxPostSize = 10 * 1024 * 1024;
 		String ENCODING = "UTF-8";
+		MultipartRequest mr = null;
 
 		try {
 			mr = new MultipartRequest(request, uploadPath, maxPostSize, ENCODING, new DefaultFileRenamePolicy());
-		} catch (Exception var6) {
-			var6.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return mr;

@@ -5,16 +5,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.FunFinder360.Bean.Model.MemberPersonalUser;
+
 public class SuperClass implements SuperController {
 	 private HttpServletRequest request;
 	 private HttpServletResponse response;
 	 protected HttpSession session;
 	
+	 protected MemberPersonalUser logInfo = null;
+	 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
 		this.session = request.getSession();
+		this.logInfo = (MemberPersonalUser) session.getAttribute("loginfo");
 	}
 
 	@Override
@@ -22,6 +27,7 @@ public class SuperClass implements SuperController {
 		this.request = request;
 		this.response = response;
 		this.session = request.getSession();
+		this.logInfo = (MemberPersonalUser) session.getAttribute("loginfo");
 	}
 	
 	public void goToPage(String path) {
@@ -46,6 +52,11 @@ public class SuperClass implements SuperController {
 	
 	public void setAlertMessage(String message) {
 		session.setAttribute("alertMessage", message);
+	}
+	
+	public void youNeededLogin(String message) {
+		this.setAlertMessage(message);
+		this.goToPage("member/memberLoginSelectForm.jsp");
 	}
 	
 }

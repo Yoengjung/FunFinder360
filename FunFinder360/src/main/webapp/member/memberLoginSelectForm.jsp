@@ -92,15 +92,23 @@
 <body>
 	<div class="container">
 		<div class="login-form-container">
+			<div class="alert alert-danger">
+				<strong>${sessionScope.alertMessage }</strong>
+			</div>
 			<h2>로그인</h2>
 			<div class="select-container">
 				<div class="select-container">
 					<div class="select-item1">
-						<a href="<%=notWithFormTag%>PersonalLogin" class="select-login-a"> <span class="material-symbols-outlined icon-tag" style="font-size: 80px;"> person </span> <span>개인 로그인</span>
+						<a href="<%=notWithFormTag%>PersonalLogin" class="select-login-a">
+							<span class="material-symbols-outlined icon-tag" style="font-size: 80px;"> person </span>
+							<span>개인 로그인</span>
 						</a>
 					</div>
 					<div class="select-item2">
-						<a href="<%=notWithFormTag%>OwnerLogin" class="select-login-a"><span class="material-symbols-outlined" style="font-size: 80px;"> apartment </span> <span>업주 로그인</span> </a>
+						<a href="<%=notWithFormTag%>OwnerLogin" class="select-login-a">
+							<span class="material-symbols-outlined" style="font-size: 80px;"> apartment </span>
+							<span>업주 로그인</span>
+						</a>
 					</div>
 				</div>
 			</div>
