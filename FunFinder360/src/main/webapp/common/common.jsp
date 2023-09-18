@@ -29,6 +29,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 body {
 	margin: 0px;
 	width: 100vw;
+	font-family: 'Sunflower', sans-serif;
 }
 
 ul {
@@ -233,34 +234,10 @@ hr {
 					<li class="nav-item">
 						<a class="nav-link" href="<%=notWithFormTag%>activityInsert">활동 등록</a>
 					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">카테고리</a>
-						<ul class="dropdown-menu">
-							<li>
-								<a class="dropdown-item" href="#">문화 - 엔터테인먼트</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="<%=notWithFormTag%>footActivites">음식 - 요리</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="#">교육 - 학습</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="#">여행 - 모험</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="#">사회 - 봉사</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="#">게임 - 취미</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="#">뷰티 - 건강</a>
-							</li>
-						</ul>
+
+					<li>
+						<a class="nav-link" href="<%=notWithFormTag%>activitesList">활동 목록</a>
 					</li>
-
-
 					<li class="nav-item">
 						<a class="nav-link" href="#">검색</a>
 					</li>

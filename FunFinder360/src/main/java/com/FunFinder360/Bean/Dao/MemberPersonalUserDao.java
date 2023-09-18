@@ -185,4 +185,26 @@ public class MemberPersonalUserDao extends SuperDao {
 		return status;
 	}
 
+	public MemberPersonalUser getMemberData(String userId) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "select * from personal_users where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		rs = pstmt.executeQuery();
+		
+		MemberPersonalUser member = new MemberPersonalUser();
+		
+		if(rs.next()) {
+			member = this.getBeanData(rs);
+		}
+		
+		return member;
+	}
+
 }

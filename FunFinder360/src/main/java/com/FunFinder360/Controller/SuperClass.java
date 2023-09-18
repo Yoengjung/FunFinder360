@@ -8,12 +8,12 @@ import javax.servlet.http.HttpSession;
 import com.FunFinder360.Bean.Model.MemberPersonalUser;
 
 public class SuperClass implements SuperController {
-	 private HttpServletRequest request;
-	 private HttpServletResponse response;
-	 protected HttpSession session;
-	
-	 protected MemberPersonalUser logInfo = null;
-	 
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	protected HttpSession session;
+
+	protected MemberPersonalUser logInfo = null;
+
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -29,9 +29,9 @@ public class SuperClass implements SuperController {
 		this.session = request.getSession();
 		this.logInfo = (MemberPersonalUser) session.getAttribute("loginfo");
 	}
-	
+
 	public void goToPage(String path) {
-		if(this.request == null) {
+		if (this.request == null) {
 			System.out.print("doGet / doPost method call omission");
 		}
 		RequestDispatcher dispatcher = null;
@@ -42,21 +42,29 @@ public class SuperClass implements SuperController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getUrlInfomation(String todoCommmand) {
-		String appName = this.request.getContextPath() ;
-		String mappingName = "/FunFinder360" ;
-		String text = appName + mappingName + "?command=" + todoCommmand ;
-		return text ;
+		String appName = this.request.getContextPath();
+		String mappingName = "/FunFinder360";
+		String text = appName + mappingName + "?command=" + todoCommmand;
+		return text;
 	}
-	
+
 	public void setAlertMessage(String message) {
 		session.setAttribute("alertMessage", message);
 	}
-	
+
 	public void youNeededLogin(String message) {
 		this.setAlertMessage(message);
 		this.goToPage("member/memberLoginSelectForm.jsp");
 	}
-	
+
+	public int getNumberData(String parameter) {
+		boolean flag = false;
+
+		flag = parameter == null || parameter.equals("") || parameter.equals("null");
+
+		return flag ? 0 : Integer.parseInt(parameter);
+	}
+
 }

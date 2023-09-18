@@ -3,9 +3,13 @@ package com.FunFinder360.Bean.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.FunFinder360.Bean.Model.ActivityAndImage;
 import com.FunFinder360.Bean.Model.PersonalActivity;
+
+import Utility.Paging;
 
 public class ActivitesDao extends SuperDao {
 
@@ -14,7 +18,7 @@ public class ActivitesDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
 
-		String sql = "insert into personal_activitis values (PERSONAL_ACTIVITY_SEQUENCE.nextval, ? ,? ,? ,? ,? ,? ,? ,? ,? )";
+		String sql = "insert into personal_activitis values (PERSONAL_ACTIVITY_SEQUENCE.nextval, ? ,? ,? ,? ,? ,? ,? ,? ,?, ?, default)";
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -27,6 +31,7 @@ public class ActivitesDao extends SuperDao {
 		pstmt.setInt(7, personalActivity.getCost());
 		pstmt.setInt(8, personalActivity.getActivityNumber());
 		pstmt.setInt(9, personalActivity.getRating());
+		pstmt.setInt(10, personalActivity.getReadHit());
 
 		int status = -1;
 
@@ -69,7 +74,7 @@ public class ActivitesDao extends SuperDao {
 		return status;
 	}
 
-	public int GetTotalRecordCount(String mode, String keyword) throws Exception{
+	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet resultSet = null;
 		Connection connection = super.getConnection();
@@ -103,6 +108,82 @@ public class ActivitesDao extends SuperDao {
 		}
 
 		return cnt;
+	}
+
+	public List<ActivityAndImage> selectAll(Paging pageInfo) throws Exception {
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		String sql = "select activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit) as ranking from personal_activitis ac join activity_image im on ac.activityid = im.imageId ";
+		if (mode == null || mode.equals("all")) {
+
+		} else {
+			sql += "where " + mode + " like '%" + keyword + "%'";
+		}
+
+		sql += ") " + " where ranking between ? and ?";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<ActivityAndImage> bean = new ArrayList<ActivityAndImage>();
+
+		while (resultSet.next()) {
+			bean.add(getActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	private ActivityAndImage getActivityBeanData(ResultSet rs) throws Exception {
+		ActivityAndImage ActivitesList = new ActivityAndImage();
+		
+		ActivitesList.setActivityName(rs.getString("activityName"));
+		ActivitesList.setCategory(rs.getString("category"));
+		ActivitesList.setLocation(rs.getString("location"));
+		ActivitesList.setLocationDetail(rs.getString("locationDetail"));
+		ActivitesList.setImage(rs.getString("image"));
+		ActivitesList.setImageOrder(rs.getInt("imageOrder"));
+		ActivitesList.setReadHit(rs.getInt("readhit"));
+		
+		return ActivitesList;
+	}
+
+	private PersonalActivity getBeanData(ResultSet rs) throws Exception {
+		PersonalActivity ActivitesList = new PersonalActivity();
+
+		ActivitesList.setActivityId(rs.getInt("ACTIVITYID"));
+		ActivitesList.setUserId(rs.getString("USERID"));
+		ActivitesList.setActivityName(rs.getString("ACTIVITYNAME"));
+		ActivitesList.setCategory(rs.getString("CATEGORY"));
+		ActivitesList.setLocation(rs.getString("LOCATION"));
+		ActivitesList.setLocationDetail(rs.getString("LOCATIONDETAIL"));
+		ActivitesList.setDuration(rs.getInt("DURATION"));
+		ActivitesList.setCost(rs.getInt("COST"));
+		ActivitesList.setActivityNumber(rs.getInt("ACTIVITYNUMBER"));
+		ActivitesList.setRating(rs.getInt("RATING"));
+		ActivitesList.setReadHit(rs.getInt("READHIT"));
+		ActivitesList.setPostedDate(rs.getString("POSTEDDATE"));
+
+		return ActivitesList;
 	}
 
 }

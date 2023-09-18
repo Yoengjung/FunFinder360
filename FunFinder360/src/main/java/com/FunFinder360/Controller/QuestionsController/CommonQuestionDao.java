@@ -1,4 +1,4 @@
-package com.FunFinder360.Bean.Dao;
+package com.FunFinder360.Controller.QuestionsController;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.FunFinder360.Bean.Dao.SuperDao;
 import com.FunFinder360.Bean.Model.CommonQuestion;
 
 import Utility.Paging;
@@ -34,7 +35,6 @@ public class CommonQuestionDao extends SuperDao {
 			bean.setContent(rs.getString("content"));
 			bean.setReadhit(rs.getInt("readHit"));
 			bean.setPostedDate(rs.getString("postedDate"));
-			
 
 			lists.add(bean);
 		}
@@ -153,17 +153,17 @@ public class CommonQuestionDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
-		
+
 		String updateSql = "update common_question set readHit = readhit + 1 where questionId = ?";
-		
+
 		pstmt = conn.prepareStatement(updateSql);
-		
+
 		pstmt.setInt(1, question_id);
-		
+
 		pstmt.executeUpdate();
-		
+
 		List<CommonQuestion> lists = new ArrayList<CommonQuestion>();
-		
+
 		try {
 			String sql = "select * from common_question where questionId = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -211,28 +211,32 @@ public class CommonQuestionDao extends SuperDao {
 		return lists;
 	}
 
-	public int InsertData(CommonQuestion bean) throws Exception{
-		System.out.println(bean);		
-		PreparedStatement pstmt = null ;
-		String sql = " insert into common_question(questionId, userId, title, content, readhit, postedDate)" ;
-		sql += "          					values(common_question_sequence.nextval, ?, ?, ?, ?, ?)" ;		
-		int cnt = -1 ;
-		
-		connection = super.getConnection() ;
-		connection.setAutoCommit(false);		
-		
-		pstmt = connection.prepareStatement(sql) ;		
+	public int InsertData(CommonQuestion bean) throws Exception {
+		System.out.println(bean);
+		PreparedStatement pstmt = null;
+		String sql = " insert into common_question(questionId, userId, title, content, readhit, postedDate)";
+		sql += "          					values(common_question_sequence.nextval, ?, ?, ?, ?, ?)";
+		int cnt = -1;
+
+		connection = super.getConnection();
+		connection.setAutoCommit(false);
+
+		pstmt = connection.prepareStatement(sql);
 		pstmt.setString(1, bean.getUserId());
 		pstmt.setString(2, bean.getTitle());
 		pstmt.setString(3, bean.getContent());
 		pstmt.setInt(4, bean.getReadhit());
 		pstmt.setString(5, bean.getPostedDate());
 
-		cnt = pstmt.executeUpdate() ;
-		connection.commit();		
-		
-		if(pstmt!=null){pstmt.close();}
-		if(connection!=null){connection.close();}		
+		cnt = pstmt.executeUpdate();
+		connection.commit();
+
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
 		return cnt;
 	}
 

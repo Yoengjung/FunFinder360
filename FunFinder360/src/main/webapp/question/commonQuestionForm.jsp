@@ -31,7 +31,7 @@
 
 .title-head {
 	text-align: left;
-	width: 50%;
+	width: 20%; /* 50% -> 20%로 수정함 */
 }
 
 .registrant-head {
@@ -76,6 +76,30 @@
 	margin: 0 20px;
 }
 </style>
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						var questionOptionList = $('#mode option');
+						for (var i = 0; i < questionOptionList.length; i++) {
+							if (questionOptionList[i].value == '${requestScope.pageInfo.mode}') {
+								questionOptionList[i].selected = true;
+							}
+						}
+						$('#keyowrd').val('${requestScope.pageInfo.keyword}');
+
+						$("#mode").change(function() {
+							if ($(this).val() != 'all') {
+								$('#keyword').attr('disabled', false);
+							} else {
+								$('#keyword').val('');
+								$('#keyword').attr('disabled', true);
+							}
+						});
+					});
+</script>
+
+
 </head>
 <body>
 	<div class="container">
@@ -85,6 +109,7 @@
 				<tr>
 					<th class="table-head-box no-head">순번</th>
 					<th class="table-head-box title-head">제목</th>
+					<th>내용</th>
 					<th class="table-head-box registrant-head">등록자명</th>
 					<th class="table-head-box posted-date-head">등록일자</th>
 					<th class="table-head-box readhit-head">조회수</th>
@@ -97,6 +122,13 @@
 						<td class="table-body-box title-box">
 							<a href="<%=notWithFormTag%>commonQuestionsDetail&question_id=${question.question_id}">${question.title}</a>
 						</td>
+						<td>
+							<span data-bs-toggle="popover" data-bs-trigger="hover" title="${bean.name}" data-bs-content="${question.content}">
+								<c:if test="${fn:length(question.content) >= 10}">
+                                    ${fn:substring(question.content, 0, 10)}...
+                                 </c:if>
+							</span>
+						</td>
 						<td class="table-body-box">${question.userId}</td>
 						<td class="table-body-box">${question.postedDate}</td>
 						<td class="table-body-box">${question.readhit}</td>
@@ -107,11 +139,11 @@
 		<div class="search-container">
 			<div class="search-in-container">
 				<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
-					<input type="hidden" name="command" value="prList">
+					<input type="hidden" name="command" value="commonQuestionsList">
 					<select id="mode" name="mode" class="form-select">
 						<option value="all" selected="selected">--- 선택해 주세요 ---
-						<option value="name">제목
-						<option value="company">내용
+						<option value="title">제목
+						<option value="content">내용
 					</select>
 					<div class="input-group">
 						<input class="keyword-input-box form-control" type="text" name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">

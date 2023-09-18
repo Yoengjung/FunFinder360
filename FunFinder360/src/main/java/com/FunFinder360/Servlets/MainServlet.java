@@ -67,7 +67,7 @@ public class MainServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String command = request.getParameter("command");
-
+ 
 		System.out.println("command : " + command);
 
 		if (command == null) {

@@ -26,7 +26,7 @@ public class Paging {
 		this.pageNumber = Integer.parseInt(_pageNumber);
 		if (_pageSize == null || _pageSize.equals("null") || _pageSize.equals("")) {
 			if (isGrid) {
-				_pageSize = "6";
+				_pageSize = "8";
 			} else {
 				_pageSize = "10";
 			}

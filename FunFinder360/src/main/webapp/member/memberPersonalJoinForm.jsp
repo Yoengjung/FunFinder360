@@ -11,7 +11,6 @@
 	})
 
 	function validation() {
-		const id = $("#id").val();
 		const password = $("#password").val();
 		const passwordConfirm = $("#passwordConfirm").val();
 		const username = $("#username").val();
@@ -19,7 +18,6 @@
 		const phoneNumber = $("#phoneNumber").val();
 		const email = $("#email").val();
 
-		const idPattern = /^[a-zA-Z0-9]{6,20}$/;
 		const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,20}$/;
 		const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 		const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
@@ -28,13 +26,7 @@
 			var element = document.getElementById("id-empty-alert-message");
 			element.style.display = "block";
 			return false;
-		} else if (!idPattern.test(id)) {
-			var element = document.getElementById("id-alert-message-tag");
-			element.style.display = "block";
-			return false;
 		} else {
-			var element = document.getElementById("id-alert-message-tag");
-			element.style.display = "none";
 			var emptyElement = document
 					.getElementById("id-empty-alert-message");
 			emptyElement.style.display = "none";

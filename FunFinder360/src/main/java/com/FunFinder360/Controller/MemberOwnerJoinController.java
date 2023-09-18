@@ -1,6 +1,5 @@
 package com.FunFinder360.Controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,8 +44,7 @@ public class MemberOwnerJoinController extends SuperClass {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
-			else {
+			} else {
 				String message = "이미 회원인 아이디입니다.";
 				super.setAlertMessage(message);
 				super.goToPage("member/memberOwnerJoinForm.jsp");
@@ -54,6 +52,6 @@ public class MemberOwnerJoinController extends SuperClass {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

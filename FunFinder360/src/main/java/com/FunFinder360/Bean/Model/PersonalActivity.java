@@ -12,11 +12,14 @@ public class PersonalActivity {
 	private int cost;
 	private int activityNumber;
 	private int rating;
+	private int readHit;
+	private String postedDate;
 	
 	public PersonalActivity () {}
 
 	public PersonalActivity(int activityId, String userId, String activityName, String category, String location,
-			String locationDetail, int duration, int cost, int activityNumber, int rating) {
+			String locationDetail, int duration, int cost, int activityNumber, int rating, int readHit,
+			String postedDate) {
 		super();
 		this.activityId = activityId;
 		this.userId = userId;
@@ -28,6 +31,8 @@ public class PersonalActivity {
 		this.cost = cost;
 		this.activityNumber = activityNumber;
 		this.rating = rating;
+		this.readHit = readHit;
+		this.postedDate = postedDate;
 	}
 
 	@Override
@@ -35,7 +40,7 @@ public class PersonalActivity {
 		return "PersonalActivity [activityId=" + activityId + ", userId=" + userId + ", activityName=" + activityName
 				+ ", category=" + category + ", location=" + location + ", locationDetail=" + locationDetail
 				+ ", duration=" + duration + ", cost=" + cost + ", activityNumber=" + activityNumber + ", rating="
-				+ rating + "]";
+				+ rating + ", readHit=" + readHit + ", postedDate=" + postedDate + "]";
 	}
 
 	public int getActivityId() {
@@ -116,6 +121,24 @@ public class PersonalActivity {
 
 	public void setRating(int rating) {
 		this.rating = rating;
-	}	
+	}
+
+	public int getReadHit() {
+		return readHit;
+	}
+
+	public void setReadHit(int readHit) {
+		this.readHit = readHit;
+	}
+
+	public String getPostedDate() {
+		return postedDate;
+	}
+
+	public void setPostedDate(String postedDate) {
+		this.postedDate = postedDate;
+	}
+
+	
 	
 }
