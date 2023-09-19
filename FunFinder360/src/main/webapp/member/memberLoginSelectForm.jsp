@@ -92,9 +92,16 @@
 <body>
 	<div class="container">
 		<div class="login-form-container">
-			<div class="alert alert-danger">
-				<strong>${sessionScope.alertMessage }</strong>
+			<c:if test="${empty sessionScope.alertMessage}">
+			<div class="alert alert-danger" style="display:none;">
+				${sessionScope.alertMessage}
 			</div>
+		</c:if>
+		<c:if test="${not empty sessionScope.alertMessage}">
+			<div class="alert alert-danger" style="display:block;">
+				${sessionScope.alertMessage}
+			</div>
+		</c:if>
 			<h2>로그인</h2>
 			<div class="select-container">
 				<div class="select-container">

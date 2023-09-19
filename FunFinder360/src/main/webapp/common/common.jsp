@@ -18,6 +18,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 	<c:if test="${sessionScope.loginfo.userId != 'admin1'}">
 		<c:set var="loginSuccessCheck" value="1"></c:set>
 	</c:if>
+	<c:if test="${sessionScope.loginfoOwner.userId != 'admin1'}">
+		<c:set var="loginSuccessCheck" value="1"></c:set>
+	</c:if>
 </c:if>
 
 <!DOCTYPE html>
@@ -29,6 +32,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 body {
 	margin: 0px;
 	width: 100vw;
+	font-family: 'Nanum Gothic Coding', cursive;
 	font-family: 'Sunflower', sans-serif;
 }
 
@@ -200,13 +204,23 @@ hr {
 <body>
 	<div class="top-container">
 		<div class="login-container">
-			<c:if test="${empty sessionScope.loginfo}">
+			<c:if test="${empty sessionScope.loginfo && empty sessionScope.loginfoOwner}">
 				<ul>
 					<li>
 						<a href="<%=notWithFormTag%>loginSelect" class="a-tag">login</a>
 					</li>
 					<li>
 						<a href="<%=notWithFormTag%>joinSelect" class="a-tag">join</a>
+					</li>
+				</ul>
+			</c:if>
+			<c:if test="${not empty sessionScope.loginfoOwner}">
+				<ul>
+					<li>
+						<span>${sessionScope.loginfoOwner.userName}</span>
+					</li>
+					<li>
+						<a href="<%=notWithFormTag%>logout" class="a-tag">logout</a>
 					</li>
 				</ul>
 			</c:if>
@@ -234,10 +248,18 @@ hr {
 					<li class="nav-item">
 						<a class="nav-link" href="<%=notWithFormTag%>activityInsert">활동 등록</a>
 					</li>
-
-					<li>
-						<a class="nav-link" href="<%=notWithFormTag%>activitesList">활동 목록</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">활동 목록</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href="<%=notWithFormTag%>activitesList">개인 활동</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="<%=notWithFormTag%>OwnerActivitesList">업주 활동</a>
+							</li>
+						</ul>
 					</li>
+
 					<li class="nav-item">
 						<a class="nav-link" href="#">검색</a>
 					</li>
@@ -285,6 +307,9 @@ hr {
 								</li>
 								<li>
 									<a class="dropdown-item" href="<%=notWithFormTag%>questionsList">개인 문의</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="<%=notWithFormTag%>questionsInsert">문의 작성</a>
 								</li>
 								<li>
 									<a class="dropdown-item" href="<%=notWithFormTag%>commonQuestionsInsert">공통 질문 작성</a>

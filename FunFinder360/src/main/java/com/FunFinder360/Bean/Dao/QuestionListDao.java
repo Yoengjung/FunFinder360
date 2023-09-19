@@ -12,6 +12,43 @@ import Utility.Paging;
 
 public class QuestionListDao extends SuperDao {
 
+	public int InsertData(QuestionsList bean, String userId, int check) throws Exception{
+		System.out.println(bean);
+		PreparedStatement pstmt = null;
+		String sql = " insert into questionList(questionListId, personalUserId, ownerUserId, title, content, readhit, postedDate)";
+		sql += "         values(question_list_sequence.nextval, ?,              ?,           ?,     ?,       ?,       ?)";
+		int cnt = -1;
+
+		connection = super.getConnection();
+		connection.setAutoCommit(false);
+
+		pstmt = connection.prepareStatement(sql);
+		
+		if(check==1) {
+			pstmt.setString(1, userId);
+			pstmt.setString(2, bean.getOwnerUserId());
+		}else {
+			pstmt.setString(1, bean.getPersonalUserId());
+			pstmt.setString(2, userId);
+		}
+		pstmt.setString(3, bean.getTitle());
+		pstmt.setString(4, bean.getContent());
+		pstmt.setInt(5, bean.getReadhit());
+		pstmt.setString(6, bean.getPostedDate());
+
+		cnt = pstmt.executeUpdate();
+		connection.commit();
+
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return cnt;
+	
+	}
+
 	public List<QuestionsList> getDateByQuestionId(int questionListId, int totalRecodeCount) throws Exception {
 
 		String updateSql = " update questionList set readhit = readhit + 1 where questionListId = ?";

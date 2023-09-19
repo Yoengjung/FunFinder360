@@ -12,7 +12,7 @@ joinSelect=com.FunFinder360.Controller.SelectJoinController
 memberDetail=com.FunFinder360.Controller.Member.MemberDetailController
 
 #로그아웃
-logout=com.FunFinder360.Controller.Member.MeberLogoutController
+logout=com.FunFinder360.Controller.Member.MemberLogoutController
 
 #문의
 commonQuestionsList=com.FunFinder360.Controller.CommonQuestionsController.CQListController
@@ -22,9 +22,11 @@ questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListContr
 
 #활동
 activityInsert=com.FunFinder360.Controller.Activity.ActivityInsertController
+OwnerActivityInsert=com.FunFinder360.Controller.Activity.OwnerActivityInsertController
+OwnerActivitesList=com.FunFinder360.Controller.ActivityController.OwnerActivityListController
 
 #관리자
-memberList=com.FunFinder360.Controller.Memer.MemberListController
+memberList=com.FunFinder360.Controller.Member.MemberListController
 activitesList=com.FunFinder360.Controller.ActivityController.ActivityListController
 
 #개인 문의

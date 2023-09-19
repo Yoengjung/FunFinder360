@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.FunFinder360.Bean.Model.MemberOwner;
 import com.FunFinder360.Bean.Model.MemberPersonalUser;
 
 public class SuperClass implements SuperController {
@@ -13,6 +14,7 @@ public class SuperClass implements SuperController {
 	protected HttpSession session;
 
 	protected MemberPersonalUser logInfo = null;
+	protected MemberOwner loginfoOwner = null;
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -20,6 +22,7 @@ public class SuperClass implements SuperController {
 		this.response = response;
 		this.session = request.getSession();
 		this.logInfo = (MemberPersonalUser) session.getAttribute("loginfo");
+		this.loginfoOwner = (MemberOwner) session.getAttribute("loginfoOwner");
 	}
 
 	@Override
@@ -28,6 +31,7 @@ public class SuperClass implements SuperController {
 		this.response = response;
 		this.session = request.getSession();
 		this.logInfo = (MemberPersonalUser) session.getAttribute("loginfo");
+		this.loginfoOwner = (MemberOwner) session.getAttribute("loginfoOwner");
 	}
 
 	public void goToPage(String path) {

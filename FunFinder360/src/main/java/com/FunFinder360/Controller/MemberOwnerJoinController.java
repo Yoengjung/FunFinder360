@@ -3,7 +3,7 @@ package com.FunFinder360.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.FunFinder360.Bean.Dao.MemberPersonalUserDao;
+import com.FunFinder360.Bean.Dao.MemberOwnerUserDao;
 import com.FunFinder360.Bean.Model.MemberOwner;
 
 public class MemberOwnerJoinController extends SuperClass {
@@ -21,7 +21,7 @@ public class MemberOwnerJoinController extends SuperClass {
 
 		String id = request.getParameter("id");
 
-		MemberPersonalUserDao dao = new MemberPersonalUserDao();
+		MemberOwnerUserDao dao = new MemberOwnerUserDao();
 
 		try {
 			boolean status = dao.duplicationOwnerIdCheck(id);

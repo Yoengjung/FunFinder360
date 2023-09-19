@@ -30,7 +30,7 @@
 				</tr>
 				<tr>
 					<td align="left">이름:</td>
-					<td>${requestScope.bean.username}</td>
+					<td>${requestScope.bean.userName}</td>
 				</tr>
 				<tr>
 					<td align="left">생년월일:</td>

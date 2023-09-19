@@ -20,6 +20,8 @@ public class MemberOwnerLoginController extends SuperClass {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
+		System.out.println("id : " + id + " , password : " + password);
+		
 		MemberOwnerDao dao = new MemberOwnerDao();
 		MemberOwner bean = null;
 
@@ -38,7 +40,7 @@ public class MemberOwnerLoginController extends SuperClass {
 
 		}else { 
 			session.removeAttribute("alertMessage");
-			super.session.setAttribute("loginfo", bean);
+			super.session.setAttribute("loginfoOwner", bean);
 			new HomeController().doGet(request, response);
 		}
 	}

@@ -117,14 +117,14 @@ public class ActivitesDao extends SuperDao {
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
-		String sql = "select activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit) as ranking from personal_activitis ac join activity_image im on ac.activityid = im.imageId ";
+		String sql = "select userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit) as ranking from personal_activitis ac join activity_image im on ac.activityid = im.personalActivityId ";
 		if (mode == null || mode.equals("all")) {
 
 		} else {
 			sql += "where " + mode + " like '%" + keyword + "%'";
 		}
 
-		sql += ") " + " where ranking between ? and ?";
+		sql += ") " + " where ranking between ? and ? and imageorder = 0 ";
 
 		Connection connection = super.getConnection();
 
@@ -156,6 +156,7 @@ public class ActivitesDao extends SuperDao {
 	private ActivityAndImage getActivityBeanData(ResultSet rs) throws Exception {
 		ActivityAndImage ActivitesList = new ActivityAndImage();
 		
+		ActivitesList.setUserId(rs.getString("userId"));
 		ActivitesList.setActivityName(rs.getString("activityName"));
 		ActivitesList.setCategory(rs.getString("category"));
 		ActivitesList.setLocation(rs.getString("location"));
@@ -163,25 +164,6 @@ public class ActivitesDao extends SuperDao {
 		ActivitesList.setImage(rs.getString("image"));
 		ActivitesList.setImageOrder(rs.getInt("imageOrder"));
 		ActivitesList.setReadHit(rs.getInt("readhit"));
-		
-		return ActivitesList;
-	}
-
-	private PersonalActivity getBeanData(ResultSet rs) throws Exception {
-		PersonalActivity ActivitesList = new PersonalActivity();
-
-		ActivitesList.setActivityId(rs.getInt("ACTIVITYID"));
-		ActivitesList.setUserId(rs.getString("USERID"));
-		ActivitesList.setActivityName(rs.getString("ACTIVITYNAME"));
-		ActivitesList.setCategory(rs.getString("CATEGORY"));
-		ActivitesList.setLocation(rs.getString("LOCATION"));
-		ActivitesList.setLocationDetail(rs.getString("LOCATIONDETAIL"));
-		ActivitesList.setDuration(rs.getInt("DURATION"));
-		ActivitesList.setCost(rs.getInt("COST"));
-		ActivitesList.setActivityNumber(rs.getInt("ACTIVITYNUMBER"));
-		ActivitesList.setRating(rs.getInt("RATING"));
-		ActivitesList.setReadHit(rs.getInt("READHIT"));
-		ActivitesList.setPostedDate(rs.getString("POSTEDDATE"));
 
 		return ActivitesList;
 	}

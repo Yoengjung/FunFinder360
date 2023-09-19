@@ -5,13 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.FunFinder360.Bean.Dao.ActivitesDao;
-import com.FunFinder360.Bean.Model.ActivityAndImage;
+import com.FunFinder360.Bean.Dao.OwnerActivitesDao;
+import com.FunFinder360.Bean.Model.OwnerActivityAndImage;
 import com.FunFinder360.Controller.SuperClass;
 
 import Utility.Paging;
 
-public class ActivityListController extends SuperClass {
+public class OwnerActivityListController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
@@ -21,26 +21,25 @@ public class ActivityListController extends SuperClass {
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
 
-		ActivitesDao dao = new ActivitesDao();
+		OwnerActivitesDao dao = new OwnerActivitesDao();
 
 		try {
 			int totalCount = dao.GetTotalRecordCount(mode, keyword);
-			String url = super.getUrlInfomation("activitesList");
+			String url = super.getUrlInfomation("OwnerActivitesList");
 			boolean isGrid = true;
-
+			
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 
-			List<ActivityAndImage> lists = dao.selectAll(pageInfo);
+			List<OwnerActivityAndImage> lists = dao.selectAll(pageInfo);
 
-			request.setAttribute("personalActivity", lists);
+			request.setAttribute("activity", lists);
 			request.setAttribute("pageInfo", pageInfo);
 
-			super.goToPage("activity/activitesList.jsp");
+			super.goToPage("activity/ownerActivitesList.jsp");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
 	}
 
 	@Override

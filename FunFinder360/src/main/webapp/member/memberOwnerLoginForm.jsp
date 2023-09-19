@@ -98,7 +98,7 @@ function validation () {
 				<br>
 				<input type="password" class="form-control" name="password" id="password" placeholder="비밀번호">
 				<br>
-				<p class="login-fail-tag">${sessionScope.alertmessage}</p>
+				<p class="login-fail-tag">${sessionScope.alertMessage}</p>
 				<div class="form-type-checkbox">
 					<div class="form_items">
 						<input type="checkbox">
