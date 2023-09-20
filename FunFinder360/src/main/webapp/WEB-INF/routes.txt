@@ -32,4 +32,4 @@ activitesList=com.FunFinder360.Controller.ActivityController.ActivityListControl
 #개인 문의
 questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListController
 questionsDetail=com.FunFinder360.Controller.QuestionsController.QuestionsListDetailController
-questionsInsert=com.FunFinder360.Controller.QuestionsController.QuestionsListInsertController
+questionsInsert=com.FunFinder360.Controller.QuestionsController.QuestionsInsertController

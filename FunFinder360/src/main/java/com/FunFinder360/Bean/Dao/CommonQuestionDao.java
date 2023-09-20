@@ -211,7 +211,7 @@ public class CommonQuestionDao extends SuperDao {
 		return lists;
 	}
 
-	public int InsertData(CommonQuestion bean) throws Exception{
+	public int InsertData(CommonQuestion bean, String userId) throws Exception{
 		System.out.println(bean);		
 		PreparedStatement pstmt = null ;
 		String sql = " insert into common_question(questionId, userId, title, content, readhit, postedDate)" ;
@@ -222,7 +222,7 @@ public class CommonQuestionDao extends SuperDao {
 		connection.setAutoCommit(false);		
 		
 		pstmt = connection.prepareStatement(sql) ;		
-		pstmt.setString(1, bean.getUserId());
+		pstmt.setString(1, userId);
 		pstmt.setString(2, bean.getTitle());
 		pstmt.setString(3, bean.getContent());
 		pstmt.setInt(4, bean.getReadhit());

@@ -28,15 +28,15 @@ public class CQInsertController extends SuperClass{
 		bean.setReadhit(super.getNumberData(request.getParameter("readhit")));
 
 		CommonQuestionDao dao = new CommonQuestionDao() ;
+		
 		int cnt = -1 ;
 		try {
-			cnt = dao.InsertData(bean) ; 
+			cnt = dao.InsertData(bean, super.logInfo.getUserId()) ; 
 			
 			if(cnt == -1) {
 				super.goToPage("question/commonQuestionInsertFrom.jsp");
 				
 			}else {
-//				new CQListController().doGet(request, response); 
 				super.goToPage("/common/main.jsp");
 			}
 		} catch (Exception e) {

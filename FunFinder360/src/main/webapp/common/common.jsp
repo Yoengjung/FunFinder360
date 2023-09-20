@@ -18,6 +18,11 @@ String notWithFormTag = appName + mappingName + "?command=";
 	<c:if test="${sessionScope.loginfo.userId != 'admin1'}">
 		<c:set var="loginSuccessCheck" value="1"></c:set>
 	</c:if>
+</c:if>
+<c:if test="${not empty sessionScope.loginfoOwner}">
+	<c:if test="${sessionScope.loginfoOwner.userId == 'admin1'}">
+		<c:set var="loginSuccessCheck" value="2"></c:set>
+	</c:if>
 	<c:if test="${sessionScope.loginfoOwner.userId != 'admin1'}">
 		<c:set var="loginSuccessCheck" value="1"></c:set>
 	</c:if>
@@ -259,10 +264,6 @@ hr {
 							</li>
 						</ul>
 					</li>
-
-					<li class="nav-item">
-						<a class="nav-link" href="#">검색</a>
-					</li>
 					<c:if test="${loginSuccessCheck == 2}">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">데이터 관리</a>
@@ -309,9 +310,6 @@ hr {
 									<a class="dropdown-item" href="<%=notWithFormTag%>questionsList">개인 문의</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="<%=notWithFormTag%>questionsInsert">문의 작성</a>
-								</li>
-								<li>
 									<a class="dropdown-item" href="<%=notWithFormTag%>commonQuestionsInsert">공통 질문 작성</a>
 								</li>
 							</ul>
@@ -326,6 +324,9 @@ hr {
 								</li>
 								<li>
 									<a class="dropdown-item" href="<%=notWithFormTag%>questionsList">개인 문의</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="<%=notWithFormTag%>questionsInsert">문의 작성</a>
 								</li>
 							</ul>
 						</li>

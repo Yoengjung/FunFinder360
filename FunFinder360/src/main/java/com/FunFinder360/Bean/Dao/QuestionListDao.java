@@ -12,7 +12,7 @@ import Utility.Paging;
 
 public class QuestionListDao extends SuperDao {
 
-	public int InsertData(QuestionsList bean, String userId, int check) throws Exception{
+	public int InsertData(QuestionsList bean, String userId) throws Exception{
 		System.out.println(bean);
 		PreparedStatement pstmt = null;
 		String sql = " insert into questionList(questionListId, personalUserId, ownerUserId, title, content, readhit, postedDate)";
