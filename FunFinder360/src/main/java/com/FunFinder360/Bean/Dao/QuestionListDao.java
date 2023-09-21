@@ -12,16 +12,20 @@ import Utility.Paging;
 
 public class QuestionListDao extends SuperDao {
 
-	public int InsertData(QuestionsList bean, String userId) throws Exception{
-		System.out.println(bean);
+	public int InsertData(QuestionsList bean, String userId, int check) throws Exception{
 		PreparedStatement pstmt = null;
-		String sql = " insert into questionList(questionListId, personalUserId, ownerUserId, title, content, readhit, postedDate)";
-		sql += "         values(question_list_sequence.nextval, ?,              ?,           ?,     ?,       ?,       ?)";
-		int cnt = -1;
-
 		connection = super.getConnection();
-		connection.setAutoCommit(false);
-
+		
+		String sql = "";
+		
+		if (check == 0) {
+			sql = "insert into questionList (questionListId, personalUserId, title, content) values (QUESTION_LIST_SEQUENCE.nextval, ?, ?, ?)";
+		} else if (check == 1) {
+			sql = "insert into questionList (questionListId, ownerUserId, title, content) values (QUESTION_LIST_SEQUENCE.nextval, ?, ?, ?)";
+		}
+		
+		int cnt = -1;
+		
 		pstmt = connection.prepareStatement(sql);
 		
 		if(check==1) {

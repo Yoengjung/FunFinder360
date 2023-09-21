@@ -4,78 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/commonQuesionCSS/commonQuestionFormCSS.css" type="text/css">
 <title>Insert title here</title>
-
-<style>
-.container {
-	margin-top: 130px;
-	width: 100%;
-	height: 100%;
-}
-
-.container h2 {
-	margin-bottom: 30px;
-}
-
-.table-head-box {
-	text-align: center;
-}
-
-.table-body-box {
-	text-align: center;
-}
-
-.no-head {
-	width: 10%;
-}
-
-.title-head {
-	text-align: left;
-	width: 20%; /* 50% -> 20%로 수정함 */
-}
-
-.registrant-head {
-	width: 10%;
-}
-
-.posted-date-head {
-	width: 20%;
-}
-
-.readhit-head {
-	width: 10%;
-}
-
-.title-box {
-	text-align: left;
-}
-
-.title-box a {
-	color: #3366FF;
-}
-
-.title-box a:hover {
-	text-decoration: underline;
-}
-
-.input-group {
-	width: 300px;
-}
-
-.form-select {
-	width: 200px;
-}
-
-.search-form {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-
-.keyword-input-box {
-	margin: 0 20px;
-}
-</style>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -98,8 +28,6 @@
 						});
 					});
 </script>
-
-
 </head>
 <body>
 	<div class="container">
@@ -109,7 +37,6 @@
 				<tr>
 					<th class="table-head-box no-head">순번</th>
 					<th class="table-head-box title-head">제목</th>
-					<th>내용</th>
 					<th class="table-head-box registrant-head">등록자명</th>
 					<th class="table-head-box posted-date-head">등록일자</th>
 					<th class="table-head-box readhit-head">조회수</th>
@@ -122,14 +49,7 @@
 						<td class="table-body-box title-box">
 							<a href="<%=notWithFormTag%>commonQuestionsDetail&questionId=${question.questionId}">${question.title}</a>
 						</td>
-						<td>
-							<span data-bs-toggle="popover" data-bs-trigger="hover" title="${bean.name}" data-bs-content="${question.content}">
-								<c:if test="${fn:length(question.content) >= 10}">
-                                    ${fn:substring(question.content, 0, 10)}...
-                                 </c:if>
-							</span>
-						</td>
-						<td class="table-body-box">${question.userId}</td>
+						<td class="table-body-box">관리자</td>
 						<td class="table-body-box">${question.postedDate}</td>
 						<td class="table-body-box">${question.readhit}</td>
 					</tr>

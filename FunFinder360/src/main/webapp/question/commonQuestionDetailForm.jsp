@@ -125,12 +125,12 @@
 .back-btn {
 	margin-top: 20px;
 }
-
 </style>
 <body>
+
 	<div class="container">
 		<h2>자주 묻는 질문</h2>
-		<c:if test='${requestScope.commonQuestionData[0].questionId == 1}'>
+		<c:if test='${requestScope.commonQuestionData[0].ranking == 1}'>
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
@@ -174,7 +174,7 @@
 			</div>
 		</c:if>
 
-		<c:if test="${requestScope.commonQuestionData[0].questionId == requestScope.totalRecodeCount}">
+		<c:if test="${requestScope.commonQuestionData[0].ranking == requestScope.totalRecodeCount}">
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
@@ -218,7 +218,7 @@
 			</div>
 		</c:if>
 
-		<c:if test="${requestScope.commonQuestionData[0].questionId != 1 && requestScope.commonQuestionData[0].questionId != requestScope.totalRecodeCount}">
+		<c:if test="${requestScope.commonQuestionData[0].ranking != 1 && requestScope.commonQuestionData[0].ranking != requestScope.totalRecodeCount}">
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">

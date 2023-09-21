@@ -3,7 +3,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">

@@ -26,22 +26,20 @@ public class QuestionsInsertController extends SuperClass {
 
 		QuestionsList bean = new QuestionsList();
 
-		bean.setQuestionListId(super.getNumberData(request.getParameter("questionListId")));
-		bean.setPersonalUserId(request.getParameter("personalUserId"));
-		bean.setOwnerUserId(request.getParameter("ownerUserId"));
+		bean.setPersonalUserId(request.getParameter("userId"));
 		bean.setTitle(request.getParameter("title"));
 		bean.setContent(request.getParameter("content"));
-		bean.setReadhit(super.getNumberData(request.getParameter("readhit")));
-		bean.setPostedDate(request.getParameter("postedDate"));
 
 		QuestionListDao dao = new QuestionListDao();
 
 		int cnt = -1;
 		try {
 			if (super.logInfo.getUserId() != null) {
-				cnt = dao.InsertData(bean, super.logInfo.getUserId());
+				int check = 0; // 0이면 개인 사용자
+				cnt = dao.InsertData(bean, super.logInfo.getUserId(), check);
 			} else if (super.loginfoOwner.getUserId() != null) {
-				cnt = dao.InsertData(bean, super.loginfoOwner.getUserId());
+				int check = 1; // 1이면 업주 사용자
+				cnt = dao.InsertData(bean, super.loginfoOwner.getUserId(), check);
 			}
 
 			if (cnt == -1) {

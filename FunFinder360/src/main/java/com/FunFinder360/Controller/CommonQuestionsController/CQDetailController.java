@@ -14,7 +14,7 @@ public class CQDetailController extends SuperClass {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
 
-		int question_id = Integer.parseInt(request.getParameter("question_id"));
+		int questionId = Integer.parseInt(request.getParameter("questionId"));
 
 		CommonQuestionDao dao = new CommonQuestionDao();
 
@@ -22,7 +22,7 @@ public class CQDetailController extends SuperClass {
 
 		try {
 			int totalRecodeCount = dao.getTotalRecordCount(null, null);
-			lists = dao.getDataByQuestionId(question_id, totalRecodeCount);
+			lists = dao.getDataByQuestionId(questionId, totalRecodeCount);
 
 			request.setAttribute("commonQuestionData", lists);
 			request.setAttribute("totalRecodeCount", totalRecodeCount);
