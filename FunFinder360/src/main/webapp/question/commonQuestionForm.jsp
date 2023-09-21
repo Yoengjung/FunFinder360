@@ -118,9 +118,9 @@
 			<tbody>
 				<c:forEach var="question" items="${requestScope.commonQuestionData}">
 					<tr>
-						<td class="table-body-box">${question.question_id}</td>
+						<td class="table-body-box">${question.questionId}</td>
 						<td class="table-body-box title-box">
-							<a href="<%=notWithFormTag%>commonQuestionsDetail&question_id=${question.question_id}">${question.title}</a>
+							<a href="<%=notWithFormTag%>commonQuestionsDetail&questionId=${question.questionId}">${question.title}</a>
 						</td>
 						<td>
 							<span data-bs-toggle="popover" data-bs-trigger="hover" title="${bean.name}" data-bs-content="${question.content}">

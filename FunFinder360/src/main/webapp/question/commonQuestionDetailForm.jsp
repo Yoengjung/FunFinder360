@@ -130,7 +130,7 @@
 <body>
 	<div class="container">
 		<h2>자주 묻는 질문</h2>
-		<c:if test='${requestScope.commonQuestionData[0].question_id == 1}'>
+		<c:if test='${requestScope.commonQuestionData[0].questionId == 1}'>
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
@@ -168,13 +168,13 @@
 				<ul>
 					<li>
 						<span>다음글</span>
-						<a href="<%=notWithFormTag%>commonQuestionsDetail&question_id=${requestScope.commonQuestionData[index + 1].question_id}">${requestScope.commonQuestionData[index + 1].title}</a>
+						<a href="<%=notWithFormTag%>commonQuestionsDetail&questionId=${requestScope.commonQuestionData[index + 1].questionId}">${requestScope.commonQuestionData[index + 1].title}</a>
 					</li>
 				</ul>
 			</div>
 		</c:if>
 
-		<c:if test="${requestScope.commonQuestionData[0].question_id == requestScope.totalRecodeCount}">
+		<c:if test="${requestScope.commonQuestionData[0].questionId == requestScope.totalRecodeCount}">
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
@@ -212,13 +212,13 @@
 				<ul>
 					<li>
 						<span>이전글</span>
-						<a href="<%=notWithFormTag%>commonQuestionsDetail&question_id=${requestScope.commonQuestionData[index + 1].question_id}">${requestScope.commonQuestionData[index + 1].title}</a>
+						<a href="<%=notWithFormTag%>commonQuestionsDetail&questionId=${requestScope.commonQuestionData[index + 1].questionId}">${requestScope.commonQuestionData[index + 1].title}</a>
 					</li>
 				</ul>
 			</div>
 		</c:if>
 
-		<c:if test="${requestScope.commonQuestionData[0].question_id != 1 && requestScope.commonQuestionData[0].question_id != requestScope.totalRecodeCount}">
+		<c:if test="${requestScope.commonQuestionData[0].questionId != 1 && requestScope.commonQuestionData[0].questionId != requestScope.totalRecodeCount}">
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
@@ -256,11 +256,11 @@
 				<ul>
 					<li>
 						<span>이전글</span>
-						<a href="<%=notWithFormTag%>commonQuestionsDetail&question_id=${requestScope.commonQuestionData[index + 1].question_id}">${requestScope.commonQuestionData[index + 1].title}</a>
+						<a href="<%=notWithFormTag%>commonQuestionsDetail&questionId=${requestScope.commonQuestionData[index + 1].questionId}">${requestScope.commonQuestionData[index + 1].title}</a>
 					</li>
 					<li>
 						<span>다음글</span>
-						<a href="<%=notWithFormTag%>commonQuestionsDetail&question_id=${requestScope.commonQuestionData[index + 2].question_id}">${requestScope.commonQuestionData[index + 2].title}</a>
+						<a href="<%=notWithFormTag%>commonQuestionsDetail&questionId=${requestScope.commonQuestionData[index + 2].questionId}">${requestScope.commonQuestionData[index + 2].title}</a>
 					</li>
 				</ul>
 			</div>

@@ -97,6 +97,7 @@ public class CommonQuestionDao extends SuperDao {
 		bean.setUserId(rs.getString("userId"));
 		bean.setTitle(rs.getString("title"));
 		bean.setContent(rs.getString("content"));
+		System.out.println("비상");
 		bean.setReadhit(rs.getInt("readHit"));
 		bean.setPostedDate(rs.getString("postedDate"));
 
@@ -108,7 +109,7 @@ public class CommonQuestionDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = " select questionId, userId, title, content, readhit postedDate "
+		String sql = " select questionId, userId, title, content, readhit, postedDate "
 				+ "from (select questionId, userId, title, content, readhit, postedDate, rank() over(order by questionId asc) as ranking "
 				+ "from common_question";
 
@@ -211,7 +212,7 @@ public class CommonQuestionDao extends SuperDao {
 		return lists;
 	}
 
-	public int InsertData(CommonQuestion bean, String userId) throws Exception{
+	public int InsertData(CommonQuestion bean) throws Exception{
 		System.out.println(bean);		
 		PreparedStatement pstmt = null ;
 		String sql = " insert into common_question(questionId, userId, title, content, readhit, postedDate)" ;
@@ -222,7 +223,7 @@ public class CommonQuestionDao extends SuperDao {
 		connection.setAutoCommit(false);		
 		
 		pstmt = connection.prepareStatement(sql) ;		
-		pstmt.setString(1, userId);
+		pstmt.setString(1, bean.getUserId());
 		pstmt.setString(2, bean.getTitle());
 		pstmt.setString(3, bean.getContent());
 		pstmt.setInt(4, bean.getReadhit());
