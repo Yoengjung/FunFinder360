@@ -59,7 +59,7 @@
 <body>
 	<div class="container">
 		<h2>home</h2>
-		<h2>주우진</h2>
+		asdlfkjaskdlfjkl
 		<div class="slider">
 			<div class="slide">
 				<img src="${pageContext.request.contextPath}/common/image/1.jpeg" alt="Image 1">
