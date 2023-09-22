@@ -285,7 +285,7 @@ hr {
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">마이페이지</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a class="dropdown-item" href="#">내 활동</a>
+									<a class="dropdown-item" href="<%=notWithFormTag%>memberActivity">내 활동</a>
 								</li>
 								<li>
 									<a class="dropdown-item" href="#">게시물 수익</a>
