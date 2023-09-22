@@ -5,14 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-.container {
-	margin-top: 130px;
-	width: 100%;
-	height: 100%;
-	background-color: red;
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/memberCSS/memberPersonalDetailCSS.css" type="text/css">
 </head>
 <body>
 	<div class="container">
@@ -21,37 +14,37 @@
 			<thead></thead>
 			<tbody>
 				<tr>
-					<td align="left">아이디</td>
-					<td>${requestScope.bean.userId}</td>
+					<td align="center" class="td-tag" style="background-color: #CCCCCC;">아이디</td>
+					<td class="content-tag" style="padding-left: 20px;">${requestScope.bean.userId}</td>
 				</tr>
 				<tr>
-					<td align="left">비밀 번호:</td>
-					<td>${requestScope.bean.password}</td>
+					<td align="center" class="td-tag" style="background-color: #CCCCCC;">비밀 번호</td>
+					<td class="content-tag" style="padding-left: 20px;">${requestScope.bean.password}</td>
 				</tr>
 				<tr>
-					<td align="left">이름:</td>
-					<td>${requestScope.bean.userName}</td>
+					<td align="center" class="td-tag" style="background-color: #CCCCCC;">이름</td>
+					<td class="content-tag" style="padding-left: 20px;">${requestScope.bean.username}</td>
 				</tr>
 				<tr>
-					<td align="left">생년월일:</td>
-					<td>${requestScope.bean.birth}</td>
+					<td align="center" class="td-tag" style="background-color: #CCCCCC;">생년월일</td>
+					<td class="content-tag" style="padding-left: 20px;">${requestScope.bean.birth}</td>
 				</tr>
 				<tr>
-					<td align="left">전화번호:</td>
-					<td>${requestScope.bean.phoneNumber}</td>
+					<td align="center" class="td-tag" style="background-color: #CCCCCC;">전화번호</td>
+					<td class="content-tag" style="padding-left: 20px;">${requestScope.bean.phoneNumber}</td>
 				</tr>
 				<tr>
-					<td align="left">이메일:</td>
-					<td>${requestScope.bean.email}</td>
+					<td align="center" class="td-tag" style="background-color: #CCCCCC;">이메일</td>
+					<td class="content-tag" style="padding-left: 20px;">${requestScope.bean.email}</td>
 				</tr>
 				<tr>
-					<td align="left">자기 소개:</td>
-					<td>${requestScope.bean.bio}</td>
+					<td align="center" class="td-tag" style="background-color: #CCCCCC;">자기 소개</td>
+					<td class="content-tag" style="padding-left: 20px;">${requestScope.bean.bio}</td>
 				</tr>
 
-				<tr>
-					<td align="left">가입 일자:</td>
-					<td>${bean.registration_date}</td>
+				<tr class="bottom-tr">
+					<td align="center" class="td-tag" style="background-color: #CCCCCC;">가입 일자</td>
+					<td class="content-tag" style="padding-left: 20px;">${bean.registration_date}</td>
 				</tr>
 			</tbody>
 		</table>

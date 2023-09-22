@@ -12,7 +12,12 @@ public class CQInsertController extends SuperClass{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
 		
-		super.goToPage("question/commonQuestionInsertFrom.jsp");
+		if (super.logInfo == null && super.loginfoOwner == null) {
+			super.setAlertMessage("로그인이 필요한 페이지입니다.");
+			super.goToPage("member/memberLoginSelectForm.jsp");
+		}
+		
+		super.goToPage("question/commonQuestionInsertForm.jsp");
 	}
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
@@ -20,12 +25,9 @@ public class CQInsertController extends SuperClass{
 
 		CommonQuestion  bean = new CommonQuestion() ;
 		
-		bean.setQuestionId(super.getNumberData(request.getParameter("questionId")));
 		bean.setUserId(request.getParameter("userId"));
 		bean.setTitle(request.getParameter("title"));
 		bean.setContent(request.getParameter("content"));
-		bean.setPostedDate(request.getParameter("postedDate"));		
-		bean.setReadhit(super.getNumberData(request.getParameter("readhit")));
 
 		CommonQuestionDao dao = new CommonQuestionDao() ;
 		

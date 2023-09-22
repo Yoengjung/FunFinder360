@@ -34,7 +34,6 @@ public class CommonQuestionDao extends SuperDao {
 			bean.setContent(rs.getString("content"));
 			bean.setReadhit(rs.getInt("readHit"));
 			bean.setPostedDate(rs.getString("postedDate"));
-			
 
 			lists.add(bean);
 		}
@@ -153,19 +152,19 @@ public class CommonQuestionDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
-		
+
 		String updateSql = "update common_question set readHit = readhit + 1 where questionId = ?";
-		
+
 		pstmt = conn.prepareStatement(updateSql);
-		
+
 		pstmt.setInt(1, question_id);
-		
+
 		pstmt.executeUpdate();
-		
+
 		List<CommonQuestion> lists = new ArrayList<CommonQuestion>();
-		
+
 		try {
-			String sql = "select * from common_question where questionId = ?";
+			String sql = "select questionid, userid, title, content, readhit, postedDate, ranking from (select questionId, userid, title, content, readhit, postedDate, rank() over(order by questionid) as ranking from common_question) where questionid = ?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, question_id);
@@ -173,66 +172,112 @@ public class CommonQuestionDao extends SuperDao {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				lists.add(getBeanData(rs));
+				lists.add(getBeanDataAndRanking(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		pstmt = null;
+		int targetRanking = lists.get(0).getRanking();
 		String sql = "";
-		if (question_id <= 1) {
-			sql = "select * from  common_question where questionId = ?";
-			pstmt.setInt(1, question_id + 1);
-		} else if (question_id >= totalRecodeCount) {
-			sql = "select * from common_question where questionId = ?";
-			pstmt.setInt(1, question_id - 1);
-		} else {
-			sql = "select * from (select * from common_question order by question_id) where questionId in (?, ?)";
+		if (targetRanking <= 1) {
+			sql = "select questionid, userid, title, content, readhit, postedDate, ranking from (select questionId, userid, title, content, readhit, postedDate, rank() over(order by questionid) as ranking from common_question) where ranking = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, question_id - 1);
-			pstmt.setInt(2, question_id + 1);
+			pstmt.setInt(1, targetRanking + 1);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				lists.add(getBeanDataAndRanking(rs));
+			}
+
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+
+		}
+		if (targetRanking >= totalRecodeCount) {
+			sql = "select questionid, userid, title, content, readhit, postedDate, ranking from (select questionId, userid, title, content, readhit, postedDate, rank() over(order by questionid) as ranking from common_question) where ranking = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, targetRanking - 1);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				lists.add(getBeanDataAndRanking(rs));
+			}
+
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+		}
+		if (targetRanking > 1 && targetRanking < totalRecodeCount) {
+			sql = "select questionid, userid, title, content, readhit, postedDate, ranking from (select questionId, userid, title, content, readhit, postedDate, rank() over(order by questionid) as ranking from common_question) where ranking in (?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, targetRanking - 1);
+			pstmt.setInt(2, targetRanking + 1);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				lists.add(getBeanDataAndRanking(rs));
+			}
+
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
 		}
 
-		rs = pstmt.executeQuery();
-
-		while (rs.next()) {
-			lists.add(getBeanData(rs));
-		}
-
-		if (rs != null) {
-			rs.close();
-		}
-		if (pstmt != null) {
-			pstmt.close();
-		}
 		if (conn != null) {
 			conn.close();
 		}
 		return lists;
 	}
 
-	public int InsertData(CommonQuestion bean) throws Exception{
-		System.out.println(bean);		
-		PreparedStatement pstmt = null ;
-		String sql = " insert into common_question(questionId, userId, title, content, readhit, postedDate)" ;
-		sql += "          					values(common_question_sequence.nextval, ?, ?, ?, ?, ?)" ;		
-		int cnt = -1 ;
-		
-		connection = super.getConnection() ;
-		connection.setAutoCommit(false);		
-		
-		pstmt = connection.prepareStatement(sql) ;		
+	private CommonQuestion getBeanDataAndRanking(ResultSet rs) throws Exception {
+		CommonQuestion bean = new CommonQuestion();
+
+		bean.setQuestionId(rs.getInt("questionId"));
+		bean.setUserId(rs.getString("userId"));
+		bean.setTitle(rs.getString("title"));
+		bean.setContent(rs.getString("content"));
+		bean.setReadhit(rs.getInt("readHit"));
+		bean.setPostedDate(rs.getString("postedDate"));
+		bean.setRanking(rs.getInt("ranking"));
+
+		return bean;
+	}
+
+	public int InsertData(CommonQuestion bean, String string) throws Exception {
+		System.out.println(bean);
+		PreparedStatement pstmt = null;
+		String sql = " insert into common_question(questionId, userId, title, content)";
+		sql += "          					values(COMMON_QUESTION_SEQUENCE.nextval, ?, ?, ?)";
+		int cnt = -1;
+
+		connection = super.getConnection();
+		connection.setAutoCommit(false);
+
+		pstmt = connection.prepareStatement(sql);
 		pstmt.setString(1, bean.getUserId());
 		pstmt.setString(2, bean.getTitle());
 		pstmt.setString(3, bean.getContent());
-		pstmt.setInt(4, bean.getReadhit());
-		pstmt.setString(5, bean.getPostedDate());
 
-		cnt = pstmt.executeUpdate() ;
-		connection.commit();		
-		
-		if(pstmt!=null){pstmt.close();}
-		if(connection!=null){connection.close();}		
+		cnt = pstmt.executeUpdate();
+		connection.commit();
+
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
 		return cnt;
 	}
 

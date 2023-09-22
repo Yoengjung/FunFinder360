@@ -7,13 +7,13 @@ public class CommonQuestion {
 	private String content;
 	private String postedDate;
 	private int readhit;
-	
-	public CommonQuestion () {}
-	
-	public CommonQuestion(int question_id, String userId, String title, String content, String postedDate,
-			int readhit) {
+	private int ranking;
+
+	public CommonQuestion() {}
+
+	public CommonQuestion(int questionId, String userId, String title, String content, String postedDate, int readhit) {
 		super();
-		this.questionId = question_id;
+		this.questionId = questionId;
 		this.userId = userId;
 		this.title = title;
 		this.content = content;
@@ -21,10 +21,12 @@ public class CommonQuestion {
 		this.readhit = readhit;
 	}
 
+	
+	
 	@Override
 	public String toString() {
-		return "CommonQuestion [question_id=" + questionId + ", userId=" + userId + ", title=" + title + ", content="
-				+ content + ", postedDate=" + postedDate + ", readhit=" + readhit + "]";
+		return "CommonQuestion [questionId=" + questionId + ", userId=" + userId + ", title=" + title + ", content="
+				+ content + ", postedDate=" + postedDate + ", readhit=" + readhit + ", ranking=" + ranking + "]";
 	}
 
 	public int getQuestionId() {
@@ -75,7 +77,13 @@ public class CommonQuestion {
 		this.readhit = readhit;
 	}
 
-	
+	public int getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}
 	
 	
 }
