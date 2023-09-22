@@ -13,18 +13,22 @@ public class PersonalActivityDetail {
 	private int rating;
 	private int readHit;
 	private String postedDate;
-	
+
 	private String image;
 	private String imageOrder;
-	
+
 	private String content;
 	private int contentOrder;
-	
-	public PersonalActivityDetail () {}
+	private int totalOrder;
+
+	public PersonalActivityDetail() {
+		
+		
+	}
 
 	public PersonalActivityDetail(int activityId, String userId, String activityName, String category, String location,
 			String locationDetail, int duration, int cost, int activityNumber, int rating, int readHit,
-			String postedDate, String image, String imageOrder, String content, int contentOrder) {
+			String postedDate, String image, String imageOrder, String content, int contentOrder, int totalOrder) {
 		super();
 		this.activityId = activityId;
 		this.userId = userId;
@@ -42,6 +46,7 @@ public class PersonalActivityDetail {
 		this.imageOrder = imageOrder;
 		this.content = content;
 		this.contentOrder = contentOrder;
+		this.totalOrder = totalOrder;
 	}
 
 	@Override
@@ -50,7 +55,8 @@ public class PersonalActivityDetail {
 				+ activityName + ", category=" + category + ", location=" + location + ", locationDetail="
 				+ locationDetail + ", duration=" + duration + ", cost=" + cost + ", activityNumber=" + activityNumber
 				+ ", rating=" + rating + ", readHit=" + readHit + ", postedDate=" + postedDate + ", image=" + image
-				+ ", imageOrder=" + imageOrder + ", content=" + content + ", contentOrder=" + contentOrder + "]";
+				+ ", imageOrder=" + imageOrder + ", content=" + content + ", contentOrder=" + contentOrder
+				+ ", totalOrder=" + totalOrder + "]";
 	}
 
 	public int getActivityId() {
@@ -180,6 +186,15 @@ public class PersonalActivityDetail {
 	public void setContentOrder(int contentOrder) {
 		this.contentOrder = contentOrder;
 	}
+
+	public int getTotalOrder() {
+		return totalOrder;
+	}
+
+	public void setTotalOrder(int totalOrder) {
+		this.totalOrder = totalOrder;
+	}
 	
 	
+
 }

@@ -101,8 +101,24 @@
 	var contentCount = 0;
 	var imageCount = 0;
 
+	function contentAndImageTodalOrder (i) {
+		var contentAndImageOrder = $("#contentAndImageOrder").val()
+		
+		console.log(contentAndImageOrder);
+		
+		if (i == 0) {
+			contentAndImageOrder += "0"
+		} else {
+			contentAndImageOrder += "1"
+		}
+		
+		document.getElementById("contentAndImageOrder").value = contentAndImageOrder;
+	}
+	
+
 	function contentAdd() {
 		scrollToBottom()
+		contentAndImageTodalOrder(0);
 		const textarea = document.createElement('textarea');
 		textarea.name = 'content' + contentCount;
 		textarea.className = "form-control content-container";
@@ -115,6 +131,7 @@
 
 	function imageAdd() {
 		scrollToBottom()
+		contentAndImageTodalOrder(1);
 		const textarea = document.createElement('input');
 		const imgTag = document.createElement("img");
 		textarea.name = 'image' + imageCount;
@@ -203,11 +220,8 @@
 		const hour = $('#hour').val()
 		const minute = $('#minute').val()
 		const rating = $("#rating").val()
-		
-		var districtCheck = 0;
 
-		console.log(title);
-		console.log(category);
+		var districtCheck = 0;
 
 		if (title === "") {
 			alert("제목은 필수 입력 사항입니다.")
@@ -258,10 +272,10 @@
 			alert("장소는 필수 선택 사항입니다.");
 			return false;
 		}
-		
+
 		const inputElement = document.getElementById('districtValue');
 		inputElement.value = districtValue;
-		
+
 		if (hour == "-") {
 			alert("소요시간은 필수 선택 사항입니다.")
 			$('#hour').focus();
@@ -509,14 +523,10 @@ input[type="file"] {
 <body>
 	<div class="container">
 		<c:if test="${empty sessionScope.alertMessage}">
-			<div class="alert alert-danger" style="display:none;">
-				${sessionScope.alertMessage}
-			</div>
+			<div class="alert alert-danger" style="display: none;">${sessionScope.alertMessage}</div>
 		</c:if>
 		<c:if test="${not empty sessionScope.alertMessage}">
-			<div class="alert alert-danger" style="display:block;">
-				${sessionScope.alertMessage}
-			</div>
+			<div class="alert alert-danger" style="display: block;">${sessionScope.alertMessage}</div>
 		</c:if>
 
 		<h2>활동 등록</h2>
@@ -675,10 +685,10 @@ input[type="file"] {
 							<option value="제주시">제주시</option>
 							<option value="서귀포시">서귀포시</option>
 						</select>
-						<input type="hidden" name="districtValue" id ="districtValue" value="">
+						<input type="hidden" name="districtValue" id="districtValue" value="">
 						<input class="form-control detail-location" type="text" name="detail-location" id="detail-location" autocomplete="off" placeholder="상세 주소">
 					</li>
-					
+
 					<li class="time-container">
 						<span id="time-span">소요 시간</span>
 						<select class="form-select hour-select" name="hour" id="hour">
@@ -739,7 +749,7 @@ input[type="file"] {
 			<div class="content-container-class"></div>
 			<input type="hidden" name="contentCount" id="contentCountInput" value="">
 			<input type="hidden" name="imageCount" id="imageCountInput" value="">
-
+			<input type="hidden" name="contentAndImageOrder" id="contentAndImageOrder" value="">
 			<div class="content-controll-container">
 				<button type="button" class="btn btn-primary" onclick="contentAdd()">
 					<span class="material-symbols-outlined" style="vertical-align: middle;"> add_circle </span>
