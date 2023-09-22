@@ -1,6 +1,7 @@
 package com.FunFinder360.Bean.Model;
 
 public class OwnerActivityAndImage {
+	private int activityId;
 	private String userId;
 	private String activityName;
 	private String category;
@@ -14,13 +15,15 @@ public class OwnerActivityAndImage {
 	private String image;
 	private int readHit;
 	private String postedDate;
-	
-	public OwnerActivityAndImage () {}
 
-	public OwnerActivityAndImage(String userId, String activityName, String category, String location,
+	public OwnerActivityAndImage() {
+	}
+
+	public OwnerActivityAndImage(int activityId, String userId, String activityName, String category, String location,
 			String locationDetail, int duration, int price, String openTime, String closeTime, String event,
 			String image, int readHit, String postedDate) {
 		super();
+		this.activityId = activityId;
 		this.userId = userId;
 		this.activityName = activityName;
 		this.category = category;
@@ -38,10 +41,19 @@ public class OwnerActivityAndImage {
 
 	@Override
 	public String toString() {
-		return "OwnerActivityAndImage [userId=" + userId + ", activityName=" + activityName + ", category=" + category
-				+ ", location=" + location + ", locationDetail=" + locationDetail + ", duration=" + duration
-				+ ", price=" + price + ", openTime=" + openTime + ", closeTime=" + closeTime + ", event=" + event
-				+ ", image=" + image + ", readHit=" + readHit + ", postedDate=" + postedDate + "]";
+		return "OwnerActivityAndImage [activityId=" + activityId + ", userId=" + userId + ", activityName="
+				+ activityName + ", category=" + category + ", location=" + location + ", locationDetail="
+				+ locationDetail + ", duration=" + duration + ", price=" + price + ", openTime=" + openTime
+				+ ", closeTime=" + closeTime + ", event=" + event + ", image=" + image + ", readHit=" + readHit
+				+ ", postedDate=" + postedDate + "]";
+	}
+
+	public int getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(int activityId) {
+		this.activityId = activityId;
 	}
 
 	public String getUserId() {

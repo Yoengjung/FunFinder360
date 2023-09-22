@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.FunFinder360.Bean.Model.ActivityAndImage;
 import com.FunFinder360.Bean.Model.PersonalActivity;
+import com.FunFinder360.Bean.Model.PersonalActivityDetail;
 
 import Utility.Paging;
 
@@ -39,6 +40,7 @@ public class ActivitesDao extends SuperDao {
 		pstmt = null;
 
 		int order = 0;
+		int totalOrder = 0;
 		for (int i = 0; i < contentList.size(); i++) {
 			sql = "insert into activity_content (contentId, personalActivityId, content, contentOrder) values (activity_content_sequence.nextval, PERSONAL_ACTIVITY_SEQUENCE.currval, ?, ?)";
 
@@ -117,7 +119,7 @@ public class ActivitesDao extends SuperDao {
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
-		String sql = "select userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit) as ranking from personal_activitis ac join activity_image im on ac.activityid = im.personalActivityId ";
+		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit) as ranking from personal_activitis ac join activity_image im on ac.activityid = im.personalActivityId ";
 		if (mode == null || mode.equals("all")) {
 
 		} else {
@@ -156,6 +158,7 @@ public class ActivitesDao extends SuperDao {
 	private ActivityAndImage getActivityBeanData(ResultSet rs) throws Exception {
 		ActivityAndImage ActivitesList = new ActivityAndImage();
 		
+		ActivitesList.setActivityId(rs.getInt("activityid"));
 		ActivitesList.setUserId(rs.getString("userId"));
 		ActivitesList.setActivityName(rs.getString("activityName"));
 		ActivitesList.setCategory(rs.getString("category"));
@@ -166,6 +169,40 @@ public class ActivitesDao extends SuperDao {
 		ActivitesList.setReadHit(rs.getInt("readhit"));
 
 		return ActivitesList;
+	}
+
+	// detail에서 사용하기 위한 데이터
+	public PersonalActivityDetail getPersonalActivityData(int activityId) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "";
+		
+		
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		
+		rs = pstmt.executeQuery();
+		
+		PersonalActivityDetail bean = new PersonalActivityDetail();
+		if (rs.next()) {
+			bean.setActivityId(rs.getInt("activityId"));
+		}
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if(rs != null) {
+			rs.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		
+		
+		return null;
 	}
 
 }

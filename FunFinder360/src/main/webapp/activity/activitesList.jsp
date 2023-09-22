@@ -94,7 +94,7 @@ img {
 						<div class="card">
 							<div class="card-header">${bean.activityName}</div>
 							<div class="card-body">
-								<a href="#"> <img alt="${bean.activityName}"
+								<a href="<%=notWithFormTag%>activityDetail&activityId=${bean.activityId}"> <img alt="${bean.activityName}"
 									src="${pageContext.request.contextPath}/upload/${bean.image}">
 								</a>
 							</div>
@@ -134,7 +134,7 @@ img {
 							autocomplete="off">
 					</div>
 					<button type="submit"
-						class="btn btn-default form-control-sm search-btn" onclick="">검색</button>
+						class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
 				</form>
 			</div>
 		</div>

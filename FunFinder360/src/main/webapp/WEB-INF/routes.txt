@@ -22,6 +22,7 @@ questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListContr
 
 #활동
 activityInsert=com.FunFinder360.Controller.Activity.ActivityInsertController
+activityDetail=com.FunFinder360.Controller.Activity.ActivityDetailController
 OwnerActivityInsert=com.FunFinder360.Controller.Activity.OwnerActivityInsertController
 OwnerActivitesList=com.FunFinder360.Controller.ActivityController.OwnerActivityListController
 

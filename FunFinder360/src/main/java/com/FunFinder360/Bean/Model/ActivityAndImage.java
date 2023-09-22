@@ -1,6 +1,7 @@
 package com.FunFinder360.Bean.Model;
 
 public class ActivityAndImage {
+	private int activityId;
 	private String userId;
 	private String activityName;
 	private String category;
@@ -12,9 +13,10 @@ public class ActivityAndImage {
 	
 	public ActivityAndImage () {}
 
-	public ActivityAndImage(String userId, String activityName, String category, String location, String locationDetail,
-			String image, int imageOrder, int readHit) {
+	public ActivityAndImage(int activityId, String userId, String activityName, String category, String location,
+			String locationDetail, String image, int imageOrder, int readHit) {
 		super();
+		this.activityId = activityId;
 		this.userId = userId;
 		this.activityName = activityName;
 		this.category = category;
@@ -27,9 +29,17 @@ public class ActivityAndImage {
 
 	@Override
 	public String toString() {
-		return "ActivityAndImage [userId=" + userId + ", activityName=" + activityName + ", category=" + category
-				+ ", location=" + location + ", locationDetail=" + locationDetail + ", image=" + image + ", imageOrder="
-				+ imageOrder + ", readHit=" + readHit + "]";
+		return "ActivityAndImage [activityId=" + activityId + ", userId=" + userId + ", activityName=" + activityName
+				+ ", category=" + category + ", location=" + location + ", locationDetail=" + locationDetail
+				+ ", image=" + image + ", imageOrder=" + imageOrder + ", readHit=" + readHit + "]";
+	}
+
+	public int getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(int activityId) {
+		this.activityId = activityId;
 	}
 
 	public String getUserId() {
