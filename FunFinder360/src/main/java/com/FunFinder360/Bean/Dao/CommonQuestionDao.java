@@ -97,7 +97,6 @@ public class CommonQuestionDao extends SuperDao {
 		bean.setUserId(rs.getString("userId"));
 		bean.setTitle(rs.getString("title"));
 		bean.setContent(rs.getString("content"));
-		System.out.println("비상");
 		bean.setReadhit(rs.getInt("readHit"));
 		bean.setPostedDate(rs.getString("postedDate"));
 
