@@ -19,30 +19,31 @@ public class MemberActivityController extends SuperClass {
 		super.doGet(request, response);
 
 		if (super.logInfo == null && super.loginfoOwner == null) {
-			
+
 			System.out.println("logInfo : " + logInfo);
 			super.setAlertMessage("로그인이 필요한 페이지입니다.");
 			super.goToPage("member/memberLoginSelectForm.jsp");
 		}
-		
 		String pageNumber = request.getParameter("pageNumber");
 		String pageSize = request.getParameter("pageSize");
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
 
+		MemberActivitesDao dao = new MemberActivitesDao();
 
 		if (super.logInfo.getUserId() != null) {
-			MemberActivitesDao dao = new MemberActivitesDao();
+
 			List<PersonalActivity> lists = null;
-			String personal_id = super.logInfo.getUserId();
+			String userId = super.logInfo.getUserId();
+
 			try {
-				System.out.println("유저 아이디 :" +  personal_id);
-				int totalCount = dao.getPersonalTotalRecordCount(mode, keyword, personal_id);
-				String url = super.getUrlInfomation("personalActivityList");
-				boolean isGrid = false;
+				System.out.println("유저 아이디 :" + userId);
+				int totalCount = dao.getPersonalTotalRecordCount(mode, keyword, userId);
+				String url = super.getUrlInfomation("memberActivity");
+				boolean isGrid = true;
 				Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 
-				lists = dao.getPseronalSelectAll(pageInfo, personal_id );
+				lists = dao.getPeronalSelectAll(pageInfo, userId);
 
 				request.setAttribute("personalActivityList", lists);
 				request.setAttribute("pageInfo", pageInfo);
@@ -53,27 +54,26 @@ public class MemberActivityController extends SuperClass {
 			}
 
 		} else if (super.loginfoOwner.getUserId() != null) {
-			MemberActivitesDao dao = new MemberActivitesDao();
+			String ownerId = super.loginfoOwner.getUserId();
 			List<OwnerActivity> lists = null;
-			String owner_id = super.loginfoOwner.getUserId();
-			
+
 			try {
-				//int totalCount = dao.getOwnerTotalRecordCount(mode, keyword, owner_id);
-				String url = super.getUrlInfomation("ownerActivityList");
-				boolean isgrid = false;
-				//Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isgrid);
-				
-				//lists = dao.getOwnerSelectAll(pageInfo);
+
+				System.out.println("기업 아이디 : " + ownerId);
+				int totalCount = dao.getOwnerTotalRecordCount(mode, keyword, ownerId);
+				String url = super.getUrlInfomation("memberActivity");
+				boolean isgrid = true;
+				Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isgrid);
+
+				lists = dao.getOwnerSelectAll(pageInfo, ownerId);
+
 				request.setAttribute("ownerActivityList", lists);
-				//request.setAttribute("pageInfo", pageInfo);
+				request.setAttribute("pageInfo", pageInfo);
 				super.goToPage("member/memberActivity2.jsp");
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
-			
-
 		}
 
 	}
