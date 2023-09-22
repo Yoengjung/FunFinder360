@@ -32,13 +32,9 @@ public class MemberActivityController extends SuperClass {
 
 
 		if (super.logInfo.getUserId() != null) {
-			
 			MemberActivitesDao dao = new MemberActivitesDao();
 			List<PersonalActivity> lists = null;
 			String personal_id = super.logInfo.getUserId();
-			
-			
-
 			try {
 				System.out.println("유저 아이디 :" +  personal_id);
 				int totalCount = dao.getPersonalTotalRecordCount(mode, keyword, personal_id);
