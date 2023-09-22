@@ -119,7 +119,7 @@ public class QuestionListDao extends SuperDao {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				lists.add(getBeanData(rs));
+				lists.add(getBeanDataAndRanking(rs));
 			}
 		}
 
