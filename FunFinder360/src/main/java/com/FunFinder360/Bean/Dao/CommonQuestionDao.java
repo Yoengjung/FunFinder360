@@ -179,8 +179,6 @@ public class CommonQuestionDao extends SuperDao {
 		}
 		pstmt = null;
 		int targetRanking = lists.get(0).getRanking();
-		System.out.println("targetRanking : " + targetRanking);
-		System.out.println("totalRecodeCount : " + totalRecodeCount);
 		String sql = "";
 		if (targetRanking <= 1) {
 			sql = "select questionid, userid, title, content, readhit, postedDate, ranking from (select questionId, userid, title, content, readhit, postedDate, rank() over(order by questionid) as ranking from common_question) where ranking = ?";

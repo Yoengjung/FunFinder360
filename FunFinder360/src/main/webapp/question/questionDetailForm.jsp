@@ -8,7 +8,8 @@
 </head>
 <script>
 	function backPage() {
-		location.href = "<%=notWithFormTag%>questionsList"
+		location.href = "<%=notWithFormTag%>
+	questionsList"
 	}
 </script>
 <style>
@@ -125,12 +126,13 @@
 .back-btn {
 	margin-top: 20px;
 }
-
 </style>
 <body>
+
 	<div class="container">
 		<h2>자주 묻는 질문</h2>
-		<c:if test='${requestScope.questionData[0].questionListId == 1}'>
+		${requestScope.questionData }
+		<c:if test='${requestScope.questionData[0].ranking == 0}'>
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
@@ -174,7 +176,7 @@
 			</div>
 		</c:if>
 
-		<c:if test="${requestScope.questionData[0].questionListId == requestScope.totalRecodeCount}">
+		<c:if test="${requestScope.questionData[0].ranking == requestScope.totalRecodeCount}">
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
@@ -218,7 +220,7 @@
 			</div>
 		</c:if>
 
-		<c:if test="${requestScope.questionData[0].questionListId != 1 && requestScope.questionData[0].questionListId != requestScope.totalRecodeCount}">
+		<c:if test="${requestScope.questionData[0].ranking != 0 && requestScope.questionData[0].ranking != requestScope.totalRecodeCount}">
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">

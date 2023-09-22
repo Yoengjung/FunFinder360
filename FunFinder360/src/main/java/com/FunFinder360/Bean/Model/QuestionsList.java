@@ -8,13 +8,13 @@ public class QuestionsList {
 	private String content;
 	private int readhit;
 	private String postedDate;
+	private int ranking;
 
 	public QuestionsList() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public QuestionsList(int questionListId, String personalUserId, String ownerUserId, String title, String content,
-			int readhit, String postedDate) {
+			int readhit, String postedDate, int ranking) {
 		super();
 		this.questionListId = questionListId;
 		this.personalUserId = personalUserId;
@@ -23,13 +23,14 @@ public class QuestionsList {
 		this.content = content;
 		this.readhit = readhit;
 		this.postedDate = postedDate;
+		this.ranking = ranking;
 	}
 
 	@Override
 	public String toString() {
 		return "QuestionsList [questionListId=" + questionListId + ", personalUserId=" + personalUserId
 				+ ", ownerUserId=" + ownerUserId + ", title=" + title + ", content=" + content + ", readhit=" + readhit
-				+ ", postedDate=" + postedDate + "]";
+				+ ", postedDate=" + postedDate + ", ranking=" + ranking + "]";
 	}
 
 	public int getQuestionListId() {
@@ -87,5 +88,15 @@ public class QuestionsList {
 	public void setPostedDate(String postedDate) {
 		this.postedDate = postedDate;
 	}
+
+	public int getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}
+
+	
 
 }

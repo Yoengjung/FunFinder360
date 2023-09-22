@@ -25,8 +25,7 @@ public class QuestionsInsertController extends SuperClass {
 		super.doPost(request, response);
 
 		QuestionsList bean = new QuestionsList();
-
-		bean.setPersonalUserId(request.getParameter("userId"));
+		
 		bean.setTitle(request.getParameter("title"));
 		bean.setContent(request.getParameter("content"));
 
@@ -46,7 +45,7 @@ public class QuestionsInsertController extends SuperClass {
 				super.goToPage("/question/questionInsertForm.jsp");
 
 			} else {
-				super.goToPage("/common/main.jsp");
+				super.goToPage("/question/questionListForm.jsp");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
