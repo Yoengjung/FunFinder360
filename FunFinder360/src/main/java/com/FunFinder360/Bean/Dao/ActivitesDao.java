@@ -21,7 +21,7 @@ public class ActivitesDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
 
-		String sql = "insert into personal_activitis values (PERSONAL_ACTIVITY_SEQUENCE.nextval, ? ,? ,? ,? ,? ,? ,? ,? ,?, ?, default)";
+		String sql = "insert into personal_activites values (PERSONAL_ACTIVITY_SEQUENCE.nextval, ? ,? ,? ,? ,? ,? ,? ,? ,?, ?, default)";
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -45,7 +45,6 @@ public class ActivitesDao extends SuperDao {
 		int imageOrder = 0;
 		int totalOrder = 0;
 
-		
 		for (int j = 0; j < contentAndImageOrder.length(); j++) {
 			char check = contentAndImageOrder.charAt(j);
 
@@ -89,7 +88,7 @@ public class ActivitesDao extends SuperDao {
 		ResultSet resultSet = null;
 		Connection connection = super.getConnection();
 
-		String sql = "select count(*) as cnt from personal_activitis";
+		String sql = "select count(*) as cnt from personal_activites";
 
 		if (mode == null || mode.equals("all")) {
 
@@ -127,7 +126,7 @@ public class ActivitesDao extends SuperDao {
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
-		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit) as ranking from personal_activitis ac join activity_image im on ac.activityid = im.personalActivityId ";
+		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId ";
 		if (mode == null || mode.equals("all")) {
 
 		} else {
@@ -185,7 +184,7 @@ public class ActivitesDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = "select * from personal_activitis";
+		String sql = "select * from personal_activites";
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -207,54 +206,60 @@ public class ActivitesDao extends SuperDao {
 			bean.setPostedDate(rs.getString("postedDate"));
 		}
 		pstmt = null;
-		
-		sql = "select count(*) cnt from activity_content con full join activity_image img on con.personalactivityid = img.personalactivityid ";
-		
-		pstmt = conn.prepareStatement(sql);
-		
-		rs = pstmt.executeQuery();
-		if(rs.next()) {
-			bean.setTotalRacodeCount(rs.getInt("cnt"));
-		}
-		
-		pstmt = null;
 
-		
 		sql = "select content, totalorder from activity_content where personalactivityid = ? ";
 
 		pstmt = conn.prepareStatement(sql);
-		
+
 		pstmt.setInt(1, activityId);
 		rs = pstmt.executeQuery();
+
 		ContentObject contentObject = null;
 		while (rs.next()) {
 			contentObject = new ContentObject();
 			contentObject.setContent(rs.getString("content"));
 			contentObject.setOrder(rs.getInt("totalorder"));
-			
+
 			bean.setContentList(contentObject);
 		}
-		
+
 		pstmt = null;
 		rs = null;
-		
+
 		sql = "select image, totalorder from activity_image where personalActivityid = ? ";
-		
+
 		pstmt = conn.prepareStatement(sql);
-		
+
 		pstmt.setInt(1, activityId);
 		rs = pstmt.executeQuery();
-		
+
 		ImageObject imageObject = null;
-		
-		while(rs.next()) {
+
+		while (rs.next()) {
 			imageObject = new ImageObject();
 			imageObject.setImage(rs.getString("image"));
 			imageObject.setOrder(rs.getInt("totalorder"));
-			
+
 			bean.setImageList(imageObject);
 		}
+
+		pstmt = null;
+
+		sql = "SELECT (COALESCE(A.a, 0) + COALESCE(B.b, 0)) AS total_count " + "FROM ( " + "    SELECT COUNT(*) AS a"
+				+ "    FROM activity_content " + "    where personalactivityid = ? " + ") A " + "FULL OUTER JOIN ( "
+				+ "    SELECT COUNT(*) AS b " + "    FROM activity_image " + "    where personalactivityid = ? "
+				+ ") B " + "ON 1=1 ";
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1, activityId);
+		pstmt.setInt(2, activityId);
 		
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			bean.setTotalRacodeCount(rs.getInt("total_count"));
+		}
+
 		if (pstmt != null) {
 			pstmt.close();
 		}

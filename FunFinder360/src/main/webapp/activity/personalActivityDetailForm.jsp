@@ -24,39 +24,36 @@
 			<span>${requestScope.personalActivityData.postedDate}</span>
 
 		</div>
-		${requestScope.personalActivityData.contentList}
-		${requestScope.personalActivityData.imageList}
-		
-		<c:forEach var="index" begin="0" end="${requestScope.personalActivityData.totalRacodeCount - 1}">
+		<c:set var="index" value="0"></c:set>
+		<c:set var="contentIndex" value="0"></c:set>
+		<c:set var="imgIndex" value="0"></c:set>
+
+		<c:forEach var="loop" begin="0" end="${requestScope.personalActivityData.totalRacodeCount - 1}">
 			<c:catch var="contentException">
-				<c:if test="${not empty requestScope.personalActivityData.contentList and requestScope.personalActivityData.contentList.size() > index}">
-					<c:if test="${requestScope.personalActivityData.contentList.get(index).getOrder() == index}">
-                ${requestScope.personalActivityData.contentList.get(index).getContent()}
-            </c:if>
+				<c:if test="${not empty requestScope.personalActivityData.contentList}">
+					<c:if test="${requestScope.personalActivityData.contentList.get(contentIndex).getOrder() == index}">
+					${requestScope.personalActivityData.contentList.get(contentIndex).getContent()}
+					<c:if test="${requestScope.personalActivityData.contentList.size() > contentIndex }">
+							<c:set var="contentIndex" value="${contentIndex + 1}"></c:set>
+						</c:if>
+					</c:if>
 				</c:if>
 			</c:catch>
-
 			<c:catch var="imageException">
-				<c:if test="${not empty requestScope.personalActivityData.imageList and requestScope.personalActivityData.imageList.size() > index}">
-					<c:if test="${requestScope.personalActivityData.imageList.get(index).getOrder() == index}">
-                ${requestScope.personalActivityData.imageList.get(index).getImage()}
-            </c:if>
+				<c:if test="${not empty requestScope.personalActivityData.imageList}">
+					<c:if test="${requestScope.personalActivityData.imageList.get(imgIndex).getOrder() == index}">
+						<img src="${pageContext.request.contextPath}/upload/${requestScope.personalActivityData.imageList.get(imgIndex).getImage()}">
+						<c:if test="${requestScope.personalActivityData.imageList.size() > imgIndex }">
+							<c:set var="imgIndex" value="${imgIndex + 1}"></c:set>
+						</c:if>
+
+					</c:if>
 				</c:if>
 			</c:catch>
-
-			<!-- 예외 처리 코드 -->
-			<c:if test="${not empty contentException}">
-				
-        예외가 발생했습니다.
-    </c:if>
-
-			<c:if test="${not empty imageException}">
-
-        예외가 발생했습니다.
-    </c:if>
+			<c:if test="${not empty contentException}"></c:if>
+			<c:if test="${not empty imageException}"></c:if>
+			<c:set var="index" value="${index + 1}"></c:set>
 		</c:forEach>
-
-
 	</div>
 </body>
 </html>

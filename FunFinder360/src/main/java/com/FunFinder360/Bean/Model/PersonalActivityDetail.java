@@ -21,6 +21,8 @@ public class PersonalActivityDetail {
 	private List<Object> imageList = new ArrayList<Object>();
 
 	private int totalRacodeCount;
+	private int contentCount = 0;
+	private int imgCount = 0;
 
 	public PersonalActivityDetail() {
 	}
@@ -170,8 +172,27 @@ public class PersonalActivityDetail {
 		return totalRacodeCount;
 	}
 
-	public void setTotalRacodeCount(int totalRacodeCount) {
+	public void setTotalRacodeCount(int totalRacodeCount ) {
 		this.totalRacodeCount = totalRacodeCount;
 	}
+
+	public int getContentCount() {
+		return contentCount;
+	}
+
+	public void setContentCount(int contentCount) {
+		this.contentCount = contentCount;
+	}
+
+	public int getImgCount() {
+		return imgCount;
+	}
+
+	public void setImgCount(int imgCount) {
+		this.imgCount = imgCount;
+	}
+	
+	
+	
 
 }
