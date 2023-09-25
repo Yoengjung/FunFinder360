@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.FunFinder360.Bean.Model.MemberOwner;
+import com.FunFinder360.Bean.Model.MemberPersonalUser;
 
 public class MemberOwnerUserDao extends SuperDao {
 	// 업주 유저 아이디 중복 체크

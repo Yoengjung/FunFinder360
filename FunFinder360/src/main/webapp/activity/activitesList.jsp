@@ -103,6 +103,7 @@ img {
 								<span>카테고리: ${bean.category}</span> <span>주소:
 									${bean.location}</span> 상세 주소:
 								<c:choose>
+
 									<c:when test="${fn:length(bean.locationDetail) >= 10}">${fn:substring(bean.locationDetail, 0 , 10)}...</c:when>
 									<c:otherwise>
                                           ${bean.locationDetail}

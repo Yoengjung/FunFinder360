@@ -26,7 +26,7 @@
 }
 
 .no-head {
-	width: 15%;
+	width: 20%;
 }
 
 .title-head {
@@ -35,21 +35,15 @@
 }
 
 .registrant-head {
-	width: 15%;
+	width: 20%;
 }
 
 .posted-date-head {
-	width: 15%;
+	width: 20%;
 }
 
 .readhit-head {
 	width: 10%;
-}
-.event-head {
-	width: 15% 
-}
-.date-head {
-	width: 25%
 }
 
 .title-box {
@@ -107,7 +101,7 @@
 </head>
 <body>
 	<div class="container">
-		<h2>내가 올린 활동들 일까?(기업)</h2>
+		<h2>내가 올린 활동들 일까?</h2>
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
@@ -116,24 +110,14 @@
 					<th class="table-head-box registrant-head">위치</th>
 					<th class="table-head-box posted-date-head">상세주소</th>
 					<th class="table-head-box readhit-head">조회수</th>
-					<th class="table-head-box event-head">이벤트</th>
-					<th class="table-head-box date-head">등록일</th>
+					<th>이벤트</th>
+					<th class="table-head-box">등록일</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="ownerActivity"
-					items="${requestScope.ownerActivityList}">
+				<c:forEach var="ownerActivity" items="${requestScope.ownerActivityList}">
 					<tr>
-						<td class="table-body-box">
-							<c:choose>
-								<c:when test="${fn:length(ownerActivity.activitiyName) >= 10}">
-				                    ${fn:substring(ownerActivity.activitiyName, 0, 10)}...
-				                </c:when>
-								<c:otherwise>
-				                    ${ownerActivity.activitiyName}
-				                </c:otherwise>
-							</c:choose>
-						</td>
+						<td class="table-body-box">${ownerActivity.activityName}</td>
 						<td class="table-body-box title-box">${ownerActivity.category}</td>
 						<td class="table-body-box">${ownerActivity.location}</td>
 						<td class="table-body-box">${ownerActivity.locationDetail}</td>

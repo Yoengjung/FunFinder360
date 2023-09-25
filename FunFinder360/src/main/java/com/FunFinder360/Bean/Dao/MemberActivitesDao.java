@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.FunFinder360.Bean.Model.CommonQuestion;
 import com.FunFinder360.Bean.Model.OwnerActivity;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 
@@ -16,7 +17,7 @@ public class MemberActivitesDao extends SuperDao {
 		OwnerActivity bean = new OwnerActivity();
 
 		bean.setUserid(rs.getString("userId"));
-		bean.setActivitiyName(rs.getString("activityName"));
+		bean.setActivitiyName(rs.getString("activitiyName"));
 		bean.setCategory(rs.getString("category"));
 		bean.setLocation(rs.getString("location"));
 		bean.setLocationDetail(rs.getString("locationDetail"));
@@ -35,18 +36,17 @@ public class MemberActivitesDao extends SuperDao {
 
 		String sql = " select userid, activityname, category, location, locationDetail, readhit, event, postedDate, ranking ";
 		sql += " from (select userid, activityname, category, location, locationDetail, readhit, event, postedDate, rank() over(order by postedDate asc) as ranking ";
-		sql += " from owner_activites where userid = ?";
+		sql += " from owner_activites) where userid = ?";
 
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
 		if (mode == null || mode.equals("all")) {
 		} else {
-			sql += " and " + mode + " like '%" + keyword + "%' ";
+			sql += " and " + mode + " like '%" + keyword + "%'";
 		}
-		sql += " ) ";
 
-		sql += " where ranking between ? and ? ";
+		sql += " and ranking between ? and ? ";
 
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, ownerId);
@@ -123,7 +123,7 @@ public class MemberActivitesDao extends SuperDao {
 
 		String sql = " select userid, activityname, category, location, locationDetail, readhit, postedDate, ranking ";
 		sql += " from (select userid, activityname, category, location, locationDetail, readhit, postedDate, rank() over(order by postedDate asc) as ranking ";
-		sql += " from personal_activitis where userid = ? " ;
+		sql += " from personal_activitis) where userid = ?";
 
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
@@ -132,9 +132,8 @@ public class MemberActivitesDao extends SuperDao {
 		} else {
 			sql += " and " + mode + " like '%" + keyword + "%'";
 		}
-		
-		sql += " ) ";
-		sql += " where ranking between ? and ? ";
+
+		sql += " and ranking between ? and ? ";
 
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, userId);
