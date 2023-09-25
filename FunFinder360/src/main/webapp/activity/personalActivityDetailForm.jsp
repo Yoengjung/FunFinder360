@@ -9,16 +9,20 @@
 <title>활동 상세 보기</title>
 <script>
 	function backPage() {
-		location.href = "<%=notWithFormTag%>activitesList"
+		location.href = "<%=notWithFormTag%>
+	activitesList"
 	}
 </script>
 </head>
 <body>
 	<div class="container">
 		<div class="container-box">
+			<span>${requestScope.personalActivityData.category}</span>
 			<h2 id="activityName-tag">${requestScope.personalActivityData.activityName}</h2>
-			<span>등록자 : ${requestScope.personalActivityData.userId}</span>
-			<span>카테고리 : ${requestScope.personalActivityData.category}</span>
+			<div class="userid-postedDate-container">
+				<span>${requestScope.personalActivityData.userId}</span>
+				<span>${requestScope.personalActivityData.postedDate}</span>
+			</div>
 			<div class="location-container">
 				<span>장소 : ${requestScope.personalActivityData.location} </span>
 				<span> ${requestScope.personalActivityData.locationDetail}</span>
@@ -27,8 +31,9 @@
 				<span>비용 : </span>
 				<fmt:formatNumber value="${requestScope.personalActivityData.cost}" pattern="###,###" />
 				원
+				<span>참가 인원 : ${requestScope.personalActivityData.activityNumber}명</span>
 			</div>
-			<span>참가 인원 : ${requestScope.personalActivityData.activityNumber}명</span>
+
 			<div class="rating-container">
 				<div class=star-box>
 					<c:forEach var="rating" begin="1" end="${requestScope.personalActivityData.rating}">
@@ -69,12 +74,13 @@
 			</c:forEach>
 			<div class="bottom-content-container">
 				<span>조회수 : ${requestScope.personalActivityData.readHit}</span>
-				<span>게시 날짜 : ${requestScope.personalActivityData.postedDate}</span>
+
 			</div>
 		</div>
 		<div>
 			<button class="back-btn" value="돌아가기" onclick="backPage();">목록</button>
 		</div>
+	</div>
 	</div>
 
 </body>
