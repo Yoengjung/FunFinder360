@@ -1,0 +1,2 @@
+uploadPath=upload
+activity_list_column_size=4

@@ -6,25 +6,26 @@ public class ActivityContent {
 	private int ownerActivityId;
 	private String content;
 	private int contentOrder;
+	private int totalOrder;
 
-	public ActivityContent() {
-	}
+	public ActivityContent () {}
 
-	public ActivityContent(int contentId, int personalActivityId, int ownerActivityId, String content,
-			int contentOrder) {
+	public ActivityContent(int contentId, int personalActivityId, int ownerActivityId, String content, int contentOrder,
+			int totalOrder) {
 		super();
 		this.contentId = contentId;
 		this.personalActivityId = personalActivityId;
 		this.ownerActivityId = ownerActivityId;
 		this.content = content;
 		this.contentOrder = contentOrder;
+		this.totalOrder = totalOrder;
 	}
 
 	@Override
 	public String toString() {
 		return "ActivityContent [contentId=" + contentId + ", personalActivityId=" + personalActivityId
 				+ ", ownerActivityId=" + ownerActivityId + ", content=" + content + ", contentOrder=" + contentOrder
-				+ "]";
+				+ ", totalOrder=" + totalOrder + "]";
 	}
 
 	public int getContentId() {
@@ -66,6 +67,15 @@ public class ActivityContent {
 	public void setContentOrder(int contentOrder) {
 		this.contentOrder = contentOrder;
 	}
+
+	public int getTotalOrder() {
+		return totalOrder;
+	}
+
+	public void setTotalOrder(int totalOrder) {
+		this.totalOrder = totalOrder;
+	}
+	
 	
 	
 }

@@ -1,0 +1,31 @@
+.container {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	margin-top: 130px;
+	max-width: 770px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.td-tag {
+	width: 200px;
+}
+
+.table {
+	width: 100%;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+button {
+	display: block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.bottom-tr {
+	border-bottom: 1px solid black;
+}

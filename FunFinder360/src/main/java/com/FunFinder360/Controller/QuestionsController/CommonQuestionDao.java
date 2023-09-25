@@ -93,12 +93,12 @@ public class CommonQuestionDao extends SuperDao {
 	private CommonQuestion getBeanData(ResultSet rs) throws Exception {
 		CommonQuestion bean = new CommonQuestion();
 
-		bean.setQuestionId(rs.getInt("questionId"));
-		bean.setUserId(rs.getString("userId"));
-		bean.setTitle(rs.getString("title"));
-		bean.setContent(rs.getString("content"));
-		bean.setReadhit(rs.getInt("readHit"));
-		bean.setPostedDate(rs.getString("postedDate"));
+		bean.setQuestionId(rs.getInt("QUESTIONID"));
+		bean.setUserId(rs.getString("USERID"));
+		bean.setTitle(rs.getString("TITLE"));
+		bean.setContent(rs.getString("CONTENT"));
+		bean.setReadhit(rs.getInt("READHIT"));
+		bean.setPostedDate(rs.getString("POSTEDDATE"));
 
 		return bean;
 	}
@@ -108,8 +108,8 @@ public class CommonQuestionDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = " select questionId, userId, title, content, readhit postedDate "
-				+ "from (select questionId, userId, title, content, readhit, postedDate, rank() over(order by questionId asc) as ranking "
+		String sql = " select QUESTIONID, USERID, TITLE, CONTENT, READHIT POSTEDDATE "
+				+ "from (select QUESTIONID, USERID, TITLE, CONTENT, READHIT, POSTEDDATE, rank() over(order by QUESTIONID asc) ranking "
 				+ "from common_question";
 
 		String mode = pageInfo.getMode();

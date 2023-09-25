@@ -5,9 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.FunFinder360.Bean.Dao.CommonQuestionDao;
 import com.FunFinder360.Bean.Model.CommonQuestion;
 import com.FunFinder360.Controller.SuperClass;
+import com.FunFinder360.Controller.QuestionsController.CommonQuestionDao;
 
 import Utility.Paging;
 
@@ -35,7 +35,7 @@ public class CQListController extends SuperClass {
 			
 			request.setAttribute("commonQuestionData", lists);
 			request.setAttribute("pageInfo", pageInfo);
-			super.goToPage("question/commonQuestionForm.jsp");
+			super.goToPage("question/commonQuestionFo.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

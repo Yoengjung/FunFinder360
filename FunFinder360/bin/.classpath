@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/first_project/first_project/src/main/webapp/WEB-INF/lib/cos.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/first_project/first_project/src/main/webapp/WEB-INF/lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/first_project/first_project/src/main/webapp/WEB-INF/lib/ojdbc6.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

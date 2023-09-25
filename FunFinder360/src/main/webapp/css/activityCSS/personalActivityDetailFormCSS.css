@@ -1,0 +1,14 @@
+body {
+	height: 100vh;
+}
+
+.container {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	top: 200px;
+	max-width: 770px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: red;
+}

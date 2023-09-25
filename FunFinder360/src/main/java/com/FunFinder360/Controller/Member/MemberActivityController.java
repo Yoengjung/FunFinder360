@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.FunFinder360.Bean.Dao.MemberActivitesDao;
-import com.FunFinder360.Bean.Dao.OwnerActivitesDao;
 import com.FunFinder360.Bean.Model.OwnerActivity;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Controller.SuperClass;

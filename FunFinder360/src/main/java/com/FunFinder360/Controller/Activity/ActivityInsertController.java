@@ -38,6 +38,10 @@ public class ActivityInsertController extends SuperClass {
 		
 		MemberPersonalUser loginfo = super.logInfo;
 		
+		String contentAndImageOrder = mr.getParameter("contentAndImageOrder");
+		
+		System.out.println("contentAndImageOrder : " + contentAndImageOrder);
+		
 		String userId = loginfo.getUserId();
 
 		int hour = Integer.parseInt(mr.getParameter("hour"));
@@ -56,6 +60,7 @@ public class ActivityInsertController extends SuperClass {
 		personalActivity.setCost(Integer.parseInt(mr.getParameter("cost")));
 		personalActivity.setActivityNumber(Integer.parseInt(mr.getParameter("activityNumber")));
 		personalActivity.setRating(Integer.parseInt(mr.getParameter("rating")));
+		
 		
 
 		int contantCount = Integer.parseInt(mr.getParameter("contentCount"));
@@ -78,7 +83,7 @@ public class ActivityInsertController extends SuperClass {
 		int status = -1;
 		ActivitesDao Dao = new ActivitesDao();
 		try {
-			status = Dao.insertPersonalActivityData(personalActivity, contentList, imageList);
+			status = Dao.insertPersonalActivityData(personalActivity, contentList, imageList, contentAndImageOrder);
 			
 			if(status == -1) {
 				super.setAlertMessage("활동 등록에 실패했습니다.");
