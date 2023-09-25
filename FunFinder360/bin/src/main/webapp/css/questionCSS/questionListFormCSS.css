@@ -1,0 +1,72 @@
+.container {
+	margin-top: 130px;
+	width: 100%;
+	height: 100%;
+}
+
+.container h2 {
+	margin-bottom: 30px;
+}
+
+.table-head-box {
+	text-align: center;
+}
+
+.table-body-box {
+	text-align: center;
+}
+
+.no-head {
+	width: 10%;
+}
+
+.title-head {
+	text-align: left;
+	width: 20%; /* 50% -> 20%로 수정함 */
+}
+
+.registrant-head {
+	width: 10%;
+}
+
+.posted-date-head {
+	width: 20%;
+}
+
+.readhit-head {
+	width: 10%;
+}
+
+.title-box {
+	text-align: left;
+}
+
+.title-box a {
+	color: #3366FF;
+}
+
+.title-box a:hover {
+	text-decoration: underline;
+}
+
+.input-group {
+	width: 300px;
+}
+
+.form-select {
+	width: 200px;
+}
+
+.search-form {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.keyword-input-box {
+	margin: 0 20px;
+}
+
+.paging-container {
+	margin-top: 20px;
+}

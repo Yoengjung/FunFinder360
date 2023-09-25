@@ -1,0 +1,7 @@
+companyName=ICT강남회사
+ceoName=홍길동
+address=서울특별시 강남구 강남로 123번지
+phoneNumber=02-123-4567
+email=info@abc-company.com
+establishmentDate=2023년 9월 9일
+businessRegistrationNumber= 123-45-67890
