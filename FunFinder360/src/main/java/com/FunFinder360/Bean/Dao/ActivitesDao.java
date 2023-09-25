@@ -79,7 +79,7 @@ public class ActivitesDao extends SuperDao {
 		ResultSet resultSet = null;
 		Connection connection = super.getConnection();
 
-		String sql = "select count(*) as cnt from personal_activitis";
+		String sql = "select count(*) as cnt from personal_activites";
 
 		if (mode == null || mode.equals("all")) {
 
@@ -117,7 +117,7 @@ public class ActivitesDao extends SuperDao {
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
-		String sql = "select userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit) as ranking from personal_activitis ac join activity_image im on ac.activityid = im.personalActivityId ";
+		String sql = "select userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId ";
 		if (mode == null || mode.equals("all")) {
 
 		} else {
