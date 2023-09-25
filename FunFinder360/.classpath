@@ -12,6 +12,6 @@
 	<classpathentry kind="lib" path="C:/Users/user/Desktop/javax.servlet.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Desktop/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Desktop/ojdbc6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/Desktop/first_project/first_project/src/main/webapp/WEB-INF/lib/cos.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/cos.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

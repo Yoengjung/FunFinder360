@@ -26,16 +26,16 @@
 }
 
 .no-head {
-	width: 10%;
+	width: 20%;
 }
 
 .title-head {
 	text-align: left;
-	width: 20%; /* 50% -> 20%로 수정함 */
+	width: 15%; /* 50% -> 20%로 수정함 */
 }
 
 .registrant-head {
-	width: 10%;
+	width: 20%;
 }
 
 .posted-date-head {
@@ -98,12 +98,10 @@
 						});
 					});
 </script>
-
-
 </head>
 <body>
 	<div class="container">
-		<h2>내가 올린 활동들일까?요</h2>
+		<h2>내가 올린 활동들 일까?</h2>
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
@@ -112,19 +110,20 @@
 					<th class="table-head-box registrant-head">위치</th>
 					<th class="table-head-box posted-date-head">상세주소</th>
 					<th class="table-head-box readhit-head">조회수</th>
-					<th>등록일</th>
+					<th>이벤트</th>
+					<th class="table-head-box">등록일</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="personalActivity" items="${requestScope.personalActivityList}">
+				<c:forEach var="ownerActivity" items="${requestScope.ownerActivityList}">
 					<tr>
-						<td class="table-body-box">${personalActivity.questionId}</td>
-						<td class="table-body-box title-box">
-							<a href="<%=notWithFormTag%>memberActivity&questionId=${personalActivity.questionId}">${question.title}</a>
-						</td>
-						<td class="table-body-box">${personalActivity.userId}</td>
-						<td class="table-body-box">${personalActivity.postedDate}</td>
-						<td class="table-body-box">${personalActivity.readhit}</td>
+						<td class="table-body-box">${ownerActivity.activityName}</td>
+						<td class="table-body-box title-box">${ownerActivity.category}</td>
+						<td class="table-body-box">${ownerActivity.location}</td>
+						<td class="table-body-box">${ownerActivity.locationDetail}</td>
+						<td class="table-body-box">${ownerActivity.readHit}</td>
+						<td class="table-body-box">${ownerActivity.event}</td>
+						<td class="table-body-box">${ownerActivity.postedDate}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -135,8 +134,13 @@
 					<input type="hidden" name="command" value="memberActivity">
 					<select id="mode" name="mode" class="form-select">
 						<option value="all" selected="selected">--- 선택해 주세요 ---
-						<option value="title">제목
-						<option value="content">내용
+						<option value="activityName">활동 제목
+						<option value="category">카테고리
+						<option value="location">위치
+						<option value="locationDetail">상세주소
+						<option value="readHit">조회수
+						<option value="event">이벤트
+						<option value="postedDate">등록일
 					</select>
 					<div class="input-group">
 						<input class="keyword-input-box form-control" type="text" name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">
@@ -146,6 +150,6 @@
 			</div>
 		</div>
 	</div>
-	${requestScope.pageInfo.pagingHtml}
+	<div> ${requestScope.pageInfo.pagingHtml}</div>
 </body>
 </html>
