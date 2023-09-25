@@ -16,13 +16,14 @@ public class ActivityDetailController extends SuperClass {
 		
 		ActivitesDao dao = new ActivitesDao();
 		
-		
+		PersonalActivityDetail personalActivityDetail = null;
 		try {
-			PersonalActivityDetail personalActivityDetail = dao.getPersonalActivityData(activityId);
+			personalActivityDetail = dao.getPersonalActivityData(activityId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		request.setAttribute("personalActivityData", personalActivityDetail);
 		super.goToPage("activity/personalActivityDetailForm.jsp");
 	}
 

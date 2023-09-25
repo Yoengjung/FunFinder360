@@ -1,5 +1,8 @@
 package com.FunFinder360.Bean.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PersonalActivityDetail {
 	private int activityId;
 	private String userId;
@@ -14,21 +17,17 @@ public class PersonalActivityDetail {
 	private int readHit;
 	private String postedDate;
 
-	private String image;
-	private String imageOrder;
+	private List<Object> contentList = new ArrayList<Object>();
+	private List<Object> imageList = new ArrayList<Object>();
 
-	private String content;
-	private int contentOrder;
-	private int totalOrder;
+	private int totalRacodeCount;
 
 	public PersonalActivityDetail() {
-		
-		
 	}
 
 	public PersonalActivityDetail(int activityId, String userId, String activityName, String category, String location,
 			String locationDetail, int duration, int cost, int activityNumber, int rating, int readHit,
-			String postedDate, String image, String imageOrder, String content, int contentOrder, int totalOrder) {
+			String postedDate, List<Object> contentList, List<Object> imageList) {
 		super();
 		this.activityId = activityId;
 		this.userId = userId;
@@ -42,11 +41,8 @@ public class PersonalActivityDetail {
 		this.rating = rating;
 		this.readHit = readHit;
 		this.postedDate = postedDate;
-		this.image = image;
-		this.imageOrder = imageOrder;
-		this.content = content;
-		this.contentOrder = contentOrder;
-		this.totalOrder = totalOrder;
+		this.contentList = contentList;
+		this.imageList = imageList;
 	}
 
 	@Override
@@ -54,9 +50,8 @@ public class PersonalActivityDetail {
 		return "PersonalActivityDetail [activityId=" + activityId + ", userId=" + userId + ", activityName="
 				+ activityName + ", category=" + category + ", location=" + location + ", locationDetail="
 				+ locationDetail + ", duration=" + duration + ", cost=" + cost + ", activityNumber=" + activityNumber
-				+ ", rating=" + rating + ", readHit=" + readHit + ", postedDate=" + postedDate + ", image=" + image
-				+ ", imageOrder=" + imageOrder + ", content=" + content + ", contentOrder=" + contentOrder
-				+ ", totalOrder=" + totalOrder + "]";
+				+ ", rating=" + rating + ", readHit=" + readHit + ", postedDate=" + postedDate + ", contentList="
+				+ contentList + ", imageList=" + imageList + "]";
 	}
 
 	public int getActivityId() {
@@ -155,46 +150,28 @@ public class PersonalActivityDetail {
 		this.postedDate = postedDate;
 	}
 
-	public String getImage() {
-		return image;
+	public List<Object> getContentList() {
+		return contentList;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setContentList(ContentObject contentObject) {
+		this.contentList.add(contentObject);
 	}
 
-	public String getImageOrder() {
-		return imageOrder;
+	public List<Object> getImageList() {
+		return imageList;
 	}
 
-	public void setImageOrder(String imageOrder) {
-		this.imageOrder = imageOrder;
+	public void setImageList(ImageObject imageObject) {
+		this.imageList.add(imageObject);
 	}
 
-	public String getContent() {
-		return content;
+	public int getTotalRacodeCount() {
+		return totalRacodeCount;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setTotalRacodeCount(int totalRacodeCount) {
+		this.totalRacodeCount = totalRacodeCount;
 	}
-
-	public int getContentOrder() {
-		return contentOrder;
-	}
-
-	public void setContentOrder(int contentOrder) {
-		this.contentOrder = contentOrder;
-	}
-
-	public int getTotalOrder() {
-		return totalOrder;
-	}
-
-	public void setTotalOrder(int totalOrder) {
-		this.totalOrder = totalOrder;
-	}
-	
-	
 
 }

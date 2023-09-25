@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.FunFinder360.Bean.Model.ActivityAndImage;
+import com.FunFinder360.Bean.Model.ContentObject;
+import com.FunFinder360.Bean.Model.ImageObject;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Bean.Model.PersonalActivityDetail;
 
@@ -183,7 +185,7 @@ public class ActivitesDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = "";
+		String sql = "select * from personal_activitis";
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -191,9 +193,68 @@ public class ActivitesDao extends SuperDao {
 
 		PersonalActivityDetail bean = new PersonalActivityDetail();
 		if (rs.next()) {
-			bean.setActivityId(rs.getInt("activityId"));
+			bean.setActivityId(rs.getInt("ACTIVITYID"));
+			bean.setUserId(rs.getString("userid"));
+			bean.setActivityName(rs.getString("ACTIVITYNAME"));
+			bean.setCategory(rs.getString("category"));
+			bean.setLocation(rs.getString("location"));
+			bean.setLocationDetail(rs.getString("locationDetail"));
+			bean.setDuration(rs.getInt("duration"));
+			bean.setCost(rs.getInt("cost"));
+			bean.setActivityNumber(rs.getInt("activityNumber"));
+			bean.setRating(rs.getInt("rating"));
+			bean.setReadHit(rs.getInt("readHit"));
+			bean.setPostedDate(rs.getString("postedDate"));
 		}
+		pstmt = null;
+		
+		sql = "select count(*) cnt from activity_content con full join activity_image img on con.personalactivityid = img.personalactivityid ";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		rs = pstmt.executeQuery();
+		if(rs.next()) {
+			bean.setTotalRacodeCount(rs.getInt("cnt"));
+		}
+		
+		pstmt = null;
 
+		
+		sql = "select content, totalorder from activity_content where personalactivityid = ? ";
+
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, activityId);
+		rs = pstmt.executeQuery();
+		ContentObject contentObject = null;
+		while (rs.next()) {
+			contentObject = new ContentObject();
+			contentObject.setContent(rs.getString("content"));
+			contentObject.setOrder(rs.getInt("totalorder"));
+			
+			bean.setContentList(contentObject);
+		}
+		
+		pstmt = null;
+		rs = null;
+		
+		sql = "select image, totalorder from activity_image where personalActivityid = ? ";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, activityId);
+		rs = pstmt.executeQuery();
+		
+		ImageObject imageObject = null;
+		
+		while(rs.next()) {
+			imageObject = new ImageObject();
+			imageObject.setImage(rs.getString("image"));
+			imageObject.setOrder(rs.getInt("totalorder"));
+			
+			bean.setImageList(imageObject);
+		}
+		
 		if (pstmt != null) {
 			pstmt.close();
 		}
@@ -204,7 +265,7 @@ public class ActivitesDao extends SuperDao {
 			conn.close();
 		}
 
-		return null;
+		return bean;
 	}
 
 }
