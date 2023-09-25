@@ -123,7 +123,7 @@ public class MemberActivitesDao extends SuperDao {
 
 		String sql = " select userid, activityname, category, location, locationDetail, readhit, postedDate, ranking ";
 		sql += " from (select userid, activityname, category, location, locationDetail, readhit, postedDate, rank() over(order by postedDate asc) as ranking ";
-		sql += " from personal_activitis where userid = ? " ;
+		sql += " from personal_activites where userid = ? " ;
 
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
@@ -179,7 +179,7 @@ public class MemberActivitesDao extends SuperDao {
 	public int getPersonalTotalRecordCount(String mode, String keyword, String userId) throws Exception {
 		System.out.println("검색 필드명 : " + mode + ", 검색 키워드 : " + keyword);
 
-		String sql = " select count(*) as cnt from personal_activitis ";
+		String sql = " select count(*) as cnt from personal_activites ";
 		sql += " where userId = ? ";
 		if (mode == null || mode.equals("all")) {
 		} else {

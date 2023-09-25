@@ -108,7 +108,7 @@ public class CommonQuestionDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = " select QUESTIONID, USERID, TITLE, CONTENT, READHIT POSTEDDATE "
+		String sql = " select QUESTIONID, USERID, TITLE, CONTENT, READHIT, POSTEDDATE "
 				+ "from (select QUESTIONID, USERID, TITLE, CONTENT, READHIT, POSTEDDATE, rank() over(order by QUESTIONID asc) ranking "
 				+ "from common_question";
 

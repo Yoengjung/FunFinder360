@@ -35,7 +35,7 @@ public class CQListController extends SuperClass {
 			
 			request.setAttribute("commonQuestionData", lists);
 			request.setAttribute("pageInfo", pageInfo);
-			super.goToPage("question/commonQuestionFo.jsp");
+			super.goToPage("question/commonQuestionForm.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

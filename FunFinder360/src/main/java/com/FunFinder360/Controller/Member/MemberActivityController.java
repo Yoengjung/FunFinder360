@@ -18,7 +18,6 @@ public class MemberActivityController extends SuperClass {
 		super.doGet(request, response);
 
 		if (super.logInfo == null && super.loginfoOwner == null) {
-
 			System.out.println("logInfo : " + logInfo);
 			super.setAlertMessage("로그인이 필요한 페이지입니다.");
 			super.goToPage("member/memberLoginSelectForm.jsp");
