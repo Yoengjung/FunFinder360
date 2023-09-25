@@ -20,6 +20,7 @@ public class ActivitesDao extends SuperDao {
 			List<String> imageList, String contentAndImageOrder) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
+		conn.setAutoCommit(false);
 
 		String sql = "insert into personal_activites values (PERSONAL_ACTIVITY_SEQUENCE.nextval, ? ,? ,? ,? ,? ,? ,? ,? ,?, ?, default)";
 
@@ -184,9 +185,11 @@ public class ActivitesDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = "select * from personal_activites";
+		String sql = "select * from personal_activites where activityid = ? ";
 
 		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, activityId);
 
 		rs = pstmt.executeQuery();
 
