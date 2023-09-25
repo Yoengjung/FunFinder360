@@ -116,7 +116,17 @@
 			<tbody>
 				<c:forEach var="personalActivity" items="${requestScope.personalActivityList}">
 					<tr>
-						<td class="table-body-box">${personalActivity.activityName}</td>
+						<td class="table-body-box">
+							<c:choose>
+								<c:when test="${fn:length(personalActivity.activityName) >= 10}">
+	                                    ${fn:substring(personalActivity.activityName, 0, 10)}...
+	                            </c:when>
+								<c:otherwise>
+       								${personalActivity.activityName}
+    							</c:otherwise>
+								<%-- ${personalActivity.activityName} --%>
+							</c:choose>
+						</td>
 						<td class="table-body-box title-box">${personalActivity.category}</td>
 						<td class="table-body-box">${personalActivity.location}</td>
 						<td class="table-body-box">${personalActivity.locationDetail}</td>
