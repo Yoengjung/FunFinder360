@@ -147,6 +147,6 @@
 			</div>
 		</div>
 	</div>
-	${requestScope.pageInfo.pagingHtml}
+	<div> ${requestScope.pageInfo.pagingHtml}</div>
 </body>
 </html>
