@@ -29,6 +29,8 @@ OwnerActivitesList=com.FunFinder360.Controller.ActivityController.OwnerActivityL
 #관리자
 memberList=com.FunFinder360.Controller.Member.MemberListController
 activitesList=com.FunFinder360.Controller.ActivityController.ActivityListController
+memberActivityList=com.FunFinder360.Controller.Member.MemberActivityListController
+memberActivityDetail=com.FunFinder360.Controller.Member.MemberActivityDetailController
 
 #개인 문의
 questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListController

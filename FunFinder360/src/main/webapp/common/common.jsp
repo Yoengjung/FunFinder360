@@ -275,7 +275,7 @@ hr {
 									<a class="dropdown-item" href="#">회원별 수익 데이터</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="<%=notWithFormTag%>activityList">회원 활동 데이터</a>
+									<a class="dropdown-item" href="<%=notWithFormTag%>memberActivityList">회원 활동 데이터</a>
 								</li>
 							</ul>
 						</li>
