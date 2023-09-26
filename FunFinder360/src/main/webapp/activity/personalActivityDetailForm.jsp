@@ -4,30 +4,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/activityCSS/personalActivityDetailFormCSS.css" type="text/css">
-
 <title>활동 상세 보기</title>
 <script>
 	function backPage() {
-		location.href = "<%=notWithFormTag%>
-	activitesList"
+		location.href = "<%=notWithFormTag%>activitesList"
 	}
 </script>
 </head>
+<style>
+</style>
 <body>
 	<div class="container">
 		<div class="container-box">
-			<span>${requestScope.personalActivityData.category}</span>
-			<h2 id="activityName-tag">${requestScope.personalActivityData.activityName}</h2>
-			<div class="userid-postedDate-container">
-				<span>${requestScope.personalActivityData.userId}</span>
-				<span>${requestScope.personalActivityData.postedDate}</span>
+			<div class="info-top">
+				<span>${requestScope.personalActivityData.category}</span>
+				<span class="material-symbols-outlined star-icon"> star </span>
 			</div>
-			<div class="location-container">
+			<h2 id="activityName-tag">${requestScope.personalActivityData.activityName}</h2>
+
+
+			<div class="location-container" style="font-size: 17px;">
 				<span>장소 : ${requestScope.personalActivityData.location} </span>
 				<span> ${requestScope.personalActivityData.locationDetail}</span>
 			</div>
-			<div class="cost-container">
+			<div class="cost-container" style="font-size: 17px;">
 				<span>비용 : </span>
 				<fmt:formatNumber value="${requestScope.personalActivityData.cost}" pattern="###,###" />
 				원
@@ -40,6 +42,10 @@
 						<img src="${pageContext.request.contextPath}/upload/star.png" id="star-icon-tag">
 					</c:forEach>
 				</div>
+			</div>
+			<div class="userid-postedDate-container" style="font-size: 17px;">
+				<span>${requestScope.personalActivityData.userId}</span>
+				<span>${requestScope.personalActivityData.postedDate}</span>
 			</div>
 		</div>
 		<c:set var="index" value="0"></c:set>

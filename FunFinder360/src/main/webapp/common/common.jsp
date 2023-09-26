@@ -2,7 +2,7 @@
 <%@ include file="./bootstrap.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 String appName = request.getContextPath();
@@ -32,14 +32,18 @@ String notWithFormTag = appName + mappingName + "?command=";
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Noto+Sans+KR:wght@200;300;400&family=Sunflower:wght@300&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <style>
 body {
 	margin: 0px;
 	width: 100vw;
-	font-family: 'Nanum Gothic Coding', cursive;
+	font-family: 'Nanum Gothic Coding', cursive; font-family :
+	'Noto Sans KR', sans-serif;
 	font-family: 'Sunflower', sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 ul {
