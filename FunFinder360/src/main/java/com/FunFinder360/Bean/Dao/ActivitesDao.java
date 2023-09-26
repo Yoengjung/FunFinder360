@@ -185,12 +185,18 @@ public class ActivitesDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = "select * from personal_activites where activityid = ? ";
-
+		String sql = "update personal_activites set readHit = readHit + 1 where activityid = ? ";
 		pstmt = conn.prepareStatement(sql);
-		
 		pstmt.setInt(1, activityId);
+		pstmt.executeUpdate();
+		
+		conn.commit();
 
+		pstmt = null;
+
+		sql = "select * from personal_activites where activityid = ? ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, activityId);
 		rs = pstmt.executeQuery();
 
 		PersonalActivityDetail bean = new PersonalActivityDetail();
@@ -209,11 +215,9 @@ public class ActivitesDao extends SuperDao {
 			bean.setPostedDate(rs.getString("postedDate"));
 		}
 		pstmt = null;
-
+		
 		sql = "select content, totalorder from activity_content where personalactivityid = ? ";
-
 		pstmt = conn.prepareStatement(sql);
-
 		pstmt.setInt(1, activityId);
 		rs = pstmt.executeQuery();
 
@@ -230,9 +234,7 @@ public class ActivitesDao extends SuperDao {
 		rs = null;
 
 		sql = "select image, totalorder from activity_image where personalActivityid = ? ";
-
 		pstmt = conn.prepareStatement(sql);
-
 		pstmt.setInt(1, activityId);
 		rs = pstmt.executeQuery();
 
@@ -253,13 +255,11 @@ public class ActivitesDao extends SuperDao {
 				+ "    SELECT COUNT(*) AS b " + "    FROM activity_image " + "    where personalactivityid = ? "
 				+ ") B " + "ON 1=1 ";
 		pstmt = conn.prepareStatement(sql);
-
 		pstmt.setInt(1, activityId);
 		pstmt.setInt(2, activityId);
-		
 		rs = pstmt.executeQuery();
-		
-		if(rs.next()) {
+
+		if (rs.next()) {
 			bean.setTotalRacodeCount(rs.getInt("total_count"));
 		}
 

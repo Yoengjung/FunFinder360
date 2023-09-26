@@ -11,6 +11,31 @@ import com.FunFinder360.Bean.Model.CommonQuestion;
 import Utility.Paging;
 
 public class CommonQuestionDao extends SuperDao {
+	
+	public int DeleteDate(int questionId) throws Exception {
+		int cnt = -1;
+		PreparedStatement pstmt = null;
+		connection = super.getConnection();
+		connection.setAutoCommit(false);
+		
+		String sql = " delete from common_question where questionId = ?";
+		pstmt = connection.prepareStatement(sql);
+		
+		pstmt.setInt(1, questionId);
+		
+		cnt = pstmt.executeUpdate();
+		
+		connection.commit();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		
+		return cnt;
+	}
 
 	public List<CommonQuestion> getCommonQuestionData() throws Exception {
 		PreparedStatement pstmt = null;
@@ -280,5 +305,7 @@ public class CommonQuestionDao extends SuperDao {
 		}
 		return cnt;
 	}
+
+	
 
 }

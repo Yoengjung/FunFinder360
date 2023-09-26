@@ -163,6 +163,12 @@
 				</div>
 			</div>
 			<button class="back-btn" value="돌아가기" onclick="backPage();">목록</button>
+				<c:set var="member" value="${sessionScope.loginfo}" />
+				<c:if test="${not empty member and member.userId == 'admin1'}">
+					<a id="deleteAnchor" href="<%=notWithFormTag%>commonQuestionsDelete&questionId=${requestScope.commonQuestionData[index].questionId}">${requestScope.commonQuestionData[index].title}">
+						삭제
+				    </a>
+			    </c:if>
 
 			<div class="page-control-container">
 				<ul>
@@ -207,6 +213,12 @@
 				</div>
 			</div>
 			<button class="back-btn" value="돌아가기" onclick="backPage();">목록</button>
+				<c:set var="member" value="${sessionScope.loginfo}" />
+				<c:if test="${not empty member and member.userId == 'admin1'}">
+					<a id="deleteAnchor" href="<%=notWithFormTag%>commonQuestionsDelete&questionId=${requestScope.commonQuestionData[index].questionId}">${requestScope.commonQuestionData[index].title}">
+						삭제
+				    </a>
+			    </c:if>
 
 			<div class="page-control-container">
 				<ul>
@@ -251,6 +263,12 @@
 				</div>
 			</div>
 			<button class="back-btn" value="돌아가기" onclick="backPage();">목록</button>
+				<c:set var="member" value="${sessionScope.loginfo}" />
+				<c:if test="${not empty member and member.userId == 'admin1'}">
+					<a id="deleteAnchor" href="<%=notWithFormTag%>commonQuestionsDelete&questionId=${requestScope.commonQuestionData[index].questionId}">${requestScope.commonQuestionData[index].title}">
+						삭제
+				    </a>
+			    </c:if>
 
 			<div class="page-control-container">
 				<ul>

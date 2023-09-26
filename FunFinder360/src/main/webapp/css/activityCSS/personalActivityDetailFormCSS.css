@@ -19,7 +19,15 @@ body {
 	margin-bottom: 20px;
 	border-bottom: 2px solid black;
 	padding: 20px;
-	background-color: #F2F0E4;
+	background-color: #F8F0E5;
+	border: 3px solid #EADBC8;
+	border-radius: 10px;
+}
+
+#category-tag {
+	display: inline;
+	margin: 0px;
+	width: 300px;
 }
 
 .container-box h2 {
@@ -28,9 +36,42 @@ body {
 	font-size: 45px;
 }
 
+.star-icon-fav {
+	color: black;
+	font-size: 50px;
+	margin: 0px !important;
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.heart-icon-fav {
+	color: black;
+	font-size: 45px;
+	top: 28px;
+	margin: 0px !important;
+	position: absolute;
+	right: 70px;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 .star-icon {
 	color: #FFFF00;
 }
+
+
 
 .rating-container {
 	margin-bottom: 30px;
@@ -50,7 +91,8 @@ body {
 }
 
 .cost-container {
-	font-size: 15px;
+	font-size: 17px;
+	height: 24px;
 }
 
 .cost-container span {
@@ -64,32 +106,33 @@ body {
 	transform: translateX(-50%);
 	margin-bottom: 50px;
 	object-fit: none;
-	width: 500px;
 	height: 500px;
 }
 
-p {
+#activityNumber-tag {
+	font-size: 17px;
+}
+
+pre {
+	font-family: 'Nanum Gothic Coding', cursive;
+	font-family:
+		'Noto Sans KR', sans-serif;
+	font-family: 'Sunflower', sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 25px;
 	text-align: center;
 	margin-top: 30px;
 	margin-bottom: 30px;
 	padding: 50px 0 50px 0;
-	border-top: 1px solid #CCCCCC;
-	border-bottom: 1px solid #CCCCCC;
-}
-
-.bottom-content-container {
-	display: inline-flex;
-	flex-direction: column;
+	background-color: #FFF5E0;
+	border: 2px solid #D2E0FB;
+	border-radius: 10px;
+	width: 1000px;
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
 }
 
-.bottom-content-container span {
-	font-size: 20px;
-	text-align: center;
-}
 
 .star-box {
 	position: relative;
@@ -118,4 +161,10 @@ p {
 
 .userid-postedDate-container span:first-child {
 	margin-right: 20px;
+}
+
+#readHit-teg {
+	position: absolute;
+	display: block;
+	right: 100px;
 }

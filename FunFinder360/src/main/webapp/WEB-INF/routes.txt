@@ -19,6 +19,7 @@ logout=com.FunFinder360.Controller.Member.MemberLogoutController
 commonQuestionsList=com.FunFinder360.Controller.CommonQuestionsController.CQListController
 commonQuestionsDetail=com.FunFinder360.Controller.CommonQuestionsController.CQDetailController
 commonQuestionsInsert=com.FunFinder360.Controller.CommonQuestionsController.CQInsertController
+commonQuestionsDelete=com.FunFinder360.Controller.CommonQuestionsController.CQDeleteController
 questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListController
 
 #활동
