@@ -9,7 +9,7 @@
 </head>
 <script>
 	function backPage() {
-		location.href = "<%=notWithFormTag%>OwnerActivity"
+		location.href = "<%=notWithFormTag%>PersonalActivity"
 	}
 </script>
 <body>
@@ -20,7 +20,7 @@
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
-					<p>${requestScope.activityData[index].activitiyName}</p>
+					<p>${requestScope.activityData[index].activityName}</p>
 				</div>
 				<div class="post-info-box">
 					<ul>
@@ -51,7 +51,7 @@
 				<ul>
 					<li>
 						<span>다음글</span>
-						<a href="<%=notWithFormTag%>memberOwnerActivityDetail&activityId=${requestScope.activityData[index + 2].activityId}">${requestScope.activityData[index + 2].activityName}</a>
+						<a href="<%=notWithFormTag%>personalActivityDetail&activityId=${requestScope.activityData[index + 2].activityId}">${requestScope.activityData[index + 2].activityName}</a>
 					</li>
 				</ul>
 			</div>
@@ -61,7 +61,7 @@
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
-					<p>${requestScope.activityData[index].activitiyName}</p>
+					<p>${requestScope.activityData[index].activityName}</p>
 				</div>
 				<div class="post-info-box">
 					<ul>
@@ -92,7 +92,7 @@
 				<ul>
 					<li>
 						<span>이전글</span>
-						<a href="<%=notWithFormTag%>memberOwnerActivityDetail&activityId=${requestScope.activityData[index + 1].activityId}">${requestScope.activityData[index + 1].activityName}</a>
+						<a href="<%=notWithFormTag%>personalActivityDetail&activityId=${requestScope.activityData[index + 1].activityId}">${requestScope.activityData[index + 1].activityName}</a>
 					</li>
 				</ul>
 			</div>
@@ -102,7 +102,7 @@
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
-					<p>${requestScope.activityData[index].activitiyName}</p>
+					<p>${requestScope.activityData[index].activityName}</p>
 				</div>
 				<div class="post-info-box">
 					<ul>
@@ -134,11 +134,11 @@
 				<ul>
 					<li>
 						<span>이전글</span>
-						<a href="<%=notWithFormTag%>memberOwnerActivityDetail&activityId=${requestScope.activityData[index + 1].activityId}">${requestScope.activityData[index + 1].activityName}</a>
+						<a href="<%=notWithFormTag%>personalActivityDetail&activityId=${requestScope.activityData[index + 1].activityId}">${requestScope.activityData[index + 1].activityName}</a>
 					</li>
 					<li>
 						<span>다음글</span>
-						<a href="<%=notWithFormTag%>memberOwnerActivityDetail&activityId=${requestScope.activityData[index + 2].activityId}">${requestScope.activityData[index + 2].activityName}</a>
+						<a href="<%=notWithFormTag%>personalActivityDetail&activityId=${requestScope.activityData[index + 2].activityId}">${requestScope.activityData[index + 2].activityName}</a>
 					</li>
 				</ul>
 			</div>

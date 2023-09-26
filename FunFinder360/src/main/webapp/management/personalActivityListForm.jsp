@@ -5,7 +5,7 @@
 <head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/questionCSS/questionListFormCSS.css" type="text/css">
 <meta charset="UTF-8">
-<title>업주 활동 데이터</title>
+<title>회원 활동 데이터</title>
 <style>
 .container {
 	margin-top: 130px;
@@ -38,48 +38,50 @@
 </style>
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		var questionOptionList = $('#mode option');
-		for (var i = 0; i < questionOptionList.length; i++) {
-			if (questionOptionList[i].value == '${requestScope.pageInfo.mode}'){
-				questionOptionList[i].selected = true;
-			}
-		}
-		$('#keyowrd').val('${requestScope.pageInfo.keyword}');
-		
-		$("#mode").change(function(){
-			if ($(this).val() != 'all') {
-				$('#keyword').attr('disabled', false);
-			} else {
-				$('#keyword').val('');
-				$('#keyword').attr('disabled', true);
-			}
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						var questionOptionList = $('#mode option');
+						for (var i = 0; i < questionOptionList.length; i++) {
+							if (questionOptionList[i].value == '${requestScope.pageInfo.mode}') {
+								questionOptionList[i].selected = true;
+							}
+						}
+						$('#keyowrd').val('${requestScope.pageInfo.keyword}');
+
+						$("#mode").change(function() {
+							if ($(this).val() != 'all') {
+								$('#keyword').attr('disabled', false);
+							} else {
+								$('#keyword').val('');
+								$('#keyword').attr('disabled', true);
+							}
+						});
+					});
 </script>
 
 </head>
 <body>
 	<div class="container">
-		<h2>업주 활동 데이터</h2>
+		<h2>회원 활동 데이터</h2>
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
 					<th class="table-head-box activityId-head">순번</th>
-					<th class="table-head-box activitiyName-head">활동 제목</th>
-					<th class="table-head-box userid-head">등록자명</th>
+					<th class="table-head-box activityName-head">활동 제목</th>
+					<th class="table-head-box userId-head">등록자명</th>
 					<th class="table-head-box postedDate-head">등록일자</th>
-					<th class="table-head-box readhit-head">조회수</th>
+					<th class="table-head-box readHit-head">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="bean" items="${requestScope.ownerActivity}">
+				<c:forEach var="bean" items="${requestScope.personalActivity}">
 					<tr>
 						<td class="table-body-box">${bean.activityId}</td>
 						<td class="table-body-box title-box">
-							<a href="<%=notWithFormTag%>memberOwnerActivityDetail&activityId=${bean.activityId}">${bean.activitiyName}</a>
+							<a href="<%=notWithFormTag%>personalActivityDetail&activityId=${bean.activityId}">${bean.activityName}</a>
 						</td>
-						<td class="table-body-box">${bean.userid}</td>
+						<td class="table-body-box">${bean.userId}</td>
 						<td class="table-body-box">${bean.postedDate}</td>
 						<td class="table-body-box">${bean.readHit}</td>
 					</tr>
@@ -89,10 +91,10 @@
 		<div class="search-container">
 			<div class="search-in-container">
 				<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
-					<input type="hidden" name="command" value=memberOwnerActivityList>
+					<input type="hidden" name="command" value="personalActivityList">
 					<select id="mode" name="mode" class="form-select">
 						<option value="all" selected="selected">--- 선택해 주세요 ---
-						<option value="activitiyName">활동 제목
+						<option value="activityName">활동 제목
 						<option value="userid">등록자 이름
 					</select>
 					<div class="input-group">

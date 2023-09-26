@@ -100,13 +100,13 @@
 			<div class="select-container">
 				<div class="select-container">
 					<div class="select-item1">
-						<a href="<%=notWithFormTag%>memberActivityList" class="select-activity-a">
+						<a href="<%=notWithFormTag%>personalActivityList" class="select-activity-a">
 							<span class="material-symbols-outlined icon-tag" style="font-size: 80px;"> person </span>
 							<span>개인 데이터</span>
 						</a>
 					</div>
 					<div class="select-item2">
-						<a href="<%=notWithFormTag%>memberOwnerActivityList" class="select-activity-a">
+						<a href="<%=notWithFormTag%>ownerActivityList" class="select-activity-a">
 							<span class="material-symbols-outlined" style="font-size: 80px;"> apartment </span>
 							<span>업주 데이터</span>
 						</a>

@@ -1,4 +1,4 @@
-package com.FunFinder360.Controller.Member;
+package com.FunFinder360.Controller.management;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Bean.Model.QuestionsList;
 import com.FunFinder360.Controller.SuperClass;
 
-public class MemberActivityDetailController extends SuperClass{
+public class PersonalActivityDetailController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
@@ -28,7 +28,7 @@ public class MemberActivityDetailController extends SuperClass{
 
 			request.setAttribute("activityData", lists);
 			request.setAttribute("totalRecodeCount", totalRecodeCount);
-			super.goToPage("member/memberActivityDetailForm.jsp");
+			super.goToPage("management/personalActivityDetailForm.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
