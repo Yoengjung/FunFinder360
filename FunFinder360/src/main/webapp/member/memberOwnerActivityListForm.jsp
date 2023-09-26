@@ -5,7 +5,7 @@
 <head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/questionCSS/questionListFormCSS.css" type="text/css">
 <meta charset="UTF-8">
-<title>회원 활동 데이터</title>
+<title>업주 활동 데이터</title>
 <style>
 .container {
 	margin-top: 130px;
@@ -38,32 +38,30 @@
 </style>
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						var questionOptionList = $('#mode option');
-						for (var i = 0; i < questionOptionList.length; i++) {
-							if (questionOptionList[i].value == '${requestScope.pageInfo.mode}') {
-								questionOptionList[i].selected = true;
-							}
-						}
-						$('#keyowrd').val('${requestScope.pageInfo.keyword}');
-
-						$("#mode").change(function() {
-							if ($(this).val() != 'all') {
-								$('#keyword').attr('disabled', false);
-							} else {
-								$('#keyword').val('');
-								$('#keyword').attr('disabled', true);
-							}
-						});
-					});
+	$(document).ready(function(){
+		var questionOptionList = $('#mode option');
+		for (var i = 0; i < questionOptionList.length; i++) {
+			if (questionOptionList[i].value == '${requestScope.pageInfo.mode}'){
+				questionOptionList[i].selected = true;
+			}
+		}
+		$('#keyowrd').val('${requestScope.pageInfo.keyword}');
+		
+		$("#mode").change(function(){
+			if ($(this).val() != 'all') {
+				$('#keyword').attr('disabled', false);
+			} else {
+				$('#keyword').val('');
+				$('#keyword').attr('disabled', true);
+			}
+		});
+	});
 </script>
 
 </head>
 <body>
 	<div class="container">
-		<h2>회원 활동 데이터</h2>
+		<h2>업주 활동 데이터</h2>
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
@@ -91,7 +89,7 @@
 		<div class="search-container">
 			<div class="search-in-container">
 				<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
-					<input type="hidden" name="command" value=activityList>
+					<input type="hidden" name="command" value=memberOwnerActivityList>
 					<select id="mode" name="mode" class="form-select">
 						<option value="all" selected="selected">--- 선택해 주세요 ---
 						<option value="activitiyName">활동 제목

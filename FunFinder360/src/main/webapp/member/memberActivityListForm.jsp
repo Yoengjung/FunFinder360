@@ -91,7 +91,7 @@
 		<div class="search-container">
 			<div class="search-in-container">
 				<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
-					<input type="hidden" name="command" value="activityList">
+					<input type="hidden" name="command" value="memberActivityList">
 					<select id="mode" name="mode" class="form-select">
 						<option value="all" selected="selected">--- 선택해 주세요 ---
 						<option value="activityName">활동 제목
