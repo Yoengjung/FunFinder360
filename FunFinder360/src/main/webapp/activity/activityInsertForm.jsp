@@ -102,10 +102,11 @@
 			});
 	var contentCount = 0;
 	var imageCount = 0;
-
+	var testOrder = []
+	var testIndex = 0;
 	function contentAndImageTodalOrder(i) {
 		var contentAndImageOrder = $("#contentAndImageOrder").val()
-
+		
 		console.log(contentAndImageOrder);
 
 		if (i == 0) {
@@ -116,14 +117,32 @@
 
 		document.getElementById("contentAndImageOrder").value = contentAndImageOrder;
 	}
+	
+	function testOrderfun(index, i) {
+		var testOrderVal = $("#testOrder").val()
+		
+		console.log(testOrder)
+		
+		if(i == 0) {
+			testOrder.push(0)
+		} else {
+			testOrder.push(1)
+		}
+		
+		document.getElementById("testOrder").value = testOrderVal;
+	} 
 
 	function contentAdd() {
 		scrollToBottom()
 		contentAndImageTodalOrder(0);
+		testOrderfun(testIndex, 0)
+		testIndex ++;
 
 		const textarea = document.createElement('textarea');
 		textarea.name = 'content' + contentCount;
 		textarea.className = "form-control content-container";
+		textarea.id = 'content' + contentCount;
+		
 		contentContainer = document.querySelector('.content-container-class');
 		
 		var contentContainer = document.querySelector('.content-container-class');
@@ -133,16 +152,43 @@
 		newSpan.id = "deleteIcon" + contentCount;
 		newSpan.textContent = "delete";
 		
+		newSpan.onclick = function() {
+	        deleteContentBtn(textarea.id, newSpan.id);
+	    };
+		
 		contentContainer.appendChild(textarea);
 		contentContainer.appendChild(newSpan);
 		
 		contentCount++;
 		document.getElementById("contentCountInput").value = contentCount;
+		console.log("content : " + textarea.name)
+	}
+	
+	
+	function deleteContentBtn(textareaId, spanId) {
+	    const elementToDelete = document.querySelector('textarea[name="' + textareaId + '"]');
+	   
+	    if (elementToDelete) {
+	    	const testareaValue = elementToDelete.name;
+		   	console.log(testareaValue);
+	        elementToDelete.remove();
+	        
+	        const spanToDelete = document.getElementById(spanId);
+	        if (spanToDelete) {
+	            spanToDelete.remove();
+	        }
+	        
+	        contentCount--;
+	        document.getElementById("contentCountInput").value = contentCount;
+	    }
 	}
 
 	function imageAdd() {
 		scrollToBottom()
 		contentAndImageTodalOrder(1);
+		testOrderfun(testIndex, 1);
+		testIndex ++;
+		
 		const textarea = document.createElement('input');
 		const imgTag = document.createElement("img");
 		textarea.name = 'image' + imageCount;
@@ -155,10 +201,23 @@
 		imgTag.alt = "미리보기 이미지";
 		imgTag.style = "max-height: 500px; display: inline-block; left: 50%;position: relative;transform: translateX(-50%);margin-top: 30px; display: none;";
 
-		const contentContainer = document
-				.querySelector('.content-container-class');
+		const newSpan = document.createElement("span");
+		newSpan.className = "material-symbols-outlined delete-item-icon";
+		newSpan.id = "deleteIcon" + imageCount;
+		newSpan.textContent = "delete";
+		
+		newSpan.onclick = function() {
+	        deleteBtn(textarea.id, newSpan.id);
+	    };
+		
+		const contentContainer = document.querySelector('.content-container-class');
 		contentContainer.appendChild(textarea);
 		contentContainer.appendChild(imgTag);
+		contentContainer.appendChild(newSpan);
+		
+		newSpan.onclick = function() {
+	        deleteImageBtn(textarea.id, newSpan.id, imgTag.id);
+	    };
 
 		imageCount++;
 		document.getElementById("imageCountInput").value = imageCount;
@@ -167,6 +226,27 @@
 		$(textarea).on('change', function(event) {
 			handleImageUpload(this, imgTag);
 		});
+		
+		console.log("image : " + textarea.name)
+	}
+	
+	function deleteImageBtn(textareaId, spanId, imgId) {
+	    const elementToDelete = document.querySelector('input[name="' + textareaId + '"]');
+	    const imgToDelete = document.querySelector('img[name="' + imgId + '"]')
+	    
+	    if (elementToDelete) {
+	    	const testareaValue = elementToDelete.name;
+		   	console.log(testareaValue);
+	        elementToDelete.remove();
+	        imgToDelete.remove();
+	        const spanToDelete = document.getElementById(spanId);
+	        if (spanToDelete) {
+	            spanToDelete.remove();
+	        }
+	        
+	        imageCount--;
+	        document.getElementById("contentCountInput").value = contentCount;
+	    }
 	}
 
 	function handleImageUpload(input, imgTag) {
@@ -334,6 +414,8 @@
 			}
 		})
 	})
+
+
 	
 </script>
 <style>
@@ -572,6 +654,7 @@
 			<input type="hidden" name="contentCount" id="contentCountInput" value="">
 			<input type="hidden" name="imageCount" id="imageCountInput" value="">
 			<input type="hidden" name="contentAndImageOrder" id="contentAndImageOrder" value="">
+			<input type="hidden" name="testOrder" id="testOrder" value="">
 			<div class="content-controll-container">
 				<button type="button" class="btn btn-primary" onclick="contentAdd()">
 					<span class="material-symbols-outlined" style="vertical-align: middle;"> add_circle </span>

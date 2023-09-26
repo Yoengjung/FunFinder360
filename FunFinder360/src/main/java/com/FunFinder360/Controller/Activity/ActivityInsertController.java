@@ -40,14 +40,15 @@ public class ActivityInsertController extends SuperClass {
 		
 		String contentAndImageOrder = mr.getParameter("contentAndImageOrder");
 		
-		System.out.println("contentAndImageOrder : " + contentAndImageOrder);
-		
 		String userId = loginfo.getUserId();
 
 		int hour = Integer.parseInt(mr.getParameter("hour"));
 		int minute = Integer.parseInt(mr.getParameter("minute"));
-		
 		int time = hour * 60 + minute;
+		
+		String cost = mr.getParameter("cost");
+		cost = cost.replace(",", "");
+		int intCost = Integer.parseInt(cost);
 		
 		PersonalActivity personalActivity = new PersonalActivity();
 
@@ -57,7 +58,7 @@ public class ActivityInsertController extends SuperClass {
 		personalActivity.setLocation(mr.getParameter("province") + " " + mr.getParameter("districtValue"));
 		personalActivity.setLocationDetail(mr.getParameter("detail-location"));
 		personalActivity.setDuration(time);
-		personalActivity.setCost(Integer.parseInt(mr.getParameter("cost")));
+		personalActivity.setCost(intCost);
 		personalActivity.setActivityNumber(Integer.parseInt(mr.getParameter("activityNumber")));
 		personalActivity.setRating(Integer.parseInt(mr.getParameter("rating")));
 		

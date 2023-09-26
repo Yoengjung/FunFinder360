@@ -12,12 +12,12 @@ input::-webkit-inner-spin-button {
 
 .container form {
 	margin-top: 20px;
-	border-top: 1px solid black;
 }
 
 .form-div-box {
 	background-color: #F8F0E5;
 	border: 3px solid #DAC0A3;
+	border-radius: 10px;
 }
 
 .district-select {
@@ -217,9 +217,9 @@ input[type="file"] {
 }
 
 .delete-item-icon {
-	font-size: 50px;
+	font-size: 30px;
 	color: red;
-	border: 2px solid black;
+	border: 2px solid red;
 	border-radius: 5px;
 	cursor: pointer;
 	position: relative;
@@ -227,5 +227,5 @@ input[type="file"] {
 	left: 50%;
 	top: 46px;
 	transform: translateX(-50%);
-	margin
 }
+
