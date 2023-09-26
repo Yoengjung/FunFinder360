@@ -24,31 +24,41 @@ public class QuestionsInsertController extends SuperClass {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		super.doPost(request, response);
 
-		QuestionsList bean = new QuestionsList();
-		
-		bean.setTitle(request.getParameter("title"));
-		bean.setContent(request.getParameter("content"));
+	      QuestionsList bean = new QuestionsList();
 
-		QuestionListDao dao = new QuestionListDao();
+	      bean.setTitle(request.getParameter("title"));
+	      bean.setContent(request.getParameter("content"));
 
-		int cnt = -1;
-		try {
-			if (super.logInfo.getUserId() != null) {
-				int check = 0; // 0이면 개인 사용자
-				cnt = dao.InsertData(bean, super.logInfo.getUserId(), check);
-			} else if (super.loginfoOwner.getUserId() != null) {
-				int check = 1; // 1이면 업주 사용자
-				cnt = dao.InsertData(bean, super.loginfoOwner.getUserId(), check);
-			}
+	      QuestionListDao dao = new QuestionListDao();
 
-			if (cnt == -1) {
-				super.goToPage("/question/questionInsertForm.jsp");
+	      int cnt = -1;
+	      try {
+	         String personalUserId = null;
+	         String ownerUserId = null;
 
-			} else {
-				super.goToPage("/question/questionListForm.jsp");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	         if (super.logInfo != null) {
+	            personalUserId = super.logInfo.getUserId();
+	         } else if (super.loginfoOwner != null) {
+	            ownerUserId = super.loginfoOwner.getUserId();
+	         }
+
+	         if (personalUserId != null) {
+	            int check = 0; // 0이면 개인 사용자
+	            cnt = dao.InsertData(bean, super.logInfo.getUserId(), check);
+	         } else if (ownerUserId != null) {
+	            int check = 1; // 1이면 업주 사용자
+	            cnt = dao.InsertData(bean, super.loginfoOwner.getUserId(), check);
+	         }
+
+	         if (cnt == -1) {
+	            super.goToPage("/question/questionInsertForm.jsp");
+
+	         } else {
+	            super.goToPage("/question/questionListForm.jsp");
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+
 	}
 }
