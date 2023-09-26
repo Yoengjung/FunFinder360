@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>데이터</title>
 <style>
 .container {
 	position: absolute;
@@ -14,7 +14,7 @@
 	max-width: none;
 }
 
-.login-form-container {
+.form-container {
 	width: 400px;
 	height: 200px;
 	position: absolute;
@@ -71,16 +71,10 @@
 	margin-top: 20px;
 }
 
-.select-login-a {
+.select-activity-a {
 	display: block;
 	position: relative;
 	height: 100%;
-}
-
-.foot-container {
-	position: absolute;
-	bottom: 100px;
-	width: 100%;
 }
 
 .icon-tag {
@@ -91,7 +85,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="login-form-container">
+		<div class="form-container">
 			<c:if test="${empty sessionScope.alertMessage}">
 			<div class="alert alert-danger" style="display:none;">
 				${sessionScope.alertMessage}
@@ -112,7 +106,7 @@
 						</a>
 					</div>
 					<div class="select-item2">
-						<a href="<%=notWithFormTag%>######" class="select-activity-a">
+						<a href="<%=notWithFormTag%>memberOwnerActivityList" class="select-activity-a">
 							<span class="material-symbols-outlined" style="font-size: 80px;"> apartment </span>
 							<span>업주 데이터</span>
 						</a>

@@ -5,13 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.FunFinder360.Bean.Dao.ActivitesDao;
-import com.FunFinder360.Bean.Model.PersonalActivity;
+import com.FunFinder360.Bean.Dao.OwnerActivitesDao;
+import com.FunFinder360.Bean.Model.OwnerActivity;
 import com.FunFinder360.Controller.SuperClass;
 
 import Utility.Paging;
 
-public class MemberActivityListController extends SuperClass{
+public class MemberOwnerActivityListController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
@@ -21,8 +21,8 @@ public class MemberActivityListController extends SuperClass{
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
 		
-		ActivitesDao dao = new ActivitesDao();
-		List<PersonalActivity> lists = null;
+		OwnerActivitesDao dao = new OwnerActivitesDao();
+		List<OwnerActivity> lists = null;
 		
 		try {
 			int totalCount = dao.GetTotalRecordCount(mode, keyword);
@@ -32,15 +32,15 @@ public class MemberActivityListController extends SuperClass{
 			
 			lists = dao.getSelectAll(pageInfo);
 			
-			request.setAttribute("personalActivity", lists);
+			request.setAttribute("ownerActivity", lists);
 			request.setAttribute("pageInfo", pageInfo);
 			
-			super.goToPage("member/memberActivityListForm.jsp");
+			super.goToPage("member/memberOwnerActivityListForm.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		super.doPost(request, response);

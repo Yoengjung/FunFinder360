@@ -15,12 +15,13 @@ public class OwnerActivity {
 	private String event;
 	private int readHit;
 	private String postedDate;
+	private int ranking;
 	
 	public OwnerActivity () {}
 
 	public OwnerActivity(int activityId, String userid, String activitiyName, String category, String location,
 			String locationDetail, int duration, int price, int activitiyNumber, String openTime, String closeTime,
-			String event, int readHit, String postedDate) {
+			String event, int readHit, String postedDate, int ranking) {
 		super();
 		this.activityId = activityId;
 		this.userid = userid;
@@ -36,6 +37,7 @@ public class OwnerActivity {
 		this.event = event;
 		this.readHit = readHit;
 		this.postedDate = postedDate;
+		this.ranking = ranking;
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class OwnerActivity {
 				+ ", category=" + category + ", location=" + location + ", locationDetail=" + locationDetail
 				+ ", duration=" + duration + ", price=" + price + ", activitiyNumber=" + activitiyNumber + ", openTime="
 				+ openTime + ", closeTime=" + closeTime + ", event=" + event + ", readHit=" + readHit + ", postedDate="
-				+ postedDate + "]";
+				+ postedDate + ", ranking=" + ranking + "]";
 	}
 
 	public int getActivityId() {
@@ -158,6 +160,13 @@ public class OwnerActivity {
 	public void setPostedDate(String postedDate) {
 		this.postedDate = postedDate;
 	}
-	
+
+	public int getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}	
 	
 }

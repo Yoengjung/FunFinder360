@@ -32,6 +32,8 @@ activitesList=com.FunFinder360.Controller.ActivityController.ActivityListControl
 memberActivityList=com.FunFinder360.Controller.Member.MemberActivityListController
 memberActivityDetail=com.FunFinder360.Controller.Member.MemberActivityDetailController
 memberActivitySelect=com.FunFinder360.Controller.Member.MemberActivitySelectController
+memberOwnerActivityList=com.FunFinder360.Controller.Member.MemberOwnerActivityListController
+memberOwnerActivityDetail=com.FunFinder360.Controller.Member.memberOwnerActivityDetailController
 
 #개인 문의
 questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListController
