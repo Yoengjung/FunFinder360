@@ -2,7 +2,6 @@ body {
 	margin: 0px;
 	padding: 0px;
 	height: 100vh;
-	background-color: blue;
 }
 
 .container {
@@ -14,7 +13,6 @@ body {
 	top: 200px;
 	left: 50%;
 	transform: translateX(-50%);
-	background-color: #F8F0E5
 }
 
 .container-box {
@@ -189,8 +187,47 @@ pre {
 .form-container {
 	position: relative;
 	top: 30px;
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 textarea {
 	resize: none;
+}
+
+.input-group {
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 100px;
+}
+
+.login-info-tag {
+	position :relative;
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 10px;
+}
+
+.review-star-select-box {
+	position: relative;
+    left: 10%;
+    margin-bottom: 10px;
+}
+
+#empty-star1,#empty-star2,#empty-star3,#empty-star4,#empty-star5{
+	width: 40px;
+	cursor: pointer;
+}
+
+.submit-box {
+	width: 100%;
+}
+
+.btn-dark {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
 }

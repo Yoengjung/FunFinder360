@@ -8,6 +8,30 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/activityCSS/personalActivityDetailFormCSS.css">
 <title>활동 상세 보기</title>
 <script>
+	function getListComment() {
+	    $('#review-List').empty();
+	    $.ajax({
+	    	url: '<%=notWithFormTag%>reviewList',
+			data : 'activityId=' + '${requestScope.personalActivityData.activityId}',
+			type : 'get',
+			dataType : 'json',
+			success : function(result, status) {
+				console.log("result data : " + result);
+	
+				$.each(result, function(idx) {
+					var cnum = result[idx].cnum;
+					var id = result[idx].id
+					var content = result[idx].content;
+					var regdate = result[idx].regdate;
+	
+					addNewItem(cnum, id, content, regdate);
+				})
+			}
+		});
+	}
+
+
+
 	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 	  return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -37,6 +61,62 @@
 			}
 		})
 	});
+
+	$(document).ready(function() {
+		$("#empty-star1").click(function() {
+			$("#empty-star1").attr("src", "./common/image/fullStar.png")
+			$("#empty-star2").attr("src", "./common/image/emptyStar.png")
+			$("#empty-star3").attr("src", "./common/image/emptyStar.png")
+			$("#empty-star4").attr("src", "./common/image/emptyStar.png")
+			$("#empty-star5").attr("src", "./common/image/emptyStar.png")
+
+			$("#review-rating").val(1)
+		})
+	})
+	$(document).ready(function() {
+		$("#empty-star2").click(function() {
+			$("#empty-star1").attr("src", "./common/image/fullStar.png")
+			$("#empty-star2").attr("src", "./common/image/fullStar.png")
+			$("#empty-star3").attr("src", "./common/image/emptyStar.png")
+			$("#empty-star4").attr("src", "./common/image/emptyStar.png")
+			$("#empty-star5").attr("src", "./common/image/emptyStar.png")
+
+			$("#review-rating").val(2)
+		})
+	})
+	$(document).ready(function() {
+		$("#empty-star3").click(function() {
+			$("#empty-star1").attr("src", "./common/image/fullStar.png")
+			$("#empty-star2").attr("src", "./common/image/fullStar.png")
+			$("#empty-star3").attr("src", "./common/image/fullStar.png")
+			$("#empty-star4").attr("src", "./common/image/emptyStar.png")
+			$("#empty-star5").attr("src", "./common/image/emptyStar.png")
+
+			$("#review-rating").val(3)
+		})
+	})
+	$(document).ready(function() {
+		$("#empty-star4").click(function() {
+			$("#empty-star1").attr("src", "./common/image/fullStar.png")
+			$("#empty-star2").attr("src", "./common/image/fullStar.png")
+			$("#empty-star3").attr("src", "./common/image/fullStar.png")
+			$("#empty-star4").attr("src", "./common/image/fullStar.png")
+			$("#empty-star5").attr("src", "./common/image/emptyStar.png")
+
+			$("#review-rating").val(4)
+		})
+	})
+	$(document).ready(function() {
+		$("#empty-star5").click(function() {
+			$("#empty-star1").attr("src", "./common/image/fullStar.png")
+			$("#empty-star2").attr("src", "./common/image/fullStar.png")
+			$("#empty-star3").attr("src", "./common/image/fullStar.png")
+			$("#empty-star4").attr("src", "./common/image/fullStar.png")
+			$("#empty-star5").attr("src", "./common/image/fullStar.png")
+
+			$("#review-rating").val(5)
+		})
+	})
 </script>
 </head>
 <body>
@@ -108,13 +188,36 @@
 		<div class="back-btn-box">
 			<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
 		</div>
-		<div class="form-container">
-			<h5>리뷰 작성</h5>
-			<form action="#" method="post">
-				<div class="input-group mb-3">
-					<textarea class="form-control"></textarea>
-				</div>
-			</form>
+		<c:if test="${not empty sessionScope.loginfo || not empty sessionScope.loginfoOwner}">
+			<div class="form-container">
+				<form action="<%=withFormTag%>" method="post">
+					<input type="hidden" id="command" name="command" value="reviewInsert">
+					<input type="hidden" id="activityId" name="activityId" value="${requestScope.personalActivityData.activityId}">
+					<c:if test="${not empty sessionScope.loginfo}">
+						<input class="form-control login-info-tag" type="text" value="${sessionScope.loginfo.username}" disabled>
+						<input type="hidden" id="userName" name="userName" value="${sessionScope.loginfo.userId}">
+					</c:if>
+					<c:if test="${not empty sessionScope.loginfoOwner}">
+						<input class="form-control login-info-tag" type="text" value="${sessionScope.loginfoOwner.userName}" disabled>
+						<input type="hidden" id="userName" name="userName" value="${sessionScope.loginfoOwner.userId}">
+					</c:if>
+					<div class="review-star-select-box">
+						<c:forEach var="loop" begin="1" end="5">
+							<img id="empty-star${loop}" src="${pageContext.request.contextPath}/common/image/emptyStar.png">
+						</c:forEach>
+						<input type="hidden" id="review-rating" name="review-rating">
+					</div>
+					<div class="input-group mb-3">
+						<textarea class="form-control review-textarea-tag" name="reviewContent" placeholder="리뷰 작성 0자 ~ 300자"></textarea>
+					</div>
+					<div class="submit-box">
+						<button type="submit" class="btn btn-dark">등록</button>
+					</div>
+				</form>
+			</div>
+		</c:if>
+		<div>
+			<ul id="review-List"></ul>
 		</div>
 	</div>
 

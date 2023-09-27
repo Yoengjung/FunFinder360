@@ -38,3 +38,7 @@ memberList=com.FunFinder360.Controller.Member.MemberListController
 questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListController
 questionsDetail=com.FunFinder360.Controller.QuestionsController.QuestionsListDetailController
 questionsInsert=com.FunFinder360.Controller.QuestionsController.QuestionsInsertController
+
+#리뷰
+reviewInsert=com.FunFinder360.Controller.ReviewController.ReviewInsertController
+reviewList=com.FunFinder360.Controller.ReviewController.ReviewListController
