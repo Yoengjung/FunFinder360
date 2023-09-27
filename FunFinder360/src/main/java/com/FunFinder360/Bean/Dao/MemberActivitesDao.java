@@ -14,7 +14,8 @@ import Utility.Paging;
 public class MemberActivitesDao extends SuperDao {
 	private OwnerActivity getOwnerBeanData(ResultSet rs) throws Exception {
 		OwnerActivity bean = new OwnerActivity();
-
+		
+		bean.setActivityId(rs.getInt("activityId"));
 		bean.setUserid(rs.getString("userId"));
 		bean.setActivitiyName(rs.getString("activityName"));
 		bean.setCategory(rs.getString("category"));
@@ -33,8 +34,8 @@ public class MemberActivitesDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = " select userid, activityname, category, location, locationDetail, readhit, event, postedDate, ranking ";
-		sql += " from (select userid, activityname, category, location, locationDetail, readhit, event, postedDate, rank() over(order by postedDate asc) as ranking ";
+		String sql = " select activityId, userid, activityname, category, location, locationDetail, readhit, event, postedDate, ranking ";
+		sql += " from (select activityId, userid, activityname, category, location, locationDetail, readhit, event, postedDate, rank() over(order by postedDate asc) as ranking ";
 		sql += " from owner_activites where userid = ?";
 
 		String mode = pageInfo.getMode();
@@ -121,8 +122,8 @@ public class MemberActivitesDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = " select userid, activityname, category, location, locationDetail, readhit, postedDate, ranking ";
-		sql += " from (select userid, activityname, category, location, locationDetail, readhit, postedDate, rank() over(order by postedDate asc) as ranking ";
+		String sql = " select activityId, userid, activityname, category, location, locationDetail, readhit, postedDate, ranking ";
+		sql += " from (select activityId, userid, activityname, category, location, locationDetail, readhit, postedDate, rank() over(order by postedDate asc) as ranking ";
 		sql += " from personal_activites where userid = ? " ;
 
 		String mode = pageInfo.getMode();
@@ -164,7 +165,8 @@ public class MemberActivitesDao extends SuperDao {
 
 	private PersonalActivity getBeanData(ResultSet rs) throws Exception {
 		PersonalActivity bean = new PersonalActivity();
-
+		
+		bean.setActivityId(rs.getInt("activityId"));
 		bean.setUserId(rs.getString("userId"));
 		bean.setActivityName(rs.getString("activityName"));
 		bean.setCategory(rs.getString("category"));

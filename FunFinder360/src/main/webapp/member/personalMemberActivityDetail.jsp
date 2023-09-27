@@ -13,8 +13,7 @@
 	  return new bootstrap.Tooltip(tooltipTriggerEl)
 	})
 	function backPage() {
-		location.href = "<%=notWithFormTag%>
-	activitesList"
+		location.href = "<%=notWithFormTag%>memberActivity"
 	}
 	var check = false;
 	$(document).ready(function() {
@@ -43,8 +42,6 @@
 	<div class="container">
 		<div class="container-box">
 			<span id="category-tag">${requestScope.personalActivityData.category}</span>
-			<span class="material-symbols-outlined heart-icon-fav" data-bs-toggle="tooltip" data-bs-placement="top" title="좋아요"> favorite </span>
-			<span class="material-symbols-outlined star-icon-fav" data-bs-toggle="tooltip" data-bs-placement="top" title="즐겨찾기"> star </span>
 
 			<h2 id="activityName-tag">${requestScope.personalActivityData.activityName}</h2>
 
@@ -104,19 +101,9 @@
 			</c:forEach>
 			<div class="bottom-content-container"></div>
 		</div>
-		<hr>
-		<div class="back-btn-box">
-			<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
-		</div>
-		<div class="form-container">
-			<h5>리뷰 작성</h5>
-			<form action="#" method="post">
-				<div class="input-group mb-3">
-					<textarea class="form-control"></textarea>
-				</div>
-			</form>
+		<div>
+			<button class="back-btn" value="돌아가기" onclick="backPage();">목록</button>
 		</div>
 	</div>
-
 </body>
 </html>

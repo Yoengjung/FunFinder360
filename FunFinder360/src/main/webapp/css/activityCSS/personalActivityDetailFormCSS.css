@@ -1,15 +1,20 @@
 body {
+	margin: 0px;
+	padding: 0px;
 	height: 100vh;
+	background-color: blue;
 }
 
 .container {
 	position: absolute;
 	width: 100%;
+	min-height: 100vh;
 	margin: 0px;
 	padding: 0px;
 	top: 200px;
 	left: 50%;
 	transform: translateX(-50%);
+	background-color: #F8F0E5
 }
 
 .container-box {
@@ -115,8 +120,7 @@ body {
 
 pre {
 	font-family: 'Nanum Gothic Coding', cursive;
-	font-family:
-		'Noto Sans KR', sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
 	font-family: 'Sunflower', sans-serif;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 25px;
@@ -127,10 +131,11 @@ pre {
 	background-color: #FFF5E0;
 	border: 2px solid #D2E0FB;
 	border-radius: 10px;
-	width: 1000px;
+	width: 80%;
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
+	white-space: pre-wrap;
 }
 
 
@@ -167,4 +172,25 @@ pre {
 	position: absolute;
 	display: block;
 	right: 100px;
+}
+
+.back-btn-box {
+	top: 20px;
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.back-btn {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.form-container {
+	position: relative;
+	top: 30px;
+}
+
+textarea {
+	resize: none;
 }

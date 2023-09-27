@@ -33,182 +33,10 @@ String notWithFormTag = appName + mappingName + "?command=";
 <html>
 <head>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Noto+Sans+KR:wght@200;300;400&family=Sunflower:wght@300&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
-<style>
-body {
-	margin: 0px;
-	width: 100vw;
-	font-family: 'Nanum Gothic Coding', cursive; font-family :
-	'Noto Sans KR', sans-serif;
-	font-family: 'Sunflower', sans-serif;
-	font-family: 'Noto Sans KR', sans-serif;
-}
-
-ul {
-	margin: 0px;
-	padding: 0px;
-}
-
-li {
-	list-style: none;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-.top-container {
-	display: block;
-	position: absolute;
-	width: 100%;
-	height: 50px;
-	top: 10px;
-}
-
-.login-container {
-	display: inline-flex;
-	position: relative;
-	right: 50px;
-	float: right;
-	font-size: 20px;
-	margin-bottom: 10px;
-}
-
-.login-container ul {
-	display: flex;
-}
-
-.a-tag {
-	margin: 0 20px;
-	border: 1px solid #cccccc;
-	border-radius: 5px;
-	padding: 5px 10px;
-	color: #cccccc;
-}
-
-.menu-container {
-	width: 100%;
-	height: 50px;
-	position: relative;
-	top: 60px;
-}
-
-.menu-container ul {
-	justify-content: center;
-	display: flex;
-	float: right;
-	right: 30px;
-	position: relative;
-	top: 9px;
-}
-
-.menu-a-tag {
-	margin: 0 50px;
-	font-size: 20px;
-}
-
-hr {
-	width: 100%;
-	margin: 0px;
-}
-
-#logo {
-	font-size: 30px;
-	position: absolute;
-	left: 200px;
-}
-
-.menu-dropdown {
-	position: relative;
-}
-
-.menu-a-tag {
-	display: inline-block;
-	padding: 3px 20px;
-	text-decoration: none;
-}
-
-/* 드롭다운 내용 숨김 */
-.dropdown-content {
-	text-align: center;
-	display: none;
-	position: absolute;
-	min-width: 210px;
-	background-color: #FFFFFF;
-	border: 1px solid #CCCCCC;
-	z-index: 1;
-	left: 9px;
-}
-
-/* 호버 시 드롭다운 내용 활성화 */
-.menu-dropdown:hover .dropdown-content {
-	display: block;
-}
-
-/* 드롭다운 내용 항목 스타일 */
-.dropdown-content a {
-	display: block;
-	padding: 10px;
-	text-decoration: none;
-	color: black;
-}
-
-/* 드롭다운 내용 항목 호버 시 스타일 */
-.dropdown-content a:hover {
-	background-color: #ddd;
-}
-
-.a-tag:hover {
-	color: black;
-}
-
-.company-info-container {
-	position: absolute;
-	margin-top: 20px;
-	left: 50%;
-	transform: translateX(-50%);
-}
-
-.company-info-container ul li span {
-	margin: 0 20px;
-}
-
-.dropdown-1 {
-	min-width: 170px;
-}
-
-.container-fluid {
-	position: relative;
-	font-size: 20px;
-}
-
-.navbar-expand-sm .navbar-nav {
-	flex-direction: row;
-	float: right;
-	position: absolute;
-	right: 70px;
-}
-
-.nav-link {
-	margin: 0 20px;
-}
-
-.dropdown-item {
-	text-align: center;
-}
-
-.navbar {
-	top: 50px;
-}
-
-.navbar-brand {
-	font-size: 30px;
-	left: 30px;
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/commonCSS/commonCSS.css">
 </head>
 <body>
 <body>
@@ -237,7 +65,7 @@ hr {
 			<c:if test="${not empty sessionScope.loginfo}">
 				<ul>
 					<li>
-						<span>${sessionScope.loginfo.username}</span>
+						<span id="login-message">환영합니다</span><span>${sessionScope.loginfo.username}님</span>
 					</li>
 					<li>
 						<a href="<%=notWithFormTag%>logout" class="a-tag">logout</a>
@@ -249,7 +77,7 @@ hr {
 	</div>
 	<nav class="navbar navbar-expand-sm ">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="<%=notWithFormTag%>home">FunFinder360</a>
+			<a class="navbar-brand" href="<%=notWithFormTag%>home"><img class="logoImage" alt="logo" src="${pageContext.request.contextPath}/common/image/FunFinder360Logo.png"></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>

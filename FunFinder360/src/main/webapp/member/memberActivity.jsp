@@ -119,11 +119,11 @@
 						<td class="table-body-box">
 							<c:choose>
 								<c:when test="${fn:length(personalActivity.activityName) >= 10}">
-	                                    ${fn:substring(personalActivity.activityName, 0, 10)}...
-	                            </c:when>
+									<a href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${fn:substring(personalActivity.activityName, 0, 10)}... </a>
+								</c:when>
 								<c:otherwise>
-       								${personalActivity.activityName}
-    							</c:otherwise>
+									<a href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${personalActivity.activityName} </a>
+								</c:otherwise>
 								<%-- ${personalActivity.activityName} --%>
 							</c:choose>
 						</td>

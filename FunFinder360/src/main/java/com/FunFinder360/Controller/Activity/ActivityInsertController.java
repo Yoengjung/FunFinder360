@@ -91,7 +91,7 @@ public class ActivityInsertController extends SuperClass {
 				new ActivityInsertController().doGet(request, response);
 			} else {
 				super.session.removeAttribute("alertMessage");
-				super.goToPage("common/main.jsp");
+				super.goToPage("activity/activitesList.jsp");
 			}
 			
 		} catch (Exception e) {

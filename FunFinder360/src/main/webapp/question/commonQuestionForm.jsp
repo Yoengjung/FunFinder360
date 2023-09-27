@@ -73,6 +73,6 @@
 			</div>
 		</div>
 	</div>
-	${requestScope.pageInfo.pagingHtml}
+	<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 </body>
 </html>

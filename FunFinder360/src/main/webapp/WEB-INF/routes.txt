@@ -28,6 +28,8 @@ activityDetail=com.FunFinder360.Controller.Activity.ActivityDetailController
 OwnerActivityInsert=com.FunFinder360.Controller.Activity.OwnerActivityInsertController
 OwnerActivitesList=com.FunFinder360.Controller.ActivityController.OwnerActivityListController
 activitesList=com.FunFinder360.Controller.ActivityController.ActivityListController
+personalMemberActivityDetail=com.FunFinder360.Controller.ActivityController.PersonalMemberActivityDetailController
+
 #관리자
 memberList=com.FunFinder360.Controller.Member.MemberListController
 
