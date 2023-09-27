@@ -11,6 +11,7 @@ loginSelect=com.FunFinder360.Controller.SelectLoginController
 joinSelect=com.FunFinder360.Controller.SelectJoinController
 memberDetail=com.FunFinder360.Controller.Member.MemberDetailController
 memberActivity=com.FunFinder360.Controller.Member.MemberActivityController
+PersonalPasswordUpdate=com.FunFinder360.Controller.Member.MemberPersonalPasswordUpdateController
 
 #로그아웃
 logout=com.FunFinder360.Controller.Member.MemberLogoutController

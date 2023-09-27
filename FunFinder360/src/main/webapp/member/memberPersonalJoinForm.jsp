@@ -319,6 +319,7 @@ textarea {
 							<input class="form-control" type="password" id="password" name="password" placeholder="비밀번호(영문 대/소문자, 숫자, 특수문자 중 2가지 조합, 8~20)">
 							<p id="password-alert-message-tag">비밀번호는 영문 대/소문자, 숫자, 특수문자 중 2가지 이상 조합으로 8 ~ 20자 이어야 합니다.</p>
 							<p id="password-empty-alert-masseage-tag">비밀번호는 필수 입력 사항입니다.</p>
+							
 							<input class="form-control" type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호 확인">
 							<p id="passwordConfirm-alert-message-tag">비밀번호가 일치하지 않습니다.</p>
 						</li>
