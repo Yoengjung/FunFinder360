@@ -8,11 +8,12 @@ public class Review {
 	private String reviewContent;
 	private int reviewOrder;
 	private String postedDate;
-	
+	private String userName;
+
 	public Review() {}
 
 	public Review(int reviewId, int activityId, String userId, int rating, String reviewContent, int reviewOrder,
-			String postedDate) {
+			String postedDate, String userName) {
 		super();
 		this.reviewId = reviewId;
 		this.activityId = activityId;
@@ -21,13 +22,14 @@ public class Review {
 		this.reviewContent = reviewContent;
 		this.reviewOrder = reviewOrder;
 		this.postedDate = postedDate;
+		this.userName = userName;
 	}
 
 	@Override
 	public String toString() {
 		return "Review [reviewId=" + reviewId + ", activityId=" + activityId + ", userId=" + userId + ", rating="
 				+ rating + ", reviewContent=" + reviewContent + ", reviewOrder=" + reviewOrder + ", postedDate="
-				+ postedDate + "]";
+				+ postedDate + ", userName=" + userName + "]";
 	}
 
 	public int getReviewId() {
@@ -86,7 +88,14 @@ public class Review {
 		this.postedDate = postedDate;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	
 	
-	
+
 }

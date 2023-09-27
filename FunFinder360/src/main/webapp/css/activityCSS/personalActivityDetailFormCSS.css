@@ -175,7 +175,7 @@ pre {
 .back-btn-box {
 	top: 20px;
 	position: relative;
-	margin-bottom: 30px;
+	margin-bottom: 50px;
 }
 
 .back-btn {
@@ -204,7 +204,7 @@ textarea {
 }
 
 .login-info-tag {
-	position :relative;
+	position: relative;
 	width: 80%;
 	left: 50%;
 	transform: translateX(-50%);
@@ -213,11 +213,15 @@ textarea {
 
 .review-star-select-box {
 	position: relative;
-    left: 10%;
-    margin-bottom: 10px;
+	left: 10%;
+	margin-bottom: 10px;
 }
 
-#empty-star1,#empty-star2,#empty-star3,#empty-star4,#empty-star5{
+#empty-star1,
+#empty-star2,
+#empty-star3,
+#empty-star4,
+#empty-star5 {
 	width: 40px;
 	cursor: pointer;
 }
@@ -230,4 +234,23 @@ textarea {
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+.review-box {
+	border: 1px solid black;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.review-head {
+	margin-bottom: 5px;
+	font-size: 20px;
+	vertical-align: auto;
+}
+
+#review-star-icon-tag {
+	width: 20px;
+	position: relative;
+	bottom: 3px;
 }

@@ -1,37 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/activityCSS/personalActivityDetailFormCSS.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/activityCSS/personalActivityDetailFormCSS.css">
 <title>활동 상세 보기</title>
 <script>
-	function getListComment() {
-	    $('#review-List').empty();
-	    $.ajax({
-	    	url: '<%=notWithFormTag%>reviewList',
-			data : 'activityId=' + '${requestScope.personalActivityData.activityId}',
-			type : 'get',
-			dataType : 'json',
-			success : function(result, status) {
-				console.log("result data : " + result);
-	
-				$.each(result, function(idx) {
-					var cnum = result[idx].cnum;
-					var id = result[idx].id
-					var content = result[idx].content;
-					var regdate = result[idx].regdate;
-	
-					addNewItem(cnum, id, content, regdate);
-				})
-			}
-		});
-	}
-
-
-
 	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 	  return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -123,33 +102,40 @@
 	<div class="container">
 		<div class="container-box">
 			<span id="category-tag">${requestScope.personalActivityData.category}</span>
-			<span class="material-symbols-outlined heart-icon-fav" data-bs-toggle="tooltip" data-bs-placement="top" title="좋아요"> favorite </span>
-			<span class="material-symbols-outlined star-icon-fav" data-bs-toggle="tooltip" data-bs-placement="top" title="즐겨찾기"> star </span>
+			<span class="material-symbols-outlined heart-icon-fav"
+				data-bs-toggle="tooltip" data-bs-placement="top" title="좋아요">
+				favorite </span> <span class="material-symbols-outlined star-icon-fav"
+				data-bs-toggle="tooltip" data-bs-placement="top" title="즐겨찾기">
+				star </span>
 
 			<h2 id="activityName-tag">${requestScope.personalActivityData.activityName}</h2>
 
 
 			<div class="location-container" style="font-size: 17px;">
-				<span>장소 : ${requestScope.personalActivityData.location} </span>
-				<span> ${requestScope.personalActivityData.locationDetail}</span>
+				<span>장소 : ${requestScope.personalActivityData.location} </span> <span>
+					${requestScope.personalActivityData.locationDetail}</span>
 			</div>
 			<div class="cost-container">
 				<span>비용 : </span>
-				<fmt:formatNumber value="${requestScope.personalActivityData.cost}" pattern="###,###" />
+				<fmt:formatNumber value="${requestScope.personalActivityData.cost}"
+					pattern="###,###" />
 				원
 			</div>
-			<span id="activityNumber-tag">참가 인원 : ${requestScope.personalActivityData.activityNumber}명</span>
+			<span id="activityNumber-tag">참가 인원 :
+				${requestScope.personalActivityData.activityNumber}명</span>
 			<div class="rating-container">
 				<div class=star-box>
-					<c:forEach var="rating" begin="1" end="${requestScope.personalActivityData.rating}">
-						<img src="${pageContext.request.contextPath}/upload/star.png" id="star-icon-tag">
+					<c:forEach var="rating" begin="1"
+						end="${requestScope.personalActivityData.rating}">
+						<img src="${pageContext.request.contextPath}/upload/star.png"
+							id="star-icon-tag">
 					</c:forEach>
 				</div>
 			</div>
 			<div class="userid-postedDate-container" style="font-size: 17px;">
-				<span>${requestScope.personalActivityData.userId}</span>
-				<span>${requestScope.personalActivityData.postedDate}</span>
-				<span id="readHit-teg">조회수 : ${requestScope.personalActivityData.readHit}</span>
+				<span>${requestScope.personalActivityData.userId}</span> <span>${requestScope.personalActivityData.postedDate}</span>
+				<span id="readHit-teg">조회수 :
+					${requestScope.personalActivityData.readHit}</span>
 			</div>
 		</div>
 		<c:set var="index" value="0"></c:set>
@@ -157,22 +143,30 @@
 		<c:set var="imgIndex" value="0"></c:set>
 
 		<div class="contents-container">
-			<c:forEach var="loop" begin="0" end="${requestScope.personalActivityData.totalRacodeCount - 1}">
+			<c:forEach var="loop" begin="0"
+				end="${requestScope.personalActivityData.totalRacodeCount - 1}">
 				<c:catch var="contentException">
-					<c:if test="${not empty requestScope.personalActivityData.contentList}">
-						<c:if test="${requestScope.personalActivityData.contentList.get(contentIndex).getOrder() == index}">
+					<c:if
+						test="${not empty requestScope.personalActivityData.contentList}">
+						<c:if
+							test="${requestScope.personalActivityData.contentList.get(contentIndex).getOrder() == index}">
 							<pre>${requestScope.personalActivityData.contentList.get(contentIndex).getContent()}</pre>
-							<c:if test="${requestScope.personalActivityData.contentList.size() > contentIndex }">
+							<c:if
+								test="${requestScope.personalActivityData.contentList.size() > contentIndex }">
 								<c:set var="contentIndex" value="${contentIndex + 1}"></c:set>
 							</c:if>
 						</c:if>
 					</c:if>
 				</c:catch>
 				<c:catch var="imageException">
-					<c:if test="${not empty requestScope.personalActivityData.imageList}">
-						<c:if test="${requestScope.personalActivityData.imageList.get(imgIndex).getOrder() == index}">
-							<img class="contents-image" src="${pageContext.request.contextPath}/upload/${requestScope.personalActivityData.imageList.get(imgIndex).getImage()}">
-							<c:if test="${requestScope.personalActivityData.imageList.size() > imgIndex }">
+					<c:if
+						test="${not empty requestScope.personalActivityData.imageList}">
+						<c:if
+							test="${requestScope.personalActivityData.imageList.get(imgIndex).getOrder() == index}">
+							<img class="contents-image"
+								src="${pageContext.request.contextPath}/upload/${requestScope.personalActivityData.imageList.get(imgIndex).getImage()}">
+							<c:if
+								test="${requestScope.personalActivityData.imageList.size() > imgIndex }">
 								<c:set var="imgIndex" value="${imgIndex + 1}"></c:set>
 							</c:if>
 						</c:if>
@@ -186,29 +180,39 @@
 		</div>
 		<hr>
 		<div class="back-btn-box">
-			<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
+			<button class="btn btn-secondary back-btn" value="돌아가기"
+				onclick="backPage();">목록</button>
 		</div>
-		<c:if test="${not empty sessionScope.loginfo || not empty sessionScope.loginfoOwner}">
+		<c:if
+			test="${not empty sessionScope.loginfo || not empty sessionScope.loginfoOwner}">
 			<div class="form-container">
 				<form action="<%=withFormTag%>" method="post">
-					<input type="hidden" id="command" name="command" value="reviewInsert">
-					<input type="hidden" id="activityId" name="activityId" value="${requestScope.personalActivityData.activityId}">
+					<input type="hidden" id="command" name="command"
+						value="reviewInsert"> <input type="hidden" id="activityId"
+						name="activityId"
+						value="${requestScope.personalActivityData.activityId}">
 					<c:if test="${not empty sessionScope.loginfo}">
-						<input class="form-control login-info-tag" type="text" value="${sessionScope.loginfo.username}" disabled>
-						<input type="hidden" id="userName" name="userName" value="${sessionScope.loginfo.userId}">
+						<input class="form-control login-info-tag" type="text"
+							value="${sessionScope.loginfo.username}" disabled>
+						<input type="hidden" id="userName" name="userName"
+							value="${sessionScope.loginfo.userId}">
 					</c:if>
 					<c:if test="${not empty sessionScope.loginfoOwner}">
-						<input class="form-control login-info-tag" type="text" value="${sessionScope.loginfoOwner.userName}" disabled>
-						<input type="hidden" id="userName" name="userName" value="${sessionScope.loginfoOwner.userId}">
+						<input class="form-control login-info-tag" type="text"
+							value="${sessionScope.loginfoOwner.userName}" disabled>
+						<input type="hidden" id="userName" name="userName"
+							value="${sessionScope.loginfoOwner.userId}">
 					</c:if>
 					<div class="review-star-select-box">
 						<c:forEach var="loop" begin="1" end="5">
-							<img id="empty-star${loop}" src="${pageContext.request.contextPath}/common/image/emptyStar.png">
+							<img id="empty-star${loop}"
+								src="${pageContext.request.contextPath}/common/image/emptyStar.png">
 						</c:forEach>
 						<input type="hidden" id="review-rating" name="review-rating">
 					</div>
 					<div class="input-group mb-3">
-						<textarea class="form-control review-textarea-tag" name="reviewContent" placeholder="리뷰 작성 0자 ~ 300자"></textarea>
+						<textarea class="form-control review-textarea-tag"
+							name="reviewContent" placeholder="리뷰 작성 0자 ~ 300자"></textarea>
 					</div>
 					<div class="submit-box">
 						<button type="submit" class="btn btn-dark">등록</button>
@@ -216,9 +220,23 @@
 				</form>
 			</div>
 		</c:if>
-		<div>
-			<ul id="review-List"></ul>
-		</div>
+
+
+		<c:forEach var="reviewBean" items="${requestScope.reviewData}">
+			<div class="review-box">
+				<div class="review-head">
+					<span>${reviewBean.userName}</span>
+					<c:forEach var="rating" begin="1" end="${reviewBean.rating}">
+						<img src="${pageContext.request.contextPath}/upload/star.png"
+							id="review-star-icon-tag">
+					</c:forEach>
+					<span></span>
+				</div>
+				<p>${reviewBean.reviewContent}</p>
+				<span>${reviewBean.postedDate}</span>
+			</div>
+		</c:forEach>
+
 	</div>
 
 </body>

@@ -7,7 +7,7 @@ public class SuperDao {
 	protected Connection connection = null;
 
 	public Connection getConnection() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@10.211.55.4:1521:xe";
 		String id = "funfinder360";
 		String password = "oracle";
 		try {

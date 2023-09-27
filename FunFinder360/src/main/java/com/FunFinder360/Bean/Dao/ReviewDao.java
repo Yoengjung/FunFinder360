@@ -2,6 +2,9 @@ package com.FunFinder360.Bean.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.FunFinder360.Bean.Model.Review;
 
@@ -53,17 +56,25 @@ public class ReviewDao extends SuperDao {
 		return cnt;
 	}
 
-	public Review getReviewDataToActivityId(int activityId) {
+	public List<Review> getReviewDataToActivityId(int activityId) throws Exception{
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		Connection conn = super.getConnection();
 		
-		String sql = "select * cnt from reviews where activityId = ?";
+		String sql = "select re.reviewId, re.activityId, re.userid, re.rating, re.reviewcontent, re.revieworder, re.postedDate, per.username from reviews re join personal_users per on re.userid = per.userid where activityid = ?";
 		
 		pstmt = conn.prepareStatement(sql);
 		
 		pstmt.setInt(1, activityId);
 		
-		pstmt.executeUpdate();
+		rs = pstmt.executeQuery();
+		
+		List<Review> lists = new ArrayList<Review>();
+		
+		while(rs.next()) {
+			lists.add(getReviewData(rs));
+		}
+		
 		
 		if (pstmt != null) {
 			pstmt.close();
@@ -72,8 +83,23 @@ public class ReviewDao extends SuperDao {
 			conn.close();
 		}
 		
-		return cnt;
+		return lists;
 		
+	}
+
+	private Review getReviewData(ResultSet rs) throws Exception{
+		Review review = new Review();
+		
+		review.setReviewId(rs.getInt("reviewId"));
+		review.setActivityId(rs.getInt("activityId"));
+		review.setUserId(rs.getString("userId"));
+		review.setRating(rs.getInt("rating"));
+		review.setReviewContent(rs.getString("reviewContent"));
+		review.setReviewOrder(rs.getInt("reviewOrder"));
+		review.setPostedDate(rs.getString("postedDate"));
+		review.setUserName(rs.getString("userName"));
+		
+		return review;
 	}
 	
 }
