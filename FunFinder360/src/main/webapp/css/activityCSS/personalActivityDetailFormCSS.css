@@ -254,3 +254,12 @@ textarea {
 	position: relative;
 	bottom: 3px;
 }
+
+#review-rating {
+	display: none;
+	color: red;
+}
+#reviewContent-tag {
+	display: none;
+	color:red;
+}

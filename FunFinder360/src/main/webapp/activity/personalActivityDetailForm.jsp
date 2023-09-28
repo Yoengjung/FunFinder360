@@ -16,8 +16,7 @@
 	  return new bootstrap.Tooltip(tooltipTriggerEl)
 	})
 	function backPage() {
-		location.href = "<%=notWithFormTag%>
-	activitesList"
+		location.href = "<%=notWithFormTag%>activitesList"
 	}
 	var check = false;
 	$(document).ready(function() {
@@ -96,6 +95,18 @@
 			$("#review-rating").val(5)
 		})
 	})
+	
+	function validation () {
+		var rating = $("#review-rating").val()
+		var reviewContent = $("#reviewContent-tag").val()
+		
+		if (rating == 0) {
+			$("#review-rating").css("display", "block");
+			return false;
+		}
+		
+		
+	}
 </script>
 </head>
 <body>
@@ -208,14 +219,16 @@
 							<img id="empty-star${loop}"
 								src="${pageContext.request.contextPath}/common/image/emptyStar.png">
 						</c:forEach>
+						<p id="review-rating">리뷰 평점은 필수 입력 사항입니다.</p>
 						<input type="hidden" id="review-rating" name="review-rating">
 					</div>
 					<div class="input-group mb-3">
 						<textarea class="form-control review-textarea-tag"
 							name="reviewContent" placeholder="리뷰 작성 0자 ~ 300자"></textarea>
+							<p id="reviewContent-tag">리뷰 내용은 필수 입력 사항입니다.</p>
 					</div>
 					<div class="submit-box">
-						<button type="submit" class="btn btn-dark">등록</button>
+						<button type="submit" class="btn btn-dark" onclick="return validation();">등록</button>
 					</div>
 				</form>
 			</div>

@@ -36,7 +36,9 @@ public class ReviewDao extends SuperDao {
 	
 	public int reviewToActivityIdCount(int activityId) throws Exception{
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		Connection conn = super.getConnection();
+		
 		
 		String sql = "select count(*) cnt from reviews where activityId = ?";
 		
@@ -44,7 +46,11 @@ public class ReviewDao extends SuperDao {
 		
 		pstmt.setInt(1, activityId);
 		
-		int cnt = pstmt.executeUpdate();
+		rs = pstmt.executeQuery();
+		int cnt = -1;
+		if (rs.next()) {
+			cnt = rs.getInt("cnt");
+		}
 		
 		if (pstmt != null) {
 			pstmt.close();
@@ -61,7 +67,7 @@ public class ReviewDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 		
-		String sql = "select re.reviewId, re.activityId, re.userid, re.rating, re.reviewcontent, re.revieworder, re.postedDate, per.username from reviews re join personal_users per on re.userid = per.userid where activityid = ?";
+		String sql = "select re.reviewId, re.activityId, re.userid, re.rating, re.reviewcontent, re.revieworder, re.postedDate, per.username from reviews re join personal_users per on re.userid = per.userid where activityid = ? order by re.reviewOrder desc";
 		
 		pstmt = conn.prepareStatement(sql);
 		
