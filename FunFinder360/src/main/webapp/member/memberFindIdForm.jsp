@@ -65,6 +65,7 @@ textarea {
 }
 
 .search-form {
+	
 	display: inline-block;
 	position: absolute;
 	width: 500px;
@@ -74,6 +75,7 @@ textarea {
 }
 
 .form-container span {
+
 	display: block;
 	text-align: center;
 }
@@ -85,6 +87,10 @@ textarea {
 .btn-secondary {
 	margin-top: 30px;
 	width: 100%;
+}
+
+.form-control {
+	margin-bottom: 10px;
 }
 </style>
 </head>
@@ -107,8 +113,8 @@ textarea {
 					<div class="title">
 						<span>가입 시 등록한 이메일로 아이디 찾기</span>
 					</div>
+					<input class="form-control" type="text" name="name" id="name" placeholder="이름" autocomplete="off">
 					<input class="form-control" type="text" name="email" id="email" placeholder="이메일" autocomplete="off">
-
 					<button type="submit" class="btn btn-secondary">아이디 찾기</button>
 				</form>
 			</div>
