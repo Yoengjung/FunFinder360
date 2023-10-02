@@ -10,9 +10,7 @@ public class MemberPersonalLoginController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
-		
 		super.session.removeAttribute("alertMessage");
-		
 		super.goToPage("/member/memberPersonalLoginForm.jsp");
 	}
 
@@ -34,9 +32,7 @@ public class MemberPersonalLoginController extends SuperClass {
 		
 		if (bean == null) {
 			String message = "로그인 정보가 잘못 되었습니다.";
-			
 			super.setAlertMessage(message);
-			
 			super.goToPage("/member/memberPersonalLoginForm.jsp");
 			
 		} else {

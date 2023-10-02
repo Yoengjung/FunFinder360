@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/activityCSS/ownerActivityInsertFormCSS.css">
+<title>업주 활동 등록</title>
 </head>
 <script>
 	$(document)
@@ -98,23 +100,48 @@
 							}
 						});
 			});
+	
 	var contentCount = 0;
 	var imageCount = 0;
 
+	function contentAndImageTotalOrder(i) {
+		var contentAndImageOrder = $("#contentAndImageOrder").val()
+
+		if (i == 0) {
+			contentAndImageOrder += "0"
+		} else {
+			contentAndImageOrder += "1"
+		}
+		
+		console.log("contentAndImageOrder : " + contentAndImageOrder)
+		document.getElementById("contentAndImageOrder").value = contentAndImageOrder;
+	}
+
 	function contentAdd() {
 		scrollToBottom()
+		contentAndImageTotalOrder(0);
+
 		const textarea = document.createElement('textarea');
 		textarea.name = 'content' + contentCount;
 		textarea.className = "form-control content-container";
-		const contentContainer = document
-				.querySelector('.content-container-class');
+		textarea.id = 'content' + contentCount;
+
+		contentContainer = document.querySelector('.content-container-class');
+
+		var contentContainer = document.querySelector('.content-container-class');
+
 		contentContainer.appendChild(textarea);
+
 		contentCount++;
 		document.getElementById("contentCountInput").value = contentCount;
+		
+		console.log(textarea.name)
 	}
 
 	function imageAdd() {
 		scrollToBottom()
+		contentAndImageTotalOrder(1);
+
 		const textarea = document.createElement('input');
 		const imgTag = document.createElement("img");
 		textarea.name = 'image' + imageCount;
@@ -127,8 +154,7 @@
 		imgTag.alt = "미리보기 이미지";
 		imgTag.style = "max-height: 500px; display: inline-block; left: 50%;position: relative;transform: translateX(-50%);margin-top: 30px; display: none;";
 
-		const contentContainer = document
-				.querySelector('.content-container-class');
+		const contentContainer = document.querySelector('.content-container-class');
 		contentContainer.appendChild(textarea);
 		contentContainer.appendChild(imgTag);
 
@@ -139,6 +165,8 @@
 		$(textarea).on('change', function(event) {
 			handleImageUpload(this, imgTag);
 		});
+		
+		console.log(textarea.name)
 	}
 
 	function handleImageUpload(input, imgTag) {
@@ -185,15 +213,6 @@
 		});
 	}
 
-	function eventCheck(event) {
-		if (event.target.checked == false) {
-			$(".event-input").css("display", "none");
-		} else {
-			$(".event-input").css("display", "block");
-		}
-
-	}
-
 	var districtValue = "";
 	function validation() {
 		const title = $('#title').val()
@@ -211,15 +230,9 @@
 		const district10 = $('#district-10').val()
 		const hour = $('#hour').val()
 		const minute = $('#minute').val()
-		const price = $("#price").val()
-		const openTime = $("#openTime").val()
-		const closeTime = $("#closeTime").val()
-		const activityNumber = $("#activityNumber").val()
+		const rating = $("#rating").val()
 
 		var districtCheck = 0;
-
-		console.log(title);
-		console.log(category);
 
 		if (title === "") {
 			alert("제목은 필수 입력 사항입니다.")
@@ -275,43 +288,18 @@
 		inputElement.value = districtValue;
 
 		if (hour == "-") {
-			alert("활동시간은 필수 선택 사항입니다.")
+			alert("소요시간은 필수 선택 사항입니다.")
 			$('#hour').focus();
 			return false;
 		}
 		if (minute == "-") {
-			alert("활동시간은 필수 선택 사항입니다.")
+			alert("소요시간은 필수 선택 사항입니다.")
 			$('#minute').focus();
 			return false;
 		}
-
-		if (price == "") {
-			alert("가격은 필수 입력 사항입니다.")
-			$('#price').focus();
-			return false;
-		}
-
-		if (price < 0) {
-			$('#alert-price-tag').css("display", "block");
-			return false;
-		} else {
-			$('#alert-price-tag').css("display", "none");
-		}
-		if (activityNumber < 0) {
-			$('#alert-activityNumber-tag').css("display", "block");
-			return false;
-		} else {
-			$('#alert-activityNumber-tag').css("display", "none");
-		}
-
-		if (openTime == "") {
-			alert("오픈 시간은 필수 입력 사항입니다.")
-			$('#openTime').focus();
-			return false;
-		}
-		if (closeTime == "") {
-			alert("오픈 시간은 필수 입력 사항입니다.")
-			$('#closeTime').focus();
+		if (rating == "-") {
+			alert("총점은 필수 입력 사항입니다.")
+			$('#rating').focus();
 			return false;
 		}
 
@@ -326,300 +314,112 @@
 			return false;
 		}
 	}
+	function filterNumber(event) {
+		console.log(event)
+		var code = event.keyCode;
+		if (code > 47 && code < 58 || (code == 8) || (code == 9)) {
+			return;
+		}
+		event.preventDefault();
+	}
+	 $(document).ready(function() {
+		 const input = document.querySelector('#price');
+			input.addEventListener('keyup', function(e) {
+				let value = e.target.value;
+				value = Number(value.replaceAll(',', ''));
+				if (isNaN(value)) {
+					input.value = 0;
+				} else {
+					const formatValue = value.toLocaleString('ko-KR');
+					console.log("formatValue : " + formatValue)
+					input.value = formatValue;
+				}
+			})
+     });
+	$(document).ready(function() {
+		function deleteLastElement() {
+			var contentAndImageOrder = $("#contentAndImageOrder").val();
+			
+			if (contentAndImageOrder.length >= 0) {
+				var lastElementOrder = contentAndImageOrder.charAt(contentAndImageOrder.length - 1);
+				var contentContainer = document.querySelector('.content-container-class');
+
+				var lastAddedElement = null;
+				if (lastElementOrder === '0') {
+					var elements = document.querySelectorAll('.content-container-class textarea');
+					if (elements.length > 0) {
+					    var lastFileInput = elements[elements.length - 1];
+					    var lastTextarea = lastFileInput.parentElement.querySelector('textarea:last-child');
+		
+					    if (lastTextarea) {
+					        console.log("마지막 <textarea> 요소를 찾았습니다:", lastTextarea);
+					        contentCount--;
+					    } else {
+					        console.log("마지막 <textarea> 요소를 찾지 못했습니다.");
+					    }
+					} else {
+					    console.log("요소를 찾지 못했습니다.");
+					}
+					if (lastTextarea) {
+						contentContainer.removeChild(lastTextarea);
+						
+						contentAndImageOrder = contentAndImageOrder.slice(0, -1);
+						$("#contentAndImageOrder").val(contentAndImageOrder);
+					}
+					
+				} else if (lastElementOrder == '1') {
+					lastAddedElement = document.querySelectorAll('.content-container-class input[type="file"]');
+					if(lastAddedElement.length > 0) {
+						var lastFileInput = lastAddedElement[lastAddedElement.length - 1];
+						 console.log("마지막 파일 입력 요소를 찾았습니다:", lastFileInput);
+					} else {
+					    // 요소를 찾지 못했을 때의 처리
+					    console.log("마지막 파일 입력 요소를 찾지 못했습니다.");
+					}
+					
+					if (lastFileInput) {
+					contentContainer.removeChild(lastFileInput);
+					// 순서 문자열에서 마지막 문자를 제거하여 업데이트합니다.
+					
+					var imageElements = document.querySelectorAll('img[name="previewImage"]');
+
+					// NodeList의 길이를 확인하여 이미지 요소가 있는지 여부를 파악합니다.
+					if (imageElements.length > 0) {
+					    // NodeList에서 마지막 이미지 요소를 가져옵니다.
+					    var lastImageElement = imageElements[imageElements.length - 1];
+					
+					    // 이미지 요소가 존재하는 경우, 해당 요소를 제거합니다.
+					    lastImageElement.parentNode.removeChild(lastImageElement);
+					    imageCount--;
+					} else {
+					    // 이미지 요소가 존재하지 않는 경우, 적절한 처리를 수행합니다.
+					    console.log("이미지 요소를 찾지 못했습니다.");
+					}
+					contentAndImageOrder = contentAndImageOrder.slice(0, -1);
+					$("#contentAndImageOrder").val(contentAndImageOrder);
+					}
+				}
+			}
+		}
+		// 삭제 버튼 클릭 이벤트 처리기를 추가합니다.
+		$("#deleteButton").click(function() {
+			deleteLastElement();
+		});
+		$("input[type='file']").on('change', function(event) {
+	        var imgTag = $(this).next('img'); // 선택한 input 다음에 있는 img 태그 가져오기
+	        handleImageUpload(this, imgTag);
+		 });
+	});
+	function eventCheck(event) {
+		if (event.target.checked == false) {
+			$(".event-input").css("display", "none");
+		} else {
+			$(".event-input").css("display", "block");
+		}
+
+	}
 </script>
 <style>
-.container {
-	margin-top: 130px;
-	width: 100%;
-	height: 100%;
-}
-
-.container form {
-	margin-top: 20px;
-	border-top: 1px solid black;
-}
-
-.district-select {
-	display: none;
-}
-
-.location-container {
-	display: flex;
-	flex-direction: row;
-	border-bottom: 1px solid #999999;
-}
-
-.district-select {
-	width: 150px;
-	margin-left: 10px;
-}
-
-.province-select {
-	width: 200px;
-}
-
-.detail-location {
-	display: none;
-}
-
-.title-container {
-	display: flex;
-	border-bottom: 1px solid #999999;
-}
-
-.title-input {
-	width: 81%;
-}
-
-#title-span {
-	width: 100px;
-	text-align: center;
-	vertical-align: center;
-	font-weight: bolder;
-	position: relative;
-	top: 6px;
-}
-
-.category-container {
-	display: flex;
-	border-bottom: 1px solid #999999;
-}
-
-.category-container span {
-	width: 100px;
-	text-align: center;
-	vertical-align: center;
-	font-weight: bolder;
-	position: relative;
-	top: 6px;
-}
-
-.category-select {
-	width: 200px;
-}
-
-#location-span {
-	width: 100px;
-	text-align: center;
-	font-size: 17px;
-	font-weight: bolder;
-	position: relative;
-	top: 6px;
-}
-
-.detail-location {
-	width: 500px;
-	margin-left: 10px;
-}
-
-.time-container {
-	display: flex;
-	flex-direction: row;
-	border-bottom: 1px solid #999999;
-}
-
-#time-span {
-	width: 100px;
-	text-align: center;
-	font-size: 17px;
-	font-weight: bolder;
-	position: relative;
-	top: 6px;
-}
-
-.hour-select {
-	width: 100px;
-}
-
-.minute-select {
-	width: 100px;
-}
-
-.minute-select {
-	margin-left: 10px;
-}
-
-.activityNumber-container {
-	display: flex;
-	flex-direction: row;
-	border-bottom: 1px solid #999999;
-}
-
-#activityNumber-span {
-	width: 100px;
-	text-align: center;
-	font-size: 17px;
-	font-weight: bolder;
-	position: relative;
-	top: 6px;
-}
-
-.activityNumber-input {
-	width: 200px;
-}
-
-.rating-container {
-	display: flex;
-	flex-direction: row;
-	border-bottom: 1px solid #999999;
-}
-
-.price-container {
-	display: flex;
-	flex-direction: row;
-	border-bottom: 1px solid #999999;
-}
-
-#price-span {
-	width: 100px;
-	text-align: center;
-	font-size: 17px;
-	font-weight: bolder;
-	position: relative;
-	top: 6px;
-}
-
-.rating-input {
-	width: 100px;
-}
-
-.price-input {
-	width: 200px;
-}
-
-form ul li {
-	padding: 5px 0px;
-	margin-bottom: 5px;
-}
-
-#hour-span {
-	margin-left: 10px;
-	position: relative;
-	top: 6px;
-}
-
-#minute-span {
-	margin-left: 10px;
-	position: relative;
-	top: 6px;
-}
-
-.content-controll-container {
-	position: relative;
-	text-align: center;
-	top: 70px;
-	margin-bottom: 100px;
-	top: 70px;
-}
-
-.content-container {
-	position: relative;
-	margin-bottom: 10px;
-	top: 50px;
-	resize: none;
-	width: 100%;
-	height: 300px;
-	padding: 10px;
-	border-radius: 10px;
-	border: 5px solid #6666FF;
-	font-size: 20px;
-}
-
-.openTime-container {
-	display: flex;
-	flex-direction: row;
-	border-bottom: 1px solid #999999;
-}
-
-#openTime-span {
-	width: 100px;
-	text-align: center;
-	font-size: 17px;
-	font-weight: bolder;
-	position: relative;
-	top: 6px;
-	text-align: center;
-	font-size: 17px;
-	font-weight: bolder;
-	font-size: 17px;
-	font-weight: bolder;
-	font-weight: bolder;
-}
-
-.closeTime-input {
-	width: 200px;
-}
-
-.closeTime-container {
-	display: flex;
-	flex-direction: row;
-	border-bottom: 1px solid #999999;
-}
-
-#closeTime-span {
-	width: 100px;
-	text-align: center;
-	font-size: 17px;
-	font-weight: bolder;
-	position: relative;
-	top: 6px;
-}
-
-.openTime-input {
-	width: 200px;
-}
-
-.event-container {
-	display: flex;
-	flex-direction: row;
-	border-bottom: 1px solid #999999;
-}
-
-#event-span {
-	width: 100px;
-	text-align: center;
-	font-size: 17px;
-	font-weight: bolder;
-	position: relative;
-	top: 6px;
-}
-
-.event-input {
-	width: 87%;
-	margin-left: 10px;
-}
-
-.form-check-input {
-	left: 4px;
-	top: 15%;
-	position: relative;
-}
-
-input[type="file"] {
-	margin-top: 70px;
-}
-
-.btn-success {
-	margin-left: 10px;
-}
-
-#alert-price-tag {
-	color: red;
-	display: none;
-	margin: 0px;
-	margin-left: 10px;
-	position: relative;
-	top: 7px;
-}
-
-#alert-activityNumber-tag {
-	color: red;
-	display: none;
-	margin: 0px;
-	margin-left: 10px;
-	position: relative;
-	top: 7px;
-}
 </style>
 
 <body>
@@ -631,235 +431,241 @@ input[type="file"] {
 			<div class="alert alert-danger" style="display: block;">${sessionScope.alertMessage}</div>
 		</c:if>
 
-		<h2>사업 활동 등록</h2>
-
+		<h2>활동 등록</h2>
 		<form action="<%=withFormTag%>" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="command" value="OwnerActivityInsert">
-			<div>
-				<ul>
-					<li class="title-container">
-						<span id="title-span">제목</span>
-						<input class="form-control title-input" type="text" name="title" id="title">
-					</li>
-					<li class="category-container">
-						<span>카테고리</span>
-						<select class="form-select category-select" id="category" name="category">
-							<option value="-">카테고리</option>
-							<option value="문화 - 엔터테인먼트">문화 - 엔터테인먼트</option>
-							<option value="음식 - 요리">음식 - 요리</option>
-							<option value="교육 - 학습">교육 - 학습</option>
-							<option value="여행 - 모험">여행 - 모험</option>
-							<option value="사회 - 봉사">사회 - 봉사</option>
-							<option value="게임 - 취미">게임 - 취미</option>
-							<option value="뷰티 - 건강">뷰티 - 건강</option>
-						</select>
-					</li>
-					<li class="location-container">
-						<span id="location-span">장소</span>
-						<select class="form-select province-select" name="province" id="province">
-							<option>--지역--</option>
-							<option>서울 특별시</option>
-							<option>경기도</option>
-							<option>강원도</option>
-							<option>충청북도</option>
-							<option>충청남도</option>
-							<option>전라북도</option>
-							<option>전라남도</option>
-							<option>경상북도</option>
-							<option>경상남도</option>
-							<option>제주도</option>
-						</select>
-						<select class="form-select district-select" name="district" id="district-1">
-							<option value="지역">--지역--</option>
-							<option value="종로구">종로구</option>
-							<option value="중구">중구</option>
-							<option value="용산구">용산구</option>
-							<option value="성동구">성동구</option>
-							<option value="광진구">광진구</option>
-							<option value="동대문구">동대문구</option>
-							<option value="중랑구">중랑구</option>
-							<option value="성북구">성북구</option>
-							<option value="강북구">강북구</option>
-							<option value="도봉구">도봉구</option>
-							<option value="노원구">노원구</option>
-							<option value="은평구">은평구</option>
-							<option value="서대문구">서대문구</option>
-							<option value="마포구">마포구</option>
-							<option value="양천구">양천구</option>
-							<option value="강서구">강서구</option>
-							<option value="구로구">구로구</option>
-							<option value="금천구">금천구</option>
-							<option value="영등포구">영등포구</option>
-							<option value="동작구">동작구</option>
-							<option value="관악구">관악구</option>
-							<option value="서초구">서초구</option>
-							<option value="강남구">강남구</option>
-							<option value="송파구">송파구</option>
-							<option value="강동구">강동구</option>
-						</select>
-						<select class="form-select district-select" name="district" id="district-2">
-							<option value="지역">--지역--</option>
-							<option value="수원시">수원시</option>
-							<option value="성남시">성남시</option>
-							<option value="고양시">고양시</option>
-							<option value="용인시">용인시</option>
-							<option value="부천시">부천시</option>
-							<option value="안산시">안산시</option>
-							<option value="안양시">안양시</option>
-							<option value="평택시">평택시</option>
-							<option value="시흥시">시흥시</option>
-							<option value="파주시">파주시</option>
-							<option value="이천시">이천시</option>
-							<option value="광주시">광주시</option>
-							<option value="양주시">양주시</option>
-							<option value="오산시">오산시</option>
-							<option value="화성시">화성시</option>
-							<option value="광명시">광명시</option>
-						</select>
-						<select class="form-select district-select" name="district" id="district-3">
-							<option value="지역">--지역--</option>
-							<option value="춘천시">춘천시</option>
-							<option value="원주시">원주시</option>
-							<option value="강릉시">강릉시</option>
-							<option value="동해시">동해시</option>
-							<option value="태백시">태백시</option>
-							<option value="속초시">속초시</option>
-							<option value="삼척시">삼척시</option>
-						</select>
-						<select class="form-select district-select" name="district" id="district-4">
-							<option value="지역">--지역--</option>
-							<option value="청주시">청주시</option>
-							<option value="충주시">충주시</option>
-							<option value="제천시">제천시</option>
-							<option value="보은군">보은군</option>
-							<option value="옥천군">옥천군</option>
-						</select>
-						<select class="form-select district-select" name="district" id="district-5">
-							<option value="지역">--지역--</option>
-							<option value="천안시">천안시</option>
-							<option value="아산시">아산시</option>
-							<option value="공주시">공주시</option>
-							<option value="논산시">논산시</option>
-							<option value="계룡시">계룡시</option>
-						</select>
-						<select class="form-select district-select" name="district" id="district-6">
-							<option value="지역">--지역--</option>
-							<option value="전주시">전주시</option>
-							<option value="군산시">군산시</option>
-							<option value="익산시">익산시</option>
-							<option value="정읍시">정읍시</option>
-						</select>
-						<select class="form-select district-select" name="district" id="district-7">
-							<option value="지역">--지역--</option>
-							<option value="목포시">목포시</option>
-							<option value="순천시">순천시</option>
-							<option value="여수시">여수시</option>
-							<option value="나주시">나주시</option>
-							<option value="광양시">광양시</option>
-							<option value="담양군">담양군</option>
-							<option value="화순군">화순군</option>
-						</select>
-						<select class="form-select district-select" name="district" id="district-8">
-							<option value="지역">--지역--</option>
-							<option value="포항시">포항시</option>
-							<option value="경주시">경주시</option>
-							<option value="안동시">안동시</option>
-							<option value="구미시">구미시</option>
-							<option value="영주시">영주시</option>
-							<option value="상주시">상주시</option>
-							<option value="김천시">김천시</option>
-							<option value="영천시">영천시</option>
-						</select>
-						<select class="form-select district-select" name="district" id="district-9">
-							<option value="지역">--지역--</option>
-							<option value="부산광역시">부산광역시</option>
-							<option value="창원시">창원시</option>
-							<option value="김해시">김해시</option>
-							<option value="양산시">양산시</option>
-							<option value="진주시">진주시</option>
-							<option value="거제시">거제시</option>
-							<option value="통영시">통영시</option>
-							<option value="사천시">사천시</option>
-							<option value="김천시">김천시</option>
-						</select>
-						<select class="form-select district-select" name="district" id="district-10">
-							<option value="지역">--지역--</option>
-							<option value="제주시">제주시</option>
-							<option value="서귀포시">서귀포시</option>
-						</select>
-						<input type="hidden" name="districtValue" id="districtValue" value="">
-						<input class="form-control detail-location" type="text" name="detail-location" id="detail-location" autocomplete="off" placeholder="상세 주소">
-					</li>
+			<div class="form-div-box">
+				<input type="hidden" name="command" value="OwnerActivityInsert">
+				<div>
+					<ul>
+						<li class="title-container">
+							<span id="title-span">제목</span>
+							<input class="form-control title-input" type="text" name="title" id="title">
+						</li>
+						<li class="category-container">
+							<span>카테고리</span>
+							<select class="form-select category-select" id="category" name="category">
+								<option value="-">카테고리</option>
+								<option value="문화 - 엔터테인먼트">문화 - 엔터테인먼트</option>
+								<option value="음식 - 요리">음식 - 요리</option>
+								<option value="교육 - 학습">교육 - 학습</option>
+								<option value="여행 - 모험">여행 - 모험</option>
+								<option value="사회 - 봉사">사회 - 봉사</option>
+								<option value="게임 - 취미">게임 - 취미</option>
+								<option value="뷰티 - 건강">뷰티 - 건강</option>
+							</select>
+						</li>
+						<li class="location-container">
+							<span id="location-span">장소</span>
+							<select class="form-select province-select" name="province" id="province">
+								<option>--지역--</option>
+								<option>서울 특별시</option>
+								<option>경기도</option>
+								<option>강원도</option>
+								<option>충청북도</option>
+								<option>충청남도</option>
+								<option>전라북도</option>
+								<option>전라남도</option>
+								<option>경상북도</option>
+								<option>경상남도</option>
+								<option>제주도</option>
+							</select>
+							<select class="form-select district-select" name="district" id="district-1">
+								<option value="지역">--지역--</option>
+								<option value="종로구">종로구</option>
+								<option value="중구">중구</option>
+								<option value="용산구">용산구</option>
+								<option value="성동구">성동구</option>
+								<option value="광진구">광진구</option>
+								<option value="동대문구">동대문구</option>
+								<option value="중랑구">중랑구</option>
+								<option value="성북구">성북구</option>
+								<option value="강북구">강북구</option>
+								<option value="도봉구">도봉구</option>
+								<option value="노원구">노원구</option>
+								<option value="은평구">은평구</option>
+								<option value="서대문구">서대문구</option>
+								<option value="마포구">마포구</option>
+								<option value="양천구">양천구</option>
+								<option value="강서구">강서구</option>
+								<option value="구로구">구로구</option>
+								<option value="금천구">금천구</option>
+								<option value="영등포구">영등포구</option>
+								<option value="동작구">동작구</option>
+								<option value="관악구">관악구</option>
+								<option value="서초구">서초구</option>
+								<option value="강남구">강남구</option>
+								<option value="송파구">송파구</option>
+								<option value="강동구">강동구</option>
+							</select>
+							<select class="form-select district-select" name="district" id="district-2">
+								<option value="지역">--지역--</option>
+								<option value="수원시">수원시</option>
+								<option value="성남시">성남시</option>
+								<option value="고양시">고양시</option>
+								<option value="용인시">용인시</option>
+								<option value="부천시">부천시</option>
+								<option value="안산시">안산시</option>
+								<option value="안양시">안양시</option>
+								<option value="평택시">평택시</option>
+								<option value="시흥시">시흥시</option>
+								<option value="파주시">파주시</option>
+								<option value="이천시">이천시</option>
+								<option value="광주시">광주시</option>
+								<option value="양주시">양주시</option>
+								<option value="오산시">오산시</option>
+								<option value="화성시">화성시</option>
+								<option value="광명시">광명시</option>
+							</select>
+							<select class="form-select district-select" name="district" id="district-3">
+								<option value="지역">--지역--</option>
+								<option value="춘천시">춘천시</option>
+								<option value="원주시">원주시</option>
+								<option value="강릉시">강릉시</option>
+								<option value="동해시">동해시</option>
+								<option value="태백시">태백시</option>
+								<option value="속초시">속초시</option>
+								<option value="삼척시">삼척시</option>
+							</select>
+							<select class="form-select district-select" name="district" id="district-4">
+								<option value="지역">--지역--</option>
+								<option value="청주시">청주시</option>
+								<option value="충주시">충주시</option>
+								<option value="제천시">제천시</option>
+								<option value="보은군">보은군</option>
+								<option value="옥천군">옥천군</option>
+							</select>
+							<select class="form-select district-select" name="district" id="district-5">
+								<option value="지역">--지역--</option>
+								<option value="천안시">천안시</option>
+								<option value="아산시">아산시</option>
+								<option value="공주시">공주시</option>
+								<option value="논산시">논산시</option>
+								<option value="계룡시">계룡시</option>
+							</select>
+							<select class="form-select district-select" name="district" id="district-6">
+								<option value="지역">--지역--</option>
+								<option value="전주시">전주시</option>
+								<option value="군산시">군산시</option>
+								<option value="익산시">익산시</option>
+								<option value="정읍시">정읍시</option>
+							</select>
+							<select class="form-select district-select" name="district" id="district-7">
+								<option value="지역">--지역--</option>
+								<option value="목포시">목포시</option>
+								<option value="순천시">순천시</option>
+								<option value="여수시">여수시</option>
+								<option value="나주시">나주시</option>
+								<option value="광양시">광양시</option>
+								<option value="담양군">담양군</option>
+								<option value="화순군">화순군</option>
+							</select>
+							<select class="form-select district-select" name="district" id="district-8">
+								<option value="지역">--지역--</option>
+								<option value="포항시">포항시</option>
+								<option value="경주시">경주시</option>
+								<option value="안동시">안동시</option>
+								<option value="구미시">구미시</option>
+								<option value="영주시">영주시</option>
+								<option value="상주시">상주시</option>
+								<option value="김천시">김천시</option>
+								<option value="영천시">영천시</option>
+							</select>
+							<select class="form-select district-select" name="district" id="district-9">
+								<option value="지역">--지역--</option>
+								<option value="부산광역시">부산광역시</option>
+								<option value="창원시">창원시</option>
+								<option value="김해시">김해시</option>
+								<option value="양산시">양산시</option>
+								<option value="진주시">진주시</option>
+								<option value="거제시">거제시</option>
+								<option value="통영시">통영시</option>
+								<option value="사천시">사천시</option>
+								<option value="김천시">김천시</option>
+							</select>
+							<select class="form-select district-select" name="district" id="district-10">
+								<option value="지역">--지역--</option>
+								<option value="제주시">제주시</option>
+								<option value="서귀포시">서귀포시</option>
+							</select>
+							<input type="hidden" name="districtValue" id="districtValue" value="">
+							<input class="form-control detail-location" type="text" name="detail-location" id="detail-location" autocomplete="off" placeholder="상세 주소">
+						</li>
 
-					<li class="time-container">
-						<span id="time-span">활동 시간</span>
-						<select class="form-select hour-select" name="hour" id="hour">
-							<option value="-">시간</option>
-							<option value="0">0</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-						</select>
-						<span id="hour-span">시간</span>
-						<select class="form-select minute-select" name="minute" id="minute">
-							<option value="-">분</option>
-							<option value="5">5</option>
-							<option value="10">10</option>
-							<option value="15">15</option>
-							<option value="20">20</option>
-							<option value="25">25</option>
-							<option value="30">30</option>
-							<option value="35">35</option>
-							<option value="40">40</option>
-							<option value="45">45</option>
-							<option value="50">50</option>
-							<option value="55">55</option>
-						</select>
-						<span id="minute-span">분</span>
-					</li>
-					<li class="price-container">
-						<span id="price-span">가격</span>
-						<input class="form-control price-input" type="number" name="price" id="price" autocomplete="off">
-						<p id="alert-price-tag">가격은 0 미만일 수 없습니다.</p>
-					</li>
-					<li class="activityNumber-container">
-						<span id="activityNumber-span">활동 인원</span>
-						<input class="form-control activityNumber-input" type="number" name="activityNumber" id="activityNumber">
-						<p id="alert-activityNumber-tag">활동 인원은 0 미만일 수 없습니다.
-					</li>
-					<li class="openTime-container">
-						<span id="openTime-span">오픈 시간</span>
-						<input class="form-control openTime-input" type="time" name="openTime" id="openTime">
-					</li>
-					<li class="closeTime-container">
-						<span id="closeTime-span">마감 시간</span>
-						<input class="form-control closeTime-input" type="time" name="closeTime" id="closeTime">
-					</li>
-					<li class="event-container">
-						<span id="event-span">이벤트 여부</span>
-						<div class="form-check form-switch" style="width: 100%;">
-							<input class="form-check-input" type="checkbox" id="event-check" name="event-check" value="yes" onclick="eventCheck(event)" checked>
-							<input class="form-control event-input" type="text" name="event" id="event">
-						</div>
-					</li>
+						<li class="time-container">
+							<span id="time-span">소요 시간</span>
+							<select class="form-select hour-select" name="hour" id="hour">
+								<option value="-">시간</option>
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+							</select>
+							<span id="hour-span">시간</span>
+							<select class="form-select minute-select" name="minute" id="minute">
+								<option value="-">분</option>
+								<option value="0">0</option>
+								<option value="5">5</option>
+								<option value="10">10</option>
+								<option value="15">15</option>
+								<option value="20">20</option>
+								<option value="25">25</option>
+								<option value="30">30</option>
+								<option value="35">35</option>
+								<option value="40">40</option>
+								<option value="45">45</option>
+								<option value="50">50</option>
+								<option value="55">55</option>
+							</select>
+							<span id="minute-span">분</span>
+						</li>
+						<li class="price-container">
+							<span id="price-span">가격</span>
+							<input class="form-control price-input" type="text" name="price" id="price" onkeydown="filterNumber(event);" autocomplete="off">
+							<p id="alert-price-tag">가격은 0 미만일 수 없습니다.</p>
+						</li>
+						<li class="activityNumber-container">
+							<span id="activityNumber-span">활동 인원</span>
+							<input class="form-control activityNumber-input" type="number" name="activityNumber" id="activityNumber" onkeydown="filterNumber(event);">
+							<p id="alert-activityNumber-tag">활동 인원은 0 미만일 수 없습니다.
+						</li>
+						<li class="openTime-container">
+							<span id="openTime-span">오픈 시간</span>
+							<input class="form-control openTime-input" type="time" name="openTime" id="openTime">
+						</li>
+						<li class="closeTime-container">
+							<span id="closeTime-span">마감 시간</span>
+							<input class="form-control closeTime-input" type="time" name="closeTime" id="closeTime">
+						</li>
+						<li class="event-container">
+							<span id="event-span">이벤트 여부</span>
+							<div class="form-check form-switch" style="width: 100%;">
+								<input class="form-check-input" type="checkbox" id="event-check" name="event-check" value="yes" onclick="eventCheck(event)" checked>
+								<input class="form-control event-input" type="text" name="event" id="event" autocomplete="off">
+							</div>
+						</li>
 
-				</ul>
+					</ul>
+				</div>
 			</div>
 			<div class="content-container-class"></div>
 			<input type="hidden" name="contentCount" id="contentCountInput" value="">
 			<input type="hidden" name="imageCount" id="imageCountInput" value="">
-
+			<input type="hidden" name="contentAndImageOrder" id="contentAndImageOrder" value="">
 			<div class="content-controll-container">
-				<button type="button" class="btn btn-primary" onclick="contentAdd()">
+				<button type="button" class="btn btn-danger" id="deleteButton">
+					<span class="material-symbols-outlined" style="vertical-align: middle;"> delete </span>
+				</button>
+
+				<button type="button" class="btn btn-primary" onclick="contentAdd()" style="margin-left: 10px;">
 					<span class="material-symbols-outlined" style="vertical-align: middle;"> add_circle </span>
 				</button>
 				<button type="button" class="btn btn-primary" style="margin-left: 10px;" onclick="imageAdd()">
@@ -867,7 +673,6 @@ input[type="file"] {
 				</button>
 				<button type="submit" class="btn btn-success" onclick="return validation()">저장</button>
 			</div>
-
 		</form>
 	</div>
 </body>

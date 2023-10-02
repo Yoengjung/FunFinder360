@@ -58,26 +58,24 @@ img {
 </style>
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						var questionOptionList = $('#mode option');
-						for (var i = 0; i < questionOptionList.length; i++) {
-							if (questionOptionList[i].value == '${requestScope.pageInfo.mode}') {
-								questionOptionList[i].selected = true;
-							}
-						}
-						$('#keyowrd').val('${requestScope.pageInfo.keyword}');
+	$(document).ready(function() {
+		var questionOptionList = $('#mode option');
+		for (var i = 0; i < questionOptionList.length; i++) {
+			if (questionOptionList[i].value == '${requestScope.pageInfo.mode}') {
+				questionOptionList[i].selected = true;
+			}
+		}
+		$('#keyowrd').val('${requestScope.pageInfo.keyword}');
 
-						$("#mode").change(function() {
-							if ($(this).val() != 'all') {
-								$('#keyword').attr('disabled', false);
-							} else {
-								$('#keyword').val('');
-								$('#keyword').attr('disabled', true);
-							}
-						});
-					});
+		$("#mode").change(function() {
+			if ($(this).val() != 'all') {
+				$('#keyword').attr('disabled', false);
+			} else {
+				$('#keyword').val('');
+				$('#keyword').attr('disabled', true);
+			}
+		});
+	});
 </script>
 <style type="text/css">
 body {
@@ -153,8 +151,6 @@ body {
 	color: #FFFF00;
 }
 
-
-
 .rating-container {
 	margin-bottom: 30px;
 }
@@ -215,7 +211,6 @@ pre {
 	white-space: pre-wrap;
 }
 
-
 .star-box {
 	position: relative;
 	display: inline-block;
@@ -273,7 +268,6 @@ pre {
 	vertical-align: center;
 	padding: 0 5px 0 5px;
 }
-
 </style>
 </head>
 <body>
@@ -290,7 +284,8 @@ pre {
 					<td>
 						<div class="card">
 							<div class="readHit-box">
-								<span class="material-symbols-outlined readHit-icon"> visibility </span> ${bean.readHit}
+								<span class="material-symbols-outlined readHit-icon"> visibility </span>
+								${bean.readHit}
 							</div>
 							<div class="card-header">${bean.activityName}</div>
 							<div class="card-body">
@@ -335,6 +330,6 @@ pre {
 		</div>
 		<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 	</div>
-	
+
 </body>
 </html>

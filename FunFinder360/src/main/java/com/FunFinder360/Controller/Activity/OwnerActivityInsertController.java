@@ -10,6 +10,8 @@ import com.FunFinder360.Bean.Dao.OwnerActivitesDao;
 import com.FunFinder360.Bean.Model.MemberOwner;
 import com.FunFinder360.Bean.Model.OwnerActivity;
 import com.FunFinder360.Controller.SuperClass;
+import com.FunFinder360.Controller.ActivityController.ActivityListController;
+import com.FunFinder360.Controller.ActivityController.OwnerActivityListController;
 import com.oreilly.servlet.MultipartRequest;
 
 public class OwnerActivityInsertController extends SuperClass {
@@ -37,13 +39,19 @@ public class OwnerActivityInsertController extends SuperClass {
 		MultipartRequest mr = (MultipartRequest) request.getAttribute("mr");
 
 		MemberOwner loginfoOwner = super.loginfoOwner;
+		
+		String contentAndImageOrder = mr.getParameter("contentAndImageOrder");
 
 		String userId = loginfoOwner.getUserId();
 
 		int hour = Integer.parseInt(mr.getParameter("hour"));
 		int minute = Integer.parseInt(mr.getParameter("minute"));
-
 		int time = hour * 60 + minute;
+		
+		String price = mr.getParameter("price");
+		price = price.replace(",", "");
+		int intPrice = Integer.parseInt(price);
+		
 
 		OwnerActivity ownerActivity = new OwnerActivity();
 
@@ -53,14 +61,11 @@ public class OwnerActivityInsertController extends SuperClass {
 		ownerActivity.setLocation(mr.getParameter("province") + " " + mr.getParameter("districtValue"));
 		ownerActivity.setLocationDetail(mr.getParameter("detail-location"));
 		ownerActivity.setDuration(time);
-		ownerActivity.setPrice(Integer.parseInt(mr.getParameter("price")));
+		ownerActivity.setPrice(intPrice);
 		ownerActivity.setActivitiyNumber(Integer.parseInt(mr.getParameter("activityNumber")));
 		ownerActivity.setOpenTime(mr.getParameter("openTime"));
 		ownerActivity.setCloseTime(mr.getParameter("closeTime"));
 		ownerActivity.setEvent(mr.getParameter("event"));
-		
-		System.out.println(mr.getParameter("openTime"));
-		System.out.println(mr.getParameter("closeTime"));
 
 		int contantCount = Integer.parseInt(mr.getParameter("contentCount"));
 		int imageCount = Integer.parseInt(mr.getParameter("imageCount"));
@@ -89,7 +94,7 @@ public class OwnerActivityInsertController extends SuperClass {
 				new OwnerActivityInsertController().doGet(request, response);
 			} else {
 				super.session.removeAttribute("alertMessage");
-				super.goToPage("common/main.jsp");
+				new OwnerActivityListController().doGet(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

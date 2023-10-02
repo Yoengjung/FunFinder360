@@ -55,6 +55,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 			<c:if test="${not empty sessionScope.loginfoOwner}">
 				<ul>
 					<li>
+						<span id="login-message">환영합니다 (업주)</span>
 						<span>${sessionScope.loginfoOwner.userName}</span>
 					</li>
 					<li>
@@ -65,7 +66,8 @@ String notWithFormTag = appName + mappingName + "?command=";
 			<c:if test="${not empty sessionScope.loginfo}">
 				<ul>
 					<li>
-						<span id="login-message">환영합니다</span><span>${sessionScope.loginfo.username}님</span>
+						<span id="login-message">환영합니다 (개인)</span>
+						<span>${sessionScope.loginfo.username}님</span>
 					</li>
 					<li>
 						<a href="<%=notWithFormTag%>logout" class="a-tag">logout</a>
@@ -77,14 +79,21 @@ String notWithFormTag = appName + mappingName + "?command=";
 	</div>
 	<nav class="navbar navbar-expand-sm ">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="<%=notWithFormTag%>home"><img class="logoImage" alt="logo" src="${pageContext.request.contextPath}/common/image/FunFinder360Logo.png"></a>
+			<a class="navbar-brand" href="<%=notWithFormTag%>home">
+				<img class="logoImage" alt="logo" src="${pageContext.request.contextPath}/common/image/FunFinder360Logo.png">
+			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link" href="<%=notWithFormTag%>activityInsert">활동 등록</a>
+						<c:if test="${not empty sessionScope.loginfo}">
+							<a class="nav-link" href="<%=notWithFormTag%>activityInsert">활동 등록</a>
+						</c:if>
+						<c:if test="${not empty sessionScope.loginfoOwner}">
+							<a class="nav-link" href="<%=notWithFormTag%>OwnerActivityInsert">활동 등록</a>
+						</c:if>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">활동 목록</a>

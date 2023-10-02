@@ -329,6 +329,7 @@
 				input.value = 0;
 			} else {
 				const formatValue = value.toLocaleString('ko-KR');
+				console.log("formatValue : " + formatValue)
 				input.value = formatValue;
 			}
 		})
@@ -619,7 +620,7 @@
 						</li>
 						<li class="cost-container">
 							<span id="cost-span">비용</span>
-							<input class="form-control cost-input" type="text" name="cost" id="cost" onkeyup="formatCurrency(this);" onkeydown="filterNumber(event);" autocomplete="off">
+							<input class="form-control cost-input" type="text" name="cost" id="cost" onkeydown="filterNumber(event);" autocomplete="off">
 						</li>
 						<li class="activityNumber-container">
 							<span id="activityNumber-span">활동 인원</span>

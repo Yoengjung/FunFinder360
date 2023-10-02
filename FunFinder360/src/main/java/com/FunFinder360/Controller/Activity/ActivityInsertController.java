@@ -62,8 +62,6 @@ public class ActivityInsertController extends SuperClass {
 		personalActivity.setCost(intCost);
 		personalActivity.setActivityNumber(Integer.parseInt(mr.getParameter("activityNumber")));
 		personalActivity.setRating(Integer.parseInt(mr.getParameter("rating")));
-		
-		
 
 		int contantCount = Integer.parseInt(mr.getParameter("contentCount"));
 		int imageCount = Integer.parseInt(mr.getParameter("imageCount"));

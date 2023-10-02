@@ -1,0 +1,324 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.container {
+	margin-top: 130px;
+	width: 100%;
+	height: 100%;
+}
+
+.container form {
+	margin-top: 20px;
+}
+
+.form-div-box {
+	background-color: #F8F0E5;
+	border: 3px solid #DAC0A3;
+	border-radius: 10px;
+}
+
+.district-select {
+	display: none;
+}
+
+.location-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.district-select {
+	width: 150px;
+	margin-left: 10px;
+}
+
+.province-select {
+	width: 200px;
+}
+
+.detail-location {
+	display: none;
+}
+
+.title-container {
+	display: flex;
+}
+
+.title-input {
+	width: 81%;
+}
+
+#title-span {
+	width: 100px;
+	text-align: center;
+	vertical-align: center;
+	font-weight: bolder;
+	position: relative;
+	top: 6px;
+}
+
+.category-container {
+	display: flex;
+}
+
+.category-container span {
+	width: 100px;
+	text-align: center;
+	vertical-align: center;
+	font-weight: bolder;
+	position: relative;
+	top: 6px;
+}
+
+.category-select {
+	width: 200px;
+}
+
+#location-span {
+	width: 100px;
+	text-align: center;
+	font-size: 17px;
+	font-weight: bolder;
+	position: relative;
+	top: 6px;
+}
+
+.detail-location {
+	width: 500px;
+	margin-left: 10px;
+}
+
+.time-container {
+	display: flex;
+	flex-direction: row;
+}
+
+#time-span {
+	width: 100px;
+	text-align: center;
+	font-size: 17px;
+	font-weight: bolder;
+	position: relative;
+	top: 6px;
+}
+
+.hour-select {
+	width: 100px;
+}
+
+.minute-select {
+	width: 100px;
+}
+
+.minute-select {
+	margin-left: 10px;
+}
+
+.activityNumber-container {
+	display: flex;
+	flex-direction: row;
+}
+
+#activityNumber-span {
+	width: 100px;
+	text-align: center;
+	font-size: 17px;
+	font-weight: bolder;
+	position: relative;
+	top: 6px;
+}
+
+.activityNumber-input {
+	width: 200px;
+}
+
+.rating-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.price-container {
+	display: flex;
+	flex-direction: row;
+}
+
+#rating-span {
+	width: 100px;
+	text-align: center;
+	font-size: 17px;
+	font-weight: bolder;
+	position: relative;
+	top: 6px;
+}
+
+#price-span {
+	width: 100px;
+	text-align: center;
+	font-size: 17px;
+	font-weight: bolder;
+	position: relative;
+	top: 6px;
+}
+
+.rating-input {
+	width: 100px;
+}
+
+.price-input {
+	width: 200px;
+}
+
+form ul li {
+	padding: 5px 0px;
+	margin-bottom: 5px;
+}
+
+#hour-span {
+	margin-left: 10px;
+	position: relative;
+	top: 6px;
+}
+
+#minute-span {
+	margin-left: 10px;
+	position: relative;
+	top: 6px;
+}
+
+.content-controll-container {
+	position: relative;
+	text-align: center;
+	top: 70px;
+	margin-bottom: 100px;
+	top: 70px;
+}
+
+.content-container {
+	position: relative;
+	margin-bottom: 10px;
+	top: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+	resize: none;
+	width: 80%;
+	height: 300px;
+	padding: 10px;
+	border-radius: 10px;
+	border: 5px solid #6666FF;
+	font-size: 25px;
+}
+
+input[type="file"] {
+	margin-top: 70px;
+}
+
+.btn-success {
+	margin-left: 10px;
+}
+
+.delete-item-icon {
+	font-size: 30px;
+	color: red;
+	border: 2px solid red;
+	border-radius: 5px;
+	cursor: pointer;
+	position: relative;
+	display:inline-block;
+	left: 50%;
+	top: 46px;
+	transform: translateX(-50%);
+}
+.openTime-container {
+	display: flex;
+	flex-direction: row;
+}
+
+#openTime-span {
+	width: 100px;
+	text-align: center;
+	font-size: 17px;
+	font-weight: bolder;
+	position: relative;
+	top: 6px;
+	text-align: center;
+	font-size: 17px;
+	font-weight: bolder;
+	font-size: 17px;
+	font-weight: bolder;
+	font-weight: bolder;
+}
+
+.closeTime-input {
+	width: 200px;
+}
+
+.closeTime-container {
+	display: flex;
+	flex-direction: row;
+}
+
+#closeTime-span {
+	width: 100px;
+	text-align: center;
+	font-size: 17px;
+	font-weight: bolder;
+	position: relative;
+	top: 6px;
+}
+
+.openTime-input {
+	width: 200px;
+}
+
+.event-container {
+	display: flex;
+	flex-direction: row;
+}
+
+#event-span {
+	width: 150px;
+	text-align: center;
+	font-size: 17px;
+	font-weight: bolder;
+	position: relative;
+	top: 6px;
+}
+
+.event-input {
+	width: 87%;
+	margin-left: 10px;
+}
+
+.form-check-input {
+	left: 4px;
+	top: 15%;
+	position: relative;
+}
+
+input[type="file"] {
+	margin-top: 70px;
+}
+
+.btn-success {
+	margin-left: 10px;
+}
+
+#alert-price-tag {
+	color: red;
+	display: none;
+	margin: 0px;
+	margin-left: 10px;
+	position: relative;
+	top: 7px;
+}
+
+#alert-activityNumber-tag {
+	color: red;
+	display: none;
+	margin: 0px;
+	margin-left: 10px;
+	position: relative;
+	top: 7px;
+}
