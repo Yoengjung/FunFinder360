@@ -8,7 +8,64 @@ import java.util.List;
 
 import com.FunFinder360.Bean.Model.Review;
 
+import Utility.Paging;
+
 public class ReviewDao extends SuperDao {
+	public List<Review> setSelectAll(Paging pageInfo, int activityId ) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Connection conn = super.getConnection();
+		
+		String sql = " select re.reviewId, re.activityId, re.userid, re.rating, re.reviewcontent, re.revieworder, re.postedDate, per.username ";
+		sql += " from reviews re join personal_users per on re.userid = per.userid ";
+		sql += " where activityid = ? ";
+		
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+		
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " and  " + mode + " like '%" + keyword + "%'";
+		}
+		
+		sql += " and re.reviewId between ? and ? ";
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, activityId);
+		pstmt.setInt(2,	pageInfo.getBeginPage());
+		pstmt.setInt(3, pageInfo.getEndRow());
+		
+		rs = pstmt.executeQuery();
+		
+		List<Review> lists = new ArrayList<Review>();
+		
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return lists;
+	}
+
+	private Review getBeanData(ResultSet rs)throws Exception {
+		Review bean = new Review();
+		
+		bean.setUserName(rs.getString("userName"));
+		bean.setRating(rs.getInt("rating"));
+		bean.setReviewContent(rs.getString("reviewContent"));
+		bean.setPostedDate(rs.getString("postedDate"));
+		return bean;
+		
+	}
 
 	public void insertReviewData(Review review) throws Exception{
 		PreparedStatement pstmt = null;
@@ -107,5 +164,6 @@ public class ReviewDao extends SuperDao {
 		
 		return review;
 	}
+	
 	
 }

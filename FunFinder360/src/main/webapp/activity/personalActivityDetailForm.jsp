@@ -226,6 +226,17 @@
 				<span>${reviewBean.postedDate}</span>
 			</div>
 		</c:forEach>
+		
+		<div class="paging-container">
+    <ul>
+        <li><a href="?pageNumber=1&pageSize=${pageInfo.pageSize}">처음</a></li>
+        <c:forEach var="page" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+            <li><a href="?pageNumber=${page}&pageSize=${pageInfo.pageSize}">${page}</a></li>
+        </c:forEach>
+        <li><a href="?pageNumber=${pageInfo.totalPages}&pageSize=${pageInfo.pageSize}">마지막</a></li>
+    </ul>
+</div>
+		
 	</div>
 </body>
 </html>
