@@ -11,6 +11,7 @@ public class MemberOwnerLoginController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
+		super.session.removeAttribute("alertMessage");
 		super.goToPage(PREFIX + "memberOwnerLoginForm.jsp");
 	}
 	@Override
@@ -20,11 +21,8 @@ public class MemberOwnerLoginController extends SuperClass {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
-		System.out.println("id : " + id + " , password : " + password);
-		
 		MemberOwnerDao dao = new MemberOwnerDao();
 		MemberOwner bean = null;
-
 		
 		try {
 			bean = dao.getDataByPk(id, password);
@@ -35,12 +33,11 @@ public class MemberOwnerLoginController extends SuperClass {
 		if(bean == null) { 
 			String message = "로그인 정보가 잘못 되었습니다." ;
 			super.setAlertMessage(message);
-			
 			super.goToPage(PREFIX + "memberOwnerLoginForm.jsp");
 
 		}else { 
-			session.removeAttribute("alertMessage");
 			super.session.setAttribute("loginfoOwner", bean);
+			session.removeAttribute("alertMessage");
 			new HomeController().doGet(request, response);
 		}
 	}

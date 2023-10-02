@@ -100,23 +100,48 @@
 							}
 						});
 			});
+	
 	var contentCount = 0;
 	var imageCount = 0;
 
+	function contentAndImageTotalOrder(i) {
+		var contentAndImageOrder = $("#contentAndImageOrder").val()
+
+		if (i == 0) {
+			contentAndImageOrder += "0"
+		} else {
+			contentAndImageOrder += "1"
+		}
+		
+		console.log("contentAndImageOrder : " + contentAndImageOrder)
+		document.getElementById("contentAndImageOrder").value = contentAndImageOrder;
+	}
+
 	function contentAdd() {
 		scrollToBottom()
+		contentAndImageTotalOrder(0);
+
 		const textarea = document.createElement('textarea');
 		textarea.name = 'content' + contentCount;
 		textarea.className = "form-control content-container";
-		const contentContainer = document
-				.querySelector('.content-container-class');
+		textarea.id = 'content' + contentCount;
+
+		contentContainer = document.querySelector('.content-container-class');
+
+		var contentContainer = document.querySelector('.content-container-class');
+
 		contentContainer.appendChild(textarea);
+
 		contentCount++;
 		document.getElementById("contentCountInput").value = contentCount;
+		
+		console.log(textarea.name)
 	}
 
 	function imageAdd() {
 		scrollToBottom()
+		contentAndImageTotalOrder(1);
+
 		const textarea = document.createElement('input');
 		const imgTag = document.createElement("img");
 		textarea.name = 'image' + imageCount;
@@ -129,8 +154,7 @@
 		imgTag.alt = "미리보기 이미지";
 		imgTag.style = "max-height: 500px; display: inline-block; left: 50%;position: relative;transform: translateX(-50%);margin-top: 30px; display: none;";
 
-		const contentContainer = document
-				.querySelector('.content-container-class');
+		const contentContainer = document.querySelector('.content-container-class');
 		contentContainer.appendChild(textarea);
 		contentContainer.appendChild(imgTag);
 
@@ -141,6 +165,8 @@
 		$(textarea).on('change', function(event) {
 			handleImageUpload(this, imgTag);
 		});
+		
+		console.log(textarea.name)
 	}
 
 	function handleImageUpload(input, imgTag) {
@@ -187,15 +213,6 @@
 		});
 	}
 
-	function eventCheck(event) {
-		if (event.target.checked == false) {
-			$(".event-input").css("display", "none");
-		} else {
-			$(".event-input").css("display", "block");
-		}
-
-	}
-
 	var districtValue = "";
 	function validation() {
 		const title = $('#title').val()
@@ -213,15 +230,9 @@
 		const district10 = $('#district-10').val()
 		const hour = $('#hour').val()
 		const minute = $('#minute').val()
-		const price = $("#price").val()
-		const openTime = $("#openTime").val()
-		const closeTime = $("#closeTime").val()
-		const activityNumber = $("#activityNumber").val()
+		const rating = $("#rating").val()
 
 		var districtCheck = 0;
-
-		console.log(title);
-		console.log(category);
 
 		if (title === "") {
 			alert("제목은 필수 입력 사항입니다.")
@@ -277,43 +288,18 @@
 		inputElement.value = districtValue;
 
 		if (hour == "-") {
-			alert("활동시간은 필수 선택 사항입니다.")
+			alert("소요시간은 필수 선택 사항입니다.")
 			$('#hour').focus();
 			return false;
 		}
 		if (minute == "-") {
-			alert("활동시간은 필수 선택 사항입니다.")
+			alert("소요시간은 필수 선택 사항입니다.")
 			$('#minute').focus();
 			return false;
 		}
-
-		if (price == "") {
-			alert("가격은 필수 입력 사항입니다.")
-			$('#price').focus();
-			return false;
-		}
-
-		if (price < 0) {
-			$('#alert-price-tag').css("display", "block");
-			return false;
-		} else {
-			$('#alert-price-tag').css("display", "none");
-		}
-		if (activityNumber < 0) {
-			$('#alert-activityNumber-tag').css("display", "block");
-			return false;
-		} else {
-			$('#alert-activityNumber-tag').css("display", "none");
-		}
-
-		if (openTime == "") {
-			alert("오픈 시간은 필수 입력 사항입니다.")
-			$('#openTime').focus();
-			return false;
-		}
-		if (closeTime == "") {
-			alert("오픈 시간은 필수 입력 사항입니다.")
-			$('#closeTime').focus();
+		if (rating == "-") {
+			alert("총점은 필수 입력 사항입니다.")
+			$('#rating').focus();
 			return false;
 		}
 
@@ -328,28 +314,114 @@
 			return false;
 		}
 	}
-	
-	$(document).ready(function() {
-		const input = document.querySelector('#price');
-		input.addEventListener('keyup', function(e) {
-			let value = e.target.value;
-			value = Number(value.replaceAll(',', ''));
-			if (isNaN(value)) {
-				input.value = 0;
-			} else {
-				const formatValue = value.toLocaleString('ko-KR');
-				input.value = formatValue;
-			}
-		})
-	})
 	function filterNumber(event) {
+		console.log(event)
 		var code = event.keyCode;
 		if (code > 47 && code < 58 || (code == 8) || (code == 9)) {
 			return;
 		}
 		event.preventDefault();
 	}
+	 $(document).ready(function() {
+		 const input = document.querySelector('#price');
+			input.addEventListener('keyup', function(e) {
+				let value = e.target.value;
+				value = Number(value.replaceAll(',', ''));
+				if (isNaN(value)) {
+					input.value = 0;
+				} else {
+					const formatValue = value.toLocaleString('ko-KR');
+					console.log("formatValue : " + formatValue)
+					input.value = formatValue;
+				}
+			})
+     });
+	$(document).ready(function() {
+		function deleteLastElement() {
+			var contentAndImageOrder = $("#contentAndImageOrder").val();
+			
+			if (contentAndImageOrder.length >= 0) {
+				var lastElementOrder = contentAndImageOrder.charAt(contentAndImageOrder.length - 1);
+				var contentContainer = document.querySelector('.content-container-class');
+
+				var lastAddedElement = null;
+				if (lastElementOrder === '0') {
+					var elements = document.querySelectorAll('.content-container-class textarea');
+					if (elements.length > 0) {
+					    var lastFileInput = elements[elements.length - 1];
+					    var lastTextarea = lastFileInput.parentElement.querySelector('textarea:last-child');
+		
+					    if (lastTextarea) {
+					        console.log("마지막 <textarea> 요소를 찾았습니다:", lastTextarea);
+					        contentCount--;
+					    } else {
+					        console.log("마지막 <textarea> 요소를 찾지 못했습니다.");
+					    }
+					} else {
+					    console.log("요소를 찾지 못했습니다.");
+					}
+					if (lastTextarea) {
+						contentContainer.removeChild(lastTextarea);
+						
+						contentAndImageOrder = contentAndImageOrder.slice(0, -1);
+						$("#contentAndImageOrder").val(contentAndImageOrder);
+					}
+					
+				} else if (lastElementOrder == '1') {
+					lastAddedElement = document.querySelectorAll('.content-container-class input[type="file"]');
+					if(lastAddedElement.length > 0) {
+						var lastFileInput = lastAddedElement[lastAddedElement.length - 1];
+						 console.log("마지막 파일 입력 요소를 찾았습니다:", lastFileInput);
+					} else {
+					    // 요소를 찾지 못했을 때의 처리
+					    console.log("마지막 파일 입력 요소를 찾지 못했습니다.");
+					}
+					
+					if (lastFileInput) {
+					contentContainer.removeChild(lastFileInput);
+					// 순서 문자열에서 마지막 문자를 제거하여 업데이트합니다.
+					
+					var imageElements = document.querySelectorAll('img[name="previewImage"]');
+
+					// NodeList의 길이를 확인하여 이미지 요소가 있는지 여부를 파악합니다.
+					if (imageElements.length > 0) {
+					    // NodeList에서 마지막 이미지 요소를 가져옵니다.
+					    var lastImageElement = imageElements[imageElements.length - 1];
+					
+					    // 이미지 요소가 존재하는 경우, 해당 요소를 제거합니다.
+					    lastImageElement.parentNode.removeChild(lastImageElement);
+					    imageCount--;
+					} else {
+					    // 이미지 요소가 존재하지 않는 경우, 적절한 처리를 수행합니다.
+					    console.log("이미지 요소를 찾지 못했습니다.");
+					}
+					contentAndImageOrder = contentAndImageOrder.slice(0, -1);
+					$("#contentAndImageOrder").val(contentAndImageOrder);
+					}
+				}
+			}
+		}
+		// 삭제 버튼 클릭 이벤트 처리기를 추가합니다.
+		$("#deleteButton").click(function() {
+			deleteLastElement();
+		});
+		$("input[type='file']").on('change', function(event) {
+	        var imgTag = $(this).next('img'); // 선택한 input 다음에 있는 img 태그 가져오기
+	        handleImageUpload(this, imgTag);
+		 });
+	});
+	function eventCheck(event) {
+		if (event.target.checked == false) {
+			$(".event-input").css("display", "none");
+		} else {
+			$(".event-input").css("display", "block");
+		}
+
+	}
 </script>
+<style>
+</style>
+
 <body>
 	<div class="container">
 		<c:if test="${empty sessionScope.alertMessage}">
@@ -359,7 +431,7 @@
 			<div class="alert alert-danger" style="display: block;">${sessionScope.alertMessage}</div>
 		</c:if>
 
-		<h2>사업 활동 등록</h2>
+		<h2>활동 등록</h2>
 		<form action="<%=withFormTag%>" method="post" enctype="multipart/form-data">
 			<div class="form-div-box">
 				<input type="hidden" name="command" value="OwnerActivityInsert">
@@ -520,7 +592,7 @@
 						</li>
 
 						<li class="time-container">
-							<span id="time-span">활동 시간</span>
+							<span id="time-span">소요 시간</span>
 							<select class="form-select hour-select" name="hour" id="hour">
 								<option value="-">시간</option>
 								<option value="0">0</option>
@@ -540,6 +612,7 @@
 							<span id="hour-span">시간</span>
 							<select class="form-select minute-select" name="minute" id="minute">
 								<option value="-">분</option>
+								<option value="0">0</option>
 								<option value="5">5</option>
 								<option value="10">10</option>
 								<option value="15">15</option>
@@ -556,12 +629,12 @@
 						</li>
 						<li class="price-container">
 							<span id="price-span">가격</span>
-							<input class="form-control price-input" type="number" name="price" id="price" onkeyup="formatCurrency(this);" onkeydown="filterNumber(event);" autocomplete="off">
+							<input class="form-control price-input" type="text" name="price" id="price" onkeydown="filterNumber(event);" autocomplete="off">
 							<p id="alert-price-tag">가격은 0 미만일 수 없습니다.</p>
 						</li>
 						<li class="activityNumber-container">
 							<span id="activityNumber-span">활동 인원</span>
-							<input class="form-control activityNumber-input" type="number" name="activityNumber" id="activityNumber">
+							<input class="form-control activityNumber-input" type="number" name="activityNumber" id="activityNumber" onkeydown="filterNumber(event);">
 							<p id="alert-activityNumber-tag">활동 인원은 0 미만일 수 없습니다.
 						</li>
 						<li class="openTime-container">
@@ -576,7 +649,7 @@
 							<span id="event-span">이벤트 여부</span>
 							<div class="form-check form-switch" style="width: 100%;">
 								<input class="form-check-input" type="checkbox" id="event-check" name="event-check" value="yes" onclick="eventCheck(event)" checked>
-								<input class="form-control event-input" type="text" name="event" id="event">
+								<input class="form-control event-input" type="text" name="event" id="event" autocomplete="off">
 							</div>
 						</li>
 
@@ -600,8 +673,6 @@
 				</button>
 				<button type="submit" class="btn btn-success" onclick="return validation()">저장</button>
 			</div>
-
-
 		</form>
 	</div>
 </body>
