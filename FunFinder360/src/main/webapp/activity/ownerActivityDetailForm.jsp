@@ -132,7 +132,13 @@
 				<fmt:formatNumber value="${requestScope.ownerActivityData.price}" pattern="###,###" />
 				원
 			</div>
-			<span id="activityNumber-tag">참가 인원 : ${requestScope.ownerActivityData.activityNumber}명</span>
+			<span id="activityNumber-tag">참여 인원 : ${requestScope.ownerActivityData.activityNumber}명</span>
+			<div class="openTime-closeTime-box" style="font-size: 17px;">
+				<span>오픈 시간 : </span>
+				<span>${requestScope.ownerActivityData.openTime} ~ </span> 
+				<span>${requestScope.ownerActivityData.closeTime}</span>
+			</div>
+			
 			<div class="userid-postedDate-container" style="font-size: 17px;">
 				<span>${requestScope.ownerActivityData.userId}</span>
 				<span>${requestScope.ownerActivityData.postedDate}</span>
