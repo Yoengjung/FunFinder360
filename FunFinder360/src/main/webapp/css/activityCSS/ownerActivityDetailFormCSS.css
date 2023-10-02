@@ -1,0 +1,276 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	height: 100vh;
+}
+
+.container {
+	position: absolute;
+	width: 100%;
+	min-height: 100vh;
+	margin: 0px;
+	padding: 0px;
+	top: 200px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.container-box {
+	display: flex;
+	flex-direction: column;
+	font-size: 20px;
+	margin-bottom: 20px;
+	border-bottom: 2px solid black;
+	padding: 20px;
+	background-color: #F8F0E5;
+	border: 3px solid #EADBC8;
+	border-radius: 10px;
+}
+
+#category-tag {
+	display: inline;
+	margin: 0px;
+	width: 300px;
+}
+
+.container-box h2 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 45px;
+}
+
+.star-icon-fav {
+	color: black;
+	font-size: 50px;
+	margin: 0px !important;
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.heart-icon-fav {
+	color: black;
+	font-size: 45px;
+	top: 28px;
+	margin: 0px !important;
+	position: absolute;
+	right: 70px;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.star-icon {
+	color: #FFFF00;
+}
+
+
+
+.rating-container {
+	margin-bottom: 30px;
+}
+
+.location-container {
+	font-size: 15px;
+}
+
+.location-container span {
+	display: inline-flex;
+	flex-direction: row;
+}
+
+.container-box span {
+	margin-bottom: 20px;
+}
+
+.cost-container {
+	font-size: 17px;
+	height: 24px;
+}
+
+.cost-container span {
+	display: inline-flex;
+	flex-direction: row;
+}
+
+.contents-image {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 50px;
+	object-fit: none;
+	height: 500px;
+}
+
+#activityNumber-tag {
+	font-size: 17px;
+}
+
+pre {
+	font-family: 'Nanum Gothic Coding', cursive;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Sunflower', sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 25px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding: 50px 10px 50px 10px;
+	background-color: #FFF5E0;
+	border: 2px solid #D2E0FB;
+	border-radius: 10px;
+	width: 80%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	white-space: pre-wrap;
+}
+
+
+.star-box {
+	position: relative;
+	display: inline-block;
+}
+
+#star-icon-tag {
+	margin: 0px;
+	left: 0px;
+}
+
+.contents-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.userid-postedDate-container {
+	display: flex;
+	flex-direction: row;
+	font-size: 20px;
+}
+
+.userid-postedDate-container span {
+	margin: 0px;
+}
+
+.userid-postedDate-container span:first-child {
+	margin-right: 20px;
+}
+
+#readHit-teg {
+	position: absolute;
+	display: block;
+	right: 100px;
+}
+
+.back-btn-box {
+	top: 20px;
+	position: relative;
+	margin-bottom: 50px;
+}
+
+.back-btn {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.form-container {
+	position: relative;
+	top: 30px;
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+textarea {
+	resize: none;
+}
+
+.input-group {
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 100px;
+}
+
+.login-info-tag {
+	position: relative;
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 10px;
+}
+
+.review-star-select-box {
+	position: relative;
+	left: 10%;
+	margin-bottom: 10px;
+}
+
+#empty-star1,
+#empty-star2,
+#empty-star3,
+#empty-star4,
+#empty-star5 {
+	width: 40px;
+	cursor: pointer;
+}
+
+.submit-box {
+	width: 100%;
+}
+
+.btn-dark {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 30px;
+}
+
+.review-box {
+	border: 1px solid black;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.review-head {
+	margin-bottom: 5px;
+	font-size: 20px;
+	vertical-align: auto;
+}
+
+#review-star-icon-tag {
+	width: 20px;
+	position: relative;
+	bottom: 3px;
+}
+
+#review-rating-tag {
+	display: none;
+	color: red;
+}
+#reviewContent-tag {
+	display: none;
+	color:red;
+}
+.review-box {
+	margin-top: 10px;
+}
+
+.event-box {
+	width: 100%;
+	padding: 20px;
+	border: 1px solid #A6F6FF;
+	border-radius: 10px;
+	background-color: #CDFCF6;
+}

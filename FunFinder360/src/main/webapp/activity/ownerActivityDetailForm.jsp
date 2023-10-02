@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/activityCSS/personalActivityDetailFormCSS.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/activityCSS/ownerActivityDetailFormCSS.css">
 <title>활동 상세 보기</title>
 <script>
 	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -113,7 +113,7 @@
 </script>
 </head>
 <body>
-	${requestScope.ownerActivityData }
+	
 	<div class="container">
 		<div class="container-box">
 			<span id="category-tag">${requestScope.ownerActivityData.category}</span>
@@ -121,8 +121,7 @@
 			<span class="material-symbols-outlined star-icon-fav" data-bs-toggle="tooltip" data-bs-placement="top" title="즐겨찾기"> star </span>
 
 			<h2 id="activityName-tag">${requestScope.ownerActivityData.activityName}</h2>
-
-
+			
 			<div class="location-container" style="font-size: 17px;">
 				<span>장소 : ${requestScope.ownerActivityData.location} </span>
 				<span> ${requestScope.ownerActivityData.locationDetail}</span>
@@ -149,7 +148,10 @@
 		<c:set var="contentIndex" value="0"></c:set>
 		<c:set var="imgIndex" value="0"></c:set>
 
-		<%-- <div class="contents-container">
+		<div class="event-box">
+			<h4 id="event-tag">이벤트 : ${requestScope.ownerActivityData.event}</h4>
+		</div>
+		<div class="contents-container">
 			<c:forEach var="loop" begin="0" end="${requestScope.ownerActivityData.totalRacodeCount - 1}">
 				<c:catch var="contentException">
 					<c:if test="${not empty requestScope.ownerActivityData.contentList}">
@@ -210,7 +212,7 @@
 					</div>
 				</form>
 			</div>
-		</c:if> --%>
+		</c:if>
 
 
 		<c:forEach var="reviewBean" items="${requestScope.reviewData}">

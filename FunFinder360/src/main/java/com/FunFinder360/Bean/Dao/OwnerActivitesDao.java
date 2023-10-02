@@ -230,7 +230,7 @@ public class OwnerActivitesDao extends SuperDao {
 		pstmt = null;
 		rs = null;
 
-		sql = "select image, totalorder from activity_image where personalActivityid = ? ";
+		sql = "select image, totalorder from activity_image where ownerActivityId = ? ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, activityId);
 		rs = pstmt.executeQuery();
@@ -245,8 +245,8 @@ public class OwnerActivitesDao extends SuperDao {
 			bean.setImageList(imageObject);
 		}
 		sql = "SELECT (COALESCE(A.a, 0) + COALESCE(B.b, 0)) AS total_count " + "FROM ( " + "    SELECT COUNT(*) AS a"
-				+ "    FROM activity_content " + "    where personalactivityid = ? " + ") A " + "FULL OUTER JOIN ( "
-				+ "    SELECT COUNT(*) AS b " + "    FROM activity_image " + "    where personalactivityid = ? "
+				+ "    FROM activity_content " + "    where owneractivityid = ? " + ") A " + "FULL OUTER JOIN ( "
+				+ "    SELECT COUNT(*) AS b " + "    FROM activity_image " + "    where owneractivityid = ? "
 				+ ") B " + "ON 1=1 ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, activityId);
