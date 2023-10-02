@@ -189,8 +189,6 @@ public class ActivitesDao extends SuperDao {
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, activityId);
 		pstmt.executeUpdate();
-		
-		conn.commit();
 
 		pstmt = null;
 

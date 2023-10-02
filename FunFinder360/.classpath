@@ -9,10 +9,13 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
-	<classpathentry kind="lib" path="/Users/gohyoungjung/Desktop/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/Users/gohyoungjung/Desktop/standard.jar"/>
-	<classpathentry kind="lib" path="/Users/gohyoungjung/Desktop/cos.jar"/>
-	<classpathentry kind="lib" path="/Users/gohyoungjung/Desktop/javax.servlet.jar"/>
-	<classpathentry kind="lib" path="/Users/gohyoungjung/Desktop/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/cos.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/oraclepki.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/osdt_cert.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/osdt_core.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ojdbc11.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -13,10 +13,14 @@ public class ReviewInsertController extends SuperClass {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		super.doPost(request, response);
 		
+		System.out.println("tset");
+		System.out.println("userName : " + request.getParameter("userName"));
+		System.out.println("rating : " + request.getParameter("reviewRating"));
+		
 		Review review = new Review();
 		review.setActivityId(Integer.parseInt(request.getParameter("activityId")));
 		review.setUserId(request.getParameter("userName"));
-		review.setRating(Integer.parseInt(request.getParameter("review-rating")));
+		review.setRating(Integer.parseInt(request.getParameter("reviewRating")));
 		review.setReviewContent(request.getParameter("reviewContent"));
 		
 		ReviewDao dao = new ReviewDao();
