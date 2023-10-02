@@ -213,30 +213,29 @@
 		</c:if>
 
 
-		<c:forEach var="reviewBean" items="${requestScope.reviewData}">
-			<div class="review-box">
-				<div class="review-head">
-					<span>${reviewBean.userName}</span>
-					<c:forEach var="rating" begin="1" end="${reviewBean.rating}">
-						<img src="${pageContext.request.contextPath}/upload/star.png" id="review-star-icon-tag">
+		<div class="search-container">
+			<div class="search-in-container">
+				<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
+					<input type="hidden" name="command" value="activityId">
+					<c:forEach var="reviewBean" items="${requestScope.reviewData}">
+						<div class="review-box">
+							<div class="review-head">
+								<span>${reviewBean.userName}</span>
+								<c:forEach var="rating" begin="1" end="${reviewBean.rating}">
+									<img src="${pageContext.request.contextPath}/upload/star.png"
+										id="review-star-icon-tag">
+								</c:forEach>
+								<span></span>
+							</div>
+							<p>${reviewBean.reviewContent}</p>
+							<span>${reviewBean.postedDate}</span>
+						</div>
 					</c:forEach>
-					<span></span>
-				</div>
-				<p>${reviewBean.reviewContent}</p>
-				<span>${reviewBean.postedDate}</span>
+				</form>
 			</div>
-		</c:forEach>
-		
-		<div class="paging-container">
-    <ul>
-        <li><a href="?pageNumber=1&pageSize=${pageInfo.pageSize}">처음</a></li>
-        <c:forEach var="page" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-            <li><a href="?pageNumber=${page}&pageSize=${pageInfo.pageSize}">${page}</a></li>
-        </c:forEach>
-        <li><a href="?pageNumber=${pageInfo.totalPages}&pageSize=${pageInfo.pageSize}">마지막</a></li>
-    </ul>
+		</div>
+		<div class="paging-container">${requestScope.pageInfo.pagingHtml}&activityId=${requestScope.personalActivityData.activityId}</div>
 </div>
-		
 	</div>
 </body>
 </html>

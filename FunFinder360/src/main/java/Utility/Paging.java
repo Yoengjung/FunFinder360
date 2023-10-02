@@ -16,7 +16,55 @@ public class Paging {
 	private String mode = "";
 	private String keyword = "";
 	private String flowParameter = "";
+	private int activityId;
 
+	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword,
+			boolean isGrid, int activityId) {
+		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
+			_pageNumber = "1";
+		}
+
+		this.pageNumber = Integer.parseInt(_pageNumber);
+		if (_pageSize == null || _pageSize.equals("null") || _pageSize.equals("")) {
+			if (isGrid) {
+				_pageSize = "8";
+			} else {
+				_pageSize = "10";
+			}
+		}
+
+		this.pageSize = Integer.parseInt(_pageSize);
+		this.totalCount = totalCount;
+		this.url = url;
+		this.mode = mode == null ? "all" : mode;
+		this.keyword = keyword == null ? "" : keyword;
+		double _totalPage = Math.ceil((double) totalCount / (double) this.pageSize);
+		this.totalPage = (int) _totalPage;
+		this.beginRow = (this.pageNumber - 1) * this.pageSize + 1;
+		this.endRow = this.pageNumber * this.pageSize;
+		if (this.endRow > totalCount) {
+			this.endRow = totalCount;
+		}
+
+		this.beginPage = (this.pageNumber - 1) / this.pageCount * this.pageCount + 1;
+		this.endPage = this.beginPage + this.pageCount - 1;
+		if (this.endPage > this.totalPage) {
+			this.endPage = this.totalPage;
+		}
+
+		this.pagingStatus = "총 " + totalCount + "건[" + this.pageNumber + "/" + this.totalPage + "]";
+		this.flowParameter = "";
+		this.flowParameter = this.flowParameter + "&pageNumber=" + this.pageNumber;
+		this.flowParameter = this.flowParameter + "&pageSize=" + this.pageSize;
+		this.flowParameter = this.flowParameter + "&mode=" + mode;
+		this.flowParameter = this.flowParameter + "&keyword=" + keyword;
+		
+		if (activityId != -1) {
+			this.flowParameter = this.flowParameter + "&activityId = " + activityId;
+		}
+		this.pagingHtml = this.getMakePagingHtml();
+	}
+	
 	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword,
 			boolean isGrid) {
 		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
@@ -57,6 +105,7 @@ public class Paging {
 		this.flowParameter = this.flowParameter + "&pageSize=" + this.pageSize;
 		this.flowParameter = this.flowParameter + "&mode=" + mode;
 		this.flowParameter = this.flowParameter + "&keyword=" + keyword;
+		
 		this.pagingHtml = this.getMakePagingHtml();
 	}
 
@@ -243,4 +292,14 @@ public class Paging {
 		imsi = imsi + "pagingHtml=" + this.pagingHtml + "<br/>";
 		return imsi;
 	}
+
+	public int getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(int activityId) {
+		this.activityId = activityId;
+	}
+	
+	
 }
