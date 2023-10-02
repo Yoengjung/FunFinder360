@@ -3,7 +3,7 @@ package com.FunFinder360.Bean.Model;
 public class OwnerActivity {
 	private int activityId;
 	private String userid;
-	private String activitiyName;
+	private String activityName;
 	private String category;
 	private String location;
 	private String locationDetail;
@@ -19,13 +19,13 @@ public class OwnerActivity {
 	
 	public OwnerActivity () {}
 
-	public OwnerActivity(int activityId, String userid, String activitiyName, String category, String location,
+	public OwnerActivity(int activityId, String userid, String activityName, String category, String location,
 			String locationDetail, int duration, int price, int activitiyNumber, String openTime, String closeTime,
 			String event, int readHit, String postedDate, int ranking) {
 		super();
 		this.activityId = activityId;
 		this.userid = userid;
-		this.activitiyName = activitiyName;
+		this.activityName = activityName;
 		this.category = category;
 		this.location = location;
 		this.locationDetail = locationDetail;
@@ -42,7 +42,7 @@ public class OwnerActivity {
 
 	@Override
 	public String toString() {
-		return "OwnerActivity [activityId=" + activityId + ", userid=" + userid + ", activitiyName=" + activitiyName
+		return "OwnerActivity [activityId=" + activityId + ", userid=" + userid + ", activityName=" + activityName
 				+ ", category=" + category + ", location=" + location + ", locationDetail=" + locationDetail
 				+ ", duration=" + duration + ", price=" + price + ", activitiyNumber=" + activitiyNumber + ", openTime="
 				+ openTime + ", closeTime=" + closeTime + ", event=" + event + ", readHit=" + readHit + ", postedDate="
@@ -65,12 +65,12 @@ public class OwnerActivity {
 		this.userid = userid;
 	}
 
-	public String getActivitiyName() {
-		return activitiyName;
+	public String getActivityName() {
+		return activityName;
 	}
 
-	public void setActivitiyName(String activitiyName) {
-		this.activitiyName = activitiyName;
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
 	}
 
 	public String getCategory() {

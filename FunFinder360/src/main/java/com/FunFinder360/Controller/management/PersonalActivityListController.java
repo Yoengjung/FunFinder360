@@ -26,7 +26,7 @@ public class PersonalActivityListController extends SuperClass{
 		
 		try {
 			int totalCount = dao.GetTotalRecordCount(mode, keyword);
-			String url = super.getUrlInfomation("activityList");
+			String url = super.getUrlInfomation("personalActivityList");
 			boolean isGrid = true;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			

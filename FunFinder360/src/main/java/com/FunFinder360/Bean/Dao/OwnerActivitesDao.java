@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.FunFinder360.Bean.Model.OwnerActivity;
 import com.FunFinder360.Bean.Model.OwnerActivityAndImage;
-import com.FunFinder360.Bean.Model.PersonalActivity;
 
 import Utility.Paging;
 
@@ -24,7 +23,7 @@ public class OwnerActivitesDao extends SuperDao {
 		pstmt = conn.prepareStatement(sql);
 
 		pstmt.setString(1, ownerActivity.getUserid());
-		pstmt.setString(2, ownerActivity.getActivitiyName());
+		pstmt.setString(2, ownerActivity.getActivityName());
 		pstmt.setString(3, ownerActivity.getCategory());
 		pstmt.setString(4, ownerActivity.getLocation());
 		pstmt.setString(5, ownerActivity.getLocationDetail());
@@ -81,7 +80,7 @@ public class OwnerActivitesDao extends SuperDao {
 		ResultSet resultSet = null;
 		Connection connection = super.getConnection();
 
-		String sql = "select count(*) as cnt from owner_activites";
+		String sql = " select count(*) as cnt from owner_activites ";
 
 		if (mode == null || mode.equals("all")) {
 
@@ -182,7 +181,7 @@ public class OwnerActivitesDao extends SuperDao {
 
 		String sql = " select activityId, userid, activityName, category, location, locationDetail, duration, price, activityNumber, openTime, closeTime, event, readHit, postedDate ";
 		sql += " from (select activityId, userid, activityName, category, location, locationDetail, duration, price, activityNumber, openTime, closeTime, event, readHit, postedDate, Row_number() over(order by readHit) as ranking ";
-		sql += " from owner_activites";
+		sql += " from owner_activites ";
 		
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
@@ -224,7 +223,7 @@ public class OwnerActivitesDao extends SuperDao {
 
 		bean.setActivityId(rs.getInt("activityId"));
 		bean.setUserid(rs.getString("userid"));
-		bean.setActivitiyName(rs.getString("activityName"));
+		bean.setActivityName(rs.getString("activityName"));
 		bean.setCategory(rs.getString("category"));
 		bean.setLocation(rs.getString("location"));
 		bean.setLocationDetail(rs.getString("locationDetail"));
@@ -372,7 +371,7 @@ public class OwnerActivitesDao extends SuperDao {
 
 		bean.setActivityId(rs.getInt("activityId"));
 		bean.setUserid(rs.getString("userid"));
-		bean.setActivitiyName(rs.getString("activityName"));
+		bean.setActivityName(rs.getString("activityName"));
 		bean.setCategory(rs.getString("category"));
 		bean.setLocation(rs.getString("location"));
 		bean.setLocationDetail(rs.getString("locationDetail"));

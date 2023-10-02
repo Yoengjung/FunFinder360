@@ -48,7 +48,7 @@ public class OwnerActivityInsertController extends SuperClass {
 		OwnerActivity ownerActivity = new OwnerActivity();
 
 		ownerActivity.setUserid(userId);
-		ownerActivity.setActivitiyName(mr.getParameter("title"));
+		ownerActivity.setActivityName(mr.getParameter("title"));
 		ownerActivity.setCategory(mr.getParameter("category"));
 		ownerActivity.setLocation(mr.getParameter("province") + " " + mr.getParameter("districtValue"));
 		ownerActivity.setLocationDetail(mr.getParameter("detail-location"));

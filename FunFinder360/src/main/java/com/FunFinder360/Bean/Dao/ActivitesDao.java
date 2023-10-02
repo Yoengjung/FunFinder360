@@ -174,8 +174,8 @@ public class ActivitesDao extends SuperDao {
 		Connection connection = super.getConnection();
 
 		String sql = " select activityId, userId, activityName, category, location, locationDetail, duration, cost, activityNumber, rating, readHit, postedDate ";
-		sql += " from (select activityId, userId, activityName, category, location, locationDetail, duration, cost, activityNumber, rating, readHit, postedDate, Row_number() over(order by readHit) as ranking ";
-		sql += " from personal_activites";
+		sql += " from (select activityId, userId, activityName, category, location, locationDetail, duration, cost, activityNumber, rating, readHit, postedDate, Row_number() over(order by activityId desc) as ranking ";
+		sql += " from personal_activites ";
 		
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
