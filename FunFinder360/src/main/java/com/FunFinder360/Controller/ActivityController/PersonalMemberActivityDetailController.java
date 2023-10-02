@@ -16,15 +16,14 @@ public class PersonalMemberActivityDetailController extends SuperClass {
 		int activityId = Integer.parseInt(request.getParameter("activityId"));
 
 		MemberActivitesDetailDao dao = new MemberActivitesDetailDao();
-
 		PersonalActivityDetail personalActivityDetail = null;
-
+		
 		try {
 			personalActivityDetail = dao.getPersonalActivityData(activityId);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		request.setAttribute("personalActivityData", personalActivityDetail);
 		super.goToPage("member/personalMemberActivityDetail.jsp");
 

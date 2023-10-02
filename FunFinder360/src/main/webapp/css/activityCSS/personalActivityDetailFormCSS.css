@@ -2,7 +2,6 @@ body {
 	margin: 0px;
 	padding: 0px;
 	height: 100vh;
-	background-color: blue;
 }
 
 .container {
@@ -14,7 +13,6 @@ body {
 	top: 200px;
 	left: 50%;
 	transform: translateX(-50%);
-	background-color: #F8F0E5
 }
 
 .container-box {
@@ -124,10 +122,9 @@ pre {
 	font-family: 'Sunflower', sans-serif;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 25px;
-	text-align: center;
 	margin-top: 30px;
 	margin-bottom: 30px;
-	padding: 50px 0 50px 0;
+	padding: 50px 10px 50px 10px;
 	background-color: #FFF5E0;
 	border: 2px solid #D2E0FB;
 	border-radius: 10px;
@@ -177,7 +174,7 @@ pre {
 .back-btn-box {
 	top: 20px;
 	position: relative;
-	margin-bottom: 30px;
+	margin-bottom: 50px;
 }
 
 .back-btn {
@@ -189,8 +186,83 @@ pre {
 .form-container {
 	position: relative;
 	top: 30px;
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 textarea {
 	resize: none;
+}
+
+.input-group {
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 100px;
+}
+
+.login-info-tag {
+	position: relative;
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 10px;
+}
+
+.review-star-select-box {
+	position: relative;
+	left: 10%;
+	margin-bottom: 10px;
+}
+
+#empty-star1,
+#empty-star2,
+#empty-star3,
+#empty-star4,
+#empty-star5 {
+	width: 40px;
+	cursor: pointer;
+}
+
+.submit-box {
+	width: 100%;
+}
+
+.btn-dark {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 30px;
+}
+
+.review-box {
+	border: 1px solid black;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.review-head {
+	margin-bottom: 5px;
+	font-size: 20px;
+	vertical-align: auto;
+}
+
+#review-star-icon-tag {
+	width: 20px;
+	position: relative;
+	bottom: 3px;
+}
+
+#review-rating-tag {
+	display: none;
+	color: red;
+}
+#reviewContent-tag {
+	display: none;
+	color:red;
+}
+.review-box {
+	margin-top: 10px;
 }

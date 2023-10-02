@@ -67,8 +67,6 @@ public class OwnerActivitesDao extends SuperDao {
 			order++;
 		}
 
-		conn.commit();
-
 		if (conn != null) {
 			conn.close();
 		}
@@ -173,7 +171,4 @@ public class OwnerActivitesDao extends SuperDao {
 		
 		return lists;
 	}
-
-	
-
 }

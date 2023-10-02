@@ -10,6 +10,7 @@ import com.FunFinder360.Bean.Dao.ActivitesDao;
 import com.FunFinder360.Bean.Model.MemberPersonalUser;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Controller.SuperClass;
+import com.FunFinder360.Controller.ActivityController.ActivityListController;
 import com.oreilly.servlet.MultipartRequest;
 
 public class ActivityInsertController extends SuperClass {
@@ -91,7 +92,8 @@ public class ActivityInsertController extends SuperClass {
 				new ActivityInsertController().doGet(request, response);
 			} else {
 				super.session.removeAttribute("alertMessage");
-				super.goToPage("activity/activitesList.jsp");
+				new ActivityListController().doGet(request, response);
+//				super.goToPage("activity/activitesList.jsp");
 			}
 			
 		} catch (Exception e) {

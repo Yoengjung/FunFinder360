@@ -185,8 +185,6 @@ public class MemberActivitesDetailDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		conn.commit();
-
 		pstmt = null;
 
 		String sql = "select * from personal_activites where activityid = ? ";

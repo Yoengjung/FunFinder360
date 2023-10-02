@@ -315,7 +315,7 @@
 	}
 	function filterNumber(event) {
 		var code = event.keyCode;
-		if (code > 47 && code < 58 || (code == 8)) {
+		if (code > 47 && code < 58 || (code == 8) || (code == 9)) {
 			return;
 		}
 		event.preventDefault();
@@ -619,7 +619,7 @@
 						</li>
 						<li class="cost-container">
 							<span id="cost-span">비용</span>
-							<input class="form-control cost-input" type="text" name="cost" id="cost" onkeyup="formatCurrency(this);" onkeydown="filterNumber(event);">
+							<input class="form-control cost-input" type="text" name="cost" id="cost" onkeyup="formatCurrency(this);" onkeydown="filterNumber(event);" autocomplete="off">
 						</li>
 						<li class="activityNumber-container">
 							<span id="activityNumber-span">활동 인원</span>
