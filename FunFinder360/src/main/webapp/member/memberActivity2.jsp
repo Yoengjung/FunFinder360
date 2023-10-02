@@ -127,10 +127,10 @@
 						<td class="table-body-box">
 							<c:choose>
 								<c:when test="${fn:length(ownerActivity.activitiyName) >= 10}">
-				                    ${fn:substring(ownerActivity.activitiyName, 0, 10)}...
+				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId">${fn:substring(ownerActivity.activitiyName, 0, 10)}...</a>
 				                </c:when>
 								<c:otherwise>
-				                    ${ownerActivity.activitiyName}
+				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId">${ownerActivity.activitiyName}</a>
 				                </c:otherwise>
 							</c:choose>
 						</td>
