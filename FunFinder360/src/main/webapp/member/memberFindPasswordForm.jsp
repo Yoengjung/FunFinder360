@@ -86,8 +86,9 @@ textarea {
 	margin-top: 30px;
 	width: 100%;
 }
-#id {
+#email {
 	margin-bottom: 10px;
+	margin-top: 10px;
 }
 </style>
 </head>
@@ -111,8 +112,9 @@ textarea {
 					<div class="title">
 						<span>가입 시 등록한 정보로 비밀번호 찾기</span>
 					</div>
-					<input class="form-control" type="text" name="id" id="id" placeholder="아이디" autocomplete="off">
+					<input class="form-control" type="text" name="name" id="name" placeholder="이름" autocomplete="off">
 					<input class="form-control" type="text" name="email" id="email" placeholder="이메일" autocomplete="off">
+					<input class="form-control" type="text" name="id" id="id" placeholder="아이디" autocomplete="off">
 					<button type="submit" class="btn btn-secondary">비밀번호 찾기</button>
 				</form>
 			</div>
