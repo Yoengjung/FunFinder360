@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class MemberPasswordUpdateDao extends SuperDao {
-	public boolean updatePassword(String name, String email, String id, String newPassword) throws Exception{
+
+	public boolean updatePassword(String name, String email, String id, String newPassword) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
 
@@ -37,4 +38,5 @@ public class MemberPasswordUpdateDao extends SuperDao {
 		return true;
 
 	}
+
 }

@@ -96,7 +96,15 @@ textarea {
 	<div class="container">
 		<div class="search-container">
 			<div class="search-form">
-				<h2>아이디/비밀번호 찾기</h2>
+				<c:if test="${empty sessionScope.alertMessage}">
+					<div class="alert alert-danger" style="display: none;">
+						${sessionScope.alertMessage}</div>
+				</c:if>
+				<c:if test="${not empty sessionScope.alertMessage}">
+					<div class="alert alert-danger" style="display: block;">
+						${sessionScope.alertMessage}</div>
+				</c:if>
+				<h2>개인 아이디/비밀번호 찾기</h2>
 				<div class="top-menu">
 					<ul>
 						<li class="id-item">

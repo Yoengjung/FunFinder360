@@ -49,11 +49,11 @@ textarea {
 }
 
 .id-item {
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #CCCCCC;
 }
 
 .password-item {
-	border-bottom: 1px solid #CCCCCC;
+	border-bottom: 1px solid black;
 }
 
 .search-form ul li a {
@@ -65,17 +65,15 @@ textarea {
 }
 
 .search-form {
-	
 	display: inline-block;
 	position: absolute;
-	width: 500px;
+	width: 450px;
 	heiht: 500px;
 	left: 50%;
 	transform: translateX(-50%);
 }
 
 .form-container span {
-
 	display: block;
 	text-align: center;
 }
@@ -88,9 +86,9 @@ textarea {
 	margin-top: 30px;
 	width: 100%;
 }
-
-.form-control {
+#email {
 	margin-bottom: 10px;
+	margin-top: 10px;
 }
 </style>
 </head>
@@ -106,24 +104,26 @@ textarea {
 					<div class="alert alert-danger" style="display: block;">
 						${sessionScope.alertMessage}</div>
 				</c:if>
-				<h2>개인 아이디/비밀번호 찾기</h2>
+				<h2>기업 아이디/비밀번호 찾기</h2>
 				<div class="top-menu">
 					<ul>
 						<li class="id-item">
-							<a href="<%=notWithFormTag%>findId">아이디 찾기</a>
+							<a href="<%=notWithFormTag%>OwnerFindId">아이디 찾기</a>
 						</li>
 						<li class="password-item">
-							<a href="<%=notWithFormTag%>findPassword">비밀번호 찾기</a>
+							<a href="<%=notWithFormTag%>OwnerfindPassword">비밀번호 찾기</a>
 						</li>
 					</ul>
 				</div>
 				<form action="#" method="post" class="form-container">
+					<input type="hidden" name="command" value="findPassword"></input>
 					<div class="title">
-						<span>가입 시 등록한 이메일로 아이디 찾기</span>
+						<span>가입 시 등록한 정보로 비밀번호 찾기</span>
 					</div>
 					<input class="form-control" type="text" name="name" id="name" placeholder="이름" autocomplete="off">
 					<input class="form-control" type="text" name="email" id="email" placeholder="이메일" autocomplete="off">
-					<button type="submit" class="btn btn-secondary">아이디 찾기</button>
+					<input class="form-control" type="text" name="id" id="id" placeholder="아이디" autocomplete="off">
+					<button type="submit" class="btn btn-secondary">비밀번호 찾기</button>
 				</form>
 			</div>
 		</div>

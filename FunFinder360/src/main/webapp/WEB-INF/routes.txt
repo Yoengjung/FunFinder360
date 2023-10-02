@@ -6,12 +6,15 @@ PersonalLogin=com.FunFinder360.Controller.MemberPersonalLoginController
 OwnerJoin=com.FunFinder360.Controller.MemberOwnerJoinController
 OwnerLogin=com.FunFinder360.Controller.MemberOwnerLoginController
 findId=com.FunFinder360.Controller.MemberFindIdController
+OwnerFindId=com.FunFinder360.Controller.MemberOwnerFindIdController
+OwnerfindPassword=com.FunFinder360.Controller.MemberOwnerFindPasswordController
 findPassword=com.FunFinder360.Controller.MemberFindPasswordController
 loginSelect=com.FunFinder360.Controller.SelectLoginController
 joinSelect=com.FunFinder360.Controller.SelectJoinController
 memberDetail=com.FunFinder360.Controller.Member.MemberDetailController
 memberActivity=com.FunFinder360.Controller.Member.MemberActivityController
 PersonalPasswordUpdate=com.FunFinder360.Controller.Member.MemberPersonalPasswordUpdateController
+OwnerPasswordUpdate=com.FunFinder360.Controller.Member.MemberOwnerPasswordUpdateController
 
 #로그아웃
 logout=com.FunFinder360.Controller.Member.MemberLogoutController
@@ -30,6 +33,7 @@ OwnerActivityInsert=com.FunFinder360.Controller.Activity.OwnerActivityInsertCont
 OwnerActivitesList=com.FunFinder360.Controller.ActivityController.OwnerActivityListController
 activitesList=com.FunFinder360.Controller.ActivityController.ActivityListController
 personalMemberActivityDetail=com.FunFinder360.Controller.ActivityController.PersonalMemberActivityDetailController
+ownerMemberActivityDetail=com.FunFinder360.Controller.ActivityController.OwnerMemberActivityDetailController
 
 #관리자
 memberList=com.FunFinder360.Controller.Member.MemberListController

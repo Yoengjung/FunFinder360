@@ -107,11 +107,12 @@ function validation () {
 					<div class="text-menu">
 						<ul>
 							<li>
-								<a href="<%=notWithFormTag%>findId">아이디 찾기</a>
+							<!-- 업주 로그인 정보 찾기 -->
+								<a href="<%=notWithFormTag%>OwnerFindId">아이디 찾기</a>
 								<span>|</span>
 							</li>
 							<li>
-								<a href="<%=notWithFormTag%>findPassword">비밀번호 찾기</a>
+								<a href="<%=notWithFormTag%>OwnerfindPassword">비밀번호 찾기</a>
 								<span>|</span>
 							</li>
 							<li>

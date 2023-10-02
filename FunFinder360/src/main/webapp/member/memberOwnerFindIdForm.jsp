@@ -106,14 +106,14 @@ textarea {
 					<div class="alert alert-danger" style="display: block;">
 						${sessionScope.alertMessage}</div>
 				</c:if>
-				<h2>개인 아이디/비밀번호 찾기</h2>
+				<h2>기업 아이디/비밀번호 찾기</h2>
 				<div class="top-menu">
 					<ul>
 						<li class="id-item">
-							<a href="<%=notWithFormTag%>findId">아이디 찾기</a>
+							<a href="<%=notWithFormTag%>OwnerFindId">아이디 찾기</a>
 						</li>
 						<li class="password-item">
-							<a href="<%=notWithFormTag%>findPassword">비밀번호 찾기</a>
+							<a href="<%=notWithFormTag%>OwnerfindPassword">비밀번호 찾기</a>
 						</li>
 					</ul>
 				</div>
