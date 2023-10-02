@@ -61,8 +61,6 @@ public class MemberOwnerUserDao extends SuperDao {
 
 		pstmt.executeUpdate();
 
-		conn.commit();
-
 		if (pstmt != null) {
 			pstmt.close();
 		}

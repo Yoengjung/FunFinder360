@@ -55,7 +55,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 			<c:if test="${not empty sessionScope.loginfoOwner}">
 				<ul>
 					<li>
-						<span>${sessionScope.loginfoOwner.userName}</span>
+						<span id="login-message">환영합니다 (업주)</span><span>${sessionScope.loginfoOwner.userName}</span>
 					</li>
 					<li>
 						<a href="<%=notWithFormTag%>logout" class="a-tag">logout</a>
@@ -65,7 +65,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 			<c:if test="${not empty sessionScope.loginfo}">
 				<ul>
 					<li>
-						<span id="login-message">환영합니다</span><span>${sessionScope.loginfo.username}님</span>
+						<span id="login-message">환영합니다 (개인)</span><span>${sessionScope.loginfo.username}님</span>
 					</li>
 					<li>
 						<a href="<%=notWithFormTag%>logout" class="a-tag">logout</a>
