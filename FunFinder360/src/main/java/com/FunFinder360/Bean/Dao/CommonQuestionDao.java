@@ -16,7 +16,6 @@ public class CommonQuestionDao extends SuperDao {
 		int cnt = -1;
 		PreparedStatement pstmt = null;
 		connection = super.getConnection();
-		connection.setAutoCommit(false);
 		
 		String sql = " delete from common_question where questionId = ?";
 		pstmt = connection.prepareStatement(sql);
@@ -24,8 +23,6 @@ public class CommonQuestionDao extends SuperDao {
 		pstmt.setInt(1, questionId);
 		
 		cnt = pstmt.executeUpdate();
-		
-		connection.commit();
 		
 		if (pstmt != null) {
 			pstmt.close();
@@ -287,7 +284,6 @@ public class CommonQuestionDao extends SuperDao {
 		int cnt = -1;
 
 		connection = super.getConnection();
-		connection.setAutoCommit(false);
 
 		pstmt = connection.prepareStatement(sql);
 		pstmt.setString(1, bean.getUserId());
@@ -295,7 +291,6 @@ public class CommonQuestionDao extends SuperDao {
 		pstmt.setString(3, bean.getContent());
 
 		cnt = pstmt.executeUpdate();
-		connection.commit();
 
 		if (pstmt != null) {
 			pstmt.close();

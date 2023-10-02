@@ -33,7 +33,6 @@ public class QuestionListDao extends SuperDao {
 		pstmt.setString(3, bean.getContent());
 
 		cnt = pstmt.executeUpdate();
-		connection.commit();
 
 		if (pstmt != null) {
 			pstmt.close();
