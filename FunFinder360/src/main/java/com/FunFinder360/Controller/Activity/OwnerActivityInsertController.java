@@ -10,7 +10,6 @@ import com.FunFinder360.Bean.Dao.OwnerActivitesDao;
 import com.FunFinder360.Bean.Model.MemberOwner;
 import com.FunFinder360.Bean.Model.OwnerActivity;
 import com.FunFinder360.Controller.SuperClass;
-import com.FunFinder360.Controller.ActivityController.ActivityListController;
 import com.FunFinder360.Controller.ActivityController.OwnerActivityListController;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -87,7 +86,7 @@ public class OwnerActivityInsertController extends SuperClass {
 		int status = -1;
 		OwnerActivitesDao dao = new OwnerActivitesDao();
 		try {
-			status = dao.insertOwnerActivityData(ownerActivity, contentList, imageList);
+			status = dao.insertOwnerActivityData(ownerActivity, contentList, imageList, contentAndImageOrder);
 
 			if (status == -1) {
 				super.setAlertMessage("활동 등록에 실패했습니다.");

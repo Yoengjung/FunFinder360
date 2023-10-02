@@ -5,36 +5,34 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.FunFinder360.Bean.Dao.ActivitesDao;
+import com.FunFinder360.Bean.Dao.OwnerActivitesDao;
 import com.FunFinder360.Bean.Dao.ReviewDao;
-import com.FunFinder360.Bean.Model.PersonalActivityDetail;
+import com.FunFinder360.Bean.Model.OwnerActivityDetail;
 import com.FunFinder360.Bean.Model.Review;
 import com.FunFinder360.Controller.SuperClass;
 
-public class ActivityDetailController extends SuperClass {
+public class OwnerActivityDetailController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
 		
 		int activityId = Integer.parseInt(request.getParameter("activityId"));
 		
-		ActivitesDao dao = new ActivitesDao();
+		OwnerActivitesDao dao = new OwnerActivitesDao();
 		ReviewDao reviewDao = new ReviewDao();
-		PersonalActivityDetail personalActivityDetail = null;
+		OwnerActivityDetail ownerActivityDetail = null;
 		
 		List<Review> reviews = null;
 		
 		try {
-			personalActivityDetail = dao.getPersonalActivityData(activityId);
+			ownerActivityDetail = dao.getOwnerActivityData(activityId);
 			reviews = reviewDao.getReviewDataToActivityId(activityId);
-		} catch (Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		request.setAttribute("personalActivityData", personalActivityDetail);
+		request.setAttribute("ownerActivityData", ownerActivityDetail);
 		request.setAttribute("reviewData", reviews);
-		super.goToPage("activity/personalActivityDetailForm.jsp");
+		super.goToPage("activity/ownerActivityDetailForm.jsp");
 	}
-
-	
 }

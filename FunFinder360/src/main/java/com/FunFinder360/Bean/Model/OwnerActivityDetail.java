@@ -3,22 +3,22 @@ package com.FunFinder360.Bean.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OwnerActivity {
+public class OwnerActivityDetail {
 	private int activityId;
-	private String userid;
-	private String activitiyName;
+	private String userId;
+	private String activityName;
 	private String category;
 	private String location;
 	private String locationDetail;
 	private int duration;
 	private int price;
-	private int activitiyNumber;
+	private int activityNumber;
 	private String openTime;
 	private String closeTime;
 	private String event;
 	private int readHit;
 	private String postedDate;
-	
+
 	private List<Object> contentList = new ArrayList<Object>();
 	private List<Object> imageList = new ArrayList<Object>();
 
@@ -26,22 +26,22 @@ public class OwnerActivity {
 	private int contentCount = 0;
 	private int imgCount = 0;
 	
-	public OwnerActivity () {}
+	public OwnerActivityDetail () {}
 
-	public OwnerActivity(int activityId, String userid, String activitiyName, String category, String location,
-			String locationDetail, int duration, int price, int activitiyNumber, String openTime, String closeTime,
+	public OwnerActivityDetail(int activityId, String userId, String activityName, String category, String location,
+			String locationDetail, int duration, int price, int activityNumber, String openTime, String closeTime,
 			String event, int readHit, String postedDate, List<Object> contentList, List<Object> imageList,
 			int totalRacodeCount, int contentCount, int imgCount) {
 		super();
 		this.activityId = activityId;
-		this.userid = userid;
-		this.activitiyName = activitiyName;
+		this.userId = userId;
+		this.activityName = activityName;
 		this.category = category;
 		this.location = location;
 		this.locationDetail = locationDetail;
 		this.duration = duration;
 		this.price = price;
-		this.activitiyNumber = activitiyNumber;
+		this.activityNumber = activityNumber;
 		this.openTime = openTime;
 		this.closeTime = closeTime;
 		this.event = event;
@@ -56,9 +56,9 @@ public class OwnerActivity {
 
 	@Override
 	public String toString() {
-		return "OwnerActivity [activityId=" + activityId + ", userid=" + userid + ", activitiyName=" + activitiyName
+		return "OwnerActivityDetail [activityId=" + activityId + ", userId=" + userId + ", activityName=" + activityName
 				+ ", category=" + category + ", location=" + location + ", locationDetail=" + locationDetail
-				+ ", duration=" + duration + ", price=" + price + ", activitiyNumber=" + activitiyNumber + ", openTime="
+				+ ", duration=" + duration + ", price=" + price + ", activityNumber=" + activityNumber + ", openTime="
 				+ openTime + ", closeTime=" + closeTime + ", event=" + event + ", readHit=" + readHit + ", postedDate="
 				+ postedDate + ", contentList=" + contentList + ", imageList=" + imageList + ", totalRacodeCount="
 				+ totalRacodeCount + ", contentCount=" + contentCount + ", imgCount=" + imgCount + "]";
@@ -72,20 +72,20 @@ public class OwnerActivity {
 		this.activityId = activityId;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getActivitiyName() {
-		return activitiyName;
+	public String getActivityName() {
+		return activityName;
 	}
 
-	public void setActivitiyName(String activitiyName) {
-		this.activitiyName = activitiyName;
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
 	}
 
 	public String getCategory() {
@@ -128,12 +128,12 @@ public class OwnerActivity {
 		this.price = price;
 	}
 
-	public int getActivitiyNumber() {
-		return activitiyNumber;
+	public int getActivityNumber() {
+		return activityNumber;
 	}
 
-	public void setActivitiyNumber(int activitiyNumber) {
-		this.activitiyNumber = activitiyNumber;
+	public void setActivityNumber(int activityNumber) {
+		this.activityNumber = activityNumber;
 	}
 
 	public String getOpenTime() {
@@ -180,16 +180,16 @@ public class OwnerActivity {
 		return contentList;
 	}
 
-	public void setContentList(List<Object> contentList) {
-		this.contentList = contentList;
+	public void setContentList(ContentObject contentList) {
+		this.contentList.add(contentList);
 	}
 
 	public List<Object> getImageList() {
 		return imageList;
 	}
 
-	public void setImageList(List<Object> imageList) {
-		this.imageList = imageList;
+	public void setImageList(ImageObject imageList) {
+		this.imageList.add(imageList);
 	}
 
 	public int getTotalRacodeCount() {
@@ -214,7 +214,8 @@ public class OwnerActivity {
 
 	public void setImgCount(int imgCount) {
 		this.imgCount = imgCount;
-	}
-
+	};
 	
+	
+
 }

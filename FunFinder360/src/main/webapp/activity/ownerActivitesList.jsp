@@ -5,96 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/activityCSS/ownerActivitesListCSS.css" type="text/css">
 <title>회원 활동 데이터</title>
 <style>
-body {
-	height: 100vh;
-}
-.container {
-	position: absolute;
-	width: 100%;
-	margin: 0px;
-	padding: 0px;
-	top: 200px;
-	left: 50%;
-	transform: translateX(-50%);
-}
-
-.card-img-top {
-	width: 100%;
-	height: 100%;
-}
-
-.card-footer {
-	display: flex;
-	flex-direction: column;
-}
-
-.card {
-	height: 475px;
-	margin: 0px 10px 10px 10px;
-}
-
-img {
-	width: 300px;
-	height: 180px;
-}
-
-.paging-container {
-	margin-top: 30px;
-}
-
-.input-group {
-	width: 300px;
-}
-
-.form-select {
-	width: 200px;
-}
-
-.search-form {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-
-.keyword-input-box {
-	margin: 0 20px;
-}
-
-.readHit-box {
-	display: flex;
-	flex-direction: row;
-	vertical-align: center;
-	padding: 0 5px 0 5px;
-}
-
-#event-tag {
-	width: 70px;
-	display: block;
-	position: relative;
-	background-color: #1478CD;
-	color: white;
-	left: 10px;
-	border-radius: 10px;
-	text-align: center;
-	margin-bottom: 5px;
-	height: 30px;
-	vertical-align: middle;
-	line-height: 29px;
-}
-
-#event-empty-tag {
-	width: 70px;
-	display: block;
-	position: relative;
-	background-color: white;
-	color: white;
-	left: 10px;
-	margin-bottom: 5px;
-	height: 30px;
-	line-height: 29px;
-}
 </style>
 
 <script type="text/javascript">
@@ -122,6 +35,7 @@ img {
 </head>
 <body>
 	<div class="container">
+	${requestScope.activity }
 		<h2>업주 활동 데이터</h2>
 		<table>
 			<thead></thead>
@@ -147,7 +61,7 @@ img {
 							</div>
 							<div class="card-header">${bean.activityName}</div>
 							<div class="card-body">
-								<a href="#">
+								<a href="<%=notWithFormTag%>OwnerActivityDetail&activityId=${bean.activityId}">
 									<img alt="${bean.activityName}" src="${pageContext.request.contextPath}/upload/${bean.image}">
 								</a>
 							</div>
@@ -167,6 +81,7 @@ img {
 								<span>등록일 : ${bean.postedDate}</span>
 							</div>
 						</div>
+						</a>
 					</td>
 				</c:forEach>
 			</tbody>
@@ -186,12 +101,11 @@ img {
 					<div class="input-group">
 						<input class="keyword-input-box form-control" type="text" name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">
 					</div>
-					<button type="submit" class="btn btn-default form-control-sm search-btn" onclick="">검색</button>
+					<button type="submit" class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
 				</form>
 			</div>
 		</div>
+		<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 	</div>
-
-	<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 </body>
 </html>

@@ -90,6 +90,10 @@ input::-webkit-inner-spin-button {
 	margin-left: 10px;
 }
 
+.price-container span {
+	font-size: 17px;
+}
+
 .time-container {
 	display: flex;
 	flex-direction: row;
