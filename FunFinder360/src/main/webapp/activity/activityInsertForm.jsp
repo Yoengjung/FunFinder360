@@ -440,9 +440,7 @@
 								<option value="음식 - 요리">음식 - 요리</option>
 								<option value="교육 - 학습">교육 - 학습</option>
 								<option value="여행 - 모험">여행 - 모험</option>
-								<option value="사회 - 봉사">사회 - 봉사</option>
 								<option value="게임 - 취미">게임 - 취미</option>
-								<option value="뷰티 - 건강">뷰티 - 건강</option>
 							</select>
 						</li>
 						<li class="location-container">
