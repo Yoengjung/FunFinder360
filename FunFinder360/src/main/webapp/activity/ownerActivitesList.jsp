@@ -11,32 +11,29 @@
 </style>
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						var questionOptionList = $('#mode option');
-						for (var i = 0; i < questionOptionList.length; i++) {
-							if (questionOptionList[i].value == '${requestScope.pageInfo.mode}') {
-								questionOptionList[i].selected = true;
-							}
-						}
-						$('#keyowrd').val('${requestScope.pageInfo.keyword}');
+	$(document).ready(function() {
+		var questionOptionList = $('#mode option');
+		for (var i = 0; i < questionOptionList.length; i++) {
+			if (questionOptionList[i].value == '${requestScope.pageInfo.mode}') {
+				questionOptionList[i].selected = true;
+			}
+		}
+		$('#keyowrd').val('${requestScope.pageInfo.keyword}');
 
-						$("#mode").change(function() {
-							if ($(this).val() != 'all') {
-								$('#keyword').attr('disabled', false);
-							} else {
-								$('#keyword').val('');
-								$('#keyword').attr('disabled', true);
-							}
-						});
-					});
+		$("#mode").change(function() {
+			if ($(this).val() != 'all') {
+				$('#keyword').attr('disabled', false);
+			} else {
+				$('#keyword').val('');
+				$('#keyword').attr('disabled', true);
+			}
+		});
+	});
 </script>
 </head>
 <body>
 	<div class="container">
-	${requestScope.activity }
-		<h2>업주 활동 데이터</h2>
+		<h2>업주 활동</h2>
 		<table>
 			<thead></thead>
 			<tbody>

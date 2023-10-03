@@ -48,3 +48,6 @@ questionsInsert=com.FunFinder360.Controller.QuestionsController.QuestionsInsertC
 #리뷰
 reviewInsert=com.FunFinder360.Controller.ReviewController.ReviewInsertController
 reviewList=com.FunFinder360.Controller.ReviewController.ReviewListController
+
+#즐겨찾기
+favoritesInsert=com.FunFinder360.Controller.FavoritesController.FavoritesInsertController

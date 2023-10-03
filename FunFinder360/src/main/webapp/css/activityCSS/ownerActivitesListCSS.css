@@ -25,6 +25,7 @@ body {
 
 .card {
 	height: 475px;
+	width: 350px;
 	margin: 0px 10px 10px 10px;
 }
 
@@ -86,4 +87,11 @@ img {
 	margin-bottom: 5px;
 	height: 30px;
 	line-height: 29px;
+}
+
+table {
+	caption-side: bottom;
+	border-collapse: collapse;
+	width: 100%;
+	min-width: 1200px;
 }
