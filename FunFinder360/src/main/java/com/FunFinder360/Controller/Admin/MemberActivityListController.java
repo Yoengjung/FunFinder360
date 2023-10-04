@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.FunFinder360.Bean.Dao.ActivitesDao;
+import com.FunFinder360.Bean.Model.MemberPersonalUser;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Controller.SuperClass;
 
@@ -29,7 +30,7 @@ public class MemberActivityListController extends SuperClass {
 			boolean isGrid = false;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			
-			List<PersonalActivity> lists = dao.getMemberPersonalList();
+			List<PersonalActivity> lists = dao.getMemberPersonalList(pageInfo);
 			
 			request.setAttribute("pageInfo", pageInfo);
 			request.setAttribute("dataList", lists);

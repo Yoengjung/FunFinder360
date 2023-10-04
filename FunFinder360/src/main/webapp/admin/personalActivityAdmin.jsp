@@ -57,9 +57,28 @@
 					<tr>
 						<td>${bean.activityId}</td>
 						<td>${bean.userId}</td>
-						<td>${bean.activityName}</td>
+						<%-- <td>${bean.activityName}</td> --%>
+						<td>
+							<c:choose>
+								<c:when test="${fn:length(bean.activityName) >= 10}">
+				                    ${fn:substring(bean.activityName, 0, 10)}..
+				                </c:when>
+								<c:otherwise>
+				                    ${bean.activityName}
+								</c:otherwise>
+							</c:choose>
+						</td>
 						<td>${bean.category}</td>
-						<td>${bean.location} ${bean.locationDetail}</td>
+						<td>
+						    <c:choose>
+						        <c:when test="${fn:length(bean.location) + fn:length(bean.locationDetail) > 15}">
+						             ${bean.location} ${fn:substring(bean.locationDetail, 0, fn:length(bean.location) - 15)}...
+						        </c:when>
+						        <c:otherwise>
+						            ${bean.location} ${bean.locationDetail}
+						        </c:otherwise>
+						    </c:choose>
+						</td>
 						<td>${bean.duration}</td>
 						<td>${bean.cost}</td>
 						<td>${bean.activityNumber}</td>

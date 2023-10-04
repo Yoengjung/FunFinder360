@@ -24,12 +24,12 @@ public class OwnerMemberListController extends SuperClass {
 		MemberOwnerDao dao = new MemberOwnerDao();
 		
 		try {
-			int totalCount = dao.getTotalRecodeCount();
+			int totalCount = dao.getTotalRecodeCount(mode, keyword);
 			String url = super.getUrlInfomation("ownerMemberList");
-			boolean isGrid = false;
+			boolean isGrid = true;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			
-			List<MemberOwner> lists = dao.getMemberOwnerList();
+			List<MemberOwner> lists = dao.getMemberOwnerList(pageInfo);
 			
 			request.setAttribute("pageInfo", pageInfo);
 			request.setAttribute("datalist", lists);

@@ -85,14 +85,15 @@ public class ActivitesDao extends SuperDao {
 	}
 
 	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
+		System.out.println("검색할 필드명 : " + mode);
+		System.out.println("검새 키워드명 : " + keyword);
+		
 		PreparedStatement pstmt = null;
 		ResultSet resultSet = null;
 		Connection connection = super.getConnection();
 
-		String sql = "select count(*) as cnt from personal_activites";
-
+		String sql = "select count(*) as cnt from personal_activites ";
 		if (mode == null || mode.equals("all")) {
-
 		} else {
 			sql += " where " + mode + " like '%" + keyword + "%'";
 		}
@@ -213,7 +214,7 @@ public class ActivitesDao extends SuperDao {
 			bean.setPostedDate(rs.getString("postedDate"));
 		}
 		pstmt = null;
-		
+
 		sql = "select content, totalorder from activity_content where personalactivityid = ? ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, activityId);
@@ -274,42 +275,70 @@ public class ActivitesDao extends SuperDao {
 		return bean;
 	}
 
-	public List<PersonalActivity> getMemberPersonalList() throws Exception{
-		PreparedStatement pstmt = null ;
-		ResultSet rs = null ;
-		
-		String sql = " select * from personal_activites order by postedDate";
-		
-		connection = super.getConnection();
-		pstmt = connection.prepareStatement(sql) ;
-		
-		rs = pstmt.executeQuery() ;
-		
-		List<PersonalActivity> lists = new ArrayList<PersonalActivity>();
-		
-		while(rs.next()) {
-			PersonalActivity bean = new PersonalActivity();
-			bean.setActivityId(rs.getInt("ACTIVITYID"));
-			bean.setUserId(rs.getString("userid"));
-			bean.setActivityName(rs.getString("ACTIVITYNAME"));
-			bean.setCategory(rs.getString("category"));
-			bean.setLocation(rs.getString("location"));
-			bean.setLocationDetail(rs.getString("locationDetail"));
-			bean.setDuration(rs.getInt("duration"));
-			bean.setCost(rs.getInt("cost"));
-			bean.setActivityNumber(rs.getInt("activityNumber"));
-			bean.setRating(rs.getInt("rating"));
-			bean.setReadHit(rs.getInt("readHit"));
-			bean.setPostedDate(rs.getString("postedDate"));
-			
-			lists.add(bean);
+	public List<PersonalActivity> getMemberPersonalList(Paging pageInfo) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		// String sql = " select * from personal_activites order by postedDate";
+
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		String sql = " SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, TO_CHAR(posteddate, 'YYYY-MM-DD') AS posteddate, ranking ";
+		sql += " FROM (SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate, RANK() OVER (ORDER BY rating ASC) AS ranking";
+		sql += " FROM personal_activites ";
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%' ";
 		}
-		
-		if(rs != null) {rs.close();}
-		if(pstmt != null) {pstmt.close();}
-		if(connection != null) {connection.close();}
-		
+		sql += " ) ";
+		sql += " where ranking between ? AND ?";
+
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql);
+
+		pstmt.setInt(1, pageInfo.getBeginRow());
+		pstmt.setInt(2, pageInfo.getEndRow());
+
+		rs = pstmt.executeQuery();
+
+		List<PersonalActivity> lists = new ArrayList<PersonalActivity>();
+
+		while (rs.next()) {
+
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
 		return lists;
+	}
+
+	private PersonalActivity getBeanData(ResultSet rs) throws Exception {
+		PersonalActivity bean = new PersonalActivity();
+
+		bean.setActivityId(rs.getInt("ACTIVITYID"));
+		bean.setUserId(rs.getString("userid"));
+		bean.setActivityName(rs.getString("ACTIVITYNAME"));
+		bean.setCategory(rs.getString("category"));
+		bean.setLocation(rs.getString("location"));
+		bean.setLocationDetail(rs.getString("locationDetail"));
+		bean.setDuration(rs.getInt("duration"));
+		bean.setCost(rs.getInt("cost"));
+		bean.setActivityNumber(rs.getInt("activityNumber"));
+		bean.setRating(rs.getInt("rating"));
+		bean.setReadHit(rs.getInt("readHit"));
+		bean.setPostedDate(rs.getString("postedDate"));
+
+		return bean;
 	}
 
 }
