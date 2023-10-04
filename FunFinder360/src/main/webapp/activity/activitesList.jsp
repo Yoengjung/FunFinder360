@@ -39,7 +39,7 @@
 	        data: 'userId=' + '${sessionScope.loginfo.userId}',
 	        dataType: "json", // 응답 데이터 타입
 	        success: function (result, status) {
-	        	
+	        	console.log(result)
 	        },
 	        error: function(xhr, status, error) {
 	            console.error("서버 오류: " + error);

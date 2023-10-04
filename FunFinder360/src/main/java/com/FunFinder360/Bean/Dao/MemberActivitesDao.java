@@ -14,7 +14,7 @@ import Utility.Paging;
 public class MemberActivitesDao extends SuperDao {
 	private OwnerActivity getOwnerBeanData(ResultSet rs) throws Exception {
 		OwnerActivity bean = new OwnerActivity();
-		
+
 		bean.setActivityId(rs.getInt("activityId"));
 		bean.setUserid(rs.getString("userId"));
 		bean.setActivitiyName(rs.getString("activityName"));
@@ -28,8 +28,7 @@ public class MemberActivitesDao extends SuperDao {
 		return bean;
 	}
 
-	
-	public List<OwnerActivity> getOwnerSelectAll(Paging pageInfo, String ownerId) throws Exception{
+	public List<OwnerActivity> getOwnerSelectAll(Paging pageInfo, String ownerId) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
@@ -73,10 +72,9 @@ public class MemberActivitesDao extends SuperDao {
 		}
 
 		return lists;
-		
+
 	}
-	
-	
+
 	public int getOwnerTotalRecordCount(String mode, String keyword, String ownerId) throws Exception {
 		System.out.println("필드명 : " + mode);
 		System.out.println("키워드 : " + keyword);
@@ -124,7 +122,7 @@ public class MemberActivitesDao extends SuperDao {
 
 		String sql = " select activityId, userid, activityname, category, location, locationDetail, readhit, postedDate, ranking ";
 		sql += " from (select activityId, userid, activityname, category, location, locationDetail, readhit, postedDate, rank() over(order by postedDate asc) as ranking ";
-		sql += " from personal_activites where userid = ? " ;
+		sql += " from personal_activites where userid = ? ";
 
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
@@ -133,7 +131,7 @@ public class MemberActivitesDao extends SuperDao {
 		} else {
 			sql += " and " + mode + " like '%" + keyword + "%'";
 		}
-		
+
 		sql += " ) ";
 		sql += " where ranking between ? and ? ";
 
@@ -165,7 +163,7 @@ public class MemberActivitesDao extends SuperDao {
 
 	private PersonalActivity getBeanData(ResultSet rs) throws Exception {
 		PersonalActivity bean = new PersonalActivity();
-		
+
 		bean.setActivityId(rs.getInt("activityId"));
 		bean.setUserId(rs.getString("userId"));
 		bean.setActivityName(rs.getString("activityName"));
@@ -215,7 +213,5 @@ public class MemberActivitesDao extends SuperDao {
 		return cnt;
 
 	}
-
-
 
 }

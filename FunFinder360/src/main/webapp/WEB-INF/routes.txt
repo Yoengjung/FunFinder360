@@ -45,8 +45,7 @@ ownerMemberActivityList=com.FunFinder360.Controller.Admin.OwnerMemberActivityLis
 
 #개인 문의
 questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListController
-questionsDetail=com.FunFinder360.Controller.Questions
-Controller.QuestionsListDetailController
+questionsDetail=com.FunFinder360.Controller.QuestionsController.QuestionsListDetailController
 questionsInsert=com.FunFinder360.Controller.QuestionsController.QuestionsInsertController
 
 #리뷰
