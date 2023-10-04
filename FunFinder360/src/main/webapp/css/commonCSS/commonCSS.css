@@ -102,14 +102,14 @@ hr {
 	min-width: 210px;
 	background-color: #FFFFFF;
 	border: 1px solid #999999;
-	z-index: 5;
+	z-index: 10;
 	left: 9px;
 }
 
 /* 호버 시 드롭다운 내용 활성화 */
 .menu-dropdown:hover .dropdown-content {
 	display: block;
-	z-index: 5;
+	z-index: 10;
 }
 
 /* 드롭다운 내용 항목 스타일 */

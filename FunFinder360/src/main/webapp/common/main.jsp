@@ -35,16 +35,15 @@ $(document).ready(function () {
 		<div class="info-1">
 			<div class="info-1-box">
 				<span>놀</span><span>거</span><span>리</span><span>의 </span><span>
-				</span><span>성</span><span>지</span><span>!</span> <span> </span><span>F</span><span>u</span><span>n</span><span>F</span><span>i</span><span>n</span><span>d</span><span>e</span><span>r</span><span>3</span><span>6</span><span>0</span><span>으</span><span>로</span> <span>
-				</span><span>지</span><span>금</span> <span> </span><span>바</span><span>로</span> <span>
-				</span><span>즐</span><span>길</span><span> </span><span>활</span><span>동</span><span>을</span> <span>
-				</span><span>찾</span><span>아</span><span>보</span><span>세</span><span>요</span><span>.</span>
+				</span><span>성</span><span>지</span><span>!</span> <span> </span><span>F</span><span>u</span><span>n</span><span>F</span><span>i</span><span>n</span><span>d</span><span>e</span><span>r</span><span>3</span><span>6</span><span>0</span><span>으</span><span>로</span>
+				<span> </span><span>지</span><span>금</span> <span> </span><span>바</span><span>로</span>
+				<span> </span><span>즐</span><span>길</span><span> </span><span>활</span><span>동</span><span>을</span>
+				<span> </span><span>찾</span><span>아</span><span>보</span><span>세</span><span>요</span><span>.</span>
 			</div>
 		</div>
 		<div class="info-2">
 			<div class="circle-container">
-				<img
-					src="${pageContext.request.contextPath}/common/image/1.jpg">
+				<img src="${pageContext.request.contextPath}/common/image/1.jpg">
 				<div class="info-2-box">
 					<p class="category-tag">문화 엔터테인먼트</p>
 					<div class="info-p-tag-box">
@@ -67,14 +66,12 @@ $(document).ready(function () {
 						<p>맛있는 음식의 세계가 여기 있습니다!</p>
 					</div>
 				</div>
-				<img
-					src="${pageContext.request.contextPath}/common/image/2.jpg">
+				<img src="${pageContext.request.contextPath}/common/image/2.jpg">
 			</div>
 		</div>
 		<div class="info-5">
 			<div class="circle-container-5">
-				<img
-					src="${pageContext.request.contextPath}/common/image/3.jpg">
+				<img src="${pageContext.request.contextPath}/common/image/3.jpg">
 				<div class="info-5-box">
 					<p class="category-tag5">교육 학습</p>
 					<div class="info-p-tag-box5">
@@ -97,14 +94,12 @@ $(document).ready(function () {
 						<p>모험은 일생 중에 가장 소중한 선물 중 하나입니다.</p>
 					</div>
 				</div>
-				<img
-					src="${pageContext.request.contextPath}/common/image/4.jpg">
+				<img src="${pageContext.request.contextPath}/common/image/4.jpg">
 			</div>
 		</div>
 		<div class="info-7">
 			<div class="circle-container-7">
-				<img
-					src="${pageContext.request.contextPath}/common/image/5.jpg">
+				<img src="${pageContext.request.contextPath}/common/image/5.jpg">
 				<div class="info-7-box">
 					<p class="category-tag7">게임 취미</p>
 					<div class="info-p-tag-box7">
