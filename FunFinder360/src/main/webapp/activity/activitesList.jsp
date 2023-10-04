@@ -31,50 +31,6 @@
 			}
 		});
 	});
-	
-	function loadFavorites() {
-	    $.ajax({
-	        type: "GET",
-	        url: "<%=notWithFormTag%>favoritesInsert",
-	        data: 'userId=' + '${sessionScope.loginfo.userId}',
-	        dataType: "json", // 응답 데이터 타입
-	        success: function (result, status) {
-	        	console.log(result)
-	        },
-	        error: function(xhr, status, error) {
-	            console.error("서버 오류: " + error);
-	        }
-	    });
-	}
-	
-	function addToFavorites(activityId, userId) {
-	    $.ajax({
-	        type: "POST",
-	        url: '<%=notWithFormTag%>favoritesInsert', // 즐겨찾기 추가 엔드포인트 URL
-	        data: { activityId: activityId, userId: userId, activityCheck: 0}, // 활동 ID 또는 필요한 정보를 전송
-	        success: function(response, status, xhr) {
-	            if (xhr.status === 200) {
-	                // 즐겨찾기 추가가 성공한 경우
-	                // 아이콘 색상 변경 등의 작업을 수행
-	                
-	                console.log($(`Favorites-icon-\${activityId}`));
-	                $(`.Favorites-icon-\${activityId}`).css('color', 'yellow');
-	            } else {
-	                // 실패 처리
-	                alert("즐겨찾기 추가 실패");
-	            }
-	        },
-	        error: function(xhr, status, error) {
-	            // 에러 처리
-	            if (xhr.status === 500) {
-	                alert("서버 오류");
-	            } else {
-	                alert("알 수 없는 오류 발생");
-	            }
-	        }
-	    });
-	}
-
 </script>
 </head>
 <body>
@@ -93,9 +49,6 @@
 						<div class="card">
 							<div class="readHit-box">
 								<span class="material-symbols-outlined readHit-icon">visibility</span>${bean.readHit}
-								<c:if test="${not empty sessionScope.loginfo}">
-									<span class="material-symbols-outlined Favorites-icon-${bean.activityId} Favorites-icon" onClick="addToFavorites(${bean.activityId}, '${sessionScope.loginfo.userId }')">star</span>
-								</c:if>
 							</div>
 							<div class="card-header">${bean.activityName}</div>
 							<div class="card-body">
