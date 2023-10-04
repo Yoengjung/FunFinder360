@@ -52,8 +52,6 @@ public class ActivityDetailController extends SuperClass {
 			e.printStackTrace();
 		}
 		
-		
-	
 		super.goToPage("activity/personalActivityDetailForm.jsp");
 	}
 

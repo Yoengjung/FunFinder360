@@ -12,6 +12,7 @@ import com.FunFinder360.Bean.Model.Review;
 import Utility.Paging;
 
 public class ReviewDao extends SuperDao {
+	
 	public List<Review> getSelectAll(Paging pageInfo, int activityId) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -47,9 +48,7 @@ public class ReviewDao extends SuperDao {
 
 		return lists;
 	}
-
 	
-
 	private Review getBeanData(ResultSet rs) throws Exception{
 		Review bean = new Review();
 		
