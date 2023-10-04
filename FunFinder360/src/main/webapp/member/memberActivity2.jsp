@@ -136,9 +136,27 @@
 						</td>
 						<td class="table-body-box title-box">${ownerActivity.category}</td>
 						<td class="table-body-box">${ownerActivity.location}</td>
-						<td class="table-body-box">${ownerActivity.locationDetail}</td>
+						<td class="table-body-box">
+							<c:choose>
+								<c:when test="${fn:length(ownerActivity.locationDetail) >= 10}">
+				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.locationDetail, 0, 10)}...</a>
+				                </c:when>
+								<c:otherwise>
+				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.locationDetail}</a>
+								</c:otherwise>
+							</c:choose>
+						</td>
 						<td class="table-body-box">${ownerActivity.readHit}</td>
-						<td class="table-body-box">${ownerActivity.event}</td>
+						<td class="table-body-box">
+							<c:choose>
+								<c:when test="${fn:length(ownerActivity.event) >= 10}">
+				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.event, 0, 10)}...</a>
+				                </c:when>
+								<c:otherwise>
+				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.event}</a>
+								</c:otherwise>
+							</c:choose>
+						</td>
 						<td class="table-body-box">${ownerActivity.postedDate}</td>
 					</tr>
 				</c:forEach>

@@ -9,6 +9,7 @@ import java.util.List;
 import com.FunFinder360.Bean.Model.ActivityAndImage;
 import com.FunFinder360.Bean.Model.ContentObject;
 import com.FunFinder360.Bean.Model.ImageObject;
+import com.FunFinder360.Bean.Model.OwnerActivityDetail;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Bean.Model.PersonalActivityDetail;
 
@@ -16,7 +17,7 @@ import Utility.Paging;
 
 public class MemberActivitesDetailDao extends SuperDao {
 	public int insertPersonalActivityData(PersonalActivity personalActivity, List<String> contentList,
-		List<String> imageList, String contentAndImageOrder) throws Exception {
+			List<String> imageList, String contentAndImageOrder) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
 
@@ -266,6 +267,107 @@ public class MemberActivitesDetailDao extends SuperDao {
 			conn.close();
 		}
 
+		return bean;
+	}
+
+	// 기업
+	public OwnerActivityDetail getOwnerActivityDate(int activityId) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Connection conn = super.getConnection();
+
+		pstmt = null;
+
+		String sql = "select * from owner_activites where activityid = ? ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, activityId);
+		rs = pstmt.executeQuery();
+
+		OwnerActivityDetail bean = null;
+		if (rs.next()) {
+			bean = getBeanData(rs);
+		}
+		pstmt = null;
+
+		sql = "select content, totalorder from activity_content where owneractivityid = ? ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, activityId);
+		rs = pstmt.executeQuery();
+
+		ContentObject contentObject = null;
+		while (rs.next()) {
+			contentObject = new ContentObject();
+			contentObject.setContent(rs.getString("content"));
+			contentObject.setOrder(rs.getInt("totalorder"));
+
+			bean.setContentList(contentObject);
+		}
+
+		pstmt = null;
+		rs = null;
+
+		sql = "select image, totalorder from activity_image where ownerActivityid = ? ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, activityId);
+		rs = pstmt.executeQuery();
+
+		ImageObject imageObject = null;
+
+		while (rs.next()) {
+			imageObject = new ImageObject();
+			imageObject.setImage(rs.getString("image"));
+			imageObject.setOrder(rs.getInt("totalorder"));
+
+			bean.setImageList(imageObject);
+		}
+
+		pstmt = null;
+
+		sql = "SELECT (COALESCE(A.a, 0) + COALESCE(B.b, 0)) AS total_count " + "FROM ( " + "    SELECT COUNT(*) AS a"
+				+ "    FROM activity_content " + "    where owneractivityid = ? " + ") A " + "FULL OUTER JOIN ( "
+				+ "    SELECT COUNT(*) AS b " + "    FROM activity_image " + "    where owneractivityid = ? " + ") B "
+				+ "ON 1=1 ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, activityId);
+		pstmt.setInt(2, activityId);
+		rs = pstmt.executeQuery();
+
+		if (rs.next()) {
+			bean.setTotalRacodeCount(rs.getInt("total_count"));
+		}
+
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (rs != null) {
+			rs.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return bean;
+	}
+
+	private OwnerActivityDetail getBeanData(ResultSet rs) throws Exception {
+
+		OwnerActivityDetail bean = new OwnerActivityDetail();
+
+		bean.setActivityId(rs.getInt("ACTIVITYID"));
+		bean.setUserId(rs.getString("userid"));
+		bean.setActivityName(rs.getString("ACTIVITYNAME"));
+		bean.setCategory(rs.getString("category"));
+		bean.setLocation(rs.getString("location"));
+		bean.setLocationDetail(rs.getString("locationDetail"));
+		bean.setDuration(rs.getInt("duration"));
+		bean.setPrice(rs.getInt("price"));
+		bean.setActivityNumber(rs.getInt("activityNumber"));
+		bean.setOpenTime(rs.getString("openTime"));
+		bean.setCloseTime(rs.getString("closeTime"));
+		bean.setEvent(rs.getString("event"));
+		bean.setReadHit(rs.getInt("readHit"));
+		bean.setPostedDate(rs.getString("postedDate"));
+		
 		return bean;
 	}
 
