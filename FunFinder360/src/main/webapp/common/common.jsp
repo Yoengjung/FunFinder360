@@ -88,7 +88,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 								data-bs-toggle="dropdown">데이터 관리</a>
 								<ul class="dropdown-menu">
 									<li><a class="dropdown-item"
-										href="<%=notWithFormTag%>memberList">회원 데이터</a></li>
+										href="<%=notWithFormTag%>selectInfo">정보 관리</a></li>
 									<li><a class="dropdown-item" href="#">회원별 수익 데이터</a></li>
 									<li><a class="dropdown-item"
 										href="<%=notWithFormTag%>activityList">회원 활동 데이터</a></li>
