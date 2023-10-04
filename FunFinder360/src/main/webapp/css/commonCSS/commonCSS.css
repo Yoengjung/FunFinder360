@@ -101,14 +101,15 @@ hr {
 	position: absolute;
 	min-width: 210px;
 	background-color: #FFFFFF;
-	border: 1px solid #CCCCCC;
-	z-index: 1;
+	border: 1px solid #999999;
+	z-index: 5;
 	left: 9px;
 }
 
 /* 호버 시 드롭다운 내용 활성화 */
 .menu-dropdown:hover .dropdown-content {
 	display: block;
+	z-index: 5;
 }
 
 /* 드롭다운 내용 항목 스타일 */
@@ -121,7 +122,7 @@ hr {
 
 /* 드롭다운 내용 항목 호버 시 스타일 */
 .dropdown-content a:hover {
-	background-color: #ddd;
+	background-color: #999999;
 }
 
 .a-tag:hover {
@@ -179,9 +180,10 @@ hr {
 }
 
 .navbar-nav {
+	flex-direction: row;
+	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-	position: absolute;
 }
 
 .navbar-brand {
@@ -195,8 +197,8 @@ hr {
 }
 
 @media screen and (max-width: 1200px) {
-    body {
-        width: 1200px; 
-        margin: 0 auto;
-    }
+	body {
+		width: 1200px;
+		margin: 0 auto;
+	}
 }

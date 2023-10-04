@@ -15,7 +15,7 @@ memberDetail=com.FunFinder360.Controller.Member.MemberDetailController
 memberActivity=com.FunFinder360.Controller.Member.MemberActivityController
 PersonalPasswordUpdate=com.FunFinder360.Controller.Member.MemberPersonalPasswordUpdateController
 OwnerPasswordUpdate=com.FunFinder360.Controller.Member.MemberOwnerPasswordUpdateController
-
+personalMemberList=com.FunFinder360.Controller.MemberListController
 #로그아웃
 logout=com.FunFinder360.Controller.Member.MemberLogoutController
 
@@ -38,7 +38,8 @@ ownerMemberActivityDetail=com.FunFinder360.Controller.ActivityController.OwnerMe
 
 #관리자
 memberList=com.FunFinder360.Controller.Member.MemberListController
-
+ownerMemberList=com.FunFinder360.Controller.Admin.OwnerMemberListController
+selectInfo=com.FunFinder360.Controller.Admin.SelectInfoController
 
 #개인 문의
 questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListController
