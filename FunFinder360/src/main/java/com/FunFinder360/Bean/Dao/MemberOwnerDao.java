@@ -2,6 +2,8 @@ package com.FunFinder360.Bean.Dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.FunFinder360.Bean.Model.MemberOwner;
 
@@ -54,6 +56,60 @@ public class MemberOwnerDao extends SuperDao {
 		bean.setRegistrationDate(String.valueOf(rs.getDate("registrationDate")));
 
 		return bean;
+	}
+
+	public int getTotalRecodeCount() throws Exception{
+		String sql = " select count(*) as cnt from owner_users ";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql);
+
+		rs = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (rs.next()) {
+			cnt = rs.getInt("cnt");
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<MemberOwner> getMemberOwnerList() throws Exception{
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		String sql = " select * from owner_users order by username asc";
+		
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ;
+		
+		List<MemberOwner> lists = new ArrayList<MemberOwner>();
+		
+		while(rs.next()) {
+			lists.add(getBeanData(rs)) ;
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(connection != null) {connection.close();}
+		
+		return lists;
 	}
 
 }

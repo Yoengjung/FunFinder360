@@ -15,15 +15,15 @@
 					<a href="<%=notWithFormTag%>memberList">개인 회원 정보 조회</a>
 				</div>
 				<div class="infoSelect-btn-2">
-					<a href="#">업주 회원 정보 조회</a>
+					<a href="<%=notWithFormTag%>ownerMemberList">업주 회원 정보 조회</a>
 				</div>
 			</div>
 			<div class="box-2">
 				<div class="infoSelect-btn-3">
-					<a href="#">개인 게시물 정보 조회</a>
+					<a href="<%=notWithFormTag%>memberActivityList">개인 게시물 정보 조회</a>
 				</div>
 				<div class="infoSelect-btn-4">
-					<a href="#">업주 게시물 정보 조회</a>
+					<a href="<%=notWithFormTag%>ownerMemberActivityList">업주 게시물 정보 조회</a>
 				</div>
 			</div>
 		</div>

@@ -5,13 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.FunFinder360.Bean.Dao.MemberOwnerDao;
-import com.FunFinder360.Bean.Model.MemberOwner;
+import com.FunFinder360.Bean.Dao.ActivitesDao;
+import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Controller.SuperClass;
 
 import Utility.Paging;
 
-public class OwnerMemberListController extends SuperClass {
+public class MemberActivityListController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
@@ -21,25 +21,22 @@ public class OwnerMemberListController extends SuperClass {
 		String mode = request.getParameter("mode") ;
 		String keyword = request.getParameter("keyword") ;
 		
-		MemberOwnerDao dao = new MemberOwnerDao();
+		ActivitesDao dao = new ActivitesDao();
 		
 		try {
-			int totalCount = dao.getTotalRecodeCount();
-			String url = super.getUrlInfomation("ownerMemberList");
+			int totalCount = dao.GetTotalRecordCount(mode, keyword);
+			String url = super.getUrlInfomation("memberActivityList");
 			boolean isGrid = false;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			
-			List<MemberOwner> lists = dao.getMemberOwnerList();
+			List<PersonalActivity> lists = dao.getMemberPersonalList();
 			
 			request.setAttribute("pageInfo", pageInfo);
-			request.setAttribute("datalist", lists);
-			super.goToPage("admin/ownerMemberList.jsp");
+			request.setAttribute("dataList", lists);
 			
-		} catch(Exception e) {
+			super.goToPage("admin/personalActivityAdmin.jsp");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
-	
 }

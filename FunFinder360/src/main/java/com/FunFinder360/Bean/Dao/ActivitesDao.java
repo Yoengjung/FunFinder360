@@ -274,4 +274,42 @@ public class ActivitesDao extends SuperDao {
 		return bean;
 	}
 
+	public List<PersonalActivity> getMemberPersonalList() throws Exception{
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		String sql = " select * from personal_activites order by postedDate";
+		
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ;
+		
+		List<PersonalActivity> lists = new ArrayList<PersonalActivity>();
+		
+		while(rs.next()) {
+			PersonalActivity bean = new PersonalActivity();
+			bean.setActivityId(rs.getInt("ACTIVITYID"));
+			bean.setUserId(rs.getString("userid"));
+			bean.setActivityName(rs.getString("ACTIVITYNAME"));
+			bean.setCategory(rs.getString("category"));
+			bean.setLocation(rs.getString("location"));
+			bean.setLocationDetail(rs.getString("locationDetail"));
+			bean.setDuration(rs.getInt("duration"));
+			bean.setCost(rs.getInt("cost"));
+			bean.setActivityNumber(rs.getInt("activityNumber"));
+			bean.setRating(rs.getInt("rating"));
+			bean.setReadHit(rs.getInt("readHit"));
+			bean.setPostedDate(rs.getString("postedDate"));
+			
+			lists.add(bean);
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(connection != null) {connection.close();}
+		
+		return lists;
+	}
+
 }

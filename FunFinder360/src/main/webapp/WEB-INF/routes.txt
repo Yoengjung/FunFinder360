@@ -37,13 +37,16 @@ personalMemberActivityDetail=com.FunFinder360.Controller.ActivityController.Pers
 ownerMemberActivityDetail=com.FunFinder360.Controller.ActivityController.OwnerMemberActivityDetailController
 
 #관리자
+selectInfo=com.FunFinder360.Controller.Admin.SelectInfoController
 memberList=com.FunFinder360.Controller.Member.MemberListController
 ownerMemberList=com.FunFinder360.Controller.Admin.OwnerMemberListController
-selectInfo=com.FunFinder360.Controller.Admin.SelectInfoController
+memberActivityList=com.FunFinder360.Controller.Admin.MemberActivityListController
+ownerMemberActivityList=com.FunFinder360.Controller.Admin.OwnerMemberActivityListController
 
 #개인 문의
 questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListController
-questionsDetail=com.FunFinder360.Controller.QuestionsController.QuestionsListDetailController
+questionsDetail=com.FunFinder360.Controller.Questions
+Controller.QuestionsListDetailController
 questionsInsert=com.FunFinder360.Controller.QuestionsController.QuestionsInsertController
 
 #리뷰

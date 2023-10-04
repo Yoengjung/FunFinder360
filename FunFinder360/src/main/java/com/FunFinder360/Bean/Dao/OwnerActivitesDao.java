@@ -16,8 +16,8 @@ import Utility.Paging;
 
 public class OwnerActivitesDao extends SuperDao {
 
-	public int insertOwnerActivityData(OwnerActivity ownerActivity, List<String> contentList, List<String> imageList, String contentAndImageOrder)
-			throws Exception {
+	public int insertOwnerActivityData(OwnerActivity ownerActivity, List<String> contentList, List<String> imageList,
+			String contentAndImageOrder) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
 
@@ -112,7 +112,7 @@ public class OwnerActivitesDao extends SuperDao {
 		return cnt;
 	}
 
-	public List<OwnerActivityAndImage> selectAll(Paging pageInfo) throws Exception{
+	public List<OwnerActivityAndImage> selectAll(Paging pageInfo) throws Exception {
 		PreparedStatement prtmt = null;
 		ResultSet resultSet = null;
 
@@ -155,9 +155,9 @@ public class OwnerActivitesDao extends SuperDao {
 		return bean;
 	}
 
-	private OwnerActivityAndImage getActivityBeanData(ResultSet rs) throws Exception{
+	private OwnerActivityAndImage getActivityBeanData(ResultSet rs) throws Exception {
 		OwnerActivityAndImage lists = new OwnerActivityAndImage();
-		
+
 		lists.setActivityId(rs.getInt("activityId"));
 		lists.setUserId(rs.getString("userId"));
 		lists.setActivityName(rs.getString("activityName"));
@@ -172,29 +172,29 @@ public class OwnerActivitesDao extends SuperDao {
 		lists.setImage(rs.getString("image"));
 		lists.setReadHit(rs.getInt("readHit"));
 		lists.setPostedDate(rs.getString("postedDate"));
-		
+
 		return lists;
 	}
 
-	public OwnerActivityDetail getOwnerActivityData(int activityId) throws Exception{
+	public OwnerActivityDetail getOwnerActivityData(int activityId) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
-		
+
 		String sql = "update owner_activites set readHit = readHit + 1 where activityid = ?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, activityId);
 		pstmt.executeUpdate();
-		
+
 		pstmt = null;
-		
+
 		sql = "select * from owner_activites where activityid = ? ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, activityId);
 		rs = pstmt.executeQuery();
-		
+
 		OwnerActivityDetail bean = new OwnerActivityDetail();
-		
+
 		if (rs.next()) {
 			bean.setActivityId(rs.getInt("activityId"));
 			bean.setUserId((rs.getString("userId")));
@@ -209,15 +209,15 @@ public class OwnerActivitesDao extends SuperDao {
 			bean.setCloseTime(rs.getString("closeTime"));
 			bean.setEvent(rs.getString("event"));
 			bean.setReadHit(rs.getInt("readHit"));
-			bean.setPostedDate(rs.getString("postedDate"));	
+			bean.setPostedDate(rs.getString("postedDate"));
 		}
 		pstmt = null;
-		
+
 		sql = "select content, totalorder from activity_content where ownerActivityId = ?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, activityId);
 		rs = pstmt.executeQuery();
-		
+
 		ContentObject contentObject = null;
 		while (rs.next()) {
 			contentObject = new ContentObject();
@@ -246,8 +246,8 @@ public class OwnerActivitesDao extends SuperDao {
 		}
 		sql = "SELECT (COALESCE(A.a, 0) + COALESCE(B.b, 0)) AS total_count " + "FROM ( " + "    SELECT COUNT(*) AS a"
 				+ "    FROM activity_content " + "    where owneractivityid = ? " + ") A " + "FULL OUTER JOIN ( "
-				+ "    SELECT COUNT(*) AS b " + "    FROM activity_image " + "    where owneractivityid = ? "
-				+ ") B " + "ON 1=1 ";
+				+ "    SELECT COUNT(*) AS b " + "    FROM activity_image " + "    where owneractivityid = ? " + ") B "
+				+ "ON 1=1 ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, activityId);
 		pstmt.setInt(2, activityId);
@@ -268,5 +268,76 @@ public class OwnerActivitesDao extends SuperDao {
 		}
 
 		return bean;
+	}
+
+	public int GetTotalRecordCount() throws Exception{
+		String sql = " select count(*) as cnt from owner_activites";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql);
+
+		rs = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (rs.next()) {
+			cnt = rs.getInt("cnt");
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<OwnerActivity> getOwnerActivityList() throws Exception{
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		String sql = " select * from owner_activites order by postedDate";
+		
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ;
+		
+		List<OwnerActivity> lists = new ArrayList<OwnerActivity>();
+		
+		while(rs.next()) {
+			OwnerActivity bean = new OwnerActivity();
+			
+			bean.setActivityId(rs.getInt("activityId"));
+			bean.setUserid((rs.getString("userId")));
+			bean.setActivitiyName(rs.getString("activityName"));
+			bean.setCategory(rs.getString("category"));
+			bean.setLocation(rs.getString("location"));
+			bean.setLocationDetail(rs.getString("locationDetail"));
+			bean.setDuration(rs.getInt("duration"));
+			bean.setPrice(rs.getInt("price"));
+			bean.setActivitiyNumber(rs.getInt("activityNumber"));
+			bean.setOpenTime(rs.getString("openTime"));
+			bean.setCloseTime(rs.getString("closeTime"));
+			bean.setEvent(rs.getString("event"));
+			bean.setReadHit(rs.getInt("readHit"));
+			bean.setPostedDate(rs.getString("postedDate"));
+			
+			lists.add(bean);
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(connection != null) {connection.close();}
+		
+		return lists;
 	}
 }
