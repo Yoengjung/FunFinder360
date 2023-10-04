@@ -3,6 +3,8 @@ package com.FunFinder360.Bean.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.FunFinder360.Bean.Model.MemberPersonalUser;
 
@@ -141,6 +143,54 @@ public class MemberPersonalUserDao extends SuperDao {
 		}
 		
 		return member;
+	}
+	
+	public int GetTotalRecordCount() throws Exception {
+		String sql = " select count(*) as cnt from personal_users " ;
+		
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		connection = super.getConnection() ;
+		pstmt = connection.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ; 
+		
+		int cnt = -1 ;
+		
+		if(rs.next()) {
+			cnt = rs.getInt("cnt") ;
+		}
+		
+		if(rs!=null) {rs.close();}
+		if(pstmt!=null) {pstmt.close();}
+		if(connection!=null) {connection.close();}
+		
+		return cnt;
+	}
+	
+	public List<MemberPersonalUser> getMemberPeronalList() throws Exception{
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		String sql = " select * from personal_users order by username asc";
+		
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ;
+		
+		List<MemberPersonalUser> lists = new ArrayList<MemberPersonalUser>();
+		
+		while(rs.next()) {
+			lists.add(getBeanData(rs)) ;
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(connection != null) {connection.close();}
+		
+		return lists;
 	}
 
 }
