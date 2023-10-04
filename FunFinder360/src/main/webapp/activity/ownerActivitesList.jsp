@@ -58,24 +58,26 @@ img {
 </style>
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		var questionOptionList = $('#mode option');
-		for (var i = 0; i < questionOptionList.length; i++) {
-			if (questionOptionList[i].value == '${requestScope.pageInfo.mode}'){
-				questionOptionList[i].selected = true;
-			}
-		}
-		$('#keyowrd').val('${requestScope.pageInfo.keyword}');
-		
-		$("#mode").change(function(){
-			if ($(this).val() != 'all') {
-				$('#keyword').attr('disabled', false);
-			} else {
-				$('#keyword').val('');
-				$('#keyword').attr('disabled', true);
-			}
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						var questionOptionList = $('#mode option');
+						for (var i = 0; i < questionOptionList.length; i++) {
+							if (questionOptionList[i].value == '${requestScope.pageInfo.mode}') {
+								questionOptionList[i].selected = true;
+							}
+						}
+						$('#keyowrd').val('${requestScope.pageInfo.keyword}');
+
+						$("#mode").change(function() {
+							if ($(this).val() != 'all') {
+								$('#keyword').attr('disabled', false);
+							} else {
+								$('#keyword').val('');
+								$('#keyword').attr('disabled', true);
+							}
+						});
+					});
 </script>
 
 

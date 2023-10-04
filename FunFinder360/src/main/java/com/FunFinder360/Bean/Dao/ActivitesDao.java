@@ -18,7 +18,7 @@ public class ActivitesDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
 
-		String sql = "insert into personal_activitis values (PERSONAL_ACTIVITY_SEQUENCE.nextval, ? ,? ,? ,? ,? ,? ,? ,? ,?, ?, default)";
+		String sql = "insert into personal_activites values (PERSONAL_ACTIVITY_SEQUENCE.nextval, ? ,? ,? ,? ,? ,? ,? ,? ,?, ?, default)";
 
 		pstmt = conn.prepareStatement(sql);
 
