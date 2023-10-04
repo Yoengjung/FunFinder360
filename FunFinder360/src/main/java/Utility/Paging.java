@@ -16,7 +16,47 @@ public class Paging {
 	private String mode = "";
 	private String keyword = "";
 	private String flowParameter = "";
+	
+	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, boolean isGrid) {
+		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
+			_pageNumber = "1";
+		}
 
+		this.pageNumber = Integer.parseInt(_pageNumber);
+		if (_pageSize == null || _pageSize.equals("null") || _pageSize.equals("")) {
+			if (isGrid) {
+				_pageSize = "8";
+			} else {
+				_pageSize = "10";
+			}
+		}
+		
+		this.pageSize = Integer.parseInt(_pageSize);
+		this.totalCount = totalCount;
+		this.url = url;
+		double _totalPage = Math.ceil((double) totalCount / (double) this.pageSize);
+		this.totalPage = (int) _totalPage;
+		this.beginRow = (this.pageNumber - 1) * this.pageSize + 1;
+		this.endRow = this.pageNumber * this.pageSize;
+		if (this.endRow > totalCount) {
+			this.endRow = totalCount;
+		}
+
+		this.beginPage = (this.pageNumber - 1) / this.pageCount * this.pageCount + 1;
+		this.endPage = this.beginPage + this.pageCount - 1;
+		if (this.endPage > this.totalPage) {
+			this.endPage = this.totalPage;
+		}
+
+		this.pagingStatus = "총 " + totalCount + "건[" + this.pageNumber + "/" + this.totalPage + "]";
+		this.flowParameter = "";
+		this.flowParameter = this.flowParameter + "&pageNumber=" + this.pageNumber;
+		this.flowParameter = this.flowParameter + "&pageSize=" + this.pageSize;
+		this.pagingHtml = this.getMakePagingHtml();
+		
+		
+	}
+	
 	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword,
 			boolean isGrid) {
 		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
@@ -31,6 +71,8 @@ public class Paging {
 				_pageSize = "10";
 			}
 		}
+		
+		
 
 		this.pageSize = Integer.parseInt(_pageSize);
 		this.totalCount = totalCount;

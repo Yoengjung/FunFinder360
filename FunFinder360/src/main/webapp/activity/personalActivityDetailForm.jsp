@@ -212,7 +212,7 @@
 			</div>
 		</c:if>
 
-
+	
 		<c:forEach var="reviewBean" items="${requestScope.reviewData}">
 			<div class="review-box">
 				<div class="review-head">
@@ -226,6 +226,9 @@
 				<span>${reviewBean.postedDate}</span>
 			</div>
 		</c:forEach>
+		
+		<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 	</div>
+	
 </body>
 </html>
