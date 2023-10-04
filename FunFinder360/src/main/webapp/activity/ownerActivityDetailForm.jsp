@@ -13,7 +13,7 @@
 	  return new bootstrap.Tooltip(tooltipTriggerEl)
 	})
 	function backPage() {
-		location.href = "<%=notWithFormTag%>activitesList"
+		location.href = "<%=notWithFormTag%>OwnerActivitesList"
 	}
 	var check = false;
 	$(document).ready(function() {
@@ -228,6 +228,8 @@
 				<span>${reviewBean.postedDate}</span>
 			</div>
 		</c:forEach>
+		
+		<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 	</div>
 </body>
 </html>
