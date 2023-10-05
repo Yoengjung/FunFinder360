@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <title>개인 회원 정보 관리</title>
 <style>
+body {
+	min-height: 800px;
+}
+
 .container {
 	margin-top: 9%;
 	width: 100%;
@@ -56,6 +60,11 @@
 	width: 200px;
 }
 
+#userId-tag {
+	color: blue;
+	text-decoration: underline;
+}
+
 
 </style>
 </head>
@@ -78,7 +87,7 @@
 			<tbody>
 				<c:forEach var="bean" items="${requestScope.datalist}">
 					<tr>
-						<td>${bean.userId}</td>
+						<td><a href="<%=notWithFormTag%>personalUserTotalDetail&userId=${bean.userId}" id="userId-tag">${bean.userId}</a></td>
 						<td>${bean.password}</td>
 						<td>${bean.username}</td>
 						<td>${bean.birth}</td>

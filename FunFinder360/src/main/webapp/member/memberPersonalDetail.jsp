@@ -92,16 +92,6 @@
 	margin-right: 10px;
 }
 
-.info-value-change-input-businessName {
-	height: 40px;
-	width: 521px;
-	line-height: 36px;
-	border: 1px solid black;
-	border-radius: 10px;
-	margin-left: 10px;
-	text-align: center;
-	margin-right: 10px;
-}
 
 .info-container-newPassword {
 	display: none;
