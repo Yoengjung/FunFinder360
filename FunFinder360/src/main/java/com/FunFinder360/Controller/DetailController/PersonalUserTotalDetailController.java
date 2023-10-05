@@ -1,5 +1,7 @@
 package com.FunFinder360.Controller.DetailController;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +10,8 @@ import com.FunFinder360.Bean.Dao.MemberPersonalUserDao;
 import com.FunFinder360.Bean.Model.MemberPersonalUser;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Controller.SuperClass;
+
+import Utility.Paging;
 
 public class PersonalUserTotalDetailController extends SuperClass {
 	@Override
@@ -26,9 +30,18 @@ public class PersonalUserTotalDetailController extends SuperClass {
 		
 		try {
 			MemberPersonalUser bean = dao.getMemberData(userId);
-	
+			int totalCount = activityDao.GetTotalRecordCount(mode, keyword);
+			String url = super.getUrlInfomation("personalUserTotalDetail");
+			boolean isGrid = false;
+			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			
+			List<PersonalActivity> lists = activityDao.getPersonalUserToUserId(pageInfo, userId);
+			int readHitTotalCount = dao.getReadHitTotalCount(userId);
+			
+			request.setAttribute("activityData", lists);
 			request.setAttribute("userData", bean);
+			request.setAttribute("pageInfo", pageInfo);
+			request.setAttribute("readHitTotalCount", readHitTotalCount);
 			
 			super.goToPage("admin/personalUserTotalDetail.jsp");
 			

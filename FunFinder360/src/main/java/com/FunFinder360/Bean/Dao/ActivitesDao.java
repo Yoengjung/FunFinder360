@@ -340,5 +340,53 @@ public class ActivitesDao extends SuperDao {
 
 		return bean;
 	}
+	
+	public List<PersonalActivity> getPersonalUserToUserId(Paging pageInfo, String userId) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		// String sql = " select * from personal_activites order by postedDate";
+
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		String sql = " SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, TO_CHAR(posteddate, 'YYYY-MM-DD') AS posteddate, ranking ";
+		sql += " FROM (SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate, RANK() OVER (ORDER BY rating ASC) AS ranking";
+		sql += " FROM personal_activites where userId = ?";
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%' ";
+		}
+		sql += " ) ";
+		sql += " where ranking between ? AND ?";
+
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql);
+
+		pstmt.setString(1, userId);
+		pstmt.setInt(2, pageInfo.getBeginRow());
+		pstmt.setInt(3, pageInfo.getEndRow());
+
+		rs = pstmt.executeQuery();
+
+		List<PersonalActivity> lists = new ArrayList<PersonalActivity>();
+
+		while (rs.next()) {
+
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return lists;
+	}
 
 }

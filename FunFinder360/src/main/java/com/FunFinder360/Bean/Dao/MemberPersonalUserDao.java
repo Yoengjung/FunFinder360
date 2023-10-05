@@ -308,4 +308,35 @@ public class MemberPersonalUserDao extends SuperDao {
 		return cnt;
 	}
 
+	public int getReadHitTotalCount(String userId) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		ResultSet rs = null;
+		
+		String sql = "select sum(readhit) totalReadhit from personal_activites where userId = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		rs = pstmt.executeQuery();
+		
+		int totalReadHit = 0;
+		if (rs.next()) {
+			totalReadHit = rs.getInt("totalReadhit");
+		}
+		
+		if(rs != null) {
+			rs.close();
+		}
+		if(pstmt != null) {
+			pstmt.close();
+		}
+		if(conn != null) {
+			conn.close();
+		}
+		
+		return totalReadHit;
+	}
+
 }
