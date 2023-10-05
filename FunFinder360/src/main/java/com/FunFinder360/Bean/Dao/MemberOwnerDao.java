@@ -1,5 +1,6 @@
 package com.FunFinder360.Bean.Dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class MemberOwnerDao extends SuperDao {
 	public int getTotalRecodeCount(String mode, String keyword) throws Exception {
 		System.out.println("검색할 필드명 : " + mode);
 		System.out.println("검새 키워드명 : " + keyword);
-		
+
 		String sql = " select count(*) as cnt from owner_users ";
 		if (mode == null || mode.equals("all")) {
 		} else {
@@ -116,7 +117,7 @@ public class MemberOwnerDao extends SuperDao {
 
 		connection = super.getConnection();
 		pstmt = connection.prepareStatement(sql);
-		
+
 		pstmt.setInt(1, pageInfo.getBeginRow());
 		pstmt.setInt(2, pageInfo.getEndRow());
 
@@ -139,6 +140,99 @@ public class MemberOwnerDao extends SuperDao {
 		}
 
 		return lists;
+	}
+
+	public MemberOwner getOwnerData(String userId) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Connection conn = super.getConnection();
+
+		String sql = "select * from owner_users where userid = ?";
+
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, userId);
+
+		rs = pstmt.executeQuery();
+
+		MemberOwner member = new MemberOwner();
+
+		if (rs.next()) {
+			member = getBeanData(rs);
+		}
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return member;
+	}
+
+	public int getReadHitTotalCount(String userId) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		ResultSet rs = null;
+		
+		String sql = "select sum(readhit) totalReadHit from owner_activites where userid =? ";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		rs = pstmt.executeQuery();
+		
+		int totalReviewCount = 0;
+		if (rs.next()) {
+			totalReviewCount = rs.getInt("totalReadHit");
+		}
+		
+		if(rs != null) {
+			rs.close();
+		}
+		if(pstmt != null) {
+			pstmt.close();
+		}
+		if(conn != null) {
+			conn.close();
+		}
+		
+		return totalReviewCount;
+	}
+
+	public int getReviewTotalCount(String userId) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		ResultSet rs = null;
+		
+		String sql = "select count(*) totalReview from owner_activites join (select activityId from reviews) re on owner_activites.activityId = re.activityid where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		rs = pstmt.executeQuery();
+		
+		int totalReviewCount = 0;
+		if (rs.next()) {
+			totalReviewCount = rs.getInt("totalReview");
+		}
+		
+		if(rs != null) {
+			rs.close();
+		}
+		if(pstmt != null) {
+			pstmt.close();
+		}
+		if(conn != null) {
+			conn.close();
+		}
+		
+		return totalReviewCount;
 	}
 
 }

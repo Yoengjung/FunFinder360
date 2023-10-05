@@ -70,3 +70,6 @@ personalUserChangeBio=com.FunFinder360.Controller.ChangeController.PersonalUserC
 
 #개인 유저 통합 상세보기
 personalUserTotalDetail=com.FunFinder360.Controller.DetailController.PersonalUserTotalDetailController
+
+#업주 유저 통합 상세보기
+ownerUserTotalDetail=com.FunFinder360.Controller.DetailController.OwnerUserTotalDetailController

@@ -140,6 +140,16 @@ public class MemberPersonalUserDao extends SuperDao {
 		if (rs.next()) {
 			member = this.getBeanData(rs);
 		}
+		
+		if(rs != null) {
+			rs.close();
+		}
+		if(pstmt != null) {
+			pstmt.close();
+		}
+		if(conn != null) {
+			conn.close();
+		}
 
 		return member;
 	}

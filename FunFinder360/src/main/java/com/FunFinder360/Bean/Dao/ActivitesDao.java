@@ -345,8 +345,6 @@ public class ActivitesDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		// String sql = " select * from personal_activites order by postedDate";
-
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 

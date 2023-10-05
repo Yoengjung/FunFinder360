@@ -56,6 +56,10 @@
 .form-select {
 	width: 200px;
 }
+#userId-tag {
+	color: blue;
+	text-decoration: underline;
+}
 
 </style>
 </head>
@@ -80,7 +84,7 @@
 			<tbody>
 				<c:forEach var="bean" items="${requestScope.datalist}">
 					<tr>
-						<td>${bean.userId}</td>
+						<td><a href="<%=notWithFormTag%>ownerUserTotalDetail&userId=${bean.userId}" id="userId-tag">${bean.userId}</a></td>
 						<td>${bean.password}</td>
 						<td>${bean.userName}</td>
 						<td>${bean.businessName}</td>
