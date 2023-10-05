@@ -158,12 +158,17 @@
 	margin-right: 10px;
 }
 
+.info-container-newPassword {
+	display: none;
+}
+
 </style>
 
 <script>
 	$(document).ready(function() {
 		$("#change-id-btn").click(function() {
 			$("#info-key-password").text("현재 비밀번호");
+			$(".info-container-newPassword").css("display", "block");
 			$("#info-value-password").css("display", "none");
 			$("#info-value-change-input-password").css("display", "block");
 			$("#info-value-change-input-password").focus();
@@ -399,7 +404,7 @@
 				<span class="info-key" id="info-key-password">비밀번호</span> 
 				<span class="info-value-password" id="info-value-password">${requestScope.bean.password}</span> 
 				<input class="info-value-change-input" id="info-value-change-input-password" type="password">
-				<button type="button" class="btn btn-dark" id="change-id-btn">수정</button>
+				<button type="button" class="btn btn-dark" id="change-id-btn">비밀번호 변경</button>
 				<button type="button" class="btn btn-primary" id="change-id-success-btn">완료</button>
 				<button type="button" class="btn btn-danger" id="change-id-delete-btn">취소</button>
 			</div>
