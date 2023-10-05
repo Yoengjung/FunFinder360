@@ -218,11 +218,20 @@
 	
 	function changePassword(userId) {
 		const newPassword = $("#info-value-change-input-password").val();
+		const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,20}$/;
 	    $.ajax({
 	        type: "POST",
 	        url: '<%=notWithFormTag%>ownerUserChangePassword',
 	        data: { userId: userId, newPassword: newPassword}, 
 	        success: function(response, status, xhr) {
+	        	if (!passwordPattern.test(newPassword)) {
+	                alert("새 비밀번호가 유효한 형식이 아닙니다.");
+	                return; 
+	            }
+	        	if (newPassword.length > 255) {
+	            	alert("비밀번호의 길이는 255이하 입니다.");
+	            	return;
+	            }
 	            if (xhr.status === 200) {
 	        		alert("비밀번호가 변경되었습니다.");
 	        		location.reload();
@@ -240,6 +249,8 @@
 	        }
 	    });
 	}
+	
+	
 	function changeBusinessName(userId) {
 		const newBusinessName = $("#info-value-change-input-businessName").val();
 	    $.ajax({
@@ -247,6 +258,11 @@
 	        url: '<%=notWithFormTag%>ownerUserChangeBusinessName',
 	        data: { userId: userId, newBusinessName: newBusinessName}, 
 	        success: function(response, status, xhr) {
+	        	
+	        	if (newBusinessName.length > 100) {
+	        		alert("기업이름은 100이하 입니다 ");
+	            	return;
+	        	}
 	            if (xhr.status === 200) {
 	        		alert("사업이름이 변경되었습니다.");
 	        		location.reload();
@@ -266,11 +282,17 @@
     }
 	function changePhoneNumber(userId) {
 		const newPhoneNumber = $("#info-value-change-input-phone").val();
+		const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
 	    $.ajax({
 	        type: "POST",
 	        url: '<%=notWithFormTag%>ownerUserChangePhoneNumber',
 	        data: { userId: userId, newPhoneNumber: newPhoneNumber}, 
 	        success: function(response, status, xhr) {
+	        	if (!phoneRegex.test(newPhoneNumber)) {
+	                alert("전화번호의 유효한 형식이 아닙니다. ex) 000-0000-0000");
+	                return; 
+	            }
+	        	
 	            if (xhr.status === 200) {
 	        		alert("전화번호가 변경되었습니다.");
 	        		location.reload();
@@ -336,6 +358,8 @@
 	        }
 	    });
     }
+	
+	
 </script>
 </head>
 <body>
@@ -343,21 +367,19 @@
 		<h2>${requestScope.bean.userName}회원정보</h2>
 		<div class="info-container">
 			<div class="info-box">
-				<span class="info-key">아이디</span> <span class="info-value" id="info-value-userId">${requestScope.bean.userId}</span>
+				<span class="info-key">아이디</span> 
+				<span class="info-value" id="info-value-userId">${requestScope.bean.userId}</span>
 				<input type="hidden" id="info-value-userId-hidden" value="${requestScope.bean.userId}">
 			</div>
 		</div>
 		<div class="info-container">
 			<div class="info-box">
-				<span class="info-key">비밀번호</span> <span class="info-value-password"
-					id="info-value-password">${requestScope.bean.password}</span> <input
-					class="info-value-change-input" id="info-value-change-input-password"
-					type="password">
+				<span class="info-key">비밀번호</span> 
+				<span class="info-value-password"id="info-value-password">${requestScope.bean.password}</span> 
+				<input class="info-value-change-input" id="info-value-change-input-password" type="password">
 				<button type="button" class="btn btn-dark" id="change-id-btn">수정</button>
-				<button type="button" class="btn btn-primary"
-					id="change-id-success-btn">완료</button>
-				<button type="button" class="btn btn-danger"
-					id="change-id-delete-btn">취소</button>
+				<button type="button" class="btn btn-primary" id="change-id-success-btn">완료</button>
+				<button type="button" class="btn btn-danger" id="change-id-delete-btn">취소</button>
 			</div>
 		</div>
 		<div class="info-container">
