@@ -11,19 +11,21 @@ public class PersonalUserChangePasswordController extends SuperClass {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		super.doPost(request, response);
-		
+
 		String userId = request.getParameter("userId");
+		String currentPassword = request.getParameter("currentPassword");
 		String newPassword = request.getParameter("newPassword");
-		
+
 		MemberPersonalUserDao dao = new MemberPersonalUserDao();
-		
+
 		try {
-			int cnt = dao.changePassword(userId, newPassword);
-			
-			if(cnt >= 0) {
-				new MemberDetailController().doGet(request, response);
+			int cnt = dao.changePassword(userId, currentPassword, newPassword);
+
+			if (cnt <= 0) {
+				response.getWriter().write("fail");
 			}
-		} catch(Exception e) {
+			new MemberDetailController().doGet(request, response);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

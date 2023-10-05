@@ -193,20 +193,36 @@ public class MemberPersonalUserDao extends SuperDao {
 		return lists;
 	}
 
-	public int changePassword(String userId, String newPassword) throws Exception{
+	public int changePassword(String userId, String currentPassword, String newPassword) throws Exception{
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
+		ResultSet rs = null;
 		
-		String sql = "update personal_users set password=? where userid = ?";
+		String sql = "select password from personal_users where userid = ?";
 		
 		pstmt = conn.prepareStatement(sql);
 		
-		pstmt.setString(1, newPassword);
-		pstmt.setString(2, userId);
+		pstmt.setString(1, userId);
 		
+		rs = pstmt.executeQuery();
+		
+		boolean passwordCheck = false;
+		if (rs.next()) {
+			if (rs.getString("password").equals(currentPassword)) {
+				passwordCheck = true;
+			}
+		}
 		int cnt = -1;
-		cnt = pstmt.executeUpdate();
-		
+		if (passwordCheck) {
+			sql = "update personal_users set password=? where userid = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, newPassword);
+			pstmt.setString(2, userId);
+			
+			cnt = pstmt.executeUpdate();	
+		}
 		return cnt;
 	}
 
