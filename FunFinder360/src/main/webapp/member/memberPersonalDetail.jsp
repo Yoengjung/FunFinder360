@@ -228,7 +228,7 @@ function changePassword(userId) {
         success: function(response) {
         	console.log(response)
         	if (!passwordPattern.test(newPassword)) {
-                alert("새 비밀번호가 유효한 형식이 아닙니다.");
+                alert("새 비밀번호가 유효한 형식이 아닙니다. ");
                 return; 
             }
         	if (newPassword.length < 8) {
