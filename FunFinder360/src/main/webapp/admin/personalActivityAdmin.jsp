@@ -56,6 +56,8 @@
 .form-select {
 	width: 200px;
 }
+
+
 </style>
 </head>
 <body>
@@ -75,7 +77,8 @@
 					<th>활동인원</th>
 					<th>평점</th>
 					<th>조회수</th>
-					<th>등록일자<th>
+					<th>등록일자
+					<th>
 				</tr>
 			</thead>
 			<tbody>
@@ -96,14 +99,14 @@
 						</td>
 						<td>${bean.category}</td>
 						<td>
-						    <c:choose>
-						        <c:when test="${fn:length(bean.location) + fn:length(bean.locationDetail) > 15}">
+							<c:choose>
+								<c:when test="${fn:length(bean.location) + fn:length(bean.locationDetail) > 15}">
 						        	${bean.location} ${fn:substring(bean.locationDetail, 0, 15 - fn:length(bean.location))}...
 						        </c:when>
-						        <c:otherwise>
+								<c:otherwise>
 						            ${bean.location} ${bean.locationDetail}
 						        </c:otherwise>
-						    </c:choose>
+							</c:choose>
 						</td>
 						<td>${bean.duration}</td>
 						<td>${bean.cost}</td>

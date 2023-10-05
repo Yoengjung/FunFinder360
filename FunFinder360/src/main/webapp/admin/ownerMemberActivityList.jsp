@@ -57,6 +57,7 @@
 	width: 200px;
 }
 
+
 </style>
 </head>
 <body>
@@ -94,27 +95,27 @@
 								</c:otherwise>
 							</c:choose>
 						</td>
-						
+
 						<td>${bean.category}</td>
 						<td>
-						    <c:choose>
-						        <c:when test="${fn:length(bean.location) + fn:length(bean.locationDetail) > 15}">
+							<c:choose>
+								<c:when test="${fn:length(bean.location) + fn:length(bean.locationDetail) > 15}">
 						        	${bean.location} ${fn:substring(bean.locationDetail, 0, 15 - fn:length(bean.location))}...
 						        </c:when>
-						        <c:otherwise>
+								<c:otherwise>
 						            ${bean.location} ${bean.locationDetail}
 						        </c:otherwise>
-						    </c:choose>
+							</c:choose>
 						</td>
 						<td align="center">${bean.price}</td>
 						<td align="center">${bean.activitiyNumber}</td>
-						<td>${bean.openTime} ~ ${bean.closeTime}</td>
+						<td>${bean.openTime}~ ${bean.closeTime}</td>
 						<td>
 							<c:choose>
-									<c:when test="${fn:length(bean.event) >= 10}">
+								<c:when test="${fn:length(bean.event) >= 10}">
 					                    ${fn:substring(bean.event, 0, 10)}..
 					                </c:when>
-									<c:otherwise>
+								<c:otherwise>
 					                    ${bean.event}
 									</c:otherwise>
 							</c:choose>

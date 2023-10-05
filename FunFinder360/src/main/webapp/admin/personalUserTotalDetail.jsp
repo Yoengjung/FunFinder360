@@ -4,145 +4,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
 <title>개인 유저 통합 상세 조회</title>
 </head>
-<style>
-.container {
-	margin-top: 9%;
-	width: 100%;
-	height: 100%;
-}
-
-.container h2 {
-	margin-bottom: 65px;
-	text-align: center;
-}
-
-.info-box {
-	width: 830px;
-	transform: translateX(-50%);
-	left: 50%;
-	position: relative;
-	display: flex;
-	flex-direction: row;
-	margin-bottom: 10px;
-}
-
-.info-key {
-	text-align: center;
-	height: 40px;
-	line-height: 36px;
-	width: 150px;
-	border: 1px solid black;
-	border-radius: 10px;
-	font-size: 18px;
-	background-color: #CCCCCC;
-}
-
-.info-value {
-	height: 40px;
-	width: 521px;
-	line-height: 36px;
-	border: 1px solid black;
-	border-radius: 10px;
-	margin-left: 10px;
-	text-align: center;
-	margin-right: 10px;
-	background-color: #eeeeee;
-}
-
-.backBtn {
-	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
-	margin-top: 30px;
-}
-
-.info-value-change-input {
-	height: 40px;
-	width: 521px;
-	line-height: 36px;
-	border: 1px solid black;
-	border-radius: 10px;
-	margin-left: 10px;
-	text-align: center;
-	margin-right: 10px;
-	display: none;
-}
-
-.info-value-change-input-newPassword {
-	height: 40px;
-	width: 521px;
-	line-height: 36px;
-	border: 1px solid black;
-	border-radius: 10px;
-	margin-left: 10px;
-	text-align: center;
-	margin-right: 10px;
-}
-
-.info-value-password {
-	height: 40px;
-	width: 521px;
-	line-height: 36px;
-	border: 1px solid black;
-	border-radius: 10px;
-	margin-left: 10px;
-	text-align: center;
-	margin-right: 10px;
-}
-
-#pagingStatus-span {
-	position: relative;
-	display: block;
-	float: right;
-	font-size: 20px;
-	margin-bottom: 10px;
-	border: 2px solid black;
-	border-radius: 10px;
-	width: auto;
-	padding: 0px 10px;
-}
-
-.form-select {
-	width: 200px;
-}
-
-.search-form {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-
-.keyword-input-box {
-	margin: 0 20px;
-}
-
-.paging-container {
-	margin-top: 20px;
-}
-
-.input-group {
-	width: 300px;
-}
-
-.form-select {
-	width: 200px;
-}
-
-.container h4 {
-	text-align: center;
-	margin-bottom: 10px;
-}
-.total-container {
-	display: flex;
-	flex-direction: row;
-	left: 50%;
-	transform: translateX(-50%);
-	position: relative;
-	background-color: red;
-}
-</style>
+<script>
+	
+	$(document).ready(function () {
+		const currentDate = new Date();
+		const date7 = currentDate.getDate();
+		const date6 = currentDate.getDate() - 1;
+		const date5 = currentDate.getDate() - 2;
+		const date4 = currentDate.getDate() - 3;
+		const date3 = currentDate.getDate() - 4;
+		const date2 = currentDate.getDate() - 5;
+		const date1 = currentDate.getDate() - 6;
+		
+		
+		$(".day1").text(date1 + "일");
+		$(".day2").text(date2 + "일");
+		$(".day3").text(date3 + "일");
+		$(".day4").text(date4 + "일");
+		$(".day5").text(date5 + "일");
+		$(".day6").text(date6 + "일");
+		$(".day7").text(date7 + "일");
+	})
+	
+	
+	
+	
+</script>
 <body>
 	<div class="container">
 		<h2>${requestScope.userData.username}회원정보</h2>
@@ -289,6 +179,115 @@
 				</div>
 			</div>
 		</div>
+		<div class='readHit-chart-container'>
+			<div class="vertical_chart_box">
+				<ul class="axis_y">
+					<li class="item">
+						10
+						<span class="blind"></span>
+					</li>
+					<li class="item">
+						50
+						<span class="blind"></span>
+					</li>
+					<li class="item">
+						100
+						<span class="blind"></span>
+					</li>
+					<li class="item">
+						500
+						<span class="blind"></span>
+					</li>
+					<li class="item">
+						1000
+						<span class="blind"></span>
+					</li>
+					<li class="item">
+						5000
+						<span class="blind"></span>
+					</li>
+					<li class="item">
+						10000
+						<span class="blind"></span>
+					</li>
+				</ul>
+				<ul class="axis_x">
+				<!-- item 을 차트에서 표현해야하는 개수만큼 나열한다. -->
+				<li class="item">
+					<div class="text_box">
+						<strong class="day1" id="day1"></strong>
+					</div>
+					<button type="button" class="graph">
+						<span class="time data1" style="height: 80%;">
+							<span class="blind">data 타입 1</span>
+						</span>
+					</button>
+				</li>
+				<li class="item">
+					<div class="text_box">
+						<strong class="day2"></strong>
+					</div>
+					<button type="button" class="graph">
+						<span class="time data1" style="height: 80%;">
+							<span class="blind">data 타입 1</span>
+						</span>
+					</button>
+				</li>
+				<li class="item">
+					<div class="text_box">
+						<strong class="day3"></strong>
+					</div>
+					<button type="button" class="graph">
+						<span class="time data1" style="height: 80%;">
+							<span class="blind">data 타입 1</span>
+						</span>
+					</button>
+				</li>
+				<li class="item">
+					<div class="text_box">
+						<strong class="day4"></strong>
+					</div>
+					<button type="button" class="graph">
+						<span class="time data1" style="height: 80%;">
+							<span class="blind">data 타입 1</span>
+						</span>
+					</button>
+				</li>
+				<li class="item">
+					<div class="text_box">
+						<strong class="day5"></strong>
+					</div>
+					<button type="button" class="graph">
+						<span class="time data1" style="height: 80%;">
+							<span class="blind">data 타입 1</span>
+						</span>
+					</button>
+				</li>
+				<li class="item">
+					<div class="text_box">
+						<strong class="day6"></strong>
+					</div>
+					<button type="button" class="graph">
+						<span class="time data1" style="height: 80%;">
+							<span class="blind">data 타입 1</span>
+						</span>
+					</button>
+				</li>
+				<li class="item">
+					<div class="text_box">
+						<strong class="day7"></strong>
+					</div>
+					<button type="button" class="graph">
+						<span class="time data1" style="height: 80%;">
+							<span class="blind">data 타입 1</span>
+						</span>
+					</button>
+				</li>
+			</ul>
+			</div>
+			
+		</div>
 	</div>
+
 </body>
 </html>

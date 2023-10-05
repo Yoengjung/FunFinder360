@@ -19,6 +19,7 @@ public class PersonalUserTotalDetailController extends SuperClass {
 		super.doGet(request, response);
 		
 		String userId = request.getParameter("userId");
+		String currentDate = request.getParameter("currentDate");
 		
 		String pageNumber = request.getParameter("pageNumber");
 		String pageSize = request.getParameter("pageSize");
@@ -40,6 +41,7 @@ public class PersonalUserTotalDetailController extends SuperClass {
 			
 			int readHitTotalCount = dao.getReadHitTotalCount(userId);
 			int reviewTotalCount = dao.getReviewTotalCount(userId);
+			int dateReadHitCount = dao.getDateReadHitCount(currentDate)
 			
 			request.setAttribute("activityData", lists);
 			request.setAttribute("userData", bean);
