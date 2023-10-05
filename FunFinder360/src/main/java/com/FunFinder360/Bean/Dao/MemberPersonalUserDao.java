@@ -339,4 +339,35 @@ public class MemberPersonalUserDao extends SuperDao {
 		return totalReadHit;
 	}
 
+	public int getReviewTotalCount(String userId) throws Exception {
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		ResultSet rs = null;
+		
+		String sql = "select count(*) totalReview from personal_activites join (select activityId from reviews) re on personal_activites.activityId = re.activityid where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		rs = pstmt.executeQuery();
+		
+		int totalReviewCount = 0;
+		if (rs.next()) {
+			totalReviewCount = rs.getInt("totalReview");
+		}
+		
+		if(rs != null) {
+			rs.close();
+		}
+		if(pstmt != null) {
+			pstmt.close();
+		}
+		if(conn != null) {
+			conn.close();
+		}
+		
+		return totalReviewCount;
+	}
+
 }

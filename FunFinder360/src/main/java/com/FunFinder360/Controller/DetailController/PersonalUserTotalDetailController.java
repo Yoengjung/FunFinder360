@@ -37,11 +37,13 @@ public class PersonalUserTotalDetailController extends SuperClass {
 			
 			List<PersonalActivity> lists = activityDao.getPersonalUserToUserId(pageInfo, userId);
 			int readHitTotalCount = dao.getReadHitTotalCount(userId);
+			int reviewTotalCount = dao.getReviewTotalCount(userId);
 			
 			request.setAttribute("activityData", lists);
 			request.setAttribute("userData", bean);
 			request.setAttribute("pageInfo", pageInfo);
 			request.setAttribute("readHitTotalCount", readHitTotalCount);
+			request.setAttribute("reviewTotalCount", reviewTotalCount);
 			
 			super.goToPage("admin/personalUserTotalDetail.jsp");
 			

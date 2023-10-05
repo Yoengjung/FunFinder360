@@ -274,7 +274,7 @@
 			 <div class='totalReviewCount-container'>
 			 	<div class="totalReivewCount-box">
 			 		<span>총 댓글수</span>
-			 		<span>${requestScope.readHitTotalCount}</span>
+			 		<span>${requestScope.reviewTotalCount}</span>
 			 	</div>
 			 </div>
 		</div>
