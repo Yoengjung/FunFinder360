@@ -128,14 +128,14 @@ public class ActivitesDao extends SuperDao {
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
-		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId ";
+		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId ";
 		if (mode == null || mode.equals("all")) {
 
 		} else {
 			sql += "where " + mode + " like '%" + keyword + "%'";
 		}
 
-		sql += ") " + " where ranking between ? and ? and imageorder = 0 ";
+		sql += ") " + " where ranking between ? and ?";
 
 		Connection connection = super.getConnection();
 

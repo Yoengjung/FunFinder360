@@ -75,7 +75,5 @@ public class ActivityContent {
 	public void setTotalOrder(int totalOrder) {
 		this.totalOrder = totalOrder;
 	}
-	
-	
-	
+
 }

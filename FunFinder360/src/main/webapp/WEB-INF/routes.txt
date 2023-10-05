@@ -15,7 +15,7 @@ memberDetail=com.FunFinder360.Controller.Member.MemberDetailController
 memberActivity=com.FunFinder360.Controller.Member.MemberActivityController
 PersonalPasswordUpdate=com.FunFinder360.Controller.Member.MemberPersonalPasswordUpdateController
 OwnerPasswordUpdate=com.FunFinder360.Controller.Member.MemberOwnerPasswordUpdateController
-personalMemberList=com.FunFinder360.Controller.MemberListController
+personalMemberList=com.FunFinder360.Controller.Member.MemberListController
 #로그아웃
 logout=com.FunFinder360.Controller.Member.MemberLogoutController
 
@@ -45,8 +45,7 @@ ownerMemberActivityList=com.FunFinder360.Controller.Admin.OwnerMemberActivityLis
 
 #개인 문의
 questionsList=com.FunFinder360.Controller.QuestionsController.QuestionsListController
-questionsDetail=com.FunFinder360.Controller.Questions
-Controller.QuestionsListDetailController
+questionsDetail=com.FunFinder360.Controller.QuestionsController.QuestionsListDetailController
 questionsInsert=com.FunFinder360.Controller.QuestionsController.QuestionsInsertController
 
 #리뷰
@@ -55,3 +54,16 @@ reviewList=com.FunFinder360.Controller.ReviewController.ReviewListController
 
 #즐겨찾기
 favoritesInsert=com.FunFinder360.Controller.FavoritesController.FavoritesInsertController
+
+#기업 유저 개인정보 변경
+ownerUserChangePassword=com.FunFinder360.Controller.ChangeController.OwnerUserChangePasswordController
+ownerUserChangeBusinessName=com.FunFinder360.Controller.ChangeController.OwnerUserChangeBusinessNameController
+ownerUserChangePhoneNumber=com.FunFinder360.Controller.ChangeController.OwnerUserChangePhoneNumberController
+ownerUserChangeEmail=com.FunFinder360.Controller.ChangeController.OwnerUserChangeEmailController
+ownerUserChangeBio=com.FunFinder360.Controller.ChangeController.OwnerUserChangeBioController
+
+#개인 유저 개인정보 변경
+personalUserChangePassword=com.FunFinder360.Controller.ChangeController.PersonalUserChangePasswordController
+personalUserChangePhoneNumber=com.FunFinder360.Controller.ChangeController.PersonalUserChangePhoneNumberController
+personalUserChangeEmail=com.FunFinder360.Controller.ChangeController.PersonalUserChangeEmailController
+personalUserChangeBio=com.FunFinder360.Controller.ChangeController.PersonalUserChangeBioController

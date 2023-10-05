@@ -101,8 +101,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 								<ul class="dropdown-menu">
 									<li><a class="dropdown-item"
 										href="<%=notWithFormTag%>memberActivity">내 활동</a></li>
-									<li><a class="dropdown-item" href="#">게시물 수익</a></li>
-									<li><a class="dropdown-item" href="#">즐겨찾기 목록</a></li>
 									<li><a class="dropdown-item"
 										href="<%=notWithFormTag%>memberDetail">회원 정보</a></li>
 								</ul></li>

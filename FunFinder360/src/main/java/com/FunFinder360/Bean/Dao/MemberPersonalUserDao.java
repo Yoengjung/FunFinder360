@@ -224,4 +224,88 @@ public class MemberPersonalUserDao extends SuperDao {
 		return lists;
 	}
 
+	public int changePassword(String userId, String currentPassword, String newPassword) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		ResultSet rs = null;
+		
+		String sql = "select password from personal_users where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		rs = pstmt.executeQuery();
+		
+		boolean passwordCheck = false;
+		if (rs.next()) {
+			if (rs.getString("password").equals(currentPassword)) {
+				passwordCheck = true;
+			}
+		}
+		int cnt = -1;
+		if (passwordCheck) {
+			sql = "update personal_users set password=? where userid = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, newPassword);
+			pstmt.setString(2, userId);
+			
+			cnt = pstmt.executeUpdate();	
+		}
+		return cnt;
+	}
+
+	public int changePhoneNumber(String userId, String newPhoneNumber) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "update personal_users set phoneNumber=? where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, newPhoneNumber);
+		pstmt.setString(2, userId);
+		
+		int cnt = -1;
+		cnt = pstmt.executeUpdate();
+		
+		return cnt;
+	}
+
+	public int changeEmail(String userId, String newEmail) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "update personal_users set email=? where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, newEmail);
+		pstmt.setString(2, userId);
+		
+		int cnt = -1;
+		cnt = pstmt.executeUpdate();
+		
+		return cnt;
+	}
+
+	public int changeBio(String userId, String newBio) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "update personal_users set bio=? where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, newBio);
+		pstmt.setString(2, userId);
+		
+		int cnt = -1;
+		cnt = pstmt.executeUpdate();
+		
+		return cnt;
+	}
+
 }
