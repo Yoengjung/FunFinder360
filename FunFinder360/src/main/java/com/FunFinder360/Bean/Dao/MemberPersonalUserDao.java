@@ -146,7 +146,7 @@ public class MemberPersonalUserDao extends SuperDao {
 
 	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
 		System.out.println("검색할 필드명 : " + mode);
-		System.out.println("검새 키워드명 : " + keyword);
+		System.out.println("검색 키워드명 : " + keyword);
 
 		String sql = " select count(*) as cnt from personal_users ";
 		if (mode == null || mode.equals("all")) {

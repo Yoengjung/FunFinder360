@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.FunFinder360.Bean.Dao.ActivitesDao;
-import com.FunFinder360.Bean.Model.MemberPersonalUser;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Controller.SuperClass;
 
@@ -21,6 +20,13 @@ public class MemberActivityListController extends SuperClass {
 		String pageSize = request.getParameter("pageSize") ;
 		String mode = request.getParameter("mode") ;
 		String keyword = request.getParameter("keyword") ;
+		
+		if (keyword != null) {
+			if (keyword.contains("-")) {
+				keyword = keyword.substring(2);
+				keyword = keyword.replace("-", "/");
+			}
+		}
 		
 		ActivitesDao dao = new ActivitesDao();
 		

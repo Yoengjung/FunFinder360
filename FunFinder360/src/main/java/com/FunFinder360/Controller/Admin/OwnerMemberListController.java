@@ -21,6 +21,13 @@ public class OwnerMemberListController extends SuperClass {
 		String mode = request.getParameter("mode") ;
 		String keyword = request.getParameter("keyword") ;
 		
+		if (keyword != null) {
+			if (keyword.contains("-")) {
+				keyword = keyword.substring(2);
+				keyword = keyword.replace("-", "/");
+			}
+		}
+		
 		MemberOwnerDao dao = new MemberOwnerDao();
 		
 		try {

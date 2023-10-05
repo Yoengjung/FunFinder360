@@ -20,10 +20,17 @@ public class MemberListController extends SuperClass {
 		String pageSize = request.getParameter("pageSize");
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
-
+		
+		
 		MemberPersonalUserDao dao = new MemberPersonalUserDao();
 
 		try {
+			if (keyword != null) {
+				if (keyword.contains("-")) {
+					keyword = keyword.substring(2);
+					keyword = keyword.replace("-", "/");
+				}
+			}
 			int totalCount = dao.GetTotalRecordCount(mode, keyword);
 			String url = super.getUrlInfomation("memberList");
 			boolean isGrid = false;

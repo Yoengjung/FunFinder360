@@ -77,6 +77,8 @@ public class OwnerActivitesDao extends SuperDao {
 	}
 
 	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
+		System.out.println("검색할 필드명 : " + mode);
+		System.out.println("검색 키워드 : " + keyword);
 		PreparedStatement pstmt = null;
 		ResultSet resultSet = null;
 		Connection connection = super.getConnection();
@@ -270,7 +272,7 @@ public class OwnerActivitesDao extends SuperDao {
 		return bean;
 	}
 
-	public int GetTotalRecordCount() throws Exception{
+	public int GetTotalRecordCount() throws Exception {
 		String sql = " select count(*) as cnt from owner_activites";
 
 		PreparedStatement pstmt = null;
@@ -300,44 +302,69 @@ public class OwnerActivitesDao extends SuperDao {
 		return cnt;
 	}
 
-	public List<OwnerActivity> getOwnerActivityList() throws Exception{
-		PreparedStatement pstmt = null ;
-		ResultSet rs = null ;
-		
-		String sql = " select * from owner_activites order by postedDate";
-		
-		connection = super.getConnection();
-		pstmt = connection.prepareStatement(sql) ;
-		
-		rs = pstmt.executeQuery() ;
-		
-		List<OwnerActivity> lists = new ArrayList<OwnerActivity>();
-		
-		while(rs.next()) {
-			OwnerActivity bean = new OwnerActivity();
-			
-			bean.setActivityId(rs.getInt("activityId"));
-			bean.setUserid((rs.getString("userId")));
-			bean.setActivitiyName(rs.getString("activityName"));
-			bean.setCategory(rs.getString("category"));
-			bean.setLocation(rs.getString("location"));
-			bean.setLocationDetail(rs.getString("locationDetail"));
-			bean.setDuration(rs.getInt("duration"));
-			bean.setPrice(rs.getInt("price"));
-			bean.setActivitiyNumber(rs.getInt("activityNumber"));
-			bean.setOpenTime(rs.getString("openTime"));
-			bean.setCloseTime(rs.getString("closeTime"));
-			bean.setEvent(rs.getString("event"));
-			bean.setReadHit(rs.getInt("readHit"));
-			bean.setPostedDate(rs.getString("postedDate"));
-			
-			lists.add(bean);
+	public List<OwnerActivity> getOwnerActivityList(Paging pageInfo) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		// String sql = " select * from owner_activites order by postedDate";
+		String sql = " select activityid, userId, activityName, category, location, locationdetail,duration, price, activitynumber,opentime, closetime, event, readhit, TO_CHAR(posteddate, 'YYYY-MM-DD') AS posteddate ";
+		sql += " from (select activityid, userId, activityName, category, location, locationdetail,duration, price, activitynumber,opentime, closetime, event, readhit, posteddate, RANK() OVER (ORDER BY locationdetail ASC) AS ranking ";
+		sql += " from owner_activites ";
+
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%'";
 		}
-		
-		if(rs != null) {rs.close();}
-		if(pstmt != null) {pstmt.close();}
-		if(connection != null) {connection.close();}
-		
+		sql += " ) ";
+		sql += " where ranking between ? and ? ";
+
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql);
+
+		pstmt.setInt(1, pageInfo.getBeginRow());
+		pstmt.setInt(2, pageInfo.getEndRow());
+
+		rs = pstmt.executeQuery();
+
+		List<OwnerActivity> lists = new ArrayList<OwnerActivity>();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
 		return lists;
+	}
+
+	private OwnerActivity getBeanData(ResultSet rs) throws Exception {
+		OwnerActivity bean = new OwnerActivity();
+
+		bean.setActivityId(rs.getInt("activityId"));
+		bean.setUserid((rs.getString("userId")));
+		bean.setActivitiyName(rs.getString("activityName"));
+		bean.setCategory(rs.getString("category"));
+		bean.setLocation(rs.getString("location"));
+		bean.setLocationDetail(rs.getString("locationDetail"));
+		bean.setDuration(rs.getInt("duration"));
+		bean.setPrice(rs.getInt("price"));
+		bean.setActivitiyNumber(rs.getInt("activityNumber"));
+		bean.setOpenTime(rs.getString("openTime"));
+		bean.setCloseTime(rs.getString("closeTime"));
+		bean.setEvent(rs.getString("event"));
+		bean.setReadHit(rs.getInt("readHit"));
+		bean.setPostedDate(rs.getString("postedDate"));
+
+		return bean;
 	}
 }
