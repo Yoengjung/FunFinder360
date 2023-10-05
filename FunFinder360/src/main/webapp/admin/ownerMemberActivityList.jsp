@@ -56,44 +56,45 @@
 .form-select {
 	width: 200px;
 }
+
 </style>
 </head>
 <body>
 	<div class="container">
-		<h2>개인 게시물 리스트</h2>
+		<h2>업주 게시물 리스트</h2>
 		<span id="pagingStatus-span">${requestScope.pageInfo.pagingStatus}</span>
 		<table class="table talbe-hover">
 			<thead class="table-dark">
 				<tr>
-					<th>게시물 번호</th>
+					<th>번호</th>
 					<th>등록자</th>
 					<th>활동명</th>
 					<th>카테고리</th>
 					<th>지역</th>
-					<th>소요시간</th>
-					<th>비용</th>
-					<th>활동인원</th>
-					<th>평점</th>
+					<th>가격</th>
+					<th>인원</th>
+					<th>영업시간</th>
+					<th>이벤트</th>
 					<th>조회수</th>
-					<th>등록일자<th>
+					<th>등록일자</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="bean" items="${requestScope.dataList}">
 					<tr>
 						<td>${bean.activityId}</td>
-						<td>${bean.userId}</td>
-						<%-- <td>${bean.activityName}</td> --%>
+						<td>${bean.userid}</td>
 						<td>
 							<c:choose>
-								<c:when test="${fn:length(bean.activityName) >= 10}">
-				                    ${fn:substring(bean.activityName, 0, 10)}..
+								<c:when test="${fn:length(bean.activitiyName) >= 10}">
+				                    ${fn:substring(bean.activitiyName, 0, 10)}..
 				                </c:when>
 								<c:otherwise>
-				                    ${bean.activityName}
+				                    ${bean.activitiyName}
 								</c:otherwise>
 							</c:choose>
 						</td>
+						
 						<td>${bean.category}</td>
 						<td>
 						    <c:choose>
@@ -105,11 +106,20 @@
 						        </c:otherwise>
 						    </c:choose>
 						</td>
-						<td>${bean.duration}</td>
-						<td>${bean.cost}</td>
-						<td>${bean.activityNumber}</td>
-						<td>${bean.rating}</td>
-						<td>${bean.readHit}</td>
+						<td align="center">${bean.price}</td>
+						<td align="center">${bean.activitiyNumber}</td>
+						<td>${bean.openTime} ~ ${bean.closeTime}</td>
+						<td>
+							<c:choose>
+									<c:when test="${fn:length(bean.event) >= 10}">
+					                    ${fn:substring(bean.event, 0, 10)}..
+					                </c:when>
+									<c:otherwise>
+					                    ${bean.event}
+									</c:otherwise>
+							</c:choose>
+						</td>
+						<td align="center">${bean.readHit}</td>
 						<td>${bean.postedDate}</td>
 					</tr>
 				</c:forEach>
@@ -118,7 +128,7 @@
 		<div class="search-container">
 			<div class="search-in-container">
 				<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
-					<input type="hidden" name="command" value="memberActivityList">
+					<input type="hidden" name="command" value="ownerMemberActivityList">
 					<select id="mode" name="mode" class="form-select">
 						<option value="all" selected="selected">--- 선택해 주세요 ---
 						<option value="activityId">번호
@@ -126,10 +136,9 @@
 						<option value="activityName">활동명
 						<option value="category">카테고리
 						<option value="location">지역
-						<option value="duration">소요시간
-						<option value="cost">비용
-						<option value="activityNumber">활동인원
-						<option value="rating">평점
+						<option value="openTime">영업시작
+						<option value="closeTime">영업종료
+						<option value="event">이벤트
 						<option value="readHit">조회수
 						<option value="postedDate">등록일자
 					</select>

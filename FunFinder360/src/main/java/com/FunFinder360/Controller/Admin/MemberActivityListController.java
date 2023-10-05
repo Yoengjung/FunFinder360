@@ -21,6 +21,13 @@ public class MemberActivityListController extends SuperClass {
 		String mode = request.getParameter("mode") ;
 		String keyword = request.getParameter("keyword") ;
 		
+		if (keyword != null) {
+			if (keyword.contains("-")) {
+				keyword = keyword.substring(2);
+				keyword = keyword.replace("-", "/");
+			}
+		}
+		
 		ActivitesDao dao = new ActivitesDao();
 		
 		try {
@@ -29,7 +36,7 @@ public class MemberActivityListController extends SuperClass {
 			boolean isGrid = false;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			
-			List<PersonalActivity> lists = dao.getMemberPersonalList();
+			List<PersonalActivity> lists = dao.getMemberPersonalList(pageInfo);
 			
 			request.setAttribute("pageInfo", pageInfo);
 			request.setAttribute("dataList", lists);

@@ -20,20 +20,27 @@ public class MemberListController extends SuperClass {
 		String pageSize = request.getParameter("pageSize");
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
-
+		
+		
 		MemberPersonalUserDao dao = new MemberPersonalUserDao();
 
 		try {
-			int totalCount = dao.GetTotalRecordCount();
-			String url = super.getUrlInfomation("personalMemberList");
+			if (keyword != null) {
+				if (keyword.contains("-")) {
+					keyword = keyword.substring(2);
+					keyword = keyword.replace("-", "/");
+				}
+			}
+			int totalCount = dao.GetTotalRecordCount(mode, keyword);
+			String url = super.getUrlInfomation("memberList");
 			boolean isGrid = false;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 
-			List<MemberPersonalUser> lists = dao.getMemberPeronalList();
+			List<MemberPersonalUser> lists = dao.getMemberPeronalList(pageInfo);
 
 			request.setAttribute("pageInfo", pageInfo);
 			request.setAttribute("datalist", lists);
-			super.goToPage("member/memberList.jsp");
+			super.goToPage("admin/memberList.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();

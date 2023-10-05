@@ -30,6 +30,33 @@
 	width: 132px;
 	padding: 0px 10px;
 }
+.form-select {
+	width: 200px;
+}
+
+.search-form {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.keyword-input-box {
+	margin: 0 20px;
+}
+
+.paging-container {
+	margin-top: 20px;
+}
+
+.input-group {
+	width: 300px;
+}
+
+.form-select {
+	width: 200px;
+}
+
+
 </style>
 </head>
 <body>
@@ -62,6 +89,27 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<div class="search-container">
+			<div class="search-in-container">
+				<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
+					<input type="hidden" name="command" value="memberList">
+					<select id="mode" name="mode" class="form-select">
+						<option value="all" selected="selected">--- 선택해 주세요 ---
+						<option value="userId">아이디
+						<option value="password">비밀번호
+						<option value="username">이름
+						<option value="birth">생년월일
+						<option value="phoneNumber">전화번호
+						<option value="email">이메일
+						<option value="registrationDate">가입 일자
+					</select>
+					<div class="input-group">
+						<input class="keyword-input-box form-control" type="text" name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">
+					</div>
+					<button type="submit" class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
+				</form>
+			</div>
+		</div>
 	</div>
 	<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 </body>
