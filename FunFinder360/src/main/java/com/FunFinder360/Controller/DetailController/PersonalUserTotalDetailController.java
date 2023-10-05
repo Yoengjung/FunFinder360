@@ -1,6 +1,5 @@
 package com.FunFinder360.Controller.DetailController;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +19,6 @@ public class PersonalUserTotalDetailController extends SuperClass {
 		super.doGet(request, response);
 		
 		String userId = request.getParameter("userId");
-		LocalDate now = LocalDate.now();
-		
-		int currentDate = now.getDayOfMonth();
 		
 		String pageNumber = request.getParameter("pageNumber");
 		String pageSize = request.getParameter("pageSize");
@@ -44,13 +40,15 @@ public class PersonalUserTotalDetailController extends SuperClass {
 			
 			int readHitTotalCount = dao.getReadHitTotalCount(userId);
 			int reviewTotalCount = dao.getReviewTotalCount(userId);
-			int dateReadHitCount = dao.getDateReadHitCount(currentDate);
+			
+			List<PersonalActivity> dateReadHitCount = dao.getDateReadHitCount(userId);
 			
 			request.setAttribute("activityData", lists);
 			request.setAttribute("userData", bean);
 			request.setAttribute("pageInfo", pageInfo);
 			request.setAttribute("readHitTotalCount", readHitTotalCount);
 			request.setAttribute("reviewTotalCount", reviewTotalCount);
+			request.setAttribute("dateReadHitCount", dateReadHitCount);
 			
 			super.goToPage("admin/personalUserTotalDetail.jsp");
 			

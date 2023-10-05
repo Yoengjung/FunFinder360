@@ -3,10 +3,12 @@ package com.FunFinder360.Bean.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.FunFinder360.Bean.Model.MemberPersonalUser;
+import com.FunFinder360.Bean.Model.PersonalActivity;
 
 import Utility.Paging;
 
@@ -23,11 +25,10 @@ public class MemberPersonalUserDao extends SuperDao {
 		connection = super.getConnection();
 		pstmt = connection.prepareStatement(sql);
 
+		
 		pstmt.setString(1, id);
 		pstmt.setString(2, password);
-
 		rs = pstmt.executeQuery();
-
 		MemberPersonalUser bean = null;
 		if (rs.next()) {
 			bean = getBeanData(rs);
@@ -378,6 +379,192 @@ public class MemberPersonalUserDao extends SuperDao {
 		}
 		
 		return totalReviewCount;
+	}
+
+	public List<PersonalActivity> getDateReadHitCount(String userId) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		ResultSet rs = null;
+		
+		String sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
+		System.out.println(sql);
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		LocalDate now = LocalDate.now();
+		
+		String date7 = String.valueOf(now.minusDays(7));
+		pstmt.setString(1, userId);
+		pstmt.setString(2, date7);
+		
+		rs = pstmt.executeQuery();
+		List<PersonalActivity> lists = new ArrayList<PersonalActivity>();
+		
+		
+		if (rs.next()) {
+			PersonalActivity bean = new PersonalActivity();
+			try {
+				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
+				lists.add(bean);
+			} catch (Exception e) {
+				bean.setReadHit(0);
+				lists.add(bean);
+			}
+		}
+		
+		pstmt.close();
+		
+		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
+		System.out.println(sql);
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		String date6 = String.valueOf(now.minusDays(6));
+		pstmt.setString(1, userId);
+		pstmt.setString(2, date6);
+		
+		rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			PersonalActivity bean = new PersonalActivity();
+			try {
+				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
+				lists.add(bean);
+			} catch (Exception e) {
+				bean.setReadHit(0);
+				lists.add(bean);
+			}
+		}
+		pstmt.close();
+		
+		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
+		System.out.println(sql);
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		String date5 = String.valueOf(now.minusDays(5));
+		pstmt.setString(1, userId);
+		pstmt.setString(2, date5);
+		
+		rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			PersonalActivity bean = new PersonalActivity();
+			try {
+				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
+				lists.add(bean);
+			} catch (Exception e) {
+				bean.setReadHit(0);
+				lists.add(bean);
+			}
+		}
+		pstmt.close();
+		
+		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
+		System.out.println(sql);
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		String date4 = String.valueOf(now.minusDays(4));
+		pstmt.setString(1, userId);
+		pstmt.setString(2, date4);
+		
+		rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			PersonalActivity bean = new PersonalActivity();
+			try {
+				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
+				lists.add(bean);
+			} catch (Exception e) {
+				bean.setReadHit(0);
+				lists.add(bean);
+			}
+		}
+		pstmt.close();
+		
+		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
+		System.out.println(sql);
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		String date3 = String.valueOf(now.minusDays(3));
+		pstmt.setString(1, userId);
+		pstmt.setString(2, date3);
+		
+		rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			PersonalActivity bean = new PersonalActivity();
+			try {
+				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
+				lists.add(bean);
+			} catch (Exception e) {
+				bean.setReadHit(0);
+				lists.add(bean);
+			}
+		}
+		
+		pstmt.close();
+		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
+		System.out.println(sql);
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		String date2 = String.valueOf(now.minusDays(2));
+		pstmt.setString(1, userId);
+		pstmt.setString(2, date2);
+		
+		rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			PersonalActivity bean = new PersonalActivity();
+			try {
+				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
+				lists.add(bean);
+			} catch (Exception e) {
+				bean.setReadHit(0);
+				lists.add(bean);
+			}
+		}
+		
+		pstmt.close();
+		
+		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
+		System.out.println(sql);
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		String date1 = String.valueOf(now.minusDays(1));
+		pstmt.setString(1, userId);
+		pstmt.setString(2, date1);
+		
+		rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			PersonalActivity bean = new PersonalActivity();
+			try {
+				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
+				lists.add(bean);
+			} catch (Exception e) {
+				bean.setReadHit(0);
+				lists.add(bean);
+			}
+		}
+		
+		pstmt.close();
+	
+		if(rs != null) {
+			rs.close();
+		}
+		if(pstmt != null) {
+			pstmt.close();
+		}
+		if(conn != null) {
+			conn.close();
+		}
+		
+		return lists;
 	}
 
 }
