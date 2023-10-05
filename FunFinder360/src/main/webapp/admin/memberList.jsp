@@ -27,7 +27,7 @@
 	margin-bottom: 10px;
 	border: 2px solid black;
 	border-radius: 10px;
-	width: 132px;
+	width: auto;
 	padding: 0px 10px;
 }
 .form-select {
