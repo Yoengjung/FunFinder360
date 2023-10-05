@@ -146,11 +146,24 @@
 #change-bio-delete-btn {
 	display: none;
 }
+
+.info-value-change-input-newPassword {
+	height: 40px;
+	width: 521px;
+	line-height: 36px;
+	border: 1px solid black;
+	border-radius: 10px;
+	margin-left: 10px;
+	text-align: center;
+	margin-right: 10px;
+}
+
 </style>
 
 <script>
 	$(document).ready(function() {
 		$("#change-id-btn").click(function() {
+			$("#info-key-password").text("현재 비밀번호");
 			$("#info-value-password").css("display", "none");
 			$("#info-value-change-input-password").css("display", "block");
 			$("#info-value-change-input-password").focus();
@@ -217,28 +230,25 @@
 	});
 	
 	function changePassword(userId) {
-		const newPassword = $("#info-value-change-input-password").val();
+		const currentPassword = $("#info-value-change-input-password").val();
+		const newPassword = $("#info-value-change-input-newPassword").val();
 		const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,20}$/;
+		
 	    $.ajax({
 	        type: "POST",
 	        url: '<%=notWithFormTag%>ownerUserChangePassword',
-	        data: { userId: userId, newPassword: newPassword}, 
-	        success: function(response, status, xhr) {
+	        data: { userId: userId, currentPassword: currentPassword, newPassword: newPassword}, 
+	        success: function(response) {
 	        	if (!passwordPattern.test(newPassword)) {
-	                alert("새 비밀번호가 유효한 형식이 아닙니다.");
+	                alert("새 비밀번호가 유효한 형식이 아닙니다. (특수문자 포함, 8글자 이상)");
 	                return; 
 	            }
-	        	if (newPassword.length < 8) {
-	            	alert("비밀번호의 길이는 8자리 이상 입니다.");
-	            	return;
-	            }
-	            if (xhr.status === 200) {
-	           
-	       		alert("비밀번호가 변경되었습니다.");
-	        		location.reload();
-	            } else {
-	               alert("오류가 발생했습니다.")
-	            }
+	            if (response == "fail") {
+	       	        alert("비밀번호 변경에 실패하셨습니다. 현재 비밀번호를 확인해주세요.");
+	       	    } else {
+	       	        alert("비밀번호가 변경되었습니다.");
+	       	    }
+	        	location.reload();
 	        },
 	        error: function(xhr, status, error) {
 	            // 에러 처리
@@ -386,14 +396,21 @@
 		</div>
 		<div class="info-container">
 			<div class="info-box">
-				<span class="info-key">비밀번호</span> 
-				<span class="info-value-password"id="info-value-password">${requestScope.bean.password}</span> 
+				<span class="info-key" id="info-key-password">비밀번호</span> 
+				<span class="info-value-password" id="info-value-password">${requestScope.bean.password}</span> 
 				<input class="info-value-change-input" id="info-value-change-input-password" type="password">
 				<button type="button" class="btn btn-dark" id="change-id-btn">수정</button>
 				<button type="button" class="btn btn-primary" id="change-id-success-btn">완료</button>
 				<button type="button" class="btn btn-danger" id="change-id-delete-btn">취소</button>
 			</div>
 		</div>
+		<div class="info-container-newPassword">
+			<div class="info-box">
+				<span class="info-key">새로운 비밀번호</span>
+				<input class="info-value-change-input-newPassword" id="info-value-change-input-newPassword" type="password">
+			</div>
+		</div>
+		
 		<div class="info-container">
 			<div class="info-box">
 				<span class="info-key">이름</span> <span class="info-value">${requestScope.bean.userName}</span>
