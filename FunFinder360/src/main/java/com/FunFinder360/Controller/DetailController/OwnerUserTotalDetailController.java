@@ -30,8 +30,8 @@ public class OwnerUserTotalDetailController extends SuperClass {
 		
 		try {
 			MemberOwner bean = dao.getOwnerData(userId);
-			int totalCount = activityDao.GetTotalRecordCount(mode, keyword);
-			String url = super.getUrlInfomation("personalUserTotalDetail");
+			int totalCount = activityDao.GetOwnerTotalRecordCount(mode, keyword, userId);
+			String url = super.getUrlInfomation("ownerUserTotalDetail&userId=" + userId);
 			boolean isGrid = false;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			

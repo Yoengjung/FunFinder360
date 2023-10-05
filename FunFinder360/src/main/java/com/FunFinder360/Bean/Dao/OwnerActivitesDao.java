@@ -368,7 +368,7 @@ public class OwnerActivitesDao extends SuperDao {
 		return bean;
 	}
 
-	public List<OwnerActivity> getOwnerUserToUserId(Paging pageInfo, String userId) throws Exception{
+	public List<OwnerActivity> getOwnerUserToUserId(Paging pageInfo, String userId) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -412,5 +412,44 @@ public class OwnerActivitesDao extends SuperDao {
 		}
 
 		return lists;
+	}
+
+	public int GetOwnerTotalRecordCount(String mode, String keyword, String userId) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " select count(*) as cnt ";
+		sql += " from (select activityid, userId, activityName, category, location, locationdetail,duration, price, activitynumber,opentime, closetime, event, readhit, posteddate ";
+		sql += " from owner_activites ";
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%' ";
+		}
+		sql += " ) ";
+		sql += " where userid = ? ";
+
+		pstmt = connection.prepareStatement(sql);
+		pstmt.setString(1, userId);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
 	}
 }

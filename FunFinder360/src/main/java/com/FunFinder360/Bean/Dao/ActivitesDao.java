@@ -101,7 +101,7 @@ public class ActivitesDao extends SuperDao {
 			sql += " where " + mode + " like '%" + keyword + "%'";
 		}
 		sql += " ) ";
-		sql += " where userid = ? " ;
+		sql += " where userid = ? ";
 
 		pstmt = connection.prepareStatement(sql);
 		pstmt.setString(1, userId);
@@ -281,17 +281,56 @@ public class ActivitesDao extends SuperDao {
 		return bean;
 	}
 
+	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
+		System.out.println("검색할 필드명 : " + mode);
+		System.out.println("검새 키워드명 : " + keyword);
+
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " select count(*) as cnt ";
+		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
+		sql += " from personal_activites ";
+
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%'";
+		}
+		sql += " ) ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
 	public List<PersonalActivity> getMemberPersonalList(Paging pageInfo) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
-		// String sql = " select * from personal_activites order by postedDate";
 
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
 		String sql = " SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, TO_CHAR(posteddate, 'YYYY-MM-DD') AS posteddate, ranking ";
-		sql += " FROM (SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate, RANK() OVER (ORDER BY rating ASC) AS ranking";
+		sql += " FROM (SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate, RANK() OVER (ORDER BY locationdetail ASC) AS ranking";
 		sql += " FROM personal_activites ";
 		if (mode == null || mode.equals("all")) {
 		} else {
@@ -391,6 +430,36 @@ public class ActivitesDao extends SuperDao {
 		}
 
 		return lists;
+	}
+
+	public int GetPersonalTotalRecordCount(String mode, String keyword) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM personal_activites ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
 	}
 
 }
