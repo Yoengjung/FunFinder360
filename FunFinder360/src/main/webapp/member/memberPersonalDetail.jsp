@@ -215,16 +215,11 @@ function changePassword(userId) {
         type: "POST",
         url: '<%=notWithFormTag%>personalUserChangePassword',
         data: { userId: userId, currentPassword: currentPassword, newPassword: newPassword }, 
-        success: function(response) {
-        	console.log(response)
+        success: function(response) {  
         	if (!passwordPattern.test(newPassword)) {
-                alert("새 비밀번호가 유효한 형식이 아닙니다. ");
-                return; 
-            }
-        	if (newPassword.length < 8) {
-            	alert("비밀번호의 길이는 8자리 이상 입니다.");
-            	return;
-            }        	
+	                alert("새 비밀번호가 유효한 형식이 아닙니다. (특수문자 포함, 8글자 이상)");
+	                return; 
+	        }
        	    if (response == "fail") {
        	        alert("비밀번호 변경에 실패하셨습니다. 현재 비밀번호를 확인해주세요.");
        	    } else {
@@ -245,12 +240,16 @@ function changePassword(userId) {
 
 function changePhoneNumber(userId) {
 	const newPhoneNumber = $("#info-value-change-input-phone").val();
+	const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
     $.ajax({
         type: "POST",
         url: '<%=notWithFormTag%>personalUserChangePhoneNumber',
         data: { userId: userId, newPhoneNumber: newPhoneNumber}, 
         success: function(response, status, xhr) {
-        	console.log(response)
+        	if (!phoneRegex.test(newPhoneNumber)) {
+                alert("전화번호의 유효한 형식이 아닙니다. ex) 000-0000-0000");
+                return; 
+            }
             if (xhr.status === 200) {
             	var responseMessage = xhr.responseText; // 여기서 응답 메시지를 얻을 수 있습니다.
             	console.log(response);
@@ -272,11 +271,17 @@ function changePhoneNumber(userId) {
 }
 function changeEmail(userId) {
 	const newEmail = $("#info-value-change-input-email").val();
+	const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     $.ajax({
         type: "POST",
         url: '<%=notWithFormTag%>personalUserChangeEmail',
         data: { userId: userId, newEmail: newEmail}, 
         success: function(response, status, xhr) {
+        	if (!emailPattern.test(newEmail)) {
+        		alert("이메일의 유효한 형식이 아닙니다.");
+                return; 
+			}
+        	
             if (xhr.status === 200) {
         		alert("이메일이 변경되었습니다.");
         		location.reload();
@@ -304,6 +309,12 @@ function changeBio(userId) {
 				newBio : newBio
 			},
 			success : function(response, status, xhr) {
+				if (newBio.length > 500) {
+	        		alert("사업소개은 500자 이상은 불가능합니다. ");
+	            	return;
+	        	}
+	        	
+				
 				if (xhr.status === 200) {
 					alert("자기소개가 변경되었습니다.");
 					location.reload();
