@@ -91,6 +91,14 @@ function validation () {
 <body>
 	<div class="container">
 		<div class="login-form-container">
+			<c:if test="${empty sessionScope.alertMessage}">
+					<div class="alert alert-danger" style="display: none;">
+						${sessionScope.alertMessage}</div>
+				</c:if>
+				<c:if test="${not empty sessionScope.alertMessage}">
+					<div class="alert alert-danger" style="display: block;">
+						${sessionScope.alertMessage}</div>
+				</c:if>
 			<h2>업주 로그인</h2>
 			<form action="<%=withFormTag%>" method="post">
 				<input type="hidden" name="command" value="OwnerLogin">

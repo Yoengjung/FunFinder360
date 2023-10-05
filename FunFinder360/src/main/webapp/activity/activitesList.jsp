@@ -81,9 +81,11 @@
 					<select id="mode" name="mode" class="form-select">
 						<option value="all" selected="selected">--- 선택해 주세요 ---
 						<option value="activityName">활동 제목
+						<option value="userid">등록자
 						<option value="category">카테고리
 						<option value="location">주소
 						<option value="locationdetail">상세주소
+						
 					</select>
 					<div class="input-group">
 						<input class="keyword-input-box form-control" type="text"
