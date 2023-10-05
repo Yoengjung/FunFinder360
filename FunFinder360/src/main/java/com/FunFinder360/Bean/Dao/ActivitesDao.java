@@ -84,21 +84,27 @@ public class ActivitesDao extends SuperDao {
 		return status;
 	}
 
-	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
+	public int GetTotalRecordCount(String mode, String keyword, String userId) throws Exception {
 		System.out.println("검색할 필드명 : " + mode);
 		System.out.println("검새 키워드명 : " + keyword);
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet resultSet = null;
 		Connection connection = super.getConnection();
 
-		String sql = "select count(*) as cnt from personal_activites ";
+		String sql = " select count(*) as cnt ";
+		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
+		sql += " from personal_activites ";
+
 		if (mode == null || mode.equals("all")) {
 		} else {
 			sql += " where " + mode + " like '%" + keyword + "%'";
 		}
+		sql += " ) ";
+		sql += " where userid = ? " ;
 
 		pstmt = connection.prepareStatement(sql);
+		pstmt.setString(1, userId);
 
 		resultSet = pstmt.executeQuery();
 
@@ -340,12 +346,10 @@ public class ActivitesDao extends SuperDao {
 
 		return bean;
 	}
-	
+
 	public List<PersonalActivity> getPersonalUserToUserId(Paging pageInfo, String userId) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
-		// String sql = " select * from personal_activites order by postedDate";
 
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
