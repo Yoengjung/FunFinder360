@@ -31,7 +31,7 @@ public class MemberActivityListController extends SuperClass {
 		ActivitesDao dao = new ActivitesDao();
 		
 		try {
-			int totalCount = dao.GetTotalRecordCount(mode, keyword);
+			int totalCount = dao.GetPersonalTotalRecordCount(mode, keyword);
 			String url = super.getUrlInfomation("memberActivityList");
 			boolean isGrid = false;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
