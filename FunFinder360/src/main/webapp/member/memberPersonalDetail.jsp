@@ -209,12 +209,22 @@ $(document).ready(function() {
 function changePassword(userId) {
     const currentPassword = $("#info-value-change-input-password").val();
     const newPassword = $("#info-value-change-input-newPassword").val();
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,20}$/;
+    
     $.ajax({
         type: "POST",
         url: '<%=notWithFormTag%>personalUserChangePassword',
         data: { userId: userId, currentPassword: currentPassword, newPassword: newPassword }, 
         success: function(response) {
         	console.log(response)
+        	if (!passwordPattern.test(newPassword)) {
+                alert("새 비밀번호가 유효한 형식이 아닙니다. ");
+                return; 
+            }
+        	if (newPassword.length < 8) {
+            	alert("비밀번호의 길이는 8자리 이상 입니다.");
+            	return;
+            }        	
        	    if (response == "fail") {
        	        alert("비밀번호 변경에 실패하셨습니다. 현재 비밀번호를 확인해주세요.");
        	    } else {
