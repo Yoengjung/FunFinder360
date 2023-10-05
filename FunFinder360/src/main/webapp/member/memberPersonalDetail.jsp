@@ -224,13 +224,13 @@ function changePassword(userId) {
         url: '<%=notWithFormTag%>personalUserChangePassword',
         data: { userId: userId, currentPassword: currentPassword, newPassword: newPassword }, 
         success: function(response) {
-            console.log(response); // 서버 응답 메시지를 콘솔에 출력
-            if (response === "fail") {
-                alert("비밀번호 변경에 실패하셨습니다. 현재 비밀번호를 확인해주세요.");
-            } else {
-                alert("비밀번호가 변경되었습니다.");
-                location.reload();
-            }
+        	console.log(response)
+       	    if (response == "fail") {
+       	        alert("비밀번호 변경에 실패하셨습니다. 현재 비밀번호를 확인해주세요.");
+       	    } else {
+       	        alert("비밀번호가 변경되었습니다.");
+       	    }
+        	location.reload();
         },
         error: function(xhr, status, error) {
             // 에러 처리
@@ -323,6 +323,8 @@ function changeBio(userId) {
 	}
 </script>
 <body>
+<div id="check"></div>
+
 	<div class="container">
 		<h2>${requestScope.bean.username}회원정보</h2>
 		<div class="info-container">

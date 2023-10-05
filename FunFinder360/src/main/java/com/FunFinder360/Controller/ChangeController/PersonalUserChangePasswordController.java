@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.FunFinder360.Bean.Dao.MemberPersonalUserDao;
 import com.FunFinder360.Controller.SuperClass;
-import com.FunFinder360.Controller.Member.MemberDetailController;
 
 public class PersonalUserChangePasswordController extends SuperClass {
 	@Override
@@ -17,14 +16,12 @@ public class PersonalUserChangePasswordController extends SuperClass {
 		String newPassword = request.getParameter("newPassword");
 
 		MemberPersonalUserDao dao = new MemberPersonalUserDao();
-
 		try {
 			int cnt = dao.changePassword(userId, currentPassword, newPassword);
-
+			System.out.println(cnt);
 			if (cnt <= 0) {
 				response.getWriter().write("fail");
 			}
-			new MemberDetailController().doGet(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
