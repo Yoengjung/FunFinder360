@@ -228,8 +228,8 @@
 	                alert("새 비밀번호가 유효한 형식이 아닙니다.");
 	                return; 
 	            }
-	        	if (newPassword.length > 255) {
-	            	alert("비밀번호의 길이는 255이하 입니다.");
+	        	if (newPassword.length < 8) {
+	            	alert("비밀번호의 길이는 8자리 이상 입니다.");
 	            	return;
 	            }
 	            if (xhr.status === 200) {
@@ -313,11 +313,17 @@
     }
 	function changeEmail(userId) {
 		const newEmail = $("#info-value-change-input-email").val();
+		const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 	    $.ajax({
 	        type: "POST",
 	        url: '<%=notWithFormTag%>ownerUserChangeEmail',
 	        data: { userId: userId, newEmail: newEmail}, 
 	        success: function(response, status, xhr) {
+	        	if (!emailPattern.test(newEmail)) {
+	        		alert("이메일의 유효한 형식이 아닙니다.");
+	                return; 
+				}
+	        	
 	            if (xhr.status === 200) {
 	        		alert("이메일이 변경되었습니다.");
 	        		location.reload();
@@ -342,6 +348,11 @@
 	        url: '<%=notWithFormTag%>ownerUserChangeBio',
 	        data: { userId: userId, newBio: newBio}, 
 	        success: function(response, status, xhr) {
+	        	if (newBio.length > 500) {
+	        		alert("사업소개은 500자 이상은 불가능합니다. ");
+	            	return;
+	        	}
+	        	
 	            if (xhr.status === 200) {
 	        		alert("자기소개가 변경되었습니다.");
 	        		location.reload();
@@ -440,7 +451,7 @@
 		</div>
 		<div class="info-container">
 			<div class="info-box">
-				<span class="info-key">자기소개</span> <span class="info-value"
+				<span class="info-key">사업소개</span> <span class="info-value"
 					id="info-value-bio">${requestScope.bean.bio}</span>
 				<textarea class="info-value-change-input"
 					id="info-value-change-input-bio"></textarea>
