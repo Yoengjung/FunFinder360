@@ -30,12 +30,14 @@ public class PersonalUserTotalDetailController extends SuperClass {
 		
 		try {
 			MemberPersonalUser bean = dao.getMemberData(userId);
-			int totalCount = activityDao.GetTotalRecordCount(mode, keyword);
-			String url = super.getUrlInfomation("personalUserTotalDetail");
+			int totalCount = activityDao.GetTotalRecordCount(mode, keyword, userId); // 모든 활동을 가져온다.
+			String url = super.getUrlInfomation("personalUserTotalDetail&userId=" + userId);
 			boolean isGrid = false;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			
 			List<PersonalActivity> lists = activityDao.getPersonalUserToUserId(pageInfo, userId);
+			
+			
 			int readHitTotalCount = dao.getReadHitTotalCount(userId);
 			int reviewTotalCount = dao.getReviewTotalCount(userId);
 			
