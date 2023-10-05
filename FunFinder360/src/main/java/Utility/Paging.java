@@ -68,7 +68,7 @@ public class Paging {
 			if (isGrid) {
 				_pageSize = "8";
 			} else {
-				_pageSize = "10";
+				_pageSize = "2";
 			}
 		}
 		

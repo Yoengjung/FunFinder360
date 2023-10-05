@@ -257,30 +257,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<div class="search-container">
-			<div class="search-in-container">
-				<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
-					<input type="hidden" name="command" value="ownerMemberActivityList">
-					<select id="mode" name="mode" class="form-select">
-						<option value="all" selected="selected">--- 선택해 주세요 ---
-						<option value="activityId">번호
-						<option value="userId">등록자
-						<option value="activityName">활동명
-						<option value="category">카테고리
-						<option value="location">지역
-						<option value="openTime">영업시작
-						<option value="closeTime">영업종료
-						<option value="event">이벤트
-						<option value="readHit">조회수
-						<option value="postedDate">등록일자
-					</select>
-					<div class="input-group">
-						<input class="keyword-input-box form-control" type="text" name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">
-					</div>
-					<button type="submit" class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
-				</form>
-			</div>
-		</div>
 		<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 		<div>
 			<h4 style="margin-top: 50px;">총계</h4>
