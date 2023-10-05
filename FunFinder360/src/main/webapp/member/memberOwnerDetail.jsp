@@ -233,7 +233,8 @@
 	            	return;
 	            }
 	            if (xhr.status === 200) {
-	        		alert("비밀번호가 변경되었습니다.");
+	           
+	       		alert("비밀번호가 변경되었습니다.");
 	        		location.reload();
 	            } else {
 	               alert("오류가 발생했습니다.")
@@ -241,7 +242,7 @@
 	        },
 	        error: function(xhr, status, error) {
 	            // 에러 처리
-	            if (xhr.status === 500) {
+	            if (xhr.status == 500) {
 	                alert("서버 오류");
 	            } else {
 	                alert("알 수 없는 오류 발생");

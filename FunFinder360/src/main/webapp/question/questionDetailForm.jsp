@@ -48,8 +48,9 @@
 					<p>${requestScope.questionData[index].content}</p>
 				</div>
 			</div>
-			<button class="back-btn" value="돌아가기" onclick="backPage();">목록</button>
-
+			<div class="list-btn-box">
+				<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
+			</div>
 			<div class="page-control-container">
 				<ul>
 					<li>
@@ -92,8 +93,9 @@
 					<p>${requestScope.questionData[index].content}</p>
 				</div>
 			</div>
-			<button class="back-btn" value="돌아가기" onclick="backPage();">목록</button>
-
+			<div class="list-btn-box">
+				<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
+			</div>
 			<div class="page-control-container">
 				<ul>
 					<li>
@@ -137,7 +139,7 @@
 				</div>
 			</div>
 			<div class="list-btn-box">
-				<button class="back-btn" value="돌아가기" onclick="backPage();">목록</button>
+				<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
 			</div>
 			<div class="page-control-container">
 				<ul>

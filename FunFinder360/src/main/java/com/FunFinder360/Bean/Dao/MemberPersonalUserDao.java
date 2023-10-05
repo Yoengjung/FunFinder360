@@ -8,6 +8,8 @@ import java.util.List;
 
 import com.FunFinder360.Bean.Model.MemberPersonalUser;
 
+import Utility.Paging;
+
 public class MemberPersonalUserDao extends SuperDao {
 
 	// 회원인지 확인하는 메소드
@@ -86,7 +88,6 @@ public class MemberPersonalUserDao extends SuperDao {
 			connection.close();
 		}
 	}
-	
 
 	// 개인 유저 아이디 중복 체크
 	public boolean duplicationIdCheck(String id) throws Exception {
@@ -121,14 +122,114 @@ public class MemberPersonalUserDao extends SuperDao {
 		return status;
 	}
 
-	
-
-	public MemberPersonalUser getMemberData(String userId) throws Exception{
+	public MemberPersonalUser getMemberData(String userId) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
-		
+
 		String sql = "select * from personal_users where userid = ?";
+
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, userId);
+
+		rs = pstmt.executeQuery();
+
+		MemberPersonalUser member = new MemberPersonalUser();
+
+		if (rs.next()) {
+			member = this.getBeanData(rs);
+		}
+
+		return member;
+	}
+
+	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
+		System.out.println("검색할 필드명 : " + mode);
+		System.out.println("검색 키워드명 : " + keyword);
+
+		String sql = " select count(*) as cnt from personal_users ";
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%'";
+		}
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql);
+
+		rs = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (rs.next()) {
+			cnt = rs.getInt("cnt");
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<MemberPersonalUser> getMemberPeronalList(Paging pageInfo) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		String sql = " select userid, password, username, birth, phonenumber, email, TO_CHAR(registrationdate, 'YYYY-MM-DD') AS registrationdate, bio"; 
+		sql += " from (SELECT userid, password, username, birth, phonenumber, email, registrationdate, bio, RANK() OVER (ORDER BY email ASC) AS ranking ";
+		sql += " from personal_users ";
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%' ";
+		}
+		sql += " ) ";
+		sql += " where ranking between ? AND ?";
+		
+		
+		connection = super.getConnection();
+		pstmt = connection.prepareStatement(sql);
+		
+		pstmt.setInt(1, pageInfo.getBeginRow());
+		pstmt.setInt(2, pageInfo.getEndRow());
+
+		rs = pstmt.executeQuery();
+
+		List<MemberPersonalUser> lists = new ArrayList<MemberPersonalUser>();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return lists;
+	}
+
+	public int changePassword(String userId, String currentPassword, String newPassword) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		ResultSet rs = null;
+		
+		String sql = "select password from personal_users where userid = ?";
 		
 		pstmt = conn.prepareStatement(sql);
 		
@@ -136,77 +237,23 @@ public class MemberPersonalUserDao extends SuperDao {
 		
 		rs = pstmt.executeQuery();
 		
-		MemberPersonalUser member = new MemberPersonalUser();
-		
-		if(rs.next()) {
-			member = this.getBeanData(rs);
+		boolean passwordCheck = false;
+		if (rs.next()) {
+			if (rs.getString("password").equals(currentPassword)) {
+				passwordCheck = true;
+			}
 		}
-		
-		return member;
-	}
-	
-	public int GetTotalRecordCount() throws Exception {
-		String sql = " select count(*) as cnt from personal_users " ;
-		
-		PreparedStatement pstmt = null ;
-		ResultSet rs = null ;
-		
-		connection = super.getConnection() ;
-		pstmt = connection.prepareStatement(sql) ;
-		
-		rs = pstmt.executeQuery() ; 
-		
-		int cnt = -1 ;
-		
-		if(rs.next()) {
-			cnt = rs.getInt("cnt") ;
-		}
-		
-		if(rs!=null) {rs.close();}
-		if(pstmt!=null) {pstmt.close();}
-		if(connection!=null) {connection.close();}
-		
-		return cnt;
-	}
-	
-	public List<MemberPersonalUser> getMemberPeronalList() throws Exception{
-		PreparedStatement pstmt = null ;
-		ResultSet rs = null ;
-		
-		String sql = " select * from personal_users order by username asc";
-		
-		connection = super.getConnection();
-		pstmt = connection.prepareStatement(sql) ;
-		
-		rs = pstmt.executeQuery() ;
-		
-		List<MemberPersonalUser> lists = new ArrayList<MemberPersonalUser>();
-		
-		while(rs.next()) {
-			lists.add(getBeanData(rs)) ;
-		}
-		
-		if(rs != null) {rs.close();}
-		if(pstmt != null) {pstmt.close();}
-		if(connection != null) {connection.close();}
-		
-		return lists;
-	}
-
-	public int changePassword(String userId, String newPassword) throws Exception{
-		PreparedStatement pstmt = null;
-		Connection conn = super.getConnection();
-		
-		String sql = "update personal_users set password=? where userid = ?";
-		
-		pstmt = conn.prepareStatement(sql);
-		
-		pstmt.setString(1, newPassword);
-		pstmt.setString(2, userId);
-		
 		int cnt = -1;
-		cnt = pstmt.executeUpdate();
-		
+		if (passwordCheck) {
+			sql = "update personal_users set password=? where userid = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, newPassword);
+			pstmt.setString(2, userId);
+			
+			cnt = pstmt.executeUpdate();	
+		}
 		return cnt;
 	}
 

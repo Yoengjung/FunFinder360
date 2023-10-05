@@ -20,21 +20,28 @@ public class OwnerMemberActivityListController extends SuperClass {
 		String pageSize = request.getParameter("pageSize");
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
+		
+		if (keyword != null) {
+			if (keyword.contains("-")) {
+				keyword = keyword.substring(2);
+				keyword = keyword.replace("-", "/");
+			}
+		}
 
 		OwnerActivitesDao dao = new OwnerActivitesDao();
 		
 		try {
-			int totalCount = dao.GetTotalRecordCount();
+			int totalCount = dao.GetTotalRecordCount(mode, keyword);
 			String url = super.getUrlInfomation("ownerMemberActivityList");
 			boolean isGrid = false;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 
-			List<OwnerActivity> lists = dao.getOwnerActivityList();
+			List<OwnerActivity> lists = dao.getOwnerActivityList(pageInfo);
 			
 			request.setAttribute("pageInfo", pageInfo);
 			request.setAttribute("dataList", lists);
 			
-			super.goToPage("admin/adminPersonalActivityList.jsp");
+			super.goToPage("admin/ownerMemberActivityList.jsp");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
