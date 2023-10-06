@@ -36,7 +36,7 @@
 		<h2>업주 활동</h2>
 		<form name="search-form" action="<%=withFormTag%>" method="get"
 			class="search-form">
-			<input type="hidden" name="command" value="OwnerActivitesList">
+			<input type="hidden" name="command" value="activitesList">
 			<select id="mode" name="mode" class="form-select">
 				<option value="all" selected="selected">--- 선택해 주세요 ---
 				<option value="readhit">조회수
@@ -89,7 +89,6 @@
 								<span>등록일 : ${bean.postedDate}</span>
 							</div>
 						</div>
-						</a>
 					</td>
 				</c:forEach>
 			</tbody>

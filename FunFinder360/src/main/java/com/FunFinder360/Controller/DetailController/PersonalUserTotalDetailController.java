@@ -36,9 +36,9 @@ public class PersonalUserTotalDetailController extends SuperClass {
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 
 			List<PersonalActivity> lists = activityDao.getPersonalUserToUserId(pageInfo, userId);
+			
 			int readHitTotalCount = dao.getReadHitTotalCount(userId);
 			int reviewTotalCount = dao.getReviewTotalCount(userId);
-
 			List<PersonalActivity> dateReadHitCount = dao.getDateReadHitCount(userId);
 
 			request.setAttribute("activityData", lists);
