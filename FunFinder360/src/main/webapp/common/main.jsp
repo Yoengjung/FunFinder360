@@ -24,15 +24,33 @@ $(document).ready(function () {
 	
 	setInterval(() => {resetAnimation();}, 5100);
 	
-    const scrollImage = document.querySelector("#scrollImage");
+	const scrollImage = document.getElementById("scrollImage");
+	
+	window.addEventListener('scroll', () => {
+	    document.body.style.setProperty('--scroll', window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
+	}, false);
 
-    window.addEventListener("scroll", () => {
-        // 스크롤 위치를 가져옵니다. 여기에서 0.1은 스크롤 속도를 조절합니다.
-        const scrollY = window.scrollY * 0.1;
+	window.addEventListener("scroll", () => {
+	    const scrollY = window.scrollY * 0.02;
+	    scrollImage.style.transform = `scale(${1 + scrollY})`;
+	});
+	
+	 $(window).scroll(function() {
+	        const scrollY = $(this).scrollTop();
+	        const windowHeight = $(this).height();
 
-        // 이미지를 확대합니다.
-        scrollImage.style.transform = `scale(${1 + scrollY})`;
-    });
+	        // 이미지 크기 조절
+	        const newImageWidth = 10 + (scrollY / windowHeight) * 100; // 이미지의 최종 너비 계산
+	        const newImageScale = newImageWidth / 10; // 이미지의 스케일 계산
+
+	        $("#scrollImage").css({
+	            "width": newImageWidth + "%", // 이미지 너비 조절
+	            "--scroll": newImageScale // 이미지 스케일 설정
+	        });
+	    });
+});
+   
+
 </script>
 <body>
 	<div class="container1">
@@ -91,7 +109,7 @@ $(document).ready(function () {
 		</div>
 		<div class="info-2">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/1.jpg" id="scrollImage">
+				<img src="${pageContext.request.contextPath}/common/image/c4.jpg" id="scrollImage">
 			</div>
 		</div>
 
