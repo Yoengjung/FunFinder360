@@ -36,6 +36,17 @@
 <body>
 	<div class="container">
 		<h2>개인 활동</h2>
+			<form name="search-form" action="<%=withFormTag%>" method="get"
+				class="search-form">
+				<input type="hidden" name="command" value="activitesList">
+				<select id="mode" name="mode" class="form-select">
+					<option value="all" selected="selected">--- 선택해 주세요 ---
+					<option value="readhit">조회수
+					<option value="postedDate">최신순
+				</select>
+				<button type="submit"
+					class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
+			</form>
 		<table>
 			<thead></thead>
 			<tbody>
@@ -88,9 +99,7 @@
 						
 					</select>
 					<div class="input-group">
-						<input class="keyword-input-box form-control" type="text"
-							name="keyword" id="keyword" placeholder="키워드 입력"
-							autocomplete="off">
+						<input class="keyword-input-box form-control" type="text"name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">
 					</div>
 					<button type="submit"
 						class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
