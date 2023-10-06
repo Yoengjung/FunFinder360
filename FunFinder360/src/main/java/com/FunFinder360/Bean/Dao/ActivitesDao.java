@@ -128,13 +128,14 @@ public class ActivitesDao extends SuperDao {
 	}
 
 	public List<ActivityAndImage> selectAll(Paging pageInfo) throws Exception {
+		System.out.println("사실은 여기임.");
 		PreparedStatement prtmt = null;
 		ResultSet resultSet = null;
 
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
-		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId ";
+		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by readHit desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId ";
 		if (mode == null || mode.equals("all")) {
 
 		} else {
@@ -167,6 +168,8 @@ public class ActivitesDao extends SuperDao {
 		if (connection != null) {
 			connection.close();
 		}
+
+		System.out.println("bean1 : " + bean);
 		return bean;
 	}
 
@@ -182,6 +185,7 @@ public class ActivitesDao extends SuperDao {
 		ActivitesList.setImage(rs.getString("image"));
 		ActivitesList.setImageOrder(rs.getInt("imageOrder"));
 		ActivitesList.setReadHit(rs.getInt("readhit"));
+		ActivitesList.setPostedDate(rs.getString("postedDate"));
 
 		return ActivitesList;
 	}
@@ -460,6 +464,78 @@ public class ActivitesDao extends SuperDao {
 		}
 
 		return cnt;
+	}
+
+	public int GetLookTotalRecordCount(String mode) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM personal_activites ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<ActivityAndImage> LookSelectAll(Paging pageInfo) throws Exception {
+		System.out.println("지금 실행중입니다.");
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String mode = pageInfo.getMode();
+
+		String sql = " SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate " +
+                " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, " +
+                " Row_number() over(order by " + mode + " desc) as ranking " +
+                " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId) " +
+                " WHERE ranking BETWEEN ? AND ?";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<ActivityAndImage> bean = new ArrayList<ActivityAndImage>();
+
+		while (resultSet.next()) {
+			bean.add(getActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		System.out.println("bean1 : " + bean);
+		return bean;
 	}
 
 }

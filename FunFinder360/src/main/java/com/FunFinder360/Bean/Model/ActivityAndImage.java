@@ -10,11 +10,12 @@ public class ActivityAndImage {
 	private String image;
 	private int imageOrder;
 	private int readHit;
+	private String postedDate;
 	
 	public ActivityAndImage () {}
 
 	public ActivityAndImage(int activityId, String userId, String activityName, String category, String location,
-			String locationDetail, String image, int imageOrder, int readHit) {
+			String locationDetail, String image, int imageOrder, int readHit, String postedDate) {
 		super();
 		this.activityId = activityId;
 		this.userId = userId;
@@ -25,13 +26,14 @@ public class ActivityAndImage {
 		this.image = image;
 		this.imageOrder = imageOrder;
 		this.readHit = readHit;
+		this.postedDate = postedDate;
 	}
 
 	@Override
 	public String toString() {
 		return "ActivityAndImage [activityId=" + activityId + ", userId=" + userId + ", activityName=" + activityName
 				+ ", category=" + category + ", location=" + location + ", locationDetail=" + locationDetail
-				+ ", image=" + image + ", imageOrder=" + imageOrder + ", readHit=" + readHit + "]";
+				+ ", image=" + image + ", imageOrder=" + imageOrder + ", readHit=" + readHit + ", postedDate=" + postedDate + "]";
 	}
 
 	public int getActivityId() {
@@ -106,6 +108,13 @@ public class ActivityAndImage {
 		this.readHit = readHit;
 	}
 
+	public String getPostedDate() {
+		return postedDate;
+	}
+
+	public void setPostedDate(String postedDate) {
+		this.postedDate = postedDate;
+	}
 	
 	
 }
