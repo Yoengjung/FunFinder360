@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.FunFinder360.Bean.Model.MemberOwner;
-import com.FunFinder360.Bean.Model.MemberPersonalUser;
 
 public class MemberOwnerUserDao extends SuperDao {
 	// 업주 유저 아이디 중복 체크
@@ -62,8 +61,6 @@ public class MemberOwnerUserDao extends SuperDao {
 
 		pstmt.executeUpdate();
 
-		conn.commit();
-
 		if (pstmt != null) {
 			pstmt.close();
 		}
@@ -110,8 +107,111 @@ public class MemberOwnerUserDao extends SuperDao {
 
 		return member;
 	}
-	
-	
-	
-	
+
+	public int changePassword(String userId, String newPassword) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "update owner_users set password=? where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, newPassword);
+		pstmt.setString(2, userId);
+		
+		int cnt = -1;
+		cnt = pstmt.executeUpdate();
+		
+		return cnt;
+	}
+
+	public int changeBusinessName(String userId, String newBusinessName) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "update owner_users set businessName=? where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, newBusinessName);
+		pstmt.setString(2, userId);
+		
+		int cnt = -1;
+		cnt = pstmt.executeUpdate();
+		
+		return cnt;
+	}
+
+	public int changePhoneNumber(String userId, String newPhoneNumber) throws Exception {
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "update owner_users set phoneNumber=? where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, newPhoneNumber);
+		pstmt.setString(2, userId);
+		
+		int cnt = -1;
+		cnt = pstmt.executeUpdate();
+		
+		return cnt;
+	}
+
+	public int changeEmail(String userId, String newEmail) throws Exception {
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "update owner_users set email=? where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, newEmail);
+		pstmt.setString(2, userId);
+		
+		int cnt = -1;
+		cnt = pstmt.executeUpdate();
+		
+		return cnt;
+	}
+
+	public int changeBio(String userId, String newBio) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "update owner_users set bio=? where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, newBio);
+		pstmt.setString(2, userId);
+		
+		int cnt = -1;
+		cnt = pstmt.executeUpdate();
+		
+		return cnt;
+	}
+
+	public int deleteData(String id) throws Exception {
+		// 업주 유저 탈퇴합니다.
+		int cnt = -1 ;
+		String sql = "" ;		
+		
+		PreparedStatement pstmt = null ;
+		
+		connection = super.getConnection() ;
+		connection.setAutoCommit(false);	
+		
+		sql = " delete from owner_users where userid = ? " ;
+		pstmt = connection.prepareStatement(sql) ;
+		pstmt.setString(1, id);
+		cnt = pstmt.executeUpdate() ;
+		if(pstmt!=null) {pstmt.close();}		
+		
+		connection.commit(); 
+		if(connection!=null) {connection.close();}
+		return cnt;
+	}
+
 }
