@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/mainCSS/mainCSS.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainCSS/mainCSS.css">
 <title>FunFinder360</title>
+</head>
 <script>
 $(document).ready(function () {
 	const spans = document.querySelectorAll('.info-1-box span');
@@ -23,25 +22,80 @@ $(document).ready(function () {
 	
 	resetAnimation();
 	
-	setInterval(() => {
-		    resetAnimation();
-		}, 5100);
-})
+	setInterval(() => {resetAnimation();}, 5100);
+	
+    const scrollImage = document.querySelector("#scrollImage");
 
+    window.addEventListener("scroll", () => {
+        // 스크롤 위치를 가져옵니다. 여기에서 0.1은 스크롤 속도를 조절합니다.
+        const scrollY = window.scrollY * 0.1;
+
+        // 이미지를 확대합니다.
+        scrollImage.style.transform = `scale(${1 + scrollY})`;
+    });
 </script>
-</head>
 <body>
-	<div class="container">
-		<div class="info-1">
-			<div class="info-1-box">
-				<span>놀</span><span>거</span><span>리</span><span>의 </span><span>
-				</span><span>성</span><span>지</span><span>!</span> <span> </span><span>F</span><span>u</span><span>n</span><span>F</span><span>i</span><span>n</span><span>d</span><span>e</span><span>r</span><span>3</span><span>6</span><span>0</span><span>으</span><span>로</span>
-				<span> </span><span>지</span><span>금</span> <span> </span><span>바</span><span>로</span>
-				<span> </span><span>즐</span><span>길</span><span> </span><span>활</span><span>동</span><span>을</span>
-				<span> </span><span>찾</span><span>아</span><span>보</span><span>세</span><span>요</span><span>.</span>
+	<div class="container1">
+		<div class="img-container">
+			<img src="${pageContext.request.contextPath}/common/image/spring.jpg" class="spring-img">
+			<img src="${pageContext.request.contextPath}/common/image/summer.jpg" class="summer-img">
+			<img src="${pageContext.request.contextPath}/common/image/fall.jpg" class="fall-img">
+			<img src="${pageContext.request.contextPath}/common/image/winter.jpg" class="winter-img">
+			<div class="info-1">
+				<div class="info-1-box">
+					<span>놀</span>
+					<span>거</span>
+					<span>리</span>
+					<span>의 </span>
+					<span> </span>
+					<span>성</span>
+					<span>지</span>
+					<span>!</span>
+					<span> </span>
+					<span>F</span>
+					<span>u</span>
+					<span>n</span>
+					<span>F</span>
+					<span>i</span>
+					<span>n</span>
+					<span>d</span>
+					<span>e</span>
+					<span>r</span>
+					<span>3</span>
+					<span>6</span>
+					<span>0</span>
+					<span>으</span>
+					<span>로</span>
+					<span> </span>
+					<span>지</span>
+					<span>금</span>
+					<span> </span>
+					<span>바</span>
+					<span>로</span>
+					<span> </span>
+					<span>즐</span>
+					<span>길</span>
+					<span> </span>
+					<span>활</span>
+					<span>동</span>
+					<span>을</span>
+					<span> </span>
+					<span>찾</span>
+					<span>아</span>
+					<span>보</span>
+					<span>세</span>
+					<span>요</span>
+					<span>.</span>
+				</div>
 			</div>
 		</div>
 		<div class="info-2">
+			<div class="circle-container">
+				<img src="${pageContext.request.contextPath}/common/image/1.jpg" id="scrollImage">
+			</div>
+		</div>
+
+		<%-- <div class="info-2">
 			<div class="circle-container">
 				<img src="${pageContext.request.contextPath}/common/image/1.jpg">
 				<div class="info-2-box">
@@ -110,7 +164,7 @@ $(document).ready(function () {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 	</div>
 </body>
 </html>

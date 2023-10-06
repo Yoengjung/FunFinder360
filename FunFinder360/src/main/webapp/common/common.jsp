@@ -153,7 +153,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 				<ul>
 					<li>
 						<span id="login-message">환영합니다 (업주)</span>
-						<span>${sessionScope.loginfoOwner.userName}</span>
+						<span id="login-user">${sessionScope.loginfoOwner.userName}</span>
 					</li>
 					<li>
 						<a href="<%=notWithFormTag%>logout" class="a-tag">logout</a>
@@ -164,7 +164,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 				<ul>
 					<li>
 						<span id="login-message">환영합니다 (개인)</span>
-						<span>${sessionScope.loginfo.username}님</span>
+						<span id="login-user">${sessionScope.loginfo.username}님</span>
 					</li>
 					<li>
 						<a href="<%=notWithFormTag%>logout" class="a-tag">logout</a>
