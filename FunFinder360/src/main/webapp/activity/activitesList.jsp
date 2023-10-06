@@ -9,7 +9,8 @@
 <title>회원 활동 데이터</title>
 <script type="text/javascript">
 	$(document).ready(function() {
-		console.log("<%=notWithFormTag%>favoritesInsert?userId=${sessionScope.loginfo.userId}")
+		console.log("<%=notWithFormTag%>
+	favoritesInsert?userId=${sessionScope.loginfo.userId}")
 						loadFavorites();
 						var questionOptionList = $('#mode option');
 						for (var i = 0; i < questionOptionList.length; i++) {
@@ -38,6 +39,15 @@
 			<img src="${pageContext.request.contextPath}/common/image/fall.jpg" class="fall-img">
 			<img src="${pageContext.request.contextPath}/common/image/winter.jpg" class="winter-img">
 			<h2>개인 활동</h2>
+			<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
+				<input type="hidden" name="command" value="activitesList">
+				<select id="mode" name="mode" class="form-select">
+					<option value="all" selected="selected">--- 선택해 주세요 ---
+					<option value="readhit">조회수
+					<option value="postedDate">최신순
+				</select>
+				<button type="submit" class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
+			</form>
 			<table>
 				<thead></thead>
 				<tbody>
@@ -94,6 +104,7 @@
 				</div>
 			</div>
 			<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
+
 		</div>
 	</div>
 </body>
