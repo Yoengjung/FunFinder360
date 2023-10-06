@@ -95,3 +95,9 @@ table {
 	width: 100%;
 	min-width: 1200px;
 }
+
+
+#activityName-a {
+	color: blue;
+	text-decoration: underline;
+}

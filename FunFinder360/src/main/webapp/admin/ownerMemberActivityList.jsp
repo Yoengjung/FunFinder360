@@ -27,7 +27,7 @@
 	margin-bottom: 10px;
 	border: 2px solid black;
 	border-radius: 10px;
-	width: 132px;
+	width: auto;
 	padding: 0px 10px;
 }
 
@@ -57,7 +57,10 @@
 	width: 200px;
 }
 
-
+#activityName-a {
+	color: blue;
+	text-decoration: underline;
+}
 </style>
 </head>
 <body>
@@ -88,10 +91,10 @@
 						<td>
 							<c:choose>
 								<c:when test="${fn:length(bean.activitiyName) >= 10}">
-				                    ${fn:substring(bean.activitiyName, 0, 10)}..
+				                    <a href="<%=notWithFormTag%>OwnerActivityDetail&activityId=${bean.activityId}" id="activityName-a">${fn:substring(bean.activitiyName, 0, 10)}..</a>
 				                </c:when>
 								<c:otherwise>
-				                    ${bean.activitiyName}
+				                     <a href="<%=notWithFormTag%>OwnerActivityDetail&activityId=${bean.activityId}" id="activityName-a">${bean.activitiyName}</a>
 								</c:otherwise>
 							</c:choose>
 						</td>

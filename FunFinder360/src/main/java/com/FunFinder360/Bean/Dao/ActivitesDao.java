@@ -330,14 +330,14 @@ public class ActivitesDao extends SuperDao {
 		String keyword = pageInfo.getKeyword();
 
 		String sql = " SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, TO_CHAR(posteddate, 'YYYY-MM-DD') AS posteddate, ranking ";
-		sql += " FROM (SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate, RANK() OVER (ORDER BY locationdetail ASC) AS ranking";
-		sql += " FROM personal_activites ";
+		sql += " FROM (SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate, RANK() OVER (ORDER BY activityId desc) AS ranking";
+		sql += " FROM personal_activites";
 		if (mode == null || mode.equals("all")) {
 		} else {
 			sql += " where " + mode + " like '%" + keyword + "%' ";
 		}
 		sql += " ) ";
-		sql += " where ranking between ? AND ?";
+		sql += " where ranking between ? AND ? ";
 
 		connection = super.getConnection();
 		pstmt = connection.prepareStatement(sql);

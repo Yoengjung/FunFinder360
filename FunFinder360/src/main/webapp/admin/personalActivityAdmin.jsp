@@ -27,7 +27,7 @@
 	margin-bottom: 10px;
 	border: 2px solid black;
 	border-radius: 10px;
-	width: 132px;
+	width: auto;
 	padding: 0px 10px;
 }
 
@@ -55,6 +55,11 @@
 
 .form-select {
 	width: 200px;
+}
+
+#activityName-a {
+	color: blue;
+	text-decoration: underline;
 }
 
 
@@ -86,14 +91,13 @@
 					<tr>
 						<td>${bean.activityId}</td>
 						<td>${bean.userId}</td>
-						<%-- <td>${bean.activityName}</td> --%>
 						<td>
 							<c:choose>
 								<c:when test="${fn:length(bean.activityName) >= 10}">
-				                    ${fn:substring(bean.activityName, 0, 10)}..
+				                    <a href="<%=notWithFormTag%>activityDetail&activityId=${bean.activityId}" id="activityName-a">${fn:substring(bean.activityName, 0, 10)}..</a>
 				                </c:when>
 								<c:otherwise>
-				                    ${bean.activityName}
+				                    <a href="<%=notWithFormTag%>activityDetail&activityId=${bean.activityId}" id="activityName-a">${bean.activityName}</a>
 								</c:otherwise>
 							</c:choose>
 						</td>

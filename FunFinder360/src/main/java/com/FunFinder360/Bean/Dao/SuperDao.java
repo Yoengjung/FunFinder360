@@ -8,8 +8,11 @@ public class SuperDao {
 
 	public Connection getConnection() {
 //	      String url = "jdbc:oracle:thin:@localhost:1521:xe";
-//	      String url = "jdbc:oracle:thin:@oraclefunfiner360_medium?TNS_ADMIN=C:/Users/user/Desktop/Wallet_oracleFunFiner360";
-		String url = "jdbc:oracle:thin:@oraclefunfiner360_low?TNS_ADMIN=/Users/gohyoungjung/Desktop/Wallet_oracleFunFiner360";
+
+		String url = "jdbc:oracle:thin:@oraclefunfiner360_medium?TNS_ADMIN=C:/Users/user/Desktop/Wallet_oracleFunFiner360";
+		// String url
+		// ="jdbc:oracle:thin:@oraclefunfiner360_low?TNS_ADMIN=/Users/gohyoungjung/Desktop/Wallet_oracleFunFiner360";
+
 		String id = "admin";
 		String password = "oracleFunfinder12";
 		try {

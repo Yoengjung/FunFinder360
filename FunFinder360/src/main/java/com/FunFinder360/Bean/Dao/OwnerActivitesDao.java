@@ -310,7 +310,7 @@ public class OwnerActivitesDao extends SuperDao {
 
 		// String sql = " select * from owner_activites order by postedDate";
 		String sql = " select activityid, userId, activityName, category, location, locationdetail,duration, price, activitynumber,opentime, closetime, event, readhit, TO_CHAR(posteddate, 'YYYY-MM-DD') AS posteddate ";
-		sql += " from (select activityid, userId, activityName, category, location, locationdetail,duration, price, activitynumber,opentime, closetime, event, readhit, posteddate, RANK() OVER (ORDER BY locationdetail ASC) AS ranking ";
+		sql += " from (select activityid, userId, activityName, category, location, locationdetail,duration, price, activitynumber,opentime, closetime, event, readhit, posteddate, RANK() OVER (ORDER BY activityId desc) AS ranking ";
 		sql += " from owner_activites ";
 
 		if (mode == null || mode.equals("all")) {
