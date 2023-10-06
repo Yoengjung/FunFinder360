@@ -22,16 +22,35 @@ public class ActivityListController extends SuperClass {
 		String keyword = request.getParameter("keyword");
 
 		ActivitesDao dao = new ActivitesDao();
+		List<ActivityAndImage> lists = null;
+		int totalCount = 0;
 
 		try {
-			int totalCount = dao.GetTotalRecordCount(mode, keyword);
+			
+			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
+			    totalCount = dao.GetLookTotalRecordCount(mode);
+			} else {
+				totalCount = dao.GetTotalRecordCount(mode, keyword);
+			}
+			
+			
 			String url = super.getUrlInfomation("activitesList");
 			boolean isGrid = true;
 
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
-
-			List<ActivityAndImage> lists = dao.selectAll(pageInfo);
-
+			
+			System.out.println("mode : " + mode);
+			
+			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
+				System.out.println("totalcount : " + totalCount);
+			    lists = dao.LookSelectAll(pageInfo);
+			} else {
+				System.out.println("totalcount : " + totalCount);
+			    lists = dao.selectAll(pageInfo);
+			}
+			
+			System.out.println("list :" + lists);
+		
 			request.setAttribute("personalActivity", lists);
 			request.setAttribute("pageInfo", pageInfo);
 

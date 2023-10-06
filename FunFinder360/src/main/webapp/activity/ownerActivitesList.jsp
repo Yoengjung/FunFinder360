@@ -34,6 +34,17 @@
 <body>
 	<div class="container">
 		<h2>업주 활동</h2>
+		<form name="search-form" action="<%=withFormTag%>" method="get"
+			class="search-form">
+			<input type="hidden" name="command" value="OwnerActivitesList">
+			<select id="mode" name="mode" class="form-select">
+				<option value="all" selected="selected">--- 선택해 주세요 ---
+				<option value="readhit">조회수
+				<option value="postedDate">최신순
+			</select>
+			<button type="submit"
+				class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
+		</form>
 		<table>
 			<thead></thead>
 			<tbody>

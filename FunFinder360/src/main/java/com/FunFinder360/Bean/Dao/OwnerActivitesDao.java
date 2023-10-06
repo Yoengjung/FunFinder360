@@ -452,4 +452,75 @@ public class OwnerActivitesDao extends SuperDao {
 
 		return cnt;
 	}
+
+	public int GetLookTotalRecordCount(String mode) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM owner_activites ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<OwnerActivityAndImage> LookSelectAll(Paging pageInfo) throws Exception {
+		
+		PreparedStatement prtmt= null;
+		ResultSet rs = null;
+		
+		String mode = pageInfo.getMode();
+		
+		String sql = " SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate ";
+		sql += " FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY " + mode +" DESC) AS ranking ";
+		sql += " FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId) ";
+		sql += " WHERE ranking BETWEEN ? AND ? ORDER BY ranking ";
+		
+		Connection conn = super.getConnection();
+		
+		prtmt = conn.prepareStatement(sql);
+		
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+		
+		rs = prtmt.executeQuery();
+		
+		List<OwnerActivityAndImage> bean = new ArrayList<OwnerActivityAndImage>();
+		
+		while (rs.next()) {
+			bean.add(getActivityBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		System.out.println("bean1 : " + bean);
+		return bean;
+	}
 }
