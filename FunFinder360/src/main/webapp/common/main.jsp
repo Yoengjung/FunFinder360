@@ -134,7 +134,7 @@ $(document).ready(function () {
 				</div>
 			</div>
 		</div>
-		<div class="info-4" data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-4" data-aos="flip-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
 				<img src="${pageContext.request.contextPath}/common/image/f1.jpg" id="scrollImage">
 				<div class="info-4-box">
