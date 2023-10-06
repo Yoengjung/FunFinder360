@@ -25,7 +25,6 @@ public class MemberPersonalUserDao extends SuperDao {
 		connection = super.getConnection();
 		pstmt = connection.prepareStatement(sql);
 
-		
 		pstmt.setString(1, id);
 		pstmt.setString(2, password);
 		rs = pstmt.executeQuery();
@@ -141,14 +140,14 @@ public class MemberPersonalUserDao extends SuperDao {
 		if (rs.next()) {
 			member = this.getBeanData(rs);
 		}
-		
-		if(rs != null) {
+
+		if (rs != null) {
 			rs.close();
 		}
-		if(pstmt != null) {
+		if (pstmt != null) {
 			pstmt.close();
 		}
-		if(conn != null) {
+		if (conn != null) {
 			conn.close();
 		}
 
@@ -197,7 +196,7 @@ public class MemberPersonalUserDao extends SuperDao {
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
-		String sql = " select userid, password, username, birth, phonenumber, email, TO_CHAR(registrationdate, 'YYYY-MM-DD') AS registrationdate, bio"; 
+		String sql = " select userid, password, username, birth, phonenumber, email, TO_CHAR(registrationdate, 'YYYY-MM-DD') AS registrationdate, bio";
 		sql += " from (SELECT userid, password, username, birth, phonenumber, email, registrationdate, bio, RANK() OVER (ORDER BY email ASC) AS ranking ";
 		sql += " from personal_users ";
 		if (mode == null || mode.equals("all")) {
@@ -206,11 +205,10 @@ public class MemberPersonalUserDao extends SuperDao {
 		}
 		sql += " ) ";
 		sql += " where ranking between ? AND ?";
-		
-		
+
 		connection = super.getConnection();
 		pstmt = connection.prepareStatement(sql);
-		
+
 		pstmt.setInt(1, pageInfo.getBeginRow());
 		pstmt.setInt(2, pageInfo.getEndRow());
 
@@ -235,19 +233,19 @@ public class MemberPersonalUserDao extends SuperDao {
 		return lists;
 	}
 
-	public int changePassword(String userId, String currentPassword, String newPassword) throws Exception{
+	public int changePassword(String userId, String currentPassword, String newPassword) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
 		ResultSet rs = null;
-		
+
 		String sql = "select password from personal_users where userid = ?";
-		
+
 		pstmt = conn.prepareStatement(sql);
-		
+
 		pstmt.setString(1, userId);
-		
+
 		rs = pstmt.executeQuery();
-		
+
 		boolean passwordCheck = false;
 		if (rs.next()) {
 			if (rs.getString("password").equals(currentPassword)) {
@@ -257,96 +255,96 @@ public class MemberPersonalUserDao extends SuperDao {
 		int cnt = -1;
 		if (passwordCheck) {
 			sql = "update personal_users set password=? where userid = ?";
-			
+
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, newPassword);
 			pstmt.setString(2, userId);
-			
-			cnt = pstmt.executeUpdate();	
+
+			cnt = pstmt.executeUpdate();
 		}
 		return cnt;
 	}
 
-	public int changePhoneNumber(String userId, String newPhoneNumber) throws Exception{
+	public int changePhoneNumber(String userId, String newPhoneNumber) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
-		
+
 		String sql = "update personal_users set phoneNumber=? where userid = ?";
-		
+
 		pstmt = conn.prepareStatement(sql);
-		
+
 		pstmt.setString(1, newPhoneNumber);
 		pstmt.setString(2, userId);
-		
+
 		int cnt = -1;
 		cnt = pstmt.executeUpdate();
-		
+
 		return cnt;
 	}
 
-	public int changeEmail(String userId, String newEmail) throws Exception{
+	public int changeEmail(String userId, String newEmail) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
-		
+
 		String sql = "update personal_users set email=? where userid = ?";
-		
+
 		pstmt = conn.prepareStatement(sql);
-		
+
 		pstmt.setString(1, newEmail);
 		pstmt.setString(2, userId);
-		
+
 		int cnt = -1;
 		cnt = pstmt.executeUpdate();
-		
+
 		return cnt;
 	}
 
-	public int changeBio(String userId, String newBio) throws Exception{
+	public int changeBio(String userId, String newBio) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
-		
+
 		String sql = "update personal_users set bio=? where userid = ?";
-		
+
 		pstmt = conn.prepareStatement(sql);
-		
+
 		pstmt.setString(1, newBio);
 		pstmt.setString(2, userId);
-		
+
 		int cnt = -1;
 		cnt = pstmt.executeUpdate();
-		
+
 		return cnt;
 	}
 
-	public int getReadHitTotalCount(String userId) throws Exception{
+	public int getReadHitTotalCount(String userId) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
 		ResultSet rs = null;
-		
+
 		String sql = "select sum(readhit) totalReadhit from personal_activites where userId = ?";
-		
+
 		pstmt = conn.prepareStatement(sql);
-		
+
 		pstmt.setString(1, userId);
-		
+
 		rs = pstmt.executeQuery();
-		
+
 		int totalReadHit = 0;
 		if (rs.next()) {
 			totalReadHit = rs.getInt("totalReadhit");
 		}
-		
-		if(rs != null) {
+
+		if (rs != null) {
 			rs.close();
 		}
-		if(pstmt != null) {
+		if (pstmt != null) {
 			pstmt.close();
 		}
-		if(conn != null) {
+		if (conn != null) {
 			conn.close();
 		}
-		
+
 		return totalReadHit;
 	}
 
@@ -354,216 +352,78 @@ public class MemberPersonalUserDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
 		ResultSet rs = null;
-		
+
 		String sql = "select count(*) totalReview from personal_activites join (select activityId from reviews) re on personal_activites.activityId = re.activityid where userid = ?";
-		
+
 		pstmt = conn.prepareStatement(sql);
-		
+
 		pstmt.setString(1, userId);
-		
+
 		rs = pstmt.executeQuery();
-		
+
 		int totalReviewCount = 0;
 		if (rs.next()) {
 			totalReviewCount = rs.getInt("totalReview");
 		}
-		
-		if(rs != null) {
+
+		if (rs != null) {
 			rs.close();
 		}
-		if(pstmt != null) {
+		if (pstmt != null) {
 			pstmt.close();
 		}
-		if(conn != null) {
+		if (conn != null) {
 			conn.close();
 		}
-		
+
 		return totalReviewCount;
 	}
 
-	public List<PersonalActivity> getDateReadHitCount(String userId) throws Exception{
+	public List<PersonalActivity> getDateReadHitCount(String userId) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = super.getConnection();
 		ResultSet rs = null;
-		
-		String sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
-		System.out.println(sql);
-		
-		pstmt = conn.prepareStatement(sql);
-		
+		//현재 날짜
 		LocalDate now = LocalDate.now();
-		
-		String date7 = String.valueOf(now.minusDays(7));
-		pstmt.setString(1, userId);
-		pstmt.setString(2, date7);
-		
-		rs = pstmt.executeQuery();
 		List<PersonalActivity> lists = new ArrayList<PersonalActivity>();
 		
-		
-		if (rs.next()) {
-			PersonalActivity bean = new PersonalActivity();
-			try {
-				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
-				lists.add(bean);
-			} catch (Exception e) {
-				bean.setReadHit(0);
-				lists.add(bean);
+		for (int i = 7; i >= 1; i--) {
+			LocalDate date = now.minusDays(i);
+		    String dateStr = date.toString();
+		    String sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
+			
+		    pstmt = conn.prepareStatement(sql);
+
+			System.out.println("data : " + dateStr);
+
+			pstmt.setString(1, userId);
+			pstmt.setString(2, dateStr);
+
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				PersonalActivity bean = new PersonalActivity();
+				try {
+					bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
+					lists.add(bean);
+				} catch (Exception e) {
+					bean.setReadHit(0);
+					lists.add(bean);
+				}
 			}
+		    
 		}
-		
-		pstmt.close();
-		
-		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
-		System.out.println(sql);
-		
-		pstmt = conn.prepareStatement(sql);
-		
-		String date6 = String.valueOf(now.minusDays(6));
-		pstmt.setString(1, userId);
-		pstmt.setString(2, date6);
-		
-		rs = pstmt.executeQuery();
-		
-		if (rs.next()) {
-			PersonalActivity bean = new PersonalActivity();
-			try {
-				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
-				lists.add(bean);
-			} catch (Exception e) {
-				bean.setReadHit(0);
-				lists.add(bean);
-			}
-		}
-		pstmt.close();
-		
-		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
-		System.out.println(sql);
-		
-		pstmt = conn.prepareStatement(sql);
-		
-		String date5 = String.valueOf(now.minusDays(5));
-		pstmt.setString(1, userId);
-		pstmt.setString(2, date5);
-		
-		rs = pstmt.executeQuery();
-		
-		if (rs.next()) {
-			PersonalActivity bean = new PersonalActivity();
-			try {
-				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
-				lists.add(bean);
-			} catch (Exception e) {
-				bean.setReadHit(0);
-				lists.add(bean);
-			}
-		}
-		pstmt.close();
-		
-		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
-		System.out.println(sql);
-		
-		pstmt = conn.prepareStatement(sql);
-		
-		String date4 = String.valueOf(now.minusDays(4));
-		pstmt.setString(1, userId);
-		pstmt.setString(2, date4);
-		
-		rs = pstmt.executeQuery();
-		
-		if (rs.next()) {
-			PersonalActivity bean = new PersonalActivity();
-			try {
-				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
-				lists.add(bean);
-			} catch (Exception e) {
-				bean.setReadHit(0);
-				lists.add(bean);
-			}
-		}
-		pstmt.close();
-		
-		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
-		System.out.println(sql);
-		
-		pstmt = conn.prepareStatement(sql);
-		
-		String date3 = String.valueOf(now.minusDays(3));
-		pstmt.setString(1, userId);
-		pstmt.setString(2, date3);
-		
-		rs = pstmt.executeQuery();
-		
-		if (rs.next()) {
-			PersonalActivity bean = new PersonalActivity();
-			try {
-				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
-				lists.add(bean);
-			} catch (Exception e) {
-				bean.setReadHit(0);
-				lists.add(bean);
-			}
-		}
-		
-		pstmt.close();
-		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
-		System.out.println(sql);
-		
-		pstmt = conn.prepareStatement(sql);
-		
-		String date2 = String.valueOf(now.minusDays(2));
-		pstmt.setString(1, userId);
-		pstmt.setString(2, date2);
-		
-		rs = pstmt.executeQuery();
-		
-		if (rs.next()) {
-			PersonalActivity bean = new PersonalActivity();
-			try {
-				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
-				lists.add(bean);
-			} catch (Exception e) {
-				bean.setReadHit(0);
-				lists.add(bean);
-			}
-		}
-		
-		pstmt.close();
-		
-		sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
-		System.out.println(sql);
-		
-		pstmt = conn.prepareStatement(sql);
-		
-		String date1 = String.valueOf(now.minusDays(1));
-		pstmt.setString(1, userId);
-		pstmt.setString(2, date1);
-		
-		rs = pstmt.executeQuery();
-		
-		if (rs.next()) {
-			PersonalActivity bean = new PersonalActivity();
-			try {
-				bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
-				lists.add(bean);
-			} catch (Exception e) {
-				bean.setReadHit(0);
-				lists.add(bean);
-			}
-		}
-		
-		pstmt.close();
-	
-		if(rs != null) {
+
+		if (rs != null) {
 			rs.close();
 		}
-		if(pstmt != null) {
+		if (pstmt != null) {
 			pstmt.close();
 		}
-		if(conn != null) {
+		if (conn != null) {
 			conn.close();
 		}
-		
+
 		return lists;
 	}
 

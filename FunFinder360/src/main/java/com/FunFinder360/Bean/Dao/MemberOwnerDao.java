@@ -3,10 +3,12 @@ package com.FunFinder360.Bean.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.FunFinder360.Bean.Model.MemberOwner;
+import com.FunFinder360.Bean.Model.OwnerActivity;
 
 import Utility.Paging;
 
@@ -209,6 +211,7 @@ public class MemberOwnerDao extends SuperDao {
 		Connection conn = super.getConnection();
 		ResultSet rs = null;
 		
+		
 		String sql = "select count(*) totalReview from owner_activites join (select activityId from reviews) re on owner_activites.activityId = re.activityid where userid = ?";
 		
 		pstmt = conn.prepareStatement(sql);
@@ -233,6 +236,54 @@ public class MemberOwnerDao extends SuperDao {
 		}
 		
 		return totalReviewCount;
+	}
+	
+	public List<OwnerActivity> getDateReadHitCount(String userId) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		ResultSet rs = null;
+		//현재 날짜
+		LocalDate now = LocalDate.now();
+		List<OwnerActivity> lists = new ArrayList<OwnerActivity>();
+		
+		for (int i = 7; i >= 1; i--) {
+			LocalDate date = now.minusDays(i);
+		    String dateStr = date.toString();
+		    String sql = "select sum(readhit) readhit from owner_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
+			
+		    pstmt = conn.prepareStatement(sql);
+
+			System.out.println("data : " + dateStr);
+
+			pstmt.setString(1, userId);
+			pstmt.setString(2, dateStr);
+
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				OwnerActivity bean = new OwnerActivity();
+				try {
+					bean.setReadHit(Integer.parseInt(rs.getString("readhit")));
+					lists.add(bean);
+				} catch (Exception e) {
+					bean.setReadHit(0);
+					lists.add(bean);
+				}
+			}
+		    
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return lists;
 	}
 
 }
