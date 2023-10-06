@@ -5,8 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainCSS/mainCSS.css">
+ <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <title>FunFinder360</title>
 </head>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();  // 초기화 선언 필수
+  </script>
 <script>
 $(document).ready(function () {
 	const spans = document.querySelectorAll('.info-1-box span');
@@ -44,10 +49,11 @@ $(document).ready(function () {
 	        const newImageScale = newImageWidth / 10; // 이미지의 스케일 계산
 
 	        $("#scrollImage").css({
-	            "width": newImageWidth + "%", // 이미지 너비 조절
+	            "width": newImageWidth - 50 + "%", // 이미지 너비 조절
 	            "--scroll": newImageScale // 이미지 스케일 설정
 	        });
 	    });
+
 });
    
 
@@ -107,7 +113,14 @@ $(document).ready(function () {
 				</div>
 			</div>
 		</div>
-		<div class="info-2">
+		<div class="info-2"  data-aos="fade-up"
+		    data-aos-offset="200"
+		    data-aos-delay="50"
+		    data-aos-duration="1000"
+		    data-aos-easing="ease-in-out"
+		    data-aos-mirror="true"
+		    data-aos-once="false"
+		    data-aos-anchor-placement="top-center">
 			<div class="circle-container">
 				<img src="${pageContext.request.contextPath}/common/image/c4.jpg" id="scrollImage">
 			</div>
