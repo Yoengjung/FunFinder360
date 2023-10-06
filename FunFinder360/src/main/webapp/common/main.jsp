@@ -120,7 +120,7 @@ $(document).ready(function () {
 				</div>
 			</div>
 		</div>
-		<div class="info-2"  data-aos="fade-up"
+		<div class="info-2" data-aos="fade-up"
 		    data-aos-offset="200"
 		    data-aos-delay="50"
 		    data-aos-duration="1000"
@@ -137,6 +137,28 @@ $(document).ready(function () {
 						<p>문화와 엔터테인먼트의 세계로 여행을 떠나세요!</p>
 						<p>문화의 아름다움과 엔터테인먼트의 즐거움을 함께 누려보세요.</p>
 						<p>풍부한 경험과 즐거운 시간이 기다리고 있어요!
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="info-4" data-aos="fade-up"
+		    data-aos-offset="200"
+		    data-aos-delay="50"
+		    data-aos-duration="1000"
+		    data-aos-easing="ease-in-out"
+		    data-aos-mirror="true"
+		    data-aos-once="false"
+		    data-aos-anchor-placement="top-center">
+			<div class="circle-container">
+				<img src="${pageContext.request.contextPath}/common/image/f1.jpg" id="scrollImage">
+				<div class="info-4-box">
+					<p class="category-tag4">음식 요리</p>
+					<div class="info-p-tag-box" style="font-size: 20px;">
+						<p>맛있는 음식의 세계로 오신 것을 환영합니다!</p>
+						<p>음식을 통해 새로운 맛과 경험을 만나보세요.</p>
+						<p>음식의 기쁨과 만족을 느껴보세요.</p>
+						<p>맛있는 음식의 세계가 여기 있습니다!</p>
 					</div>
 				</div>
 			</div>
