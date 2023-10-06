@@ -146,19 +146,18 @@
 	}
 }
 
-.info-2 {
-	width: 100%;
-	height: 900px;
-}
+
 
 .info-2 {
+	width: 100%;
 	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-	background-image: url("../../common/image/c4.jpg");
+	background-image: url("../../common/image/C6.jpg");
 	opacity: 0.5;
+	margin-bottom: 100px;
 }
 
 .circle-container {
@@ -197,6 +196,7 @@
 .info-4 {
 	width: 100%;
 	height: 900px;
+	margin-bottom: 50px;
 }
 
 .circle-container-4 {
@@ -232,10 +232,9 @@
 }
 
 .info-5 {
-	display: inline-block;
-	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
+	width: 100%;
+	height: 900px;
+	margin-bottom: 100px;
 }
 
 .circle-container-5 {
@@ -248,17 +247,12 @@
 }
 
 .info-5-box {
-	width: 60%;
-	height: 83%;
-	left: 14%;
-	padding-left: 170px;
 	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	border: 5px solid #7D7C7C;
-	justify-content: center;
+	background-color: rgba(255, 255, 255, 0.9);
 	border-radius: 10px;
-	background-color: #CCC8AA;
+	width: 600px;
+	text-align: center;
+	font-size: 25px;
 }
 
 .category-tag5 {
@@ -281,10 +275,9 @@
 }
 
 .info-6 {
-	display: inline-block;
-	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
+	width: 100%;
+	height: 900px;
+	margin-bottom: 100px;
 }
 
 .circle-container-6 {
@@ -297,17 +290,12 @@
 }
 
 .info-6-box {
-	width: 60%;
-	height: 83%;
-	left: 5%;
-	padding-left: 110px;
 	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	border: 5px solid #9EB384;
-	justify-content: center;
+	background-color: rgba(255, 255, 255, 0.9);
 	border-radius: 10px;
-	background-color: #CEDEBD;
+	width: 600px;
+	text-align: center;
+	font-size: 25px;
 }
 
 .circle-container-6 img {
@@ -327,33 +315,25 @@
 }
 
 .info-7 {
-	display: inline-block;
-	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
+	width: 100%;
+	height: 900px;
 }
 
 .circle-container-7 {
 	position: relative;
 	display: flex;
 	flex-direction: row;
-	left: 5%;
 	width: 90%;
 	min-width: 1200px;
 }
 
 .info-7-box {
-	width: 60%;
-	height: 83%;
-	left: 14%;
-	padding-left: 170px;
 	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	border: 5px solid #6499E9;
-	justify-content: center;
+	background-color: rgba(255, 255, 255, 0.9);
 	border-radius: 10px;
-	background-color: #A6F6FF;
+	width: 600px;
+	text-align: center;
+	font-size: 25px;
 }
 
 .category-tag7 {
@@ -363,14 +343,5 @@
 
 .info-p-tag-box7 {
 	position: relative;
-	top: 30%;
-	transform: translateY(-50%);
 }
 
-.circle-container-7 img {
-	border: 4px solid #6499E9;
-	border-radius: 200px;
-	width: 300px;
-	height: 300px;
-	z-index: 2;
-}
