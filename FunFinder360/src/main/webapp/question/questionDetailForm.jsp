@@ -11,7 +11,71 @@
 	function backPage() {
 		location.href = "<%=notWithFormTag%>questionsList"
 	}
+	
+	$(document).ready(function() {
+	    var isButtonVisible = true; // 초기에 버튼이 보이도록 설정
+
+	    $("#response-id-btn").click(function() {
+	        if (isButtonVisible) {
+	            $("#success-btn").css("display", "block"); // 버튼 표시
+	            isButtonVisible = false; // 가시성 상태를 토글
+	            $("#response-id-btn").css("display", "none");
+	        }
+
+	        $("#info-value-change-input").css("display", "block"); // 입력란 표시
+	        $("#info-value-change-input").focus();
+	    });
+	    
+	    $("#success-btn").click(function(){
+	    	$("#response-id-btn").css("display", "block");
+	    	$("#success-btn").css("display", "none");
+	    });
+	    
+	   
+	});
 </script>
+
+<style>
+#success-btn {
+	display: none;
+}
+
+#info-value-change-input {
+	display: none;
+}
+
+/* 입력란 스타일 */
+.info-value-change-input {
+    padding: 10px; /* 내용과 테두리 사이의 간격 */
+    border: 1px solid #ccc; /* 회색 테두리 */
+    border-radius: 5px; /* 둥근 테두리 */
+    box-sizing: border-box; /* 테두리를 포함한 전체 너비를 사용 */
+    margin-right: 10px; /* 오른쪽 여백 추가 */
+    width: calc(100% - 110px); /* 버튼 너비를 제외한 나머지 너비 계산 */
+}
+
+/* 버튼 스타일 */
+.adminbtn {
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 둥근 테두리 */
+    cursor: pointer; /* 포인터 커서 표시 */
+    color: #fff; /* 글자색 */
+    width: 100px; /* 버튼 너비 */
+}
+
+/* 주요 버튼 스타일 */
+.btn-primary {
+    background-color: #007bff; /* 파란색 배경색 */
+}
+
+/* 어두운 버튼 스타일 */
+.btn-dark {
+    background-color: #343a40; /* 어두운 회색 배경색 */
+}
+
+
+</style>
 <body>
 
 	<div class="container">
@@ -57,6 +121,15 @@
 						<span>다음글</span>
 						<a href="<%=notWithFormTag%>questionsDetail&questionListId=${requestScope.questionData[index + 1].questionListId}">${requestScope.questionData[index + 1].title}</a>
 					</li>
+					<c:set var="member" value="${sessionScope.loginfo}" />
+					<c:if test="${not empty member and member.userId == 'admin1'}">
+						<div>
+						<input class="info-value-change-input" id="info-value-change-input" type="text">
+							<button type="button" class="adminbtn btn-primary" id="success-btn">완료</button>
+						</div>
+						
+						<button type="button" class="adminbtn btn-dark" id="response-id-btn">답글</button>
+					</c:if>
 				</ul>
 			</div>
 		</c:if>
@@ -96,6 +169,16 @@
 			<div class="list-btn-box">
 				<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
 			</div>
+			<c:set var="member" value="${sessionScope.loginfo}" />
+			<c:if test="${not empty member and member.userId == 'admin1'}">
+				<button> 답글 </button>
+			</c:if>
+			
+			<c:set var="member" value="${sessionScope.loginfo}" />
+			<c:if test="${not empty member and member.userId == 'admin1'}">
+				
+			</c:if>
+			
 			<div class="page-control-container">
 				<ul>
 					<li>
@@ -141,6 +224,11 @@
 			<div class="list-btn-box">
 				<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
 			</div>
+			<c:set var="member" value="${sessionScope.loginfo}" />
+			<c:if test="${not empty member and member.userId == 'admin1'}">
+				<button> 답글 </button>
+			</c:if>
+			
 			<div class="page-control-container">
 				<ul>
 					<li>
