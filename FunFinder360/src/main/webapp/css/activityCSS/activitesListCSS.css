@@ -1,15 +1,14 @@
-.container1 {
-	position: relative;
-	top: 25%;
-	width: 80%;
-	left: 50%;
-	transform: translateX(-50%);
-	background-color: red;
+@charset "UTF-8";
+
+.container {
+	margin-top: 8%;
+	width: 100%;
+	height: 100%;
 }
 
 .container1 h2 {
 	text-align: center;
-	margin-bottom: 70px;
+	margin-bottom: 30px;
 }
 
 .card-img-top {
@@ -17,43 +16,38 @@
 	height: 100%;
 }
 
-.form-select {
-	width: 96px;
-}
-
-.row-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	/* Adjust as needed */
-}
-
 .card-footer {
-	background-color: #f2f2f2;
-	padding: 10px;
-	text-align: center;
+	display: flex;
+	flex-direction: column;
+	border-top: none;
 }
 
 .card {
-	width: calc(25% - 20px);
-	/* Adjust the width as needed to fit 4 cards in a row */
-	margin-bottom: 20px;
-	border: 1px solid #ccc;
-	/* Add border or other styles as needed */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	/* Add shadow or other styles as needed */
+	height: 400px;
+	width: 350px;
+	margin-bottom: 30px;
+	border: 3px solid #666666;
+}
+
+.card:hover {
+	box-shadow: 3px 3px 3px 3px;
+}
+
+.card-header {
+	background-color: white;
 }
 
 .card-body {
-	padding: 10px;
-	text-align: center;
+	padding: 0px;
 }
 
 img {
-	width: 350px;
-	height: 215px;
+	width: 336px;
+    height: 215px;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
 }
-
 
 .paging-container {
 	margin-top: 30px;
@@ -64,14 +58,19 @@ img {
 }
 
 .form-select {
-	width: 95px;
+	width: 96px;
+
+}
+
+.table {
+	top: 30px;
 }
 
 .search-form {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
 	margin-top: 30px;
+	float: right;
 }
 
 .keyword-input-box {
@@ -258,7 +257,6 @@ pre {
 	flex-direction: row;
 	vertical-align: center;
 	padding: 0 5px 0 5px;
-	background-color: darkgray;
 }
 
 table {
@@ -272,4 +270,16 @@ table {
 	position: absolute;
 	right: 10px;
 	cursor: pointer;
+}
+
+@media (min-width: 1400px) {
+
+	.container,
+	.container-lg,
+	.container-md,
+	.container-sm,
+	.container-xl,
+	.container-xxl {
+		max-width: 1500px;
+	}
 }
