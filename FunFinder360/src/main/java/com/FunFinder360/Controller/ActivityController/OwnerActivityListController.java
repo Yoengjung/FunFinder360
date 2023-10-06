@@ -22,15 +22,29 @@ public class OwnerActivityListController extends SuperClass {
 		String keyword = request.getParameter("keyword");
 
 		OwnerActivitesDao dao = new OwnerActivitesDao();
+		List<OwnerActivityAndImage> lists = null;
+		int totalCount = 0;
 
 		try {
-			int totalCount = dao.GetTotalRecordCount(mode, keyword);
+			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
+			    totalCount = dao.GetLookTotalRecordCount(mode);
+			} else {
+				totalCount = dao.GetTotalRecordCount(mode, keyword);
+			}
+
 			String url = super.getUrlInfomation("OwnerActivitesList");
 			boolean isGrid = true;
 			
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 
-			List<OwnerActivityAndImage> lists = dao.selectAll(pageInfo);
+			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
+				System.out.println("totalcount : " + totalCount);
+			    lists = dao.LookSelectAll(pageInfo);
+			} else {
+				System.out.println("totalcount : " + totalCount);
+			    lists = dao.selectAll(pageInfo);
+			}
+			
 
 			request.setAttribute("activity", lists);
 			request.setAttribute("pageInfo", pageInfo);

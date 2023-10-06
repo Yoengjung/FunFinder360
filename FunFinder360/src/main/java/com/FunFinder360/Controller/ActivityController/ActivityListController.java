@@ -28,10 +28,8 @@ public class ActivityListController extends SuperClass {
 		try {
 			
 			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
-				System.out.println("totalcount : " + totalCount);
 			    totalCount = dao.GetLookTotalRecordCount(mode);
 			} else {
-				System.out.println("totalcount : " + totalCount);
 				totalCount = dao.GetTotalRecordCount(mode, keyword);
 			}
 			
