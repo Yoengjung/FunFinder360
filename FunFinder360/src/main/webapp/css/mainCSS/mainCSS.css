@@ -17,7 +17,6 @@
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: -11;
-	background-color: blue;
 }
 
 .img-container {
@@ -150,7 +149,6 @@
 .info-2 {
 	width: 100%;
 	height: 900px;
-	background-color: red;
 }
 
 .info-2 {
@@ -163,13 +161,15 @@
 
 .circle-container {
 	width: 100%;
-	height: 100%;
-	overflow: hidden
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #scrollImage {
 	max-width: 100%;
-	width: 10px;
 	transition: transform 0.3s ease-in-out;
 	transform: scale(var(--scroll, 1));
 }
@@ -184,11 +184,14 @@
 	font-size: 24px !important;
 }
 
-.info-p-tag-box {
-	position: relative;
-	top: 30%;
-	transform: translateY(-50%);
+.info-2-box {
+	position: absolute;
+	background-color: rgba(255, 255, 255, 0.9);
+	width: 600px;
+	text-align: center;
+	font-size: 25px;
 }
+
 
 
 .info-3 {

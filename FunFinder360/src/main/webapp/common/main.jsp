@@ -43,14 +43,21 @@ $(document).ready(function () {
 	 $(window).scroll(function() {
 	        const scrollY = $(this).scrollTop();
 	        const windowHeight = $(this).height();
+	        const imageHeight = $("#scrollImage").height();
+	        const imageWidth = $("#scrollImage").width();
 
+	        
+	        const originalImageRatio = imageWidth / imageHeight;
+	        
+	        const newImageHeight = windowHeight * 0.8;
+	        const newImageWidth = newImageHeight * originalImageRatio;
 	        // 이미지 크기 조절
-	        const newImageWidth = 10 + (scrollY / windowHeight) * 100; // 이미지의 최종 너비 계산
-	        const newImageScale = newImageWidth / 10; // 이미지의 스케일 계산
+	        const newImageScale = (imageHeight + scrollY) / (windowHeight + imageHeight);
 
 	        $("#scrollImage").css({
-	            "width": newImageWidth - 50 + "%", // 이미지 너비 조절
-	            "--scroll": newImageScale // 이미지 스케일 설정
+	            "transform": `scale(${newImageScale})`, // 이미지 스케일 조절
+	            "height": newImageHeight + 300+ "px",
+	            "width": newImageWidth + 400 + "px",
 	        });
 	    });
 
@@ -123,15 +130,9 @@ $(document).ready(function () {
 		    data-aos-anchor-placement="top-center">
 			<div class="circle-container">
 				<img src="${pageContext.request.contextPath}/common/image/c4.jpg" id="scrollImage">
-			</div>
-		</div>
-
-		<%-- <div class="info-2">
-			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/1.jpg">
 				<div class="info-2-box">
 					<p class="category-tag">문화 엔터테인먼트</p>
-					<div class="info-p-tag-box">
+					<div class="info-p-tag-box" style="font-size: 20px;">
 						<p>당신의 문화적 탐험을 위한 멋진 순간을 찾아보세요.</p>
 						<p>문화와 엔터테인먼트의 세계로 여행을 떠나세요!</p>
 						<p>문화의 아름다움과 엔터테인먼트의 즐거움을 함께 누려보세요.</p>
@@ -140,6 +141,9 @@ $(document).ready(function () {
 				</div>
 			</div>
 		</div>
+
+		<%--
+			
 		<div class="info-4">
 			<div class="circle-container-4">
 				<div class="info-4-box">
