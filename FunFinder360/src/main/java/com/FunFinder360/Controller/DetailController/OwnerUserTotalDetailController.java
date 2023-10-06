@@ -27,29 +27,33 @@ public class OwnerUserTotalDetailController extends SuperClass {
 
 		MemberOwnerDao dao = new MemberOwnerDao();
 		OwnerActivitesDao activityDao = new OwnerActivitesDao();
-		
+
 		try {
 			MemberOwner bean = dao.getOwnerData(userId);
 			int totalCount = activityDao.GetOwnerTotalRecordCount(mode, keyword, userId);
 			String url = super.getUrlInfomation("ownerUserTotalDetail&userId=" + userId);
 			boolean isGrid = false;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
-			
+
 			List<OwnerActivity> lists = activityDao.getOwnerUserToUserId(pageInfo, userId);
 			int readHitTotalCount = dao.getReadHitTotalCount(userId);
 			int reviewTotalCount = dao.getReviewTotalCount(userId);
-			
+
+			List<OwnerActivity> dateReadHitCount = dao.getDateReadHitCount(userId);
+
 			request.setAttribute("activityData", lists);
 			request.setAttribute("userData", bean);
 			request.setAttribute("pageInfo", pageInfo);
 			request.setAttribute("readHitTotalCount", readHitTotalCount);
 			request.setAttribute("reviewTotalCount", reviewTotalCount);
-			
+			request.setAttribute("dateReadHitCount", dateReadHitCount);
+
+
 			super.goToPage("admin/ownerUserTotalDetail.jsp");
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

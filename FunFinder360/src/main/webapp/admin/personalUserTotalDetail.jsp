@@ -209,12 +209,14 @@
 			<div class="total-container">
 				<div class="totalReadHit-container">
 					<div class="totalReadHit-box">
-						<span>총 조회수</span> <span>${requestScope.readHitTotalCount}</span>
+						<span>총 조회수</span> 
+						<span>${requestScope.readHitTotalCount}</span>
 					</div>
 				</div>
 				<div class='totalReviewCount-container'>
 					<div class="totalReivewCount-box">
-						<span>총 댓글수</span> <span>${requestScope.reviewTotalCount}</span>
+						<span>총 댓글수</span> 
+						<span>${requestScope.reviewTotalCount}</span>
 					</div>
 				</div>
 			</div>
