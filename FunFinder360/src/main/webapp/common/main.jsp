@@ -120,7 +120,7 @@ $(document).ready(function () {
 				</div>
 			</div>
 		</div>
-		<div class="info-2" data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-2" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
 				<img src="${pageContext.request.contextPath}/common/image/C6.jpg" id="scrollImage">
 				<div class="info-2-box">
@@ -134,9 +134,9 @@ $(document).ready(function () {
 				</div>
 			</div>
 		</div>
-		<div class="info-4" data-aos="flip-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-4" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/f1.jpg" id="scrollImage">
+				<img src="${pageContext.request.contextPath}/common/image/f1.jpg" id="scrollImage1">
 				<div class="info-4-box">
 					<p class="category-tag4">음식 요리</p>
 					<div class="info-p-tag-box" style="font-size: 20px;">
@@ -150,9 +150,9 @@ $(document).ready(function () {
 		</div>
 
 
-		<div class="info-5" data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-5" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/s1.jpg" id="scrollImage">
+				<img src="${pageContext.request.contextPath}/common/image/s1.jpg" id="scrollImage1">
 				<div class="info-4-box">
 					<p class="category-tag5">교육 학습</p>
 					<div class="info-p-tag-box" style="font-size: 20px;">
@@ -165,9 +165,9 @@ $(document).ready(function () {
 			</div>
 		</div>
 
-		<div class="info-6" data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-6" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/t1.jpg" id="scrollImage">
+				<img src="${pageContext.request.contextPath}/common/image/t1.jpg" id="scrollImage1">
 				<div class="info-6-box">
 					<p class="category-tag6">여행 모험</p>
 					<div class="info-p-tag-box" style="font-size: 20px;">
@@ -180,9 +180,9 @@ $(document).ready(function () {
 			</div>
 		</div>
 
-		<div class="info-7" data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-7" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/g1.jpg" id="scrollImage">
+				<img src="${pageContext.request.contextPath}/common/image/g1.jpg" id="scrollImage1">
 				<div class="info-7-box">
 					<p class="category-tag7">게임 취미</p>
 					<div class="info-p-tag-box" style="font-size: 20px;">

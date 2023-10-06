@@ -2,6 +2,12 @@
 	display: none;
 }
 
+.a-tag {
+	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.8);
+	color: black;
+}
+
 #login-message {
 	background-color: rgba(255, 255, 255, 0.8);
 	padding: 11px;
@@ -29,6 +35,7 @@
 	align-items: center;
 	width: 100%;
 	height: 100vh;
+	margin-bottom: 100px;
 }
 
 #login-user {
@@ -65,7 +72,7 @@
 	left: 50%;
 	transform: translateX(-50%);
 	background-color: #ffffff;
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.8);
 	line-height: 96px;
 	padding: 0px 30px 0px 30px;
 	border-radius: 80px;
@@ -199,8 +206,12 @@
 
 .info-4 {
 	width: 100%;
-	height: 900px;
-	margin-bottom: 50px;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	margin-bottom: 100px;
 	background-image: url("../../common/image/f1.jpg");
 }
 
@@ -240,15 +251,16 @@
 	width: 100%;
 	height: 900px;
 	margin-bottom: 100px;
-	background-image: url("../../common/image/s1.jpg");
 }
 
 .circle-container-5 {
-	position: relative;
+	width: 100%;
+	height: 100vh;
 	display: flex;
-	flex-direction: row;
-	left: 5%;
-	width: 90%;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	margin-bottom: 100px;
 	min-width: 1200px;
 }
 
@@ -287,12 +299,13 @@
 }
 
 .circle-container-6 {
-	position: relative;
+	width: 100%;
+	height: 100vh;
 	display: flex;
-	flex-direction: row;
-	left: 5%;
-	width: 90%;
-	min-width: 1200px;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	margin-bottom: 100px;
 }
 
 .info-6-box {
