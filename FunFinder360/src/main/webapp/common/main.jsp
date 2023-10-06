@@ -122,7 +122,7 @@ $(document).ready(function () {
 		</div>
 		<div class="info-2" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/C6.jpg" id="scrollImage">
+				<img src="${pageContext.request.contextPath}/common/image/c4.jpg" id="scrollImage1">
 				<div class="info-2-box">
 					<p class="category-tag">문화 엔터테인먼트</p>
 					<div class="info-p-tag-box" style="font-size: 20px;">
