@@ -1059,7 +1059,6 @@ public class ActivitesDao extends SuperDao {
 		if (mode == null || mode.equals("all")) {
 		} else {
 			sql += " and " + mode + " like '%" + keyword + "%'";
-
 		}
 		sql += " ) ";
 
