@@ -13,7 +13,7 @@
 	  return new bootstrap.Tooltip(tooltipTriggerEl)
 	})
 	function backPage() {
-		location.href = "<%=notWithFormTag%>activitesList"
+		window.history.back();
 	}
 	var check = false;
 	$(document).ready(function() {

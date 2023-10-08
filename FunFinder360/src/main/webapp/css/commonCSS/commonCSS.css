@@ -94,6 +94,10 @@ hr {
 	text-decoration: none;
 }
 
+.activites-menu {
+	width: 300px;
+}
+
 /* 드롭다운 내용 숨김 */
 .dropdown-content {
 	text-align: center;

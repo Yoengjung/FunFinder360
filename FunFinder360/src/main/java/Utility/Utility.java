@@ -68,7 +68,7 @@ public class Utility {
 		int maxPostSize = 10 * 1024 * 1024;
 		String ENCODING = "UTF-8";
 		MultipartRequest mr = null;
-
+		System.out.println("file src : " +uploadPath);
 		try {
 			mr = new MultipartRequest(request, uploadPath, maxPostSize, ENCODING, new DefaultFileRenamePolicy());
 		} catch (Exception e) {
