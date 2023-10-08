@@ -104,6 +104,9 @@
 	background-color: #BCA37F;
 	text-align: center;
 	float: right;
+	position: absolute;
+	bottom: 10px;
+	right: 80px;
 }
 
 .detailBtn a {
@@ -156,10 +159,10 @@
 /*검색*/
 .search {
 	font-size: 40px;
-    position: relative;
-    padding-left: 50px;
-    cursor: pointer;
-    margin-bottom: 30px;
+	position: relative;
+	padding-left: 50px;
+	cursor: pointer;
+	margin-bottom: 11px;
 }
 
 .search-container1 {
@@ -183,8 +186,24 @@
 }
 
 .material-symbols-outlined.search {
-    -khtml-user-drag: none;
-    -webkit-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
+	-khtml-user-drag: none;
+	-webkit-user-drag: none;
+	-moz-user-drag: none;
+	-o-user-drag: none;
+}
+
+/*조회수 등록순*/
+.search-form1 {
+	display: inline-flex;
+	position: relative;
+	float: right;
+	padding-right: 50px;
+	margin-bottom: 10px;
+}
+
+.form-select1 {
+	border: 0;
+	width: 82px;
+	text-align: center;
+	margin-right: 10px
 }

@@ -473,7 +473,7 @@ public class ActivitesDao extends SuperDao {
 		ResultSet resultSet = null;
 		Connection connection = super.getConnection();
 
-		String sql = " SELECT count(*) as cnt FROM personal_activites ";
+		String sql = " SELECT count(*) as cnt FROM personal_activites where category = '문화 - 엔터테인먼트' ";
 
 		pstmt = connection.prepareStatement(sql);
 
@@ -634,11 +634,11 @@ public class ActivitesDao extends SuperDao {
 
 		String sql = " select count(*) as cnt ";
 		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
-		sql += " from personal_activites ";
+		sql += " from personal_activites where category = '문화 - 엔터테인먼트' ";
 
 		if (mode == null || mode.equals("all")) {
 		} else {
-			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '문화 - 엔터테인먼트'";
+			sql += " and " + mode + " like '%" + keyword + "%'";
 		}
 		sql += " ) ";
 
@@ -646,7 +646,7 @@ public class ActivitesDao extends SuperDao {
 
 		resultSet = pstmt.executeQuery();
 
-		int cnt = -1;
+		int cnt = -1; 	 		
 
 		if (resultSet.next()) {
 			cnt = resultSet.getInt("cnt");
@@ -672,7 +672,7 @@ public class ActivitesDao extends SuperDao {
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
-		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId where category = '문화 - 엔터테인먼트') tt join activity_content con on tt.activityid = con.personalactivityId ";
+		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId where category = '문화 - 엔터테인먼트' and imageorder = 0) tt join activity_content con on tt.activityid = con.personalactivityId ";
 		if (mode == null || mode.equals("all")) {
 
 		} else {
