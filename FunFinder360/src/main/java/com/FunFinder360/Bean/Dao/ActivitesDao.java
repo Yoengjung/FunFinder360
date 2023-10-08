@@ -3,12 +3,14 @@ package com.FunFinder360.Bean.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.FunFinder360.Bean.Model.ActivityAndImage;
 import com.FunFinder360.Bean.Model.ContentObject;
 import com.FunFinder360.Bean.Model.ImageObject;
+import com.FunFinder360.Bean.Model.PersonalActivitesList;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Bean.Model.PersonalActivityDetail;
 
@@ -503,11 +505,11 @@ public class ActivitesDao extends SuperDao {
 
 		String mode = pageInfo.getMode();
 
-		String sql = " SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate " +
-                " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, " +
-                " Row_number() over(order by " + mode + " desc) as ranking " +
-                " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId) " +
-                " WHERE ranking BETWEEN ? AND ?";
+		String sql = " SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate "
+				+ " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, "
+				+ " Row_number() over(order by " + mode + " desc) as ranking "
+				+ " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId) "
+				+ " WHERE ranking BETWEEN ? AND ?";
 
 		Connection connection = super.getConnection();
 
@@ -535,6 +537,768 @@ public class ActivitesDao extends SuperDao {
 		}
 
 		System.out.println("bean1 : " + bean);
+		return bean;
+	}
+
+	public List<PersonalActivitesList> getCultureActivites(Paging pageInfo) throws Exception {
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content "
+				+ "                        FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, "
+				+ "                        Row_number() over(order by activityId desc) as ranking  "
+				+ "                        FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId where category= '문화 - 엔터테인먼트') tt join activity_content con on tt.activityid = con.personalActivityid "
+				+ "                        WHERE ranking BETWEEN ? AND ? ";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getPersonalActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return bean;
+
+	}
+
+	private PersonalActivitesList getPersonalActivityBeanData(ResultSet rs) throws SQLException {
+		PersonalActivitesList bean = new PersonalActivitesList();
+
+		bean.setActivityId(rs.getInt("activityid"));
+		bean.setUserId(rs.getString("userId"));
+		bean.setActivityName(rs.getString("activityName"));
+		bean.setCategory(rs.getString("category"));
+		bean.setLocation(rs.getString("location"));
+		bean.setLocationDetail(rs.getString("locationDetail"));
+		bean.setImage(rs.getString("image"));
+		bean.setImageOrder(rs.getInt("imageOrder"));
+		bean.setReadHit(rs.getInt("readhit"));
+		bean.setPostedDate(rs.getString("postedDate"));
+		bean.setContent(rs.getString("content"));
+
+		return bean;
+	}
+
+	public int GetCultureLookTotalRecordCount(String mode) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM personal_activites where category = '문화 - 엔터테인먼트'";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public int GetCultureTotalRecordCount(String mode, String keyword) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " select count(*) as cnt ";
+		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
+		sql += " from personal_activites ";
+
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '문화 - 엔터테인먼트'";
+		}
+		sql += " ) ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<PersonalActivitesList> getCultureSelectAll(Paging pageInfo) throws Exception {
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId where category = '문화 - 엔터테인먼트') tt join activity_content con on tt.activityid = con.personalactivityId ";
+		if (mode == null || mode.equals("all")) {
+
+		} else {
+			sql += "where " + mode + " like '%" + keyword + "%' ";
+		}
+
+		sql += " where ranking between ? and ?";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getPersonalActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		System.out.println("bean1 : " + bean);
+		return bean;
+	}
+
+	public int GetFoodLookTotalRecordCount(String mode) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM personal_activites where category = '음식 - 요리'";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public int GetFoodTotalRecordCount(String mode, String keyword) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " select count(*) as cnt ";
+		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
+		sql += " from personal_activites ";
+
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '음식 - 요리'";
+		}
+		sql += " ) ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<PersonalActivitesList> getFoodActivites(Paging pageInfo) throws Exception {
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content "
+				+ "                        FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, "
+				+ "                        Row_number() over(order by activityId desc) as ranking  "
+				+ "                        FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId where category= '음식 - 요리') tt join activity_content con on tt.activityid = con.personalActivityid "
+				+ "                        WHERE ranking BETWEEN ? AND ? ";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getPersonalActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	public List<PersonalActivitesList> getFoodSelectAll(Paging pageInfo) throws Exception {
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId where category = '음식 - 요리') tt join activity_content con on tt.activityid = con.personalactivityId ";
+		if (mode == null || mode.equals("all")) {
+
+		} else {
+			sql += "where " + mode + " like '%" + keyword + "%' ";
+		}
+
+		sql += " where ranking between ? and ?";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getPersonalActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	public int GetStudyLookTotalRecordCount(String mode) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM personal_activites where category = '교육 - 학습'";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public int GetStudyTotalRecordCount(String mode, String keyword) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " select count(*) as cnt ";
+		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
+		sql += " from personal_activites ";
+
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '교육 - 학습'";
+		}
+		sql += " ) ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<PersonalActivitesList> getStudyActivites(Paging pageInfo) throws Exception {
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content "
+				+ "                        FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, "
+				+ "                        Row_number() over(order by activityId desc) as ranking  "
+				+ "                        FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId where category= '교육 - 학습') tt join activity_content con on tt.activityid = con.personalActivityid "
+				+ "                        WHERE ranking BETWEEN ? AND ? ";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getPersonalActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	public List<PersonalActivitesList> getStudySelectAll(Paging pageInfo) throws Exception {
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId where category = '교육 - 학습') tt join activity_content con on tt.activityid = con.personalactivityId ";
+		if (mode == null || mode.equals("all")) {
+
+		} else {
+			sql += "where " + mode + " like '%" + keyword + "%' ";
+		}
+
+		sql += " where ranking between ? and ?";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getPersonalActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	public int GetTravelLookTotalRecordCount(String mode) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM personal_activites where category = '여행 - 모험'";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public int GetTravelTotalRecordCount(String mode, String keyword) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " select count(*) as cnt ";
+		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
+		sql += " from personal_activites ";
+
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '여행 - 모험'";
+		}
+		sql += " ) ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<PersonalActivitesList> getTravelActivites(Paging pageInfo) throws Exception {
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content "
+				+ "                        FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, "
+				+ "                        Row_number() over(order by activityId desc) as ranking  "
+				+ "                        FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId where category= '여행 - 모험') tt join activity_content con on tt.activityid = con.personalActivityid "
+				+ "                        WHERE ranking BETWEEN ? AND ? ";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getPersonalActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	public List<PersonalActivitesList> getTravalSelectAll(Paging pageInfo) throws Exception {
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId where category = '여행 - 모험') tt join activity_content con on tt.activityid = con.personalactivityId ";
+		if (mode == null || mode.equals("all")) {
+
+		} else {
+			sql += "where " + mode + " like '%" + keyword + "%' ";
+		}
+
+		sql += " where ranking between ? and ?";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getPersonalActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	public int GetGameLookTotalRecordCount(String mode) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM personal_activites where category = '게임 - 취미'";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public int GetGameTotalRecordCount(String mode, String keyword) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " select count(*) as cnt ";
+		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
+		sql += " from personal_activites ";
+
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '게임 - 취미'";
+		}
+		sql += " ) ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<PersonalActivitesList> getGameActivites(Paging pageInfo) throws Exception{
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content "
+				+ "                        FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, "
+				+ "                        Row_number() over(order by activityId desc) as ranking  "
+				+ "                        FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId where category= '게임 - 취미') tt join activity_content con on tt.activityid = con.personalActivityid "
+				+ "                        WHERE ranking BETWEEN ? AND ? ";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getPersonalActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	public List<PersonalActivitesList> getGameSelectAll(Paging pageInfo) throws Exception{
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId where category = '게임 - 취미') tt join activity_content con on tt.activityid = con.personalactivityId ";
+		if (mode == null || mode.equals("all")) {
+
+		} else {
+			sql += "where " + mode + " like '%" + keyword + "%' ";
+		}
+
+		sql += " where ranking between ? and ?";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getPersonalActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
 		return bean;
 	}
 
