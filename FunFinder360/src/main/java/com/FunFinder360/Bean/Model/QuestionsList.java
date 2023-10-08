@@ -9,12 +9,13 @@ public class QuestionsList {
 	private int readhit;
 	private String postedDate;
 	private int ranking;
+	private String respond;
 
 	public QuestionsList() {
 	}
 
 	public QuestionsList(int questionListId, String personalUserId, String ownerUserId, String title, String content,
-			int readhit, String postedDate, int ranking) {
+			int readhit, String postedDate, int ranking, String respond) {
 		super();
 		this.questionListId = questionListId;
 		this.personalUserId = personalUserId;
@@ -24,13 +25,22 @@ public class QuestionsList {
 		this.readhit = readhit;
 		this.postedDate = postedDate;
 		this.ranking = ranking;
+		this.respond = respond;
 	}
 
 	@Override
 	public String toString() {
 		return "QuestionsList [questionListId=" + questionListId + ", personalUserId=" + personalUserId
 				+ ", ownerUserId=" + ownerUserId + ", title=" + title + ", content=" + content + ", readhit=" + readhit
-				+ ", postedDate=" + postedDate + ", ranking=" + ranking + "]";
+				+ ", postedDate=" + postedDate + ", ranking=" + ranking + ", respond=" + respond + "]";
+	}
+	
+	public String getRespond() {
+		return respond;
+	}
+
+	public void setRespond(String respond) {
+		this.respond = respond;
 	}
 
 	public int getQuestionListId() {

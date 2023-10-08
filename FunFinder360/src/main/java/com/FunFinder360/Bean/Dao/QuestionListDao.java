@@ -245,4 +245,50 @@ public class QuestionListDao extends SuperDao {
 		return bean;
 	}
 
+	public void insertRespond(QuestionsList questionRespond) throws Exception {
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "update questionlist set respond = ? ";
+		sql += " where questionlistid = " + questionRespond.getQuestionListId();
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, questionRespond.getRespond());
+		
+		pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		
+	}
+
+	public void insertRespond(QuestionsList questionRespond, int questionListId ) throws Exception {
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "update questionlist set respond = ? ";
+		sql += " where questionlistid = ? ";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, questionRespond.getRespond());
+		pstmt.setInt(2, questionListId);
+		
+		
+		pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		
+	}
+
 }
