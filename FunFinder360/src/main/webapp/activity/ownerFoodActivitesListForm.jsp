@@ -27,7 +27,7 @@
 								$('#keyword').attr('disabled', true);
 							}
 						});
-						
+
 						$('.search').click(function() {
 							var searchContainer = $('.search-form');
 							if (searchContainer.css('display') === 'flex') {
@@ -36,6 +36,7 @@
 								searchContainer.css('display', 'flex');
 							}
 						});
+
 					});
 </script>
 </head>
@@ -51,19 +52,19 @@
 			<div class="nav-bar-container">
 				<ul class="middle-nav-bar">
 					<li>
-						<a href="<%=notWithFormTag%>cultureActivitesList">문화 - 엔터테인먼트</a>
+						<a href="<%=notWithFormTag%>ownerCultureActivitesList">문화 - 엔터테인먼트</a>
 					</li>
 					<li>
-						<a href="<%=notWithFormTag%>foodActivitesList">음식 - 요리</a>
+						<a href="<%=notWithFormTag%>ownerFoodActivitesList">음식 - 요리</a>
 					</li>
 					<li>
-						<a href="<%=notWithFormTag%>studyActivitesList">교육 - 학습</a>
+						<a href="<%=notWithFormTag%>ownerStudyActivitesList">교육 - 학습</a>
 					</li>
 					<li>
-						<a href="<%=notWithFormTag%>travelActivitesList">여행 - 모험</a>
+						<a href="<%=notWithFormTag%>ownerActivitesList">여행 - 모험</a>
 					</li>
 					<li>
-						<a href="<%=notWithFormTag%>gameActivitesList">게임 - 취미</a>
+						<a href="<%=notWithFormTag%>ownerGameActivitesList">게임 - 취미</a>
 					</li>
 				</ul>
 			</div>
@@ -91,14 +92,14 @@
 					</div>
 				</div>
 				<form name="search-form1" action="<%=withFormTag%>" method="get" class="search-form1">
-						<input type="hidden" name="command" value="activitesList">
-						<select id="mode" name="mode" class="form-select1">
-							<option value="readhit">조회수
-							<option value="postedDate">최신순
-						</select>
-						<button type="submit" class="btn form-control-sm search-btn" onclick="">검색</button>
+					<input type="hidden" name="command" value="activitesList">
+					<select id="mode" name="mode" class="form-select1">
+						<option value="readhit">조회수
+						<option value="postedDate">최신순
+					</select>
+					<button type="submit" class="btn form-control-sm search-btn" onclick="">검색</button>
 				</form>
-				<c:forEach var="bean" items="${requestScope.personalActivity}">
+				<c:forEach var="bean" items="${requestScope.ownerActivity}">
 					<div class="activity-item">
 						<div class="activity-img">
 							<img class="img-sizing" src="${pageContext.request.contextPath}/upload/${bean.image}">
@@ -113,14 +114,25 @@
 									<p>${bean.content}</p>
 								</c:otherwise>
 							</c:choose>
-							<p>장소 : ${bean.location} ${bean.locationDetail}
-							<p>게시자 : ${bean.userId}
-							<p>조회수 : ${bean.readHit}
-							<p>게시 시간 : ${bean.postedDate}
+							<c:choose>
+								<c:when test="${fn:length(bean.event) >= 200}">
+									<p>이벤트 : ${fn:substring(bean.event, 0 , 200)}...</p>
+								</c:when>
+								<c:otherwise>
+									<p>이벤트 : ${bean.event}</p>
+								</c:otherwise>
+							</c:choose>
+							<p>장소 : ${bean.location} ${bean.locationDetail}</p>
+							<p>가격 : <fmt:formatNumber value="${bean.price}" pattern="###,###" /> 원</p>
+							<p>오픈 시간 : ${bean.openTime} ~ ${bean.closeTime}
+							<p>게시자 : ${bean.userId}</p>
+							<p>조회수 : ${bean.readHit}</p>
+							<p>게시 시간 : ${bean.postedDate}</p>
 								<span class="detailBtn">
-									<a href="<%=notWithFormTag%>activityDetail&activityId=${bean.activityId}">상세보기</a>
+									<a href="<%=notWithFormTag%>OwnerActivityDetail&activityId=${bean.activityId}">상세보기</a>
 								</span>
 						</div>
+
 					</div>
 				</c:forEach>
 
@@ -128,4 +140,5 @@
 			<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 		</div>
 	</div>
+</body>
 </html>

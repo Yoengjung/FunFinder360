@@ -116,6 +116,10 @@ hr {
 	z-index: 10;
 }
 
+.li-tag {
+	width: 50%;
+}
+
 /* 드롭다운 내용 항목 스타일 */
 .dropdown-content a {
 	display: block;
@@ -176,6 +180,7 @@ hr {
 
 .dropdown-item {
 	text-align: center;
+	width: 200%;
 }
 
 .navbar {
@@ -204,5 +209,12 @@ hr {
 	body {
 		width: 1200px;
 		margin: 0 auto;
+	}
+}
+
+@media (min-width: 576px) {
+	.navbar-expand-sm .navbar-nav .dropdown-menu {
+		position: absolute;
+		width: 317px;
 	}
 }
