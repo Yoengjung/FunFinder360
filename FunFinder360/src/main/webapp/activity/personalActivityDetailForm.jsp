@@ -211,8 +211,7 @@
 				</form>
 			</div>
 		</c:if>
-
-	
+		
 		<c:forEach var="reviewBean" items="${requestScope.reviewData}">
 			<div class="review-box">
 				<div class="review-head">

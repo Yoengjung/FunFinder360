@@ -752,11 +752,11 @@ public class ActivitesDao extends SuperDao {
 
 		String sql = " select count(*) as cnt ";
 		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
-		sql += " from personal_activites ";
+		sql += " from personal_activites where category = '음식 - 요리'";
 
 		if (mode == null || mode.equals("all")) {
 		} else {
-			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '음식 - 요리'";
+			sql += " and " + mode + " like '%" + keyword + "%'";
 		}
 		sql += " ) ";
 
@@ -1058,7 +1058,11 @@ public class ActivitesDao extends SuperDao {
 
 		if (mode == null || mode.equals("all")) {
 		} else {
+<<<<<<< HEAD
 			sql += " and " + mode + " like '%" + keyword + "%'";
+=======
+			sql += " and " + mode + " like '%" + keyword + "%'" ;
+>>>>>>> a22826cde19333d362ed56cd7f72f4820cce6506
 		}
 		sql += " ) ";
 
@@ -1211,7 +1215,11 @@ String mode = pageInfo.getMode();
 
 		String sql = " select count(*) as cnt ";
 		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
+<<<<<<< HEAD
 		sql += " from personal_activites where category = '게임 - 취미'";
+=======
+		sql += " from personal_activites where category = '게임 - 취미' ";
+>>>>>>> a22826cde19333d362ed56cd7f72f4820cce6506
 
 		if (mode == null || mode.equals("all")) {
 		} else {

@@ -111,7 +111,17 @@ textarea {
 				<div class="post-info-box">
 					<ul>
 						<li class="post-span-column"><span>등록자명</span></li>
-						<li class="post-span-user post-span"><span>관리자</span></li>
+						<li class="post-span-user post-span">
+						<span>
+							<c:choose>
+								<c:when test="${not empty requestScope.questionData[index].personalUserId}">
+									${requestScope.questionData[index].personalUserId}
+								</c:when>
+								<c:otherwise>
+									${requestScope.questionData[index].personalUserId}
+								</c:otherwise>
+							</c:choose>
+						</span></li>
 						<li class="post-span-column"><span>등록일</span></li>
 						<li class="post-span-postedDate post-span"><span>${requestScope.questionData[index].postedDate}</span>
 						</li>
@@ -122,6 +132,8 @@ textarea {
 				</div>
 				<div class="content-box">
 					<p>${requestScope.questionData[index].content}</p>
+					
+				
 				</div>
 			</div>
 			<div class="list-btn-box">
@@ -139,16 +151,12 @@ textarea {
 						<div class="form-container">
 							<form action="<%=withFormTag%>" method="post">
 								<input type="hidden" id="command" name="command" value="respond">
-								<input type="hidden" id="questionListId" name="questionListId"
-									value="${requestScope.questionData[0].questionListId}">
+								<input type="hidden" id="questionListId" name="questionListId" value="${requestScope.questionData[0].questionListId}">
 								<div>
 									<textarea class="respond" id="respond" name="respond"></textarea>
-									<button type="button" class="adminbtn btn-dark"
-										id="response-id-btn">답글</button>
+									<button type="button" class="adminbtn btn-dark" id="response-id-btn">답글</button>
 								</div>
-
-								<button type="submit" class="adminbtn btn-primary"
-									id="success-btn" onclick="return validation();">완료</button>
+								<button type="submit" class="adminbtn btn-primary" id="success-btn" onclick="return validation();">완료</button>
 							</form>
 						</div>
 					</c:if>
@@ -199,16 +207,12 @@ textarea {
 						<div class="form-container">
 							<form action="<%=withFormTag%>" method="post">
 								<input type="hidden" id="command" name="command" value="respond">
-								<input type="hidden" id="questionListId" name="questionListId"
-									value="${requestScope.questionData[0].questionListId}">
+								<input type="hidden" id="questionListId" name="questionListId" value="${requestScope.questionData[0].questionListId}">
 								<div>
 									<textarea class="respond" id="respond" name="respond"></textarea>
-									<button type="button" class="adminbtn btn-dark"
-										id="response-id-btn">답글</button>
+									<button type="button" class="adminbtn btn-dark" id="response-id-btn">답글</button>
 								</div>
-
-								<button type="submit" class="adminbtn btn-primary"
-									id="success-btn" onclick="return validation();">완료</button>
+								<button type="submit" class="adminbtn btn-primary" id="success-btn" onclick="return validation();">완료</button>
 							</form>
 						</div>
 					</c:if>
@@ -266,16 +270,12 @@ textarea {
 						<div class="form-container">
 							<form action="<%=withFormTag%>" method="post">
 								<input type="hidden" id="command" name="command" value="respond">
-								<input type="hidden" id="questionListId" name="questionListId"
-									value="${requestScope.questionData[0].questionListId}">
+								<input type="hidden" id="questionListId" name="questionListId" value="${requestScope.questionData[0].questionListId}">
 								<div>
 									<textarea class="respond" id="respond" name="respond"></textarea>
-									<button type="button" class="adminbtn btn-dark"
-										id="response-id-btn">답글</button>
+									<button type="button" class="adminbtn btn-dark" id="response-id-btn">답글</button>
 								</div>
-
-								<button type="submit" class="adminbtn btn-primary"
-									id="success-btn" onclick="return validation();">완료</button>
+								<button type="submit" class="adminbtn btn-primary" id="success-btn" onclick="return validation();">완료</button>
 							</form>
 						</div>
 					</c:if>
