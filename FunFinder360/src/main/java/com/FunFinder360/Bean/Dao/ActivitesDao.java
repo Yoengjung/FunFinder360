@@ -747,11 +747,11 @@ public class ActivitesDao extends SuperDao {
 
 		String sql = " select count(*) as cnt ";
 		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
-		sql += " from personal_activites ";
+		sql += " from personal_activites where category = '음식 - 요리'";
 
 		if (mode == null || mode.equals("all")) {
 		} else {
-			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '음식 - 요리'";
+			sql += " and " + mode + " like '%" + keyword + "%'";
 		}
 		sql += " ) ";
 
@@ -895,11 +895,11 @@ public class ActivitesDao extends SuperDao {
 
 		String sql = " select count(*) as cnt ";
 		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
-		sql += " from personal_activites ";
+		sql += " from personal_activites where category = '교육 - 학습' ";
 
 		if (mode == null || mode.equals("all")) {
 		} else {
-			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '교육 - 학습'";
+			sql += " and " + mode + " like '%" + keyword + "%'";
 		}
 		sql += " ) ";
 
@@ -1043,11 +1043,11 @@ public class ActivitesDao extends SuperDao {
 
 		String sql = " select count(*) as cnt ";
 		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
-		sql += " from personal_activites ";
+		sql += " from personal_activites where category = '여행 - 모험' ";
 
 		if (mode == null || mode.equals("all")) {
 		} else {
-			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '여행 - 모험'";
+			sql += " and " + mode + " like '%" + keyword + "%'" ;
 		}
 		sql += " ) ";
 
@@ -1191,11 +1191,11 @@ public class ActivitesDao extends SuperDao {
 
 		String sql = " select count(*) as cnt ";
 		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
-		sql += " from personal_activites ";
+		sql += " from personal_activites where category = '게임 - 취미' ";
 
 		if (mode == null || mode.equals("all")) {
 		} else {
-			sql += " where " + mode + " like '%" + keyword + "%'" + "and category = '게임 - 취미'";
+			sql += " and " + mode + " like '%" + keyword + "%'";
 		}
 		sql += " ) ";
 
