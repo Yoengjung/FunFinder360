@@ -547,7 +547,7 @@ public class ActivitesDao extends SuperDao {
 		System.out.println("최신, 조회수 mode를 보기 : " + mode);
 
 		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content  ";
-		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY activityId deSC) AS ranking  ";
+		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY "+ mode +" deSC) AS ranking  ";
 		sql	+= " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId ";
 		sql += " WHERE category = '문화 - 엔터테인먼트' ) tt JOIN activity_content con ON tt.activityid = con.personalActivityid ";
 		sql	+= " WHERE ranking BETWEEN ? AND ? ";
@@ -940,7 +940,7 @@ public class ActivitesDao extends SuperDao {
 		System.out.println("최신, 조회수 mode를 보기 : " + mode);
 
 		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content  ";
-		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY activityId deSC) AS ranking  ";
+		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY " + mode + " deSC) AS ranking  ";
 		sql += " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId ";
 		sql += " WHERE category = '교육 - 학습' ) tt JOIN activity_content con ON tt.activityid = con.personalActivityid ";
 		sql += " WHERE ranking BETWEEN ? AND ? ";
@@ -1058,7 +1058,6 @@ public class ActivitesDao extends SuperDao {
 
 		if (mode == null || mode.equals("all")) {
 		} else {
-
 			sql += " and " + mode + " like '%" + keyword + "%'";
 		}
 		sql += " ) ";
@@ -1096,7 +1095,7 @@ String mode = pageInfo.getMode();
 		System.out.println("최신, 조회수 mode를 보기 : " + mode);
 
 		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content  ";
-		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY activityId deSC) AS ranking  ";
+		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY " + mode + " deSC) AS ranking  ";
 		sql	+= " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId ";
 		sql += " WHERE category = '여행 - 모험' ) tt JOIN activity_content con ON tt.activityid = con.personalActivityid ";
 		sql	+= " WHERE ranking BETWEEN ? AND ? ";
@@ -1253,7 +1252,7 @@ String mode = pageInfo.getMode();
 		System.out.println("최신, 조회수 mode를 보기 : " + mode);
 
 		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content  ";
-		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY activityId deSC) AS ranking  ";
+		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY " + mode + " deSC) AS ranking  ";
 		sql	+= " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId ";
 		sql += " WHERE category = '게임 - 취미' ) tt JOIN activity_content con ON tt.activityid = con.personalActivityid ";
 		sql	+= " WHERE ranking BETWEEN ? AND ? ";
