@@ -21,6 +21,8 @@ public class CultureActivitesListController extends SuperClass {
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
 		
+		System.out.println("mode : " + mode);
+		
 
 		ActivitesDao dao = new ActivitesDao();
 		List<PersonalActivitesList> lists = null;
@@ -29,6 +31,8 @@ public class CultureActivitesListController extends SuperClass {
 		try {
 			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
 				totalCount = dao.GetCultureLookTotalRecordCount(mode);
+				
+				
 			} else {
 				totalCount = dao.GetCultureTotalRecordCount(mode, keyword);
 			}

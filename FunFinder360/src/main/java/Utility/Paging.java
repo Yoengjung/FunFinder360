@@ -7,7 +7,7 @@ public class Paging {
 	private int pageSize = 0;
 	private int beginRow = 0;
 	private int endRow = 0;
-	private int pageCount = 10;
+	private int pageCount = 5;
 	private int beginPage = 0;
 	private int endPage = 0;
 	private String url = "";
@@ -106,8 +106,8 @@ public class Paging {
 		String html = "";
 		html = html + "<ul class=\"pagination justify-content-center\">";
 		if (this.pageNumber > this.pageCount) {
-			html = html + this.makeLiTag("맨처음", 1);
-			html = html + this.makeLiTag("이전", this.beginPage - 1);
+			html = html + this.makeLiTag("<", this.beginPage - 1);
+			html = html + this.makeLiTag("<<", 1);
 		}
 
 		for (int i = this.beginPage; i <= this.endPage; ++i) {
@@ -122,8 +122,8 @@ public class Paging {
 		}
 
 		if (this.pageNumber < this.totalPage / this.pageCount * this.pageCount + 1) {
-			html = html + this.makeLiTag("다음", this.endPage + 1);
-			html = html + this.makeLiTag("맨끝", this.totalPage);
+			html = html + this.makeLiTag(">", this.totalPage);
+			html = html + this.makeLiTag(">>", this.endPage + 1);
 		}
 
 		html = html + "</ul>";
