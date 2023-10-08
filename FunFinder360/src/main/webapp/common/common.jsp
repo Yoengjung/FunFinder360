@@ -67,6 +67,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 						</c:if>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">활동 목록</a>
+
 							<ul class="dropdown-menu activites-menu">
 								<li style="display: flex">
 									<ul style="width: 50%">
@@ -89,9 +90,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 											<a class="dropdown-item" href="<%=notWithFormTag%>gameActivitesList">게임 - 취미</a>
 										</li>
 									</ul>
-									<ul style= "width: 156px;">
+									<ul style="width: 156px;">
 										<li>
-											<a class="dropdown-item" href="<%=notWithFormTag%>OwnerActivitesList" style="width: 100%">업주 활동</a>
+											<a class="dropdown-item" href="<%=notWithFormTag%>ownerActivitesList" style="width: 100%">업주 활동</a>
 										</li>
 										<li class="li-tag">
 											<a class="dropdown-item" href="<%=notWithFormTag%>ownerCultureActivitesList">문화 - 엔터테인먼트</a>
@@ -110,8 +111,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 										</li>
 									</ul>
 								</li>
-
-
 							</ul>
 						</li>
 

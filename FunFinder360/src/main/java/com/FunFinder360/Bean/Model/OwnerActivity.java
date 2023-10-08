@@ -25,6 +25,7 @@ public class OwnerActivity {
 	private int totalRacodeCount;
 	private int contentCount = 0;
 	private int imgCount = 0;
+	private String content;
 	
 	public OwnerActivity () {}
 
@@ -215,6 +216,16 @@ public class OwnerActivity {
 	public void setImgCount(int imgCount) {
 		this.imgCount = imgCount;
 	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	
 
 	
 }

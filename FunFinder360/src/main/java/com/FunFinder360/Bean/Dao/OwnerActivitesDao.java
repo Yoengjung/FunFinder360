@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.FunFinder360.Bean.Model.ContentObject;
 import com.FunFinder360.Bean.Model.ImageObject;
+import com.FunFinder360.Bean.Model.OwnerActivitesList;
 import com.FunFinder360.Bean.Model.OwnerActivity;
 import com.FunFinder360.Bean.Model.OwnerActivityAndImage;
 import com.FunFinder360.Bean.Model.OwnerActivityDetail;
@@ -484,28 +485,29 @@ public class OwnerActivitesDao extends SuperDao {
 	}
 
 	public List<OwnerActivityAndImage> LookSelectAll(Paging pageInfo) throws Exception {
-		
-		PreparedStatement prtmt= null;
+
+		PreparedStatement prtmt = null;
 		ResultSet rs = null;
-		
+
 		String mode = pageInfo.getMode();
-		
+
 		String sql = " SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate ";
-		sql += " FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY " + mode +" DESC) AS ranking ";
+		sql += " FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY "
+				+ mode + " DESC) AS ranking ";
 		sql += " FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId) ";
 		sql += " WHERE ranking BETWEEN ? AND ? ORDER BY ranking ";
-		
+
 		Connection conn = super.getConnection();
-		
+
 		prtmt = conn.prepareStatement(sql);
-		
+
 		prtmt.setInt(1, pageInfo.getBeginRow());
 		prtmt.setInt(2, pageInfo.getEndRow());
-		
+
 		rs = prtmt.executeQuery();
-		
+
 		List<OwnerActivityAndImage> bean = new ArrayList<OwnerActivityAndImage>();
-		
+
 		while (rs.next()) {
 			bean.add(getActivityBeanData(rs));
 		}
@@ -521,6 +523,311 @@ public class OwnerActivitesDao extends SuperDao {
 		}
 
 		System.out.println("bean1 : " + bean);
+		return bean;
+	}
+
+	public int GetOwnerCultureLookTotalRecordCount(String mode) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM owner_activites where category = '문화 - 엔터테인먼트'";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public int GetOwnerCultureTotalRecordCount(String mode, String keyword) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " select count(*) as cnt ";
+		sql += " from (select activityid, userId, activityName, category, location, locationdetail,duration, price, activitynumber,opentime, closetime, event, readhit, posteddate ";
+		sql += " from owner_activites where category = '문화 - 엔터테인먼트'";
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%' ";
+		}
+		sql += " ) ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<OwnerActivitesList> getOwnerCultureActivites(Paging pageInfo) throws Exception{
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate , content "
+				+ "		 FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY "
+				+ "				 postedDate DESC) AS ranking FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '문화 - 엔터테인먼트' AND imageorder = 0) tt join activity_content on activity_content.ownerActivityId = tt.activityid "
+				+ " WHERE ranking BETWEEN ? AND ? ORDER BY ranking";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<OwnerActivitesList> bean = new ArrayList<OwnerActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getOwnerActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	private OwnerActivitesList getOwnerActivityBeanData(ResultSet rs) throws Exception{
+		OwnerActivitesList bean = new OwnerActivitesList();
+		
+		bean.setActivityId(rs.getInt("activityId"));
+		bean.setUserId((rs.getString("userId")));
+		bean.setActivityName(rs.getString("activityName"));
+		bean.setCategory(rs.getString("category"));
+		bean.setLocation(rs.getString("location"));
+		bean.setLocationDetail(rs.getString("locationDetail"));
+		bean.setDuration(rs.getInt("duration"));
+		bean.setPrice(rs.getInt("price"));
+		bean.setOpenTime(rs.getString("openTime"));
+		bean.setCloseTime(rs.getString("closeTime"));
+		bean.setImage(rs.getString("image"));
+		bean.setEvent(rs.getString("event"));
+		bean.setReadHit(rs.getInt("readHit"));
+		bean.setPostedDate(rs.getString("postedDate"));
+		bean.setContent(rs.getString("content"));
+		
+		return bean;
+		
+	}
+
+	public List<OwnerActivitesList> getOwnerCultureSelectAll(Paging pageInfo) throws Exception{
+		PreparedStatement prtmt = null;
+		ResultSet rs = null;
+
+		String mode = pageInfo.getMode();
+
+		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, readhit, postedDate, content "
+				+ "			   FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY postedDate DESC) AS ranking "
+				+ "				FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '문화 - 엔터테인먼트' and imageorder = 0) tt join activity_content con on tt.activityid = con.ownerActivityid WHERE ranking BETWEEN ? AND ? ORDER BY ranking ";
+
+		Connection conn = super.getConnection();
+
+		prtmt = conn.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		rs = prtmt.executeQuery();
+
+		List<OwnerActivitesList> bean = new ArrayList<OwnerActivitesList>();
+
+		while (rs.next()) {
+			bean.add(getOwnerActivityBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		
+		return bean;
+	}
+
+	public int GetOwnerFoodLookTotalRecordCount(String mode) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM owner_activites where category = '음식 - 요리'";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public int GetOwnerFoodTotalRecordCount(String mode, String keyword) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " select count(*) as cnt ";
+		sql += " from (select activityid, userId, activityName, category, location, locationdetail,duration, price, activitynumber,opentime, closetime, event, readhit, posteddate ";
+		sql += " from owner_activites where category = '음식 - 요리'";
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%' ";
+		}
+		sql += " ) ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<OwnerActivitesList> getOwnerFoodActivites(Paging pageInfo) throws Exception{
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate , content "
+				+ "		 FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY "
+				+ "				 postedDate DESC) AS ranking FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '음식 - 요리' AND imageorder = 0) tt join activity_content on activity_content.ownerActivityId = tt.activityid "
+				+ " WHERE ranking BETWEEN ? AND ? ORDER BY ranking";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<OwnerActivitesList> bean = new ArrayList<OwnerActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getOwnerActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	public List<OwnerActivitesList> getOwnerFoodSelectAll(Paging pageInfo) throws Exception{
+		PreparedStatement prtmt = null;
+		ResultSet rs = null;
+
+		String mode = pageInfo.getMode();
+
+		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, readhit, postedDate, content "
+				+ "			   FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY postedDate DESC) AS ranking "
+				+ "				FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '음식 - 요리' and imageorder = 0) tt join activity_content con on tt.activityid = con.ownerActivityid WHERE ranking BETWEEN ? AND ? ORDER BY ranking ";
+
+		Connection conn = super.getConnection();
+
+		prtmt = conn.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		rs = prtmt.executeQuery();
+
+		List<OwnerActivitesList> bean = new ArrayList<OwnerActivitesList>();
+
+		while (rs.next()) {
+			bean.add(getOwnerActivityBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		
 		return bean;
 	}
 }
