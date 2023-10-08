@@ -830,4 +830,145 @@ public class OwnerActivitesDao extends SuperDao {
 		
 		return bean;
 	}
+
+	public int GetOwnerStudyLookTotalRecordCount(String mode) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM owner_activites where category = '교육 - 학습'";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public int GetOwnerStudyTotalRecordCount(String mode, String keyword) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " select count(*) as cnt ";
+		sql += " from (select activityid, userId, activityName, category, location, locationdetail,duration, price, activitynumber,opentime, closetime, event, readhit, posteddate ";
+		sql += " from owner_activites where category = '교육 - 학습'";
+		if (mode == null || mode.equals("all")) {
+		} else {
+			sql += " where " + mode + " like '%" + keyword + "%' ";
+		}
+		sql += " ) ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
+
+	public List<OwnerActivitesList> getOwnerStudyActivites(Paging pageInfo) throws Exception{
+		PreparedStatement prtmt = null;
+		ResultSet resultSet = null;
+
+		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate , content "
+				+ "		 FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY "
+				+ "				 postedDate DESC) AS ranking FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '교육 - 학습' AND imageorder = 0) tt join activity_content on activity_content.ownerActivityId = tt.activityid "
+				+ " WHERE ranking BETWEEN ? AND ? ORDER BY ranking";
+
+		Connection connection = super.getConnection();
+
+		prtmt = connection.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		resultSet = prtmt.executeQuery();
+
+		List<OwnerActivitesList> bean = new ArrayList<OwnerActivitesList>();
+
+		while (resultSet.next()) {
+			bean.add(getOwnerActivityBeanData(resultSet));
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		return bean;
+	}
+
+	public List<OwnerActivitesList> getOwnerStudySelectAll(Paging pageInfo) throws Exception{
+		PreparedStatement prtmt = null;
+		ResultSet rs = null;
+
+		String mode = pageInfo.getMode();
+
+		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, readhit, postedDate, content "
+				+ "			   FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY postedDate DESC) AS ranking "
+				+ "				FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '교육 - 학습' and imageorder = 0) tt join activity_content con on tt.activityid = con.ownerActivityid WHERE ranking BETWEEN ? AND ? ORDER BY ranking ";
+
+		Connection conn = super.getConnection();
+
+		prtmt = conn.prepareStatement(sql);
+
+		prtmt.setInt(1, pageInfo.getBeginRow());
+		prtmt.setInt(2, pageInfo.getEndRow());
+
+		rs = prtmt.executeQuery();
+
+		List<OwnerActivitesList> bean = new ArrayList<OwnerActivitesList>();
+
+		while (rs.next()) {
+			bean.add(getOwnerActivityBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (prtmt != null) {
+			prtmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		
+		return bean;
+	}
 }

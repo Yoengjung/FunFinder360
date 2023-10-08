@@ -1058,11 +1058,8 @@ public class ActivitesDao extends SuperDao {
 
 		if (mode == null || mode.equals("all")) {
 		} else {
-<<<<<<< HEAD
+
 			sql += " and " + mode + " like '%" + keyword + "%'";
-=======
-			sql += " and " + mode + " like '%" + keyword + "%'" ;
->>>>>>> a22826cde19333d362ed56cd7f72f4820cce6506
 		}
 		sql += " ) ";
 
@@ -1215,11 +1212,8 @@ String mode = pageInfo.getMode();
 
 		String sql = " select count(*) as cnt ";
 		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
-<<<<<<< HEAD
 		sql += " from personal_activites where category = '게임 - 취미'";
-=======
-		sql += " from personal_activites where category = '게임 - 취미' ";
->>>>>>> a22826cde19333d362ed56cd7f72f4820cce6506
+
 
 		if (mode == null || mode.equals("all")) {
 		} else {
