@@ -48,8 +48,8 @@
 					<li><a href="<%=notWithFormTag%>cultureActivitesList">문화 - 엔터테인먼트</a></li>
 					<li><a href="<%=notWithFormTag%>foodActivitesList">음식 - 요리</a></li>
 					<li><a href="<%=notWithFormTag%>studyActivitesList">교육 - 학습</a></li>
-					<li><a href="#">여행 - 모험</a></li>
-					<li><a href="#">게임 - 취미</a></li>
+					<li><a href="<%=notWithFormTag%>travelActivitesList">여행 - 모험</a></li>
+					<li><a href="<%=notWithFormTag%>gameActivitesList">게임 - 취미</a></li>
 				</ul>
 			</div>
 			<div class="activity-container">
@@ -71,6 +71,7 @@
 							<p>게시자 : ${bean.userId}
 							<p>조회수 : ${bean.readHit}
 							<p>게시 시간 : ${bean.postedDate}
+							<span class="detailBtn"><a href="<%=notWithFormTag%>activityDetail&activityId=${bean.activityId}">상세보기</a></span>
 						</div>
 					</div>
 				</c:forEach>

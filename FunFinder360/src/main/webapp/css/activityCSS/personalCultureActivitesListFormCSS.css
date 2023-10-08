@@ -86,13 +86,29 @@
 }
 
 .img-sizing {
-	width: 300px;
+	width: 500px;
 	height: 100%;
 }
 
 
 .activity-contents {
 	padding: 30px;
-	background-color: antiquewhite;
+	background-color: #F1EFEF;
 	width: 100%;
+}
+
+.detailBtn {
+	display: block;
+	width: 100px;
+	height: 40px;
+	background-color: #BCA37F;
+	text-align: center;
+	float: right;
+}
+
+.detailBtn a {
+	top: 50%;
+	position: relative;
+	display: block;
+	transform: translateY(-50%);
 }

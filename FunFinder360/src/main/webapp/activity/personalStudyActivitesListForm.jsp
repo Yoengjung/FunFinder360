@@ -70,7 +70,8 @@
 							<p>장소 : ${bean.location} ${bean.locationDetail}
 							<p>게시자 : ${bean.userId}
 							<p>조회수 : ${bean.readHit}
-							<p>게시 시간 : ${bean.postedDate}
+							<p>게시 시간 : ${bean.postedDate} <br>
+							<span class="detailBtn"><a href="<%=notWithFormTag%>activityDetail&activityId=${bean.activityId}">상세보기</a></span>
 						</div>
 					</div>
 				</c:forEach>
@@ -126,4 +127,4 @@
 			</div>
 			<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div> --%>
 </body>
-</html>
+</html> 

@@ -32,7 +32,7 @@ public class StudyActivitesListController extends SuperClass {
 				totalCount = dao.GetStudyTotalRecordCount(mode, keyword);
 			}
 
-			String url = super.getUrlInfomation("foodActivitesList");
+			String url = super.getUrlInfomation("studyActivitesList");
 			boolean isGrid = true;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
