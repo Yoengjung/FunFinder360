@@ -90,7 +90,7 @@
 					</div>
 				</div>
 				<form name="search-form1" action="<%=withFormTag%>" method="get" class="search-form1">
-						<input type="hidden" name="command" value="activitesList">
+						<input type="hidden" name="command" value="travelActivitesList">
 						<select id="mode" name="mode" class="form-select1">
 							<option value="postedDate">최신순
 						<option value="readhit">조회수
