@@ -65,6 +65,41 @@ body {
 	text-decoration: underline;
 }
 
+.page-link {
+	background-color: white;
+	color: black;
+	border: 0px;
+	margin: 0px 10px;
+	border-radius: 0px;
+}
+
+.active {
+	background-color: white;
+	font-weight: 700;
+} 
+
+.pagination {
+    --bs-pagination-padding-x: 0.75rem;
+    --bs-pagination-padding-y: 0.375rem;
+    --bs-pagination-font-size: 1rem;
+    --bs-pagination-color: white;
+    --bs-pagination-bg: var(--bs-body-bg);
+    --bs-pagination-border-width: var(--bs-border-width);
+    --bs-pagination-border-color: var(--bs-border-color);
+    --bs-pagination-border-radius: var(--bs-border-radius);
+    --bs-pagination-hover-color: white;
+    --bs-pagination-hover-bg: var(--bs-tertiary-bg);
+    --bs-pagination-hover-border-color: var(--bs-border-color);
+    --bs-pagination-focus-color: var(--bs-link-hover-color);
+    --bs-pagination-focus-bg: var(--bs-secondary-bg);
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    --bs-pagination-active-color: black;
+    --bs-pagination-active-bg: white;
+    --bs-pagination-active-border-color: #0d6efd;
+    --bs-pagination-disabled-color: var(--bs-secondary-color);
+    --bs-pagination-disabled-bg: var(--bs-secondary-bg);
+    --bs-pagination-disabled-border-color: var(--bs-border-color);
+
 
 </style>
 </head>
@@ -76,7 +111,6 @@ body {
 			<thead class="table-dark">
 				<tr>
 					<th>아이디</th>
-					<th>비밀 번호</th>
 					<th>이름</th>
 					<th>생년월일</th>
 					<th>전화번호</th>
@@ -88,7 +122,6 @@ body {
 				<c:forEach var="bean" items="${requestScope.datalist}">
 					<tr>
 						<td><a href="<%=notWithFormTag%>personalUserTotalDetail&userId=${bean.userId}" id="userId-tag">${bean.userId}</a></td>
-						<td>${bean.password}</td>
 						<td>${bean.username}</td>
 						<td>${bean.birth}</td>
 						<td>${bean.phoneNumber}</td>
