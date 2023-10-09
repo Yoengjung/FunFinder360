@@ -9,6 +9,11 @@
 	href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
 <title>개인 유저 통합 상세 조회</title>
 </head>
+
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
 <script>
 	$(document).ready(function() {
 		const currentDate = new Date();
@@ -76,6 +81,194 @@
 		    $(this).find('.time').css('height', heightPercentage);
 		});
 	})
+	
+	am5.ready(function() {
+
+	// Create root element
+	// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+	var root = am5.Root.new("chartdiv");
+
+
+	// Set themes
+	// https://www.amcharts.com/docs/v5/concepts/themes/
+	root.setThemes([
+	  am5themes_Animated.new(root)
+	]);
+
+
+	// Create chart
+	// https://www.amcharts.com/docs/v5/charts/xy-chart/
+	var chart = root.container.children.push(am5xy.XYChart.new(root, {
+	  panX: true,
+	  panY: true,
+	  wheelX: "panX",
+	  wheelY: "zoomX",
+	  pinchZoomX: true
+	}));
+
+	// Add cursor
+	// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+	var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+	cursor.lineY.set("visible", false);
+
+
+	// Create axes
+	// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+	var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+	xRenderer.labels.template.setAll({
+	  rotation: -90,
+	  centerY: am5.p50,
+	  centerX: am5.p100,
+	  paddingRight: 15
+	});
+
+	xRenderer.grid.template.setAll({
+	  location: 1
+	})
+
+	var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+	  maxDeviation: 0.3,
+	  categoryField: "country",
+	  renderer: xRenderer,
+	  tooltip: am5.Tooltip.new(root, {})
+	}));
+
+	var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+	  maxDeviation: 0.3,
+	  renderer: am5xy.AxisRendererY.new(root, {
+	    strokeOpacity: 0.1
+	  })
+	}));
+
+
+	// Create series
+	// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+	var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+	  name: "Series 1",
+	  xAxis: xAxis,
+	  yAxis: yAxis,
+	  valueYField: "value",
+	  sequencedInterpolation: true,
+	  categoryXField: "country",
+	  tooltip: am5.Tooltip.new(root, {
+	    labelText: "{valueY}"
+	  })
+	}));
+
+	series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5, strokeOpacity: 0 });
+	series.columns.template.adapters.add("fill", function(fill, target) {
+	  return chart.get("colors").getIndex(series.columns.indexOf(target));
+	});
+
+	series.columns.template.adapters.add("stroke", function(stroke, target) {
+	  return chart.get("colors").getIndex(series.columns.indexOf(target));
+	});
+	
+	const graphData = [
+	    ${requestScope.dateReadHitCount[0].readHit},
+	    ${requestScope.dateReadHitCount[1].readHit},
+	    ${requestScope.dateReadHitCount[2].readHit},
+	    ${requestScope.dateReadHitCount[3].readHit},
+	    ${requestScope.dateReadHitCount[4].readHit},
+	    ${requestScope.dateReadHitCount[5].readHit},
+	    ${requestScope.dateReadHitCount[6].readHit},
+	    ${requestScope.dateReadHitCount[7].readHit},
+	];
+	
+	const currentDate = new Date();
+
+	// 각 날짜 계산
+	const date8 = new Date(currentDate);
+	date8.setDate(currentDate.getDate());
+	const month8 = date8.getMonth() + 1;
+	const day8 = date8.getDate();
+	
+	const date7 = new Date(currentDate);
+	date7.setDate(currentDate.getDate() - 1);
+	const month7 = date7.getMonth() + 1;
+	const day7 = date7.getDate();
+
+	const date6 = new Date(currentDate);
+	date6.setDate(currentDate.getDate() - 2); // 전전날
+	const month6 = date6.getMonth() + 1;
+	const day6 = date6.getDate();
+
+	const date5 = new Date(currentDate);
+	date5.setDate(currentDate.getDate() - 3);
+	const month5 = date5.getMonth() + 1;
+	const day5 = date5.getDate();
+
+	const date4 = new Date(currentDate);
+	date4.setDate(currentDate.getDate() - 4);
+	const month4 = date4.getMonth() + 1;
+	const day4 = date4.getDate();
+
+	const date3 = new Date(currentDate);
+	date3.setDate(currentDate.getDate() - 5);
+	const month3 = date3.getMonth() + 1;
+	const day3 = date3.getDate();
+
+	const date2 = new Date(currentDate);
+	date2.setDate(currentDate.getDate() - 6);
+	const month2 = date2.getMonth() + 1;
+	const day2 = date2.getDate();
+
+	const date1 = new Date(currentDate);
+	date1.setDate(currentDate.getDate() - 7); // 일주일 전
+	const month1 = date1.getMonth() + 1;
+	const day1 = date1.getDate();
+
+	// 각 클래스에 텍스트 설정
+	
+	$(".day1").text(`\${month1}월 \${day1}일`);
+	$(".day2").text(`\${month2}월 \${day2}일`);
+	$(".day3").text(`\${month3}월 \${day3}일`);
+	$(".day4").text(`\${month4}월 \${day4}일`);
+	$(".day5").text(`\${month5}월 \${day5}일`);
+	$(".day6").text(`\${month6}월 \${day6}일`);
+	$(".day7").text(`\${month7}월 \${day7}일`);
+	$(".day8").text(`\${month8}월 \${day8}일`);
+	// Set data
+	var data = [{
+	  country: `\${month1}월 \${day1}일`,
+	  value: graphData[0]
+	}, {
+	  country: `\${month2}월 \${day2}일`,
+	  value: graphData[1]
+	}, {
+	  country: `\${month3}월 \${day3}일`,
+	  value: graphData[2]
+	}, {
+	  country: `\${month4}월 \${day4}일`,
+	  value: graphData[3]
+	}, {
+	  country: `\${month5}월 \${day5}일`,
+	  value: graphData[4]
+	}, {
+	  country: `\${month6}월 \${day6}일`,
+	  value: graphData[5]
+	}, {
+	  country: `\${month7}월 \${day7}일`,
+	  value: graphData[6]
+	}, {
+	  country: `\${month8}월 \${day8}일`,
+	  value: graphData[7]
+	}];
+
+	xAxis.data.setAll(data);
+	series.data.setAll(data);
+
+
+	// Make stuff animate on load
+	// https://www.amcharts.com/docs/v5/concepts/animations/
+	series.appear(1000);
+	chart.appear(1000, 100);
+
+	}); // end am5.ready()
+
+</script>
+<script>
+
 </script>
 <body>
 	<div class="container">
@@ -221,108 +414,7 @@
 				</div>
 			</div>
 		</div>
-		<div class='readHit-chart-container'>
-			<div class="vertical_chart_box">
-				<ul class="axis_y">
-					<li class="item">100 <span class="blind"></span>
-					</li>
-					<li class="item">200 <span class="blind"></span>
-					</li>
-					<li class="item">300 <span class="blind"></span>
-					</li>
-					<li class="item">400 <span class="blind"></span>
-					</li>
-					<li class="item">500 <span class="blind"></span>
-					</li>
-					<li class="item">600 <span class="blind"></span>
-					</li>
-					<li class="item">700 <span class="blind"></span>
-					</li>
-					<li class="item">800 <span class="blind"></span>
-					</li>
-					<li class="item">900 <span class="blind"></span>
-					</li>
-					<li class="item">1000 <span class="blind"></span>
-					</li>
-
-				</ul>
-				<ul class="axis_x">
-					<!-- item 을 차트에서 표현해야하는 개수만큼 나열한다. -->
-					<li class="item">
-						<div class="text_box">
-							<strong class="day1" id="day1"></strong>
-						</div>
-						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[0].readHit}</span>
-							</span>
-						</button>
-
-					</li>
-					<li class="item">
-						<div class="text_box">
-							<strong class="day2"></strong>
-						</div>
-						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[1].readHit}</span>
-							</span>
-						</button>
-					</li>
-					<li class="item">
-						<div class="text_box">
-							<strong class="day3"></strong>
-						</div>
-						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[2].readHit}</span>
-							</span>
-						</button>
-					</li>
-					<li class="item">
-						<div class="text_box">
-							<strong class="day4"></strong>
-						</div>
-						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[3].readHit}</span>
-							</span>
-						</button>
-					</li>
-					<li class="item">
-						<div class="text_box">
-							<strong class="day5"></strong>
-						</div>
-						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[4].readHit}</span>
-							</span>
-						</button>
-					</li>
-					<li class="item">
-						<div class="text_box">
-							<strong class="day6"></strong>
-						</div>
-						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[5].readHit}</span>
-							</span>
-						</button>
-					</li>
-					<li class="item">
-						<div class="text_box">
-							<strong class="day7"></strong>
-						</div>
-						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[6].readHit}</span>
-							</span>
-						</button>
-					</li>
-				</ul>
-			</div>
-
-		</div>
+		<div id="chartdiv"></div>
 	</div>
 </body>
 </html>

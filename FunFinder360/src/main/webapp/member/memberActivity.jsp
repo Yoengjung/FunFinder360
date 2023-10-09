@@ -144,7 +144,7 @@
 				<thead class="table-dark">
 					<tr>
 						<th class="table-head-box no-head">활동 제목</th>
-						<th class="table-head-box title-head">카테고리</th>
+						<th class="table-head-box title-head" align="center">카테고리</th>
 						<th class="table-head-box registrant-head">위치</th>
 						<th class="table-head-box posted-date-head">상세주소</th>
 						<th class="table-head-box readhit-head" style="width: 70px;">조회수</th>
@@ -182,6 +182,7 @@
 							<td class="table-body-box">${personalActivity.postedDate}</td>
 							<td class="table-body-box">
 								<button type="button" onclick="button_event(event);">삭제</button>
+								<button type="button" onclick="button_event(event);">수정</button>
 								<%-- <a href="<%=notWithFormTag%>personalDeleteActivity&activityId=${personalActivity.activityId}" onclick="return button_event()">삭제</a> --%>
 							</td>
 						</tr>
@@ -207,7 +208,7 @@
 						<div class="input-group">
 							<input class="keyword-input-box form-control" type="text" name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">
 						</div>
-						<button type="submit" class="btn btn-default form-control-sm search-btn" onclick="">검색</button>
+						<button type="submit" class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
 					</form>
 				</div>
 			</div>
