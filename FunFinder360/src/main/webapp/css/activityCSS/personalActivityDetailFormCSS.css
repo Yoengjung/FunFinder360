@@ -1,4 +1,4 @@
-body {
+wbody {
 	margin: 0px;
 	padding: 0px;
 	height: 100vh;
@@ -27,6 +27,12 @@ body {
 	border-radius: 10px;
 }
 
+.backBtn {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 30px;
+}
 #category-tag {
 	display: inline;
 	margin: 0px;

@@ -42,10 +42,7 @@
 	<div class="container">
 		<div class="container-box">
 			<span id="category-tag">${requestScope.personalActivityData.category}</span>
-
 			<h2 id="activityName-tag">${requestScope.personalActivityData.activityName}</h2>
-
-
 			<div class="location-container" style="font-size: 17px;">
 				<span>장소 : ${requestScope.personalActivityData.location} </span>
 				<span> ${requestScope.personalActivityData.locationDetail}</span>
@@ -102,7 +99,7 @@
 			<div class="bottom-content-container"></div>
 		</div>
 		<div>
-			<button class="back-btn" value="돌아가기" onclick="backPage();">목록</button>
+			<button style="left: 50%; position: relative; transform: translate(-50%);" class="btn btn-primary backBtn" value="돌아가기" onclick="backPage();">목록</button>
 		</div>
 	</div>
 </body>

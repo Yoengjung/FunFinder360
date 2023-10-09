@@ -105,12 +105,35 @@ $(document).ready(
 			}
 		});
 	});
+	
+function button_event(event) {
+	  event.preventDefault();
+	  const activityId = $("#activityId-tag").val();
+	  if (confirm("정말 삭제하시겠습니까??")) {
+	    var url = "<%=notWithFormTag%>ownerDeleteActivity&activityId=" + activityId;
+		var xhr = new XMLHttpRequest();
+
+		xhr.open("GET", url, true);
+
+		xhr.onload = function() {
+			if (xhr.status === 200) {
+				window.location.reload();
+			} else {
+				console.error("요청 실패");
+			}
+		};
+
+		xhr.send();
+	} else {
+		return;
+	}
+}
 
 </script>
 </head>
 <body>
 	<div class="container">
-		<h2>내가 올린 활동들 일까?(기업)</h2>
+		<h2>나의 활동</h2>
 		<table class="table">
 			<thead class="table-dark">
 				<tr>

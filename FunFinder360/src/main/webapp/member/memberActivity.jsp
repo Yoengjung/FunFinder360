@@ -85,6 +85,11 @@
 .keyword-input-box {
 	margin: 0 20px;
 }
+
+.a-tag-1 {
+	color: blue;
+	text-decoration: underline;
+}
 </style>
 <script type="text/javascript">
 	$(document)
@@ -107,6 +112,28 @@
 							}
 						});
 					});
+	function button_event(event) {
+		  event.preventDefault();
+		  const activityId = $("#activityId-tag").val();
+		  if (confirm("정말 삭제하시겠습니까??")) {
+		    var url = "<%=notWithFormTag%>personalDeleteActivity&activityId=" + activityId;
+			var xhr = new XMLHttpRequest();
+
+			xhr.open("GET", url, true);
+
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+					window.location.reload();
+				} else {
+					console.error("요청 실패");
+				}
+			};
+
+			xhr.send();
+		} else {
+			return;
+		}
+	}
 </script>
 </head>
 <body>
@@ -127,43 +154,43 @@
 				</thead>
 				<tbody>
 					<c:forEach var="personalActivity" items="${requestScope.personalActivityList}">
-				<input type="hidden" value="${personalActivity.activityId}" id="activityId-tag">
-					<tr>
-						<td class="table-body-box">
-							<c:choose>
-								<c:when test="${fn:length(personalActivity.activityName) >= 10}">
-									<a href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${fn:substring(personalActivity.activityName, 0, 10)}...</a>
-								</c:when>
-								<c:otherwise>
-									<a href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${personalActivity.activityName}</a>
-								</c:otherwise>
-							</c:choose>
-						</td>
-						<td class="table-body-box title-box">${personalActivity.category}</td>
-						<td class="table-body-box">${personalActivity.location}</td>
-						<td class="table-body-box">
-							<c:choose>
-								<c:when test="${fn:length(personalActivity.locationDetail) >= 10}">
-									<a href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${fn:substring(personalActivity.locationDetail, 0, 10)}...</a>
-								</c:when>
-								<c:otherwise>
-									<a href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${personalActivity.locationDetail}</a>
-								</c:otherwise>
-							</c:choose>
-						</td>
-						<td class="table-body-box">${personalActivity.readHit}</td>
-						<td class="table-body-box">${personalActivity.postedDate}</td>
-						<td class="table-body-box">
-							<button type="button" onclick="button_event(event);">삭제</button>
-							<%-- <a href="<%=notWithFormTag%>personalDeleteActivity&activityId=${personalActivity.activityId}" onclick="return button_event()">삭제</a> --%>
-						</td>
-					</tr>
-				</c:forEach>
+						<input type="hidden" value="${personalActivity.activityId}" id="activityId-tag">
+						<tr>
+							<td class="table-body-box">
+								<c:choose>
+									<c:when test="${fn:length(personalActivity.activityName) >= 10}">
+										<a class="a-tag-1" href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${fn:substring(personalActivity.activityName, 0, 10)}...</a>
+									</c:when>
+									<c:otherwise>
+										<a class="a-tag-1" href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${personalActivity.activityName}</a>
+									</c:otherwise>
+								</c:choose>
+							</td>
+							<td class="table-body-box title-box">${personalActivity.category}</td>
+							<td class="table-body-box">${personalActivity.location}</td>
+							<td class="table-body-box">
+								<c:choose>
+									<c:when test="${fn:length(personalActivity.locationDetail) >= 10}">
+										<a href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${fn:substring(personalActivity.locationDetail, 0, 10)}...</a>
+									</c:when>
+									<c:otherwise>
+										<a href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${personalActivity.locationDetail}</a>
+									</c:otherwise>
+								</c:choose>
+							</td>
+							<td class="table-body-box">${personalActivity.readHit}</td>
+							<td class="table-body-box">${personalActivity.postedDate}</td>
+							<td class="table-body-box">
+								<button type="button" onclick="button_event(event);">삭제</button>
+								<%-- <a href="<%=notWithFormTag%>personalDeleteActivity&activityId=${personalActivity.activityId}" onclick="return button_event()">삭제</a> --%>
+							</td>
+						</tr>
+					</c:forEach>
 
 				</tbody>
 
 			</table>
-			
+
 			<div class="search-container">
 				<div class="search-in-container">
 					<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">

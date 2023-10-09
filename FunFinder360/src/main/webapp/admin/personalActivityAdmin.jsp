@@ -61,8 +61,6 @@
 	color: blue;
 	text-decoration: underline;
 }
-
-
 </style>
 </head>
 <body>

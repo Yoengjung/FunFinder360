@@ -92,7 +92,6 @@
 	margin-right: 10px;
 }
 
-
 .info-container-newPassword {
 	display: none;
 }
@@ -303,18 +302,18 @@ function changeBio(userId) {
 	const newBio = $("#info-value-change-input-bio").val();
     $.ajax({
         type: "POST",
-        url: '<%=notWithFormTag%>personalUserChangeBio',
+        url: '<%=notWithFormTag%>
+	personalUserChangeBio',
 			data : {
 				userId : userId,
 				newBio : newBio
 			},
 			success : function(response, status, xhr) {
 				if (newBio.length > 500) {
-	        		alert("사업소개은 500자 이상은 불가능합니다. ");
-	            	return;
-	        	}
-	        	
-				
+					alert("사업소개은 500자 이상은 불가능합니다. ");
+					return;
+				}
+
 				if (xhr.status === 200) {
 					alert("자기소개가 변경되었습니다.");
 					location.reload();
@@ -334,7 +333,7 @@ function changeBio(userId) {
 	}
 </script>
 <body>
-<div id="check"></div>
+	<div id="check"></div>
 
 	<div class="container">
 		<h2>${requestScope.bean.username}회원정보</h2>
@@ -411,7 +410,7 @@ function changeBio(userId) {
 		</div>
 
 		<div id="backButton">
-			<button type="button" class="btn btn-primary backBtn" onclick="history.back();">돌아 가기</button>
+			<button  class="btn btn-primary backBtn" onclick="history.back();">돌아 가기</button>
 		</div>
 	</div>
 </body>
