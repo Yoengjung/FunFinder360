@@ -182,7 +182,6 @@
 							<td class="table-body-box">${personalActivity.postedDate}</td>
 							<td class="table-body-box">
 								<button type="button" onclick="button_event(event);">삭제</button>
-								<button type="button" onclick="button_event(event);">수정</button>
 								<%-- <a href="<%=notWithFormTag%>personalDeleteActivity&activityId=${personalActivity.activityId}" onclick="return button_event()">삭제</a> --%>
 							</td>
 						</tr>
