@@ -134,6 +134,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 									<li>
 										<a class="dropdown-item" href="<%=notWithFormTag%>memberDetail">회원 정보</a>
 									</li>
+									<li>
+										<a class="dropdown-item" href="<%=notWithFormTag%>memberProfit">수익 활동</a>
+									</li>
 								</ul>
 							</li>
 						</c:if>

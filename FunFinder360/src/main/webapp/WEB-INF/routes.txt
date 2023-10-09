@@ -16,6 +16,8 @@ memberActivity=com.FunFinder360.Controller.Member.MemberActivityController
 PersonalPasswordUpdate=com.FunFinder360.Controller.Member.MemberPersonalPasswordUpdateController
 OwnerPasswordUpdate=com.FunFinder360.Controller.Member.MemberOwnerPasswordUpdateController
 personalMemberList=com.FunFinder360.Controller.Member.MemberListController
+memberProfit=com.FunFinder360.Controller.Member.MemberProfitController
+
 #로그아웃
 logout=com.FunFinder360.Controller.Member.MemberLogoutController
 

@@ -752,7 +752,7 @@ public class ActivitesDao extends SuperDao {
 
 		String sql = " select count(*) as cnt ";
 		sql += " from ( SELECT activityid, userid, activityname, category, location, locationdetail, duration, cost, activitynumber, rating, readhit, posteddate";
-		sql += " from personal_activites where category = '음식 - 요리'";
+		sql += " from personal_activites where category = '음식 - 요리' ";
 
 		if (mode == null || mode.equals("all")) {
 		} else {
@@ -787,11 +787,17 @@ public class ActivitesDao extends SuperDao {
 		PreparedStatement prtmt = null;
 		ResultSet resultSet = null;
 
-		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content "
-				+ "                        FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, "
-				+ "                        Row_number() over(order by activityId desc) as ranking  "
-				+ "                        FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId where category= '음식 - 요리') tt join activity_content con on tt.activityid = con.personalActivityid "
-				+ "                        WHERE ranking BETWEEN ? AND ? ";
+		String mode = pageInfo.getMode();
+
+		System.out.println("최신, 조회수 mode를 보기 : " + mode);
+
+		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content  ";
+		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER (ORDER BY "
+				+ mode + " deSC) AS ranking  ";
+		sql += " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId ";
+		sql += " WHERE category = '음식 - 요리' ) tt JOIN activity_content con ON tt.activityid = con.personalActivityid ";
+		sql += " WHERE ranking BETWEEN ? AND ? ";
+		sql += " ORDER BY " + mode + " desc ";
 
 		Connection connection = super.getConnection();
 
@@ -827,13 +833,15 @@ public class ActivitesDao extends SuperDao {
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
-		String sql = "select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId where category = '음식 - 요리') tt join activity_content con on tt.activityid = con.personalactivityId ";
+		String sql = " select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content ";
+		sql += " from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking ";
+		sql += " from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId ";
+		sql += " where category = '음식 - 요리' and imageorder = 0";
 		if (mode == null || mode.equals("all")) {
-
 		} else {
-			sql += "where " + mode + " like '%" + keyword + "%' ";
+			sql += " and " + mode + " like '%" + keyword + "%' ";
 		}
-
+		sql += ") tt join activity_content con on tt.activityid = con.personalactivityId ";
 		sql += " where ranking between ? and ?";
 
 		Connection connection = super.getConnection();
@@ -1095,7 +1103,7 @@ public class ActivitesDao extends SuperDao {
 		System.out.println("최신, 조회수 mode를 보기 : " + mode);
 
 		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content  ";
-		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY "
+		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER (ORDER BY "
 				+ mode + " deSC) AS ranking  ";
 		sql += " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId ";
 		sql += " WHERE category = '여행 - 모험' ) tt JOIN activity_content con ON tt.activityid = con.personalActivityid ";
@@ -1296,115 +1304,6 @@ public class ActivitesDao extends SuperDao {
 		sql += " from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking ";
 		sql += " from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId ";
 		sql += " where category = '게임 - 취미' and imageorder = 0";
-		if (mode == null || mode.equals("all")) {
-		} else {
-			sql += " and " + mode + " like '%" + keyword + "%' ";
-		}
-		sql += ") tt join activity_content con on tt.activityid = con.personalactivityId ";
-		sql += " where ranking between ? and ?";
-
-		Connection connection = super.getConnection();
-
-		prtmt = connection.prepareStatement(sql);
-
-		prtmt.setInt(1, pageInfo.getBeginRow());
-		prtmt.setInt(2, pageInfo.getEndRow());
-
-		resultSet = prtmt.executeQuery();
-
-		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
-
-		while (resultSet.next()) {
-			bean.add(getPersonalActivityBeanData(resultSet));
-		}
-
-		if (resultSet != null) {
-			resultSet.close();
-		}
-		if (prtmt != null) {
-			prtmt.close();
-		}
-		if (connection != null) {
-			connection.close();
-		}
-		return bean;
-	}
-
-	public void deleteActivityData(int activityId) throws Exception {
-		PreparedStatement pstmt = null;
-		Connection conn = super.getConnection();
-
-		String sql = "delete from personal_activites where activityId = ?";
-
-		pstmt = conn.prepareStatement(sql);
-		
-		pstmt.setInt(1, activityId);
-		
-		pstmt.executeUpdate();
-
-		if (pstmt != null) {
-			pstmt.close();
-		}
-		if (conn != null) {
-			conn.close();
-		}
-
-	}
-
-	public List<PersonalActivitesList> getActivites(Paging pageInfo) throws Exception{
-		PreparedStatement prtmt = null;
-		ResultSet resultSet = null;
-
-		String mode = pageInfo.getMode();
-
-		System.out.println("최신, 조회수 mode를 보기 : " + mode);
-
-		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content  ";
-		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY "
-				+ mode + " deSC) AS ranking  ";
-		sql += " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId ";
-		sql += " ) tt JOIN activity_content con ON tt.activityid = con.personalActivityid ";
-		sql += " WHERE ranking BETWEEN ? AND ? ";
-		sql += " ORDER BY " + mode + " desc ";
-
-		Connection connection = super.getConnection();
-
-		prtmt = connection.prepareStatement(sql);
-
-		prtmt.setInt(1, pageInfo.getBeginRow());
-		prtmt.setInt(2, pageInfo.getEndRow());
-
-		resultSet = prtmt.executeQuery();
-
-		List<PersonalActivitesList> bean = new ArrayList<PersonalActivitesList>();
-
-		while (resultSet.next()) {
-			bean.add(getPersonalActivityBeanData(resultSet));
-		}
-
-		if (resultSet != null) {
-			resultSet.close();
-		}
-		if (prtmt != null) {
-			prtmt.close();
-		}
-		if (connection != null) {
-			connection.close();
-		}
-		return bean;
-	}
-
-	public List<PersonalActivitesList> getSelectAll(Paging pageInfo) throws Exception{
-		PreparedStatement prtmt = null;
-		ResultSet resultSet = null;
-
-		String mode = pageInfo.getMode();
-		String keyword = pageInfo.getKeyword();
-
-		String sql = " select activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content ";
-		sql += " from (select  activityId ,userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, Row_number() over(order by postedDate desc) as ranking ";
-		sql += " from personal_activites ac join activity_image im on ac.activityid = im.personalActivityId ";
-		sql += " where imageorder = 0";
 		if (mode == null || mode.equals("all")) {
 		} else {
 			sql += " and " + mode + " like '%" + keyword + "%' ";
