@@ -61,7 +61,7 @@
 						<a href="<%=notWithFormTag%>ownerStudyActivitesList">교육 - 학습</a>
 					</li>
 					<li>
-						<a href="<%=notWithFormTag%>ownerActivitesList">여행 - 모험</a>
+						<a href="<%=notWithFormTag%>ownerTravelActivitesList">여행 - 모험</a>
 					</li>
 					<li>
 						<a href="<%=notWithFormTag%>ownerGameActivitesList">게임 - 취미</a>
@@ -123,7 +123,7 @@
 								</c:otherwise>
 							</c:choose>
 							<p>장소 : ${bean.location} ${bean.locationDetail}</p>
-							<p>가격 : <fmt:formatNumber value="${bean.price}" pattern="###,###" /> 원</p>
+							<p>가격 : <fmt:formatNumber value="${bean.price}" pattern="###,###"/> 원</p>
 							<p>오픈 시간 : ${bean.openTime} ~ ${bean.closeTime}
 							<p>게시자 : ${bean.userId}</p>
 							<p>조회수 : ${bean.readHit}</p>
@@ -132,7 +132,6 @@
 									<a href="<%=notWithFormTag%>OwnerActivityDetail&activityId=${bean.activityId}">상세보기</a>
 								</span>
 						</div>
-
 					</div>
 				</c:forEach>
 

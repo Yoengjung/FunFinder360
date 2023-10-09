@@ -3,20 +3,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
 <meta charset="UTF-8">
 <title>개인 활동</title>
 
 <style>
-.container {
-	margin-top: 130px;
+.container1 {
 	width: 100%;
-	height: 100%;
+	height: 100vh;
+	min-height: 100vh;
 }
 
-.container h2 {
+.container2 {
+	width: 80%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 25%;
+}
+
+.container1 h2 {
 	margin-bottom: 30px;
+	text-align: center;
 }
 
 .table-head-box {
@@ -101,38 +109,19 @@ $(document).ready(
 </script>
 </head>
 <body>
-	<div class="container">
-		<h2>내가 올린 활동들 일까?</h2>
-		<table class="table">
-			<thead class="table-dark">
-				<tr>
-					<th class="table-head-box no-head">활동 제목</th>
-					<th class="table-head-box title-head">카테고리</th>
-					<th class="table-head-box registrant-head">위치</th>
-					<th class="table-head-box posted-date-head">상세주소</th>
-					<th class="table-head-box readhit-head">조회수</th>
-					<th class="table-head-box">등록일</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="personalActivity" items="${requestScope.personalActivityList}">
+	<div class="container1">
+		<div class="container2">
+			<h2>나의 활동</h2>
+			<table class="table">
+				<thead class="table-dark">
 					<tr>
-						<td class="table-body-box">
-							<c:choose>
-								<c:when test="${fn:length(personalActivity.activityName) >= 10}">
-									<a href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${fn:substring(personalActivity.activityName, 0, 10)}... </a>
-								</c:when>
-								<c:otherwise>
-									<a href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${personalActivity.activityName} </a>
-								</c:otherwise>
-								<%-- ${personalActivity.activityName} --%>
-							</c:choose>
-						</td>
-						<td class="table-body-box title-box">${personalActivity.category}</td>
-						<td class="table-body-box">${personalActivity.location}</td>
-						<td class="table-body-box">${personalActivity.locationDetail}</td>
-						<td class="table-body-box">${personalActivity.readHit}</td>
-						<td class="table-body-box">${personalActivity.postedDate}</td>
+						<th class="table-head-box no-head">활동 제목</th>
+						<th class="table-head-box title-head">카테고리</th>
+						<th class="table-head-box registrant-head">위치</th>
+						<th class="table-head-box posted-date-head">상세주소</th>
+						<th class="table-head-box readhit-head" style="width: 70px;">조회수</th>
+						<th class="table-head-box">등록일</th>
+						<th class="table-head-box">옵션</th>
 					</tr>
 				</c:forEach>
 			</tbody>

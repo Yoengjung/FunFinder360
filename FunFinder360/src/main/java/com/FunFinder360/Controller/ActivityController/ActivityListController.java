@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.FunFinder360.Bean.Dao.ActivitesDao;
-import com.FunFinder360.Bean.Model.ActivityAndImage;
+import com.FunFinder360.Bean.Model.PersonalActivitesList;
 import com.FunFinder360.Controller.SuperClass;
 
 import Utility.Paging;
@@ -22,35 +22,26 @@ public class ActivityListController extends SuperClass {
 		String keyword = request.getParameter("keyword");
 
 		ActivitesDao dao = new ActivitesDao();
-		List<ActivityAndImage> lists = null;
+		List<PersonalActivitesList> lists = null;
 		int totalCount = 0;
 
 		try {
-			
 			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
-			    totalCount = dao.GetLookTotalRecordCount(mode);
+				totalCount = dao.GetLookTotalRecordCount(mode);
 			} else {
 				totalCount = dao.GetTotalRecordCount(mode, keyword);
 			}
-			
-			
+
 			String url = super.getUrlInfomation("activitesList");
 			boolean isGrid = true;
-
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
-			
-			System.out.println("mode : " + mode);
-			
+
 			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
-				System.out.println("totalcount : " + totalCount);
-			    lists = dao.LookSelectAll(pageInfo);
+				lists = dao.getActivites(pageInfo);
 			} else {
-				System.out.println("totalcount : " + totalCount);
-			    lists = dao.selectAll(pageInfo);
+				lists = dao.getSelectAll(pageInfo);
 			}
-			
-			System.out.println("list :" + lists);
-		
+
 			request.setAttribute("personalActivity", lists);
 			request.setAttribute("pageInfo", pageInfo);
 
@@ -58,7 +49,6 @@ public class ActivityListController extends SuperClass {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 
 	}
 

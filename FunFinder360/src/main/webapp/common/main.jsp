@@ -4,8 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainCSS/mainCSS.css">
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
 <title>FunFinder360</title>
 </head>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -24,6 +26,20 @@ $(document).ready(function () {
 	        }, index * 100); // 각 요소마다 0.1초씩 딜레이
 	    });
 	}
+	
+	const underArrowTag = document.querySelector('.underArrow-tag');
+
+	// 스크롤 이벤트를 사용하여 아래로 내리는 애니메이션 활성화
+	window.addEventListener('scroll', () => {
+	    const scrollY = window.scrollY;
+
+	    if (scrollY > 200) { // 스크롤 위치가 200px 이상이면
+	        underArrowTag.classList.add('animate-down'); // 애니메이션 클래스 추가
+	    } else {
+	        underArrowTag.classList.remove('animate-down'); // 애니메이션 클래스 제거
+	    }
+	});
+
 	
 	resetAnimation();
 	
@@ -68,10 +84,17 @@ $(document).ready(function () {
 <body>
 	<div class="container1">
 		<div class="img-container">
-			<img src="${pageContext.request.contextPath}/common/image/spring.jpg" class="spring-img">
-			<img src="${pageContext.request.contextPath}/common/image/summer.jpg" class="summer-img">
-			<img src="${pageContext.request.contextPath}/common/image/fall.jpg" class="fall-img">
-			<img src="${pageContext.request.contextPath}/common/image/winter.jpg" class="winter-img">
+			<div class="img-box1">
+				<img src="${pageContext.request.contextPath}/common/image/spring1.jpg" class="spring-img">
+				<img src="${pageContext.request.contextPath}/common/image/summer.jpg" class="summer-img">
+			</div>
+			<div class="img-box2">
+				<img src="${pageContext.request.contextPath}/common/image/fall.jpg" class="fall-img">
+				<img src="${pageContext.request.contextPath}/common/image/winter.jpg" class="winter-img">
+				<span class="material-symbols-outlined underArrow-tag">keyboard_double_arrow_down </span>
+			</div>
+
+
 			<div class="info-1">
 				<div class="info-1-box">
 					<span>놀</span>
@@ -132,6 +155,19 @@ $(document).ready(function () {
 						<p>풍부한 경험과 즐거운 시간이 기다리고 있어요!
 					</div>
 				</div>
+				<div class="a-btn">
+					<a href="<%=notWithFormTag%>cultureActivitesList" id="a-btn-1">
+						<span>개인</span>
+						<br>문화 - 엔터테인먼트
+					</a>
+					<a href="<%=notWithFormTag%>ownerCultureActivitesList">
+						<span>업주</span>
+						<br>문화 - 엔터테인먼트
+					</a>
+				</div>
+				<div class="arrow-box">
+					<span class="material-symbols-outlined underArrow-tag2">keyboard_double_arrow_down </span>
+				</div>
 			</div>
 		</div>
 		<div class="info-4" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
@@ -145,6 +181,16 @@ $(document).ready(function () {
 						<p>음식의 기쁨과 만족을 느껴보세요.</p>
 						<p>맛있는 음식의 세계가 여기 있습니다!</p>
 					</div>
+				</div>
+				<div class="a-btn">
+					<a href="<%=notWithFormTag%>foodActivitesList" id="a-btn-1">
+						<span>개인</span>
+						<br>음식 - 요리
+					</a>
+					<a href="<%=notWithFormTag%>ownerFoodActivitesList">
+						<span>업주</span>
+						<br>음식 - 요리
+					</a>
 				</div>
 			</div>
 		</div>
@@ -162,6 +208,16 @@ $(document).ready(function () {
 						<p>풍부한 경험과 즐거운 시간이 기다리고 있어요!
 					</div>
 				</div>
+				<div class="a-btn">
+					<a href="<%=notWithFormTag%>studyActivitesList" id="a-btn-1">
+						<span>개인</span>
+						<br>교육 - 학습
+					</a>
+					<a href="<%=notWithFormTag%>ownerStudyActivitesList">
+						<span>업주</span>
+						<br>교육 - 학습
+					</a>
+				</div>
 			</div>
 		</div>
 
@@ -177,6 +233,16 @@ $(document).ready(function () {
 						<p>모험은 일생 중에 가장 소중한 선물 중 하나입니다.</p>
 					</div>
 				</div>
+				<div class="a-btn">
+					<a href="<%=notWithFormTag%>travelActivitesList" id="a-btn-1">
+						<span>개인</span>
+						<br>여행 - 모험
+					</a>
+					<a href="<%=notWithFormTag%>ownerTravelActivitesList">
+						<span>업주</span>
+						<br>여행 - 모험
+					</a>
+				</div>
 			</div>
 		</div>
 
@@ -191,6 +257,16 @@ $(document).ready(function () {
 						<p>문화의 아름다움과 엔터테인먼트의 즐거움을 함께 누려보세요.</p>
 						<p>풍부한 경험과 즐거운 시간이 기다리고 있어요!
 					</div>
+				</div>
+				<div class="a-btn">
+					<a href="<%=notWithFormTag%>gameActivitesList" id="a-btn-1">
+						<span>개인</span>
+						<br>게임 - 취미
+					</a>
+					<a href="<%=notWithFormTag%>ownerGameActivitesList">
+						<span>업주</span>
+						<br>게임 - 취미
+					</a>
 				</div>
 			</div>
 		</div>

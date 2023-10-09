@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -47,9 +46,11 @@
 .readhit-head {
 	width: 10%;
 }
+
 .event-head {
-	width: 15% 
+	width: 15%
 }
+
 .date-head {
 	width: 25%
 }
@@ -104,7 +105,7 @@ $(document).ready(
 			}
 		});
 	});
-	
+
 </script>
 </head>
 <body>
@@ -114,26 +115,27 @@ $(document).ready(
 			<thead class="table-dark">
 				<tr>
 					<th class="table-head-box no-head">활동 제목</th>
-					<th class="table-head-box title-head">카테고리</th>
+					<th class="table-head-box title-head" style="width: 130px;">카테고리</th>
 					<th class="table-head-box registrant-head">위치</th>
 					<th class="table-head-box posted-date-head">상세주소</th>
-					<th class="table-head-box readhit-head">조회수</th>
+					<th class="table-head-box readhit-head" style="width: 70px;">조회수</th>
 					<th class="table-head-box event-head">이벤트</th>
-					<th class="table-head-box date-head">등록일</th>
+					<th class="table-head-box date-head" style="width: 100px;">등록일</th>
+					<th class="table-head-box" style="width: 70px;">옵션</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="ownerActivity"
-					items="${requestScope.ownerActivityList}">
+				<c:forEach var="ownerActivity" items="${requestScope.ownerActivityList}">
+				<input type="hidden" value="${ownerActivity.activityId}" id="activityId-tag">
 					<tr>
 						<td class="table-body-box">
 							<c:choose>
 								<c:when test="${fn:length(ownerActivity.activitiyName) >= 10}">
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.activitiyName, 0, 10)}...</a>
-				                </c:when>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.activitiyName, 0, 10)}...</a>
+								</c:when>
 								<c:otherwise>
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.activitiyName}</a>
-				                </c:otherwise>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.activitiyName}</a>
+								</c:otherwise>
 							</c:choose>
 						</td>
 						<td class="table-body-box title-box">${ownerActivity.category}</td>
@@ -141,10 +143,10 @@ $(document).ready(
 						<td class="table-body-box">
 							<c:choose>
 								<c:when test="${fn:length(ownerActivity.locationDetail) >= 10}">
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.locationDetail, 0, 10)}...</a>
-				                </c:when>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.locationDetail, 0, 10)}...</a>
+								</c:when>
 								<c:otherwise>
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.locationDetail}</a>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.locationDetail}</a>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -152,14 +154,18 @@ $(document).ready(
 						<td class="table-body-box">
 							<c:choose>
 								<c:when test="${fn:length(ownerActivity.event) >= 10}">
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.event, 0, 10)}...</a>
-				                </c:when>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.event, 0, 10)}...</a>
+								</c:when>
 								<c:otherwise>
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.event}</a>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.event}</a>
 								</c:otherwise>
 							</c:choose>
 						</td>
 						<td class="table-body-box">${ownerActivity.postedDate}</td>
+						<td class="table-body-box">
+							<button type="button" onclick="button_event(event);">삭제</button>
+							<%-- <a href="<%=notWithFormTag%>personalDeleteActivity&activityId=${personalActivity.activityId}" onclick="return button_event()">삭제</a> --%>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

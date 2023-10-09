@@ -72,42 +72,42 @@ String notWithFormTag = appName + mappingName + "?command=";
 								<li style="display: flex">
 									<ul style="width: 50%">
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>activitesList">개인 활동</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>activitesList">개인 활동</a>
 										</li>
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>cultureActivitesList">문화 - 엔터테인먼트</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>cultureActivitesList">문화 - 엔터테인먼트</a>
 										</li>
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>foodActivitesList">음식 - 요리</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>foodActivitesList">음식 - 요리</a>
 										</li>
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>studyActivitesList">공부 - 학습</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>studyActivitesList">공부 - 학습</a>
 										</li>
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>travelActivitesList">여행 - 모험</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>travelActivitesList">여행 - 모험</a>
 										</li>
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>gameActivitesList">게임 - 취미</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>gameActivitesList">게임 - 취미</a>
 										</li>
 									</ul>
 									<ul style="width: 156px;">
 										<li>
-											<a class="dropdown-item" href="<%=notWithFormTag%>ownerActivitesList" style="width: 100%">업주 활동</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>ownerActivitesList" style="width: 100%">업주 활동</a>
 										</li>
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>ownerCultureActivitesList">문화 - 엔터테인먼트</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>ownerCultureActivitesList">문화 - 엔터테인먼트</a>
 										</li>
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>ownerFoodActivitesList">음식 - 요리</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>ownerFoodActivitesList">음식 - 요리</a>
 										</li>
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>ownerStudyActivitesList">공부 - 학습</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>ownerStudyActivitesList">공부 - 학습</a>
 										</li>
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>ownerTravelActivitesList">여행 - 모험</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>ownerTravelActivitesList">여행 - 모험</a>
 										</li>
 										<li class="li-tag">
-											<a class="dropdown-item" href="<%=notWithFormTag%>ownerGameActivitesList">게임 - 취미</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>ownerGameActivitesList">게임 - 취미</a>
 										</li>
 									</ul>
 								</li>

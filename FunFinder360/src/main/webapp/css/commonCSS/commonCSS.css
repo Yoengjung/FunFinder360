@@ -178,9 +178,14 @@ hr {
 	margin: 0 20px;
 }
 
-.dropdown-item {
+.dropdown-item1 {
 	text-align: center;
 	width: 200%;
+}
+
+.dropdown-item {
+	width: 100%;
+	text-align: center;
 }
 
 .navbar {

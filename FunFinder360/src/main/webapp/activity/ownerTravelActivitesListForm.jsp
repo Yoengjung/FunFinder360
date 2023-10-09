@@ -44,7 +44,7 @@
 	<div class="container1">
 		<div class="container2">
 			<div class="img-box">
-				<img src="${pageContext.request.contextPath}/common/image/shutterstock_722718082.jpg">
+				<img src="${pageContext.request.contextPath}/common/image/shutterstock_2080987960.jpg">
 				<span>음식 - 요리</span>
 			</div>
 		</div>

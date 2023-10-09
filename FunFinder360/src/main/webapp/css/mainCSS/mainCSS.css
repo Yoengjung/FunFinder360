@@ -1,3 +1,8 @@
+body {
+	position: absolute;
+	z-index: -10;
+}
+
 .logoImage {
 	display: none;
 }
@@ -31,8 +36,7 @@
 
 .img-container {
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	flex-direction: column;
 	width: 100%;
 	height: 100vh;
 }
@@ -48,10 +52,14 @@
 .summer-img,
 .fall-img,
 .winter-img {
-	max-width: 100%;
-	max-height: 100%;
-	height: 100%;
-	width: 25%;
+	height: 500px;
+	width: 50%;
+}
+
+.img-box1,
+.img-box2 {
+	display: flex;
+	flex-direction: row;
 }
 
 
@@ -60,6 +68,7 @@
 	display: block;
 	width: 100%;
 	text-align: center;
+	top: 7%
 }
 
 .info-1-box {
@@ -156,6 +165,38 @@
 	}
 }
 
+/* 스타일 초기 설정 */
+.underArrow-tag {
+	font-size: 140px;
+	color: white;
+	left: 44%;
+	transform: translateX(-50%);
+	position: absolute;
+	display: block;
+	top: 15%;
+	animation: bounce1 1s infinite;
+	transition: top 0.3s;
+}
+
+/* 애니메이션 클래스 추가 */
+.underArrow-tag.animate-down {
+	top: 50%;
+	/* 원하는 위치로 이동 */
+}
+
+@keyframes bounce1 {
+
+	0%,
+	100% {
+		transform: translateY(0);
+		/* 시작 및 끝 지점 */
+	}
+
+	50% {
+		transform: translateY(-20px);
+		/* 중간 지점 (위로 튕김) */
+	}
+}
 
 
 .info-2 {
@@ -165,7 +206,6 @@
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-	margin-bottom: 100px;
 }
 
 .info-2:after {
@@ -208,6 +248,48 @@
 	font-size: 25px;
 }
 
+.a-btn {
+	display: flex;
+	position: absolute;
+	z-index: 998;
+	top: 70%;
+	width: 415px;
+}
+
+.a-btn a {
+	text-align: center;
+	position: relative;
+	z-index: 999;
+	border: 1px solid black;
+	border-radius: 9px;
+	background-color: rgba(255, 255, 255, 0.9);
+	height: 80px;
+	width: 300px;
+	padding: 10px;
+
+}
+
+#a-btn-1 {
+	margin-right: 30px;
+}
+
+.arrow-box {
+	width: 100%;
+	background-color: red;
+}
+
+.underArrow-tag2 {
+	font-size: 140px;
+	color: white;
+	left: 50%;
+	transform: translateX(-50%);
+	position: absolute;
+	display: block;
+	animation: bounce1 1s infinite;
+	transition: top 0.3s;
+	bottom: 43px;
+}
+
 .info-4 {
 	width: 100%;
 	height: 100vh;
@@ -215,7 +297,6 @@
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-	margin-bottom: 100px;
 	background-image: url("../../common/image/f1.jpg");
 }
 
@@ -254,7 +335,6 @@
 .info-5 {
 	width: 100%;
 	height: 900px;
-	margin-bottom: 100px;
 }
 
 .circle-container-5 {
@@ -299,7 +379,6 @@
 .info-6 {
 	width: 100%;
 	height: 900px;
-	margin-bottom: 100px;
 }
 
 .circle-container-6 {
@@ -367,4 +446,3 @@
 .info-p-tag-box7 {
 	position: relative;
 }
-
