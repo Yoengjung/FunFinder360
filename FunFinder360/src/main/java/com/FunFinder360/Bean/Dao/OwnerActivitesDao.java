@@ -1253,4 +1253,24 @@ public class OwnerActivitesDao extends SuperDao {
 		
 		return bean;
 	}
+
+	public void deleteActivityData(int activityId) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+
+		String sql = "delete from owner_activites where activityId = ?";
+
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, activityId);
+		
+		pstmt.executeUpdate();
+
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+	}
 }

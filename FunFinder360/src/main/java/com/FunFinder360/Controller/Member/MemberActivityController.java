@@ -44,7 +44,6 @@ public class MemberActivityController extends SuperClass {
 				String userId = super.logInfo.getUserId();
 
 				try {
-					System.out.println("유저 아이디 여기다 여기 :" + userId);
 					int totalCount = dao.getPersonalTotalRecordCount(mode, keyword, userId);
 					String url = super.getUrlInfomation("memberActivity");
 					boolean isGrid = true;
@@ -69,14 +68,10 @@ public class MemberActivityController extends SuperClass {
 					e.printStackTrace();
 				}
 			} else if (ownerUserId != null) {
-				System.out.println("오류 확인 1");
-
 				List<OwnerActivity> lists = null;
 				String ownerId = super.loginfoOwner.getUserId();
 
 				try {
-
-					System.out.println("기업 아이디 : " + ownerId);
 					int totalCount = dao.getOwnerTotalRecordCount(mode, keyword, ownerId);
 					String url = super.getUrlInfomation("memberActivity");
 					boolean isgrid = true;

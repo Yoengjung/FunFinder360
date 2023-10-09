@@ -169,7 +169,7 @@ body {
 .underArrow-tag {
 	font-size: 140px;
 	color: white;
-	left: 46%;
+	left: 44%;
 	transform: translateX(-50%);
 	position: absolute;
 	display: block;
@@ -266,23 +266,28 @@ body {
 	height: 80px;
 	width: 300px;
 	padding: 10px;
-	
+
 }
 
 #a-btn-1 {
 	margin-right: 30px;
 }
 
+.arrow-box {
+	width: 100%;
+	background-color: red;
+}
+
 .underArrow-tag2 {
 	font-size: 140px;
-    color: white;
-    left: 46%;
-    transform: translateX(-50%);
-    position: absolute;
-    display: block;
-    animation: bounce1 1s infinite;
-    transition: top 0.3s;
-    bottom: 0;
+	color: white;
+	left: 50%;
+	transform: translateX(-50%);
+	position: absolute;
+	display: block;
+	animation: bounce1 1s infinite;
+	transition: top 0.3s;
+	bottom: 43px;
 }
 
 .info-4 {

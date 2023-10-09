@@ -61,7 +61,7 @@
 						<a href="<%=notWithFormTag%>ownerStudyActivitesList">교육 - 학습</a>
 					</li>
 					<li>
-						<a href="<%=notWithFormTag%>ownerActivitesList">여행 - 모험</a>
+						<a href="<%=notWithFormTag%>ownerTravelActivitesList">여행 - 모험</a>
 					</li>
 					<li>
 						<a href="<%=notWithFormTag%>ownerGameActivitesList">게임 - 취미</a>

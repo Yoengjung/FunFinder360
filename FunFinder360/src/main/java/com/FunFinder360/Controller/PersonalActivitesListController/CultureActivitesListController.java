@@ -27,12 +27,9 @@ public class CultureActivitesListController extends SuperClass {
 
 		try {
 			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
-
 				totalCount = dao.GetCultureLookTotalRecordCount(mode);
-
 			} else {
 				totalCount = dao.GetCultureTotalRecordCount(mode, keyword);
-				System.out.println("2. totalCount의 수 : " + totalCount);
 			}
 
 			String url = super.getUrlInfomation("cultureActivitesList");

@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -47,9 +46,11 @@
 .readhit-head {
 	width: 10%;
 }
+
 .event-head {
-	width: 15% 
+	width: 15%
 }
+
 .date-head {
 	width: 25%
 }
@@ -104,7 +105,29 @@ $(document).ready(
 			}
 		});
 	});
-	
+function button_event(event) {
+	  event.preventDefault();
+	  const activityId = $("#activityId-tag").val();
+	  console.log(activityId);
+	  if (confirm("정말 삭제하시겠습니까??")) {
+	    var url = `<%=notWithFormTag%>ownerDeleteActivity&activityId=\${activityId}`;
+	    var xhr = new XMLHttpRequest();
+
+	    xhr.open("GET", url, true);
+
+	    xhr.onload = function () {
+	      if (xhr.status === 200) {
+	        window.location.reload();
+	      } else {
+	        console.error("요청 실패");
+	      }
+	    };
+
+	    xhr.send();
+	  } else {
+	    return;
+	  }
+	}
 $(document).ready(function() {
 	const currentDate = new Date();
 
@@ -180,26 +203,27 @@ $(document).ready(function() {
 			<thead class="table-dark">
 				<tr>
 					<th class="table-head-box no-head">활동 제목</th>
-					<th class="table-head-box title-head">카테고리</th>
+					<th class="table-head-box title-head" style="width: 130px;">카테고리</th>
 					<th class="table-head-box registrant-head">위치</th>
 					<th class="table-head-box posted-date-head">상세주소</th>
-					<th class="table-head-box readhit-head">조회수</th>
+					<th class="table-head-box readhit-head" style="width: 70px;">조회수</th>
 					<th class="table-head-box event-head">이벤트</th>
-					<th class="table-head-box date-head">등록일</th>
+					<th class="table-head-box date-head" style="width: 100px;">등록일</th>
+					<th class="table-head-box" style="width: 70px;">옵션</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="ownerActivity"
-					items="${requestScope.ownerActivityList}">
+				<c:forEach var="ownerActivity" items="${requestScope.ownerActivityList}">
+				<input type="hidden" value="${ownerActivity.activityId}" id="activityId-tag">
 					<tr>
 						<td class="table-body-box">
 							<c:choose>
 								<c:when test="${fn:length(ownerActivity.activitiyName) >= 10}">
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.activitiyName, 0, 10)}...</a>
-				                </c:when>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.activitiyName, 0, 10)}...</a>
+								</c:when>
 								<c:otherwise>
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.activitiyName}</a>
-				                </c:otherwise>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.activitiyName}</a>
+								</c:otherwise>
 							</c:choose>
 						</td>
 						<td class="table-body-box title-box">${ownerActivity.category}</td>
@@ -207,10 +231,10 @@ $(document).ready(function() {
 						<td class="table-body-box">
 							<c:choose>
 								<c:when test="${fn:length(ownerActivity.locationDetail) >= 10}">
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.locationDetail, 0, 10)}...</a>
-				                </c:when>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.locationDetail, 0, 10)}...</a>
+								</c:when>
 								<c:otherwise>
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.locationDetail}</a>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.locationDetail}</a>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -218,14 +242,18 @@ $(document).ready(function() {
 						<td class="table-body-box">
 							<c:choose>
 								<c:when test="${fn:length(ownerActivity.event) >= 10}">
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.event, 0, 10)}...</a>
-				                </c:when>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${fn:substring(ownerActivity.event, 0, 10)}...</a>
+								</c:when>
 								<c:otherwise>
-				                    <a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.event}</a>
+									<a href="<%=notWithFormTag%>ownerMemberActivityDetail&activityId=${ownerActivity.activityId}">${ownerActivity.event}</a>
 								</c:otherwise>
 							</c:choose>
 						</td>
 						<td class="table-body-box">${ownerActivity.postedDate}</td>
+						<td class="table-body-box">
+							<button type="button" onclick="button_event(event);">삭제</button>
+							<%-- <a href="<%=notWithFormTag%>personalDeleteActivity&activityId=${personalActivity.activityId}" onclick="return button_event()">삭제</a> --%>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -257,13 +285,13 @@ $(document).ready(function() {
 			<div class="total-container">
 				<div class="totalReadHit-container">
 					<div class="totalReadHit-box">
-						<span>총 조회수</span> 
+						<span>총 조회수</span>
 						<span>${requestScope.readHitTotalCount}</span>
 					</div>
 				</div>
 				<div class='totalReviewCount-container'>
 					<div class="totalReivewCount-box">
-						<span>총 댓글수</span> 
+						<span>총 댓글수</span>
 						<span>${requestScope.reviewTotalCount}</span>
 					</div>
 				</div>
@@ -272,25 +300,45 @@ $(document).ready(function() {
 		<div class='readHit-chart-container'>
 			<div class="vertical_chart_box">
 				<ul class="axis_y">
-					<li class="item">100 <span class="blind"></span>
+					<li class="item">
+						100
+						<span class="blind"></span>
 					</li>
-					<li class="item">200 <span class="blind"></span>
+					<li class="item">
+						200
+						<span class="blind"></span>
 					</li>
-					<li class="item">300 <span class="blind"></span>
+					<li class="item">
+						300
+						<span class="blind"></span>
 					</li>
-					<li class="item">400 <span class="blind"></span>
+					<li class="item">
+						400
+						<span class="blind"></span>
 					</li>
-					<li class="item">500 <span class="blind"></span>
+					<li class="item">
+						500
+						<span class="blind"></span>
 					</li>
-					<li class="item">600 <span class="blind"></span>
+					<li class="item">
+						600
+						<span class="blind"></span>
 					</li>
-					<li class="item">700 <span class="blind"></span>
+					<li class="item">
+						700
+						<span class="blind"></span>
 					</li>
-					<li class="item">800 <span class="blind"></span>
+					<li class="item">
+						800
+						<span class="blind"></span>
 					</li>
-					<li class="item">900 <span class="blind"></span>
+					<li class="item">
+						900
+						<span class="blind"></span>
 					</li>
-					<li class="item">1000 <span class="blind"></span>
+					<li class="item">
+						1000
+						<span class="blind"></span>
 					</li>
 
 				</ul>
@@ -301,8 +349,8 @@ $(document).ready(function() {
 							<strong class="day1" id="day1"></strong>
 						</div>
 						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[0].readHit}</span>
+							<span class="time data1" style="height: 80%;">
+								<span class="blind">${requestScope.dateReadHitCount[0].readHit}</span>
 							</span>
 						</button>
 
@@ -312,8 +360,8 @@ $(document).ready(function() {
 							<strong class="day2"></strong>
 						</div>
 						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[1].readHit}</span>
+							<span class="time data1" style="height: 80%;">
+								<span class="blind">${requestScope.dateReadHitCount[1].readHit}</span>
 							</span>
 						</button>
 					</li>
@@ -322,8 +370,8 @@ $(document).ready(function() {
 							<strong class="day3"></strong>
 						</div>
 						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[2].readHit}</span>
+							<span class="time data1" style="height: 80%;">
+								<span class="blind">${requestScope.dateReadHitCount[2].readHit}</span>
 							</span>
 						</button>
 					</li>
@@ -332,8 +380,8 @@ $(document).ready(function() {
 							<strong class="day4"></strong>
 						</div>
 						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[3].readHit}</span>
+							<span class="time data1" style="height: 80%;">
+								<span class="blind">${requestScope.dateReadHitCount[3].readHit}</span>
 							</span>
 						</button>
 					</li>
@@ -342,8 +390,8 @@ $(document).ready(function() {
 							<strong class="day5"></strong>
 						</div>
 						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[4].readHit}</span>
+							<span class="time data1" style="height: 80%;">
+								<span class="blind">${requestScope.dateReadHitCount[4].readHit}</span>
 							</span>
 						</button>
 					</li>
@@ -352,8 +400,8 @@ $(document).ready(function() {
 							<strong class="day6"></strong>
 						</div>
 						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[5].readHit}</span>
+							<span class="time data1" style="height: 80%;">
+								<span class="blind">${requestScope.dateReadHitCount[5].readHit}</span>
 							</span>
 						</button>
 					</li>
@@ -362,8 +410,8 @@ $(document).ready(function() {
 							<strong class="day7"></strong>
 						</div>
 						<button type="button" class="graph">
-							<span class="time data1" style="height: 80%;"> <span
-								class="blind">${requestScope.dateReadHitCount[6].readHit}</span>
+							<span class="time data1" style="height: 80%;">
+								<span class="blind">${requestScope.dateReadHitCount[6].readHit}</span>
 							</span>
 						</button>
 					</li>
