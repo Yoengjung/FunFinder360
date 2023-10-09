@@ -51,7 +51,7 @@
 		</div>
 		<div class="container3">
 			<div class="nav-bar-container">
-				<ul class="middle-nav-bar">
+					<ul class="middle-nav-bar">
 					<li><a href="<%=notWithFormTag%>cultureActivitesList">문화 - 엔터테인먼트</a></li>
 					<li><a href="<%=notWithFormTag%>foodActivitesList">음식 - 요리</a></li>
 					<li><a href="<%=notWithFormTag%>studyActivitesList">교육 - 학습</a></li>

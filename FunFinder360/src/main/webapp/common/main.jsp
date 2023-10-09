@@ -1,11 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="./common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainCSS/mainCSS.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mainCSS/mainCSS.css">
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
 <title>FunFinder360</title>
 </head>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -24,6 +28,20 @@ $(document).ready(function () {
 	        }, index * 100); // 각 요소마다 0.1초씩 딜레이
 	    });
 	}
+	
+	const underArrowTag = document.querySelector('.underArrow-tag');
+
+	// 스크롤 이벤트를 사용하여 아래로 내리는 애니메이션 활성화
+	window.addEventListener('scroll', () => {
+	    const scrollY = window.scrollY;
+
+	    if (scrollY > 200) { // 스크롤 위치가 200px 이상이면
+	        underArrowTag.classList.add('animate-down'); // 애니메이션 클래스 추가
+	    } else {
+	        underArrowTag.classList.remove('animate-down'); // 애니메이션 클래스 제거
+	    }
+	});
+
 	
 	resetAnimation();
 	
@@ -68,61 +86,43 @@ $(document).ready(function () {
 <body>
 	<div class="container1">
 		<div class="img-container">
-			<img src="${pageContext.request.contextPath}/common/image/spring.jpg" class="spring-img">
-			<img src="${pageContext.request.contextPath}/common/image/summer.jpg" class="summer-img">
-			<img src="${pageContext.request.contextPath}/common/image/fall.jpg" class="fall-img">
-			<img src="${pageContext.request.contextPath}/common/image/winter.jpg" class="winter-img">
+			<div class="img-box1">
+				<img
+					src="${pageContext.request.contextPath}/common/image/spring1.jpg"
+					class="spring-img"> <img
+					src="${pageContext.request.contextPath}/common/image/summer.jpg"
+					class="summer-img">
+			</div>
+			<div class="img-box2">
+				<img src="${pageContext.request.contextPath}/common/image/fall.jpg"
+					class="fall-img"> <img
+					src="${pageContext.request.contextPath}/common/image/winter.jpg"
+					class="winter-img">
+					<span class="material-symbols-outlined underArrow-tag">keyboard_double_arrow_down </span>
+			</div>
+
+
 			<div class="info-1">
 				<div class="info-1-box">
-					<span>놀</span>
-					<span>거</span>
-					<span>리</span>
-					<span>의 </span>
-					<span> </span>
-					<span>성</span>
-					<span>지</span>
-					<span>!</span>
-					<span> </span>
-					<span>F</span>
-					<span>u</span>
-					<span>n</span>
-					<span>F</span>
-					<span>i</span>
-					<span>n</span>
-					<span>d</span>
-					<span>e</span>
-					<span>r</span>
-					<span>3</span>
-					<span>6</span>
-					<span>0</span>
-					<span>으</span>
-					<span>로</span>
-					<span> </span>
-					<span>지</span>
-					<span>금</span>
-					<span> </span>
-					<span>바</span>
-					<span>로</span>
-					<span> </span>
-					<span>즐</span>
-					<span>길</span>
-					<span> </span>
-					<span>활</span>
-					<span>동</span>
-					<span>을</span>
-					<span> </span>
-					<span>찾</span>
-					<span>아</span>
-					<span>보</span>
-					<span>세</span>
-					<span>요</span>
-					<span>.</span>
+					<span>놀</span> <span>거</span> <span>리</span> <span>의 </span> <span>
+					</span> <span>성</span> <span>지</span> <span>!</span> <span> </span> <span>F</span>
+					<span>u</span> <span>n</span> <span>F</span> <span>i</span> <span>n</span>
+					<span>d</span> <span>e</span> <span>r</span> <span>3</span> <span>6</span>
+					<span>0</span> <span>으</span> <span>로</span> <span> </span> <span>지</span>
+					<span>금</span> <span> </span> <span>바</span> <span>로</span> <span>
+					</span> <span>즐</span> <span>길</span> <span> </span> <span>활</span> <span>동</span>
+					<span>을</span> <span> </span> <span>찾</span> <span>아</span> <span>보</span>
+					<span>세</span> <span>요</span> <span>.</span>
 				</div>
 			</div>
 		</div>
-		<div class="info-2" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-2" data-aos="zoom-in" data-aos-offset="200"
+			data-aos-delay="50" data-aos-duration="1000"
+			data-aos-easing="ease-in-out" data-aos-mirror="true"
+			data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/c4.jpg" id="scrollImage1">
+				<img src="${pageContext.request.contextPath}/common/image/c4.jpg"
+					id="scrollImage1">
 				<div class="info-2-box">
 					<p class="category-tag">문화 엔터테인먼트</p>
 					<div class="info-p-tag-box" style="font-size: 20px;">
@@ -132,11 +132,20 @@ $(document).ready(function () {
 						<p>풍부한 경험과 즐거운 시간이 기다리고 있어요!
 					</div>
 				</div>
+				<div class="a-btn">
+					<a href="<%=notWithFormTag%>cultureActivitesList" id="a-btn-1"><span>개인</span><br>문화 - 엔터테인먼트</a>
+					<a href="<%=notWithFormTag%>ownerCultureActivitesList"><span>업주</span><br> 문화 - 엔터테인먼트</a>
+				</div>
+				<span class="material-symbols-outlined underArrow-tag2">keyboard_double_arrow_down </span>
 			</div>
 		</div>
-		<div class="info-4" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-4" data-aos="zoom-in" data-aos-offset="200"
+			data-aos-delay="50" data-aos-duration="1000"
+			data-aos-easing="ease-in-out" data-aos-mirror="true"
+			data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/f1.jpg" id="scrollImage1">
+				<img src="${pageContext.request.contextPath}/common/image/f1.jpg"
+					id="scrollImage1">
 				<div class="info-4-box">
 					<p class="category-tag4">음식 요리</p>
 					<div class="info-p-tag-box" style="font-size: 20px;">
@@ -150,9 +159,13 @@ $(document).ready(function () {
 		</div>
 
 
-		<div class="info-5" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-5" data-aos="zoom-in" data-aos-offset="200"
+			data-aos-delay="50" data-aos-duration="1000"
+			data-aos-easing="ease-in-out" data-aos-mirror="true"
+			data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/s1.jpg" id="scrollImage1">
+				<img src="${pageContext.request.contextPath}/common/image/s1.jpg"
+					id="scrollImage1">
 				<div class="info-4-box">
 					<p class="category-tag5">교육 학습</p>
 					<div class="info-p-tag-box" style="font-size: 20px;">
@@ -165,9 +178,13 @@ $(document).ready(function () {
 			</div>
 		</div>
 
-		<div class="info-6" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-6" data-aos="zoom-in" data-aos-offset="200"
+			data-aos-delay="50" data-aos-duration="1000"
+			data-aos-easing="ease-in-out" data-aos-mirror="true"
+			data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/t1.jpg" id="scrollImage1">
+				<img src="${pageContext.request.contextPath}/common/image/t1.jpg"
+					id="scrollImage1">
 				<div class="info-6-box">
 					<p class="category-tag6">여행 모험</p>
 					<div class="info-p-tag-box" style="font-size: 20px;">
@@ -180,9 +197,13 @@ $(document).ready(function () {
 			</div>
 		</div>
 
-		<div class="info-7" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
+		<div class="info-7" data-aos="zoom-in" data-aos-offset="200"
+			data-aos-delay="50" data-aos-duration="1000"
+			data-aos-easing="ease-in-out" data-aos-mirror="true"
+			data-aos-once="false" data-aos-anchor-placement="top-center">
 			<div class="circle-container">
-				<img src="${pageContext.request.contextPath}/common/image/g1.jpg" id="scrollImage1">
+				<img src="${pageContext.request.contextPath}/common/image/g1.jpg"
+					id="scrollImage1">
 				<div class="info-7-box">
 					<p class="category-tag7">게임 취미</p>
 					<div class="info-p-tag-box" style="font-size: 20px;">
