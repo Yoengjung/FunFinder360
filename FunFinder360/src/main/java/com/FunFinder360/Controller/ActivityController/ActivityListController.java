@@ -27,7 +27,7 @@ public class ActivityListController extends SuperClass {
 
 		try {
 			if ("readhit".equals(mode) || "postedDate".equals(mode)) {
-				totalCount = dao.GetLookTotalRecordCount(mode);
+				totalCount = dao.GetLookTotalAllRecordCount(mode);
 			} else {
 				totalCount = dao.GetTotalRecordCount(mode, keyword);
 			}
