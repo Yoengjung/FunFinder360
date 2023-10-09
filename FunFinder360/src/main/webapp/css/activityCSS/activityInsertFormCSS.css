@@ -1,7 +1,7 @@
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 .container {
@@ -10,14 +10,23 @@ input::-webkit-inner-spin-button {
 	height: 100%;
 }
 
+h2 {
+	text-align: center;
+}
+
+
 .container form {
 	margin-top: 20px;
 }
 
 .form-div-box {
-	background-color: #F8F0E5;
-	border: 3px solid #DAC0A3;
+	background-color: #EAEAEA;
 	border-radius: 10px;
+	width: 706px;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 10px;
 }
 
 .district-select {
@@ -30,12 +39,12 @@ input::-webkit-inner-spin-button {
 }
 
 .district-select {
-	width: 150px;
+	width: 120px;
 	margin-left: 10px;
 }
 
 .province-select {
-	width: 200px;
+	width: 136px;
 }
 
 .detail-location {
@@ -47,7 +56,7 @@ input::-webkit-inner-spin-button {
 }
 
 .title-input {
-	width: 81%;
+	width: 600px;
 }
 
 #title-span {
@@ -86,7 +95,7 @@ input::-webkit-inner-spin-button {
 }
 
 .detail-location {
-	width: 500px;
+	width: 324px;
 	margin-left: 10px;
 }
 
@@ -105,11 +114,11 @@ input::-webkit-inner-spin-button {
 }
 
 .hour-select {
-	width: 100px;
+	width: 85px;
 }
 
 .minute-select {
-	width: 100px;
+	width: 77px;
 }
 
 .minute-select {
@@ -206,7 +215,7 @@ form ul li {
 	height: 300px;
 	padding: 10px;
 	border-radius: 10px;
-	border: 5px solid #6666FF;
+	border: 5px solid #EAEAEA;
 	font-size: 25px;
 }
 
@@ -225,9 +234,16 @@ input[type="file"] {
 	border-radius: 5px;
 	cursor: pointer;
 	position: relative;
-	display:inline-block;
+	display: inline-block;
 	left: 50%;
 	top: 46px;
 	transform: translateX(-50%);
 }
 
+.form-control[type=file]:not(:disabled):not([readonly]) {
+    cursor: pointer;
+    width: 400px;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+}

@@ -432,17 +432,6 @@
 							<span id="title-span">제목</span>
 							<input class="form-control title-input" type="text" name="title" id="title">
 						</li>
-						<li class="category-container">
-							<span>카테고리</span>
-							<select class="form-select category-select" id="category" name="category">
-								<option value="-">카테고리</option>
-								<option value="문화 - 엔터테인먼트">문화 - 엔터테인먼트</option>
-								<option value="음식 - 요리">음식 - 요리</option>
-								<option value="교육 - 학습">교육 - 학습</option>
-								<option value="여행 - 모험">여행 - 모험</option>
-								<option value="게임 - 취미">게임 - 취미</option>
-							</select>
-						</li>
 						<li class="location-container">
 							<span id="location-span">장소</span>
 							<select class="form-select province-select" name="province" id="province">
@@ -579,7 +568,17 @@
 							<input type="hidden" name="districtValue" id="districtValue" value="">
 							<input class="form-control detail-location" type="text" name="detail-location" id="detail-location" autocomplete="off" placeholder="상세 주소">
 						</li>
-
+						<li class="category-container">
+							<span>카테고리</span>
+							<select class="form-select category-select" id="category" name="category">
+								<option value="-">카테고리</option>
+								<option value="문화 - 엔터테인먼트">문화 - 엔터테인먼트</option>
+								<option value="음식 - 요리">음식 - 요리</option>
+								<option value="교육 - 학습">교육 - 학습</option>
+								<option value="여행 - 모험">여행 - 모험</option>
+								<option value="게임 - 취미">게임 - 취미</option>
+							</select>
+						</li>
 						<li class="time-container">
 							<span id="time-span">소요 시간</span>
 							<select class="form-select hour-select" name="hour" id="hour">

@@ -1,5 +1,7 @@
 package com.FunFinder360.Controller.Activity;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,8 +78,15 @@ public class ActivityInsertController extends SuperClass {
 		}
 		for (int i = 0; i < imageCount; i++) {
 			String imageItem = mr.getFilesystemName("image" + i);
-			System.out.println("imageItem : " + imageItem);
-			imageList.add(imageItem);
+			if (imageItem != null) {
+		        String encodedImageItem;
+				try {
+					encodedImageItem = URLEncoder.encode(imageItem, "UTF-8");
+					imageList.add(encodedImageItem);
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+		    }
 		}
 		
 		int status = -1;

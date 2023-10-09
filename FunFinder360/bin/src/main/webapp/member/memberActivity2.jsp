@@ -117,7 +117,7 @@
 			<tbody>
 				<c:forEach var="ownerActivity" items="${requestScope.ownerActivityList}">
 					<tr>
-						<td class="table-body-box">${ownerActivity.activityName}</td>
+						<td class="table-body-box" style="color:blue; text-decoration: underline;">${ownerActivity.activityName}</td>
 						<td class="table-body-box title-box">${ownerActivity.category}</td>
 						<td class="table-body-box">${ownerActivity.location}</td>
 						<td class="table-body-box">${ownerActivity.locationDetail}</td>

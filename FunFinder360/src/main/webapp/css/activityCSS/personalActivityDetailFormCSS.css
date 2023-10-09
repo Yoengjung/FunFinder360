@@ -22,9 +22,12 @@ wbody {
 	margin-bottom: 20px;
 	border-bottom: 2px solid black;
 	padding: 20px;
-	background-color: #F8F0E5;
-	border: 3px solid #EADBC8;
+	background-color: #EAEAEA;
 	border-radius: 10px;
+	width: 700px;
+	transform: translate(-50%);
+	left: 50%;
+	position: relative;
 }
 
 .backBtn {
@@ -124,22 +127,18 @@ wbody {
 }
 
 pre {
-	font-family: 'Nanum Gothic Coding', cursive;
-	font-family: 'Noto Sans KR', sans-serif;
-	font-family: 'Sunflower', sans-serif;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 25px;
 	margin-top: 30px;
 	margin-bottom: 30px;
-	padding: 50px 10px 50px 10px;
-	background-color: #FFF5E0;
-	border: 2px solid #D2E0FB;
-	border-radius: 10px;
+	padding: 50px 20px 50px 20px;
 	width: 80%;
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
 	white-space: pre-wrap;
+	line-height: 50px;
+	text-align: center;
 }
 
 
@@ -281,9 +280,9 @@ textarea {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
-    width: 200px;
-    font-size: 30px;
-    margin-right:30px;
+	width: 200px;
+	font-size: 30px;
+	margin-right: 30px;
 }
 
 #avg-value {
@@ -301,7 +300,8 @@ textarea {
 #rating-score {
 	margin-right: 10px;
 }
+
 .ratings-box {
-	display:flex;
-	flex-direction: column;	
+	display: flex;
+	flex-direction: column;
 }

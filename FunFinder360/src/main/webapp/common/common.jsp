@@ -68,7 +68,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">활동 목록</a>
 
-							<ul class="dropdown-menu activites-menu">
+							<ul class="dropdown-menu dropdown-menu1 activites-menu">
 								<li style="display: flex">
 									<ul style="width: 50%">
 										<li class="li-tag">

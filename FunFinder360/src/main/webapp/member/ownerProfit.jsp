@@ -6,7 +6,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>기업 수익 모델</title>
 
 <style>
 .container {

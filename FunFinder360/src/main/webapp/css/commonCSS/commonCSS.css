@@ -218,7 +218,7 @@ hr {
 }
 
 @media (min-width: 576px) {
-	.navbar-expand-sm .navbar-nav .dropdown-menu {
+	.navbar-expand-sm .navbar-nav .dropdown-menu1 {
 		position: absolute;
 		width: 317px;
 	}
