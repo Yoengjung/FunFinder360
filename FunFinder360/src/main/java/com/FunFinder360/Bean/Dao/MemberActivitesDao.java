@@ -285,7 +285,7 @@ public class MemberActivitesDao extends SuperDao {
 		LocalDate now = LocalDate.now();
 		List<PersonalActivity> lists = new ArrayList<PersonalActivity>();
 		
-		for (int i = 7; i >= 1; i--) {
+		for (int i = 7; i >= 0; i--) {
 			LocalDate date = now.minusDays(i);
 		    String dateStr = date.toString();
 		    String sql = "select sum(readhit) readhit from personal_activites where userid = ? and posteddate <= to_date(?, 'yyyy-mm-dd')";
