@@ -12,7 +12,7 @@ import com.FunFinder360.Controller.SuperClass;
 import Utility.Paging;
 
 public class ActivityListController extends SuperClass {
-	@Override
+	@Override	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		super.doGet(request, response);
 

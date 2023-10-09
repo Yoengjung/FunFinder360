@@ -87,25 +87,26 @@
 }
 </style>
 <script type="text/javascript">
-$(document).ready(
-	function() {
-		var questionOptionList = $('#mode option');
-		for (var i = 0; i < questionOptionList.length; i++) {
-			if (questionOptionList[i].value == '${requestScope.pageInfo.mode}') {
-				questionOptionList[i].selected = true;
-			}
-		}
-		$('#keyowrd').val('${requestScope.pageInfo.keyword}');
-	
-		$("#mode").change(function() {
-			if ($(this).val() != 'all') {
-				$('#keyword').attr('disabled', false);
-			} else {
-				$('#keyword').val('');
-				$('#keyword').attr('disabled', true);
-			}
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						var questionOptionList = $('#mode option');
+						for (var i = 0; i < questionOptionList.length; i++) {
+							if (questionOptionList[i].value == '${requestScope.pageInfo.mode}') {
+								questionOptionList[i].selected = true;
+							}
+						}
+						$('#keyowrd').val('${requestScope.pageInfo.keyword}');
+
+						$("#mode").change(function() {
+							if ($(this).val() != 'all') {
+								$('#keyword').attr('disabled', false);
+							} else {
+								$('#keyword').val('');
+								$('#keyword').attr('disabled', true);
+							}
+						});
+					});
 </script>
 </head>
 <body>
@@ -123,30 +124,30 @@ $(document).ready(
 						<th class="table-head-box">등록일</th>
 						<th class="table-head-box">옵션</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<div class="search-container">
-			<div class="search-in-container">
-				<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
-					<input type="hidden" name="command" value="memberActivity">
-					<select id="mode" name="mode" class="form-select">
-						<option value="all" selected="selected">--- 선택해 주세요 ---
-						<option value="activityName">활동 제목
-						<option value="category">카테고리
-						<option value="location">위치
-						<option value="locationDetail">상세주소
-						<option value="readHit">조회수
-						<option value="postedDate">등록일
-					</select>
-					<div class="input-group">
-						<input class="keyword-input-box form-control" type="text" name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">
-					</div>
-					<button type="submit" class="btn btn-default form-control-sm search-btn" onclick="">검색</button>
-				</form>
+				</tbody>
+			</table>
+			<div class="search-container">
+				<div class="search-in-container">
+					<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
+						<input type="hidden" name="command" value="memberActivity">
+						<select id="mode" name="mode" class="form-select">
+							<option value="all" selected="selected">--- 선택해 주세요 ---
+							<option value="activityName">활동 제목
+							<option value="category">카테고리
+							<option value="location">위치
+							<option value="locationDetail">상세주소
+							<option value="readHit">조회수
+							<option value="postedDate">등록일
+						</select>
+						<div class="input-group">
+							<input class="keyword-input-box form-control" type="text" name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">
+						</div>
+						<button type="submit" class="btn btn-default form-control-sm search-btn" onclick="">검색</button>
+					</form>
+				</div>
 			</div>
+			<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 		</div>
-		<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 	</div>
 </body>
 </html>

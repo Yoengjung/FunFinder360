@@ -84,15 +84,10 @@ $(document).ready(function () {
 <body>
 	<div class="container1">
 		<div class="img-container">
-			<div class="img-box1">
-				<img src="${pageContext.request.contextPath}/common/image/spring1.jpg" class="spring-img">
-				<img src="${pageContext.request.contextPath}/common/image/summer.jpg" class="summer-img">
-			</div>
-			<div class="img-box2">
-				<img src="${pageContext.request.contextPath}/common/image/fall.jpg" class="fall-img">
-				<img src="${pageContext.request.contextPath}/common/image/winter.jpg" class="winter-img">
-				<span class="material-symbols-outlined underArrow-tag">keyboard_double_arrow_down </span>
-			</div>
+			<img src="${pageContext.request.contextPath}/common/image/spring.jpg" class="spring-img">
+			<img src="${pageContext.request.contextPath}/common/image/summer.jpg" class="summer-img">
+			<img src="${pageContext.request.contextPath}/common/image/fall.jpg" class="fall-img">
+			<img src="${pageContext.request.contextPath}/common/image/winter.jpg" class="winter-img">
 
 
 			<div class="info-1">

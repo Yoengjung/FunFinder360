@@ -45,7 +45,6 @@
 	<div class="container1">
 		<div class="container2">
 			<div class="img-box">
-				<img src="${pageContext.request.contextPath}/common/image/1991070551-huge.jpg">
 				<span>개인 활동</span>
 			</div>
 		</div>
