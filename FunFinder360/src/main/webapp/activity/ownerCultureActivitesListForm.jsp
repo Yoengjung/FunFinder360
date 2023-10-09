@@ -99,7 +99,7 @@
 					</select>
 					<button type="submit" class="btn form-control-sm search-btn" onclick="">검색</button>
 				</form>
-				<c:forEach var="bean" items="${requestScope.ownerActivity}">
+				<c:forEach var="bean" items="${requestScope.ownerActactivityivity}">
 					<div class="activity-item">
 						<div class="activity-img">
 							<img class="img-sizing" src="${pageContext.request.contextPath}/upload/${bean.image}">

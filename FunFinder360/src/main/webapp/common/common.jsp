@@ -92,7 +92,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 									</ul>
 									<ul style="width: 156px;">
 										<li>
-											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>ownerActivitesList" style="width: 100%">업주 활동</a>
+											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>OwnerActivitesList" style="width: 100%">업주 활동</a>
 										</li>
 										<li class="li-tag">
 											<a class="dropdown-item dropdown-item1" href="<%=notWithFormTag%>ownerCultureActivitesList">문화 - 엔터테인먼트</a>

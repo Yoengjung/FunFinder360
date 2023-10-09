@@ -184,13 +184,13 @@ hr {
 }
 
 .dropdown-item {
-	width: 100%;
 	text-align: center;
 }
 
 .navbar {
 	top: 50%;
 	transform: translateY(-50%);
+	z-index: 100;
 }
 
 .navbar-nav {

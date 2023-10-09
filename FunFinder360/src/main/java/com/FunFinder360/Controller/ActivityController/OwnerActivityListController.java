@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.FunFinder360.Bean.Dao.OwnerActivitesDao;
-import com.FunFinder360.Bean.Model.OwnerActivityAndImage;
+import com.FunFinder360.Bean.Model.OwnerActivitesList;
 import com.FunFinder360.Controller.SuperClass;
 
 import Utility.Paging;
@@ -22,7 +22,7 @@ public class OwnerActivityListController extends SuperClass {
 		String keyword = request.getParameter("keyword");
 
 		OwnerActivitesDao dao = new OwnerActivitesDao();
-		List<OwnerActivityAndImage> lists = null;
+		List<OwnerActivitesList> lists = null;
 		int totalCount = 0;
 
 		try {
