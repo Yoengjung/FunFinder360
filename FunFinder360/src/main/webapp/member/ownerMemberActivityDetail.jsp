@@ -72,7 +72,9 @@
 		<c:set var="imgIndex" value="0"></c:set>
 
 		<div class="event-box">
-			<h4 id="event-tag">이벤트 : ${requestScope.ownerActivityData.event}</h4>
+			<c:if test="${not empty requestScope.ownerActivityData.event }">
+				<h4 id="event-tag" style="color:red; text-align: center; text-decoration: underline;">이벤트 : ${requestScope.ownerActivityData.event}</h4>
+			</c:if>
 		</div>
 		<div class="contents-container">
 			<c:forEach var="loop" begin="0" end="${requestScope.ownerActivityData.totalRacodeCount - 1}">
