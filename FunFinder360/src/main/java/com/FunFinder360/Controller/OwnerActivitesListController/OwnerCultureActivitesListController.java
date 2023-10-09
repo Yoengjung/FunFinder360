@@ -30,6 +30,7 @@ public class OwnerCultureActivitesListController extends SuperClass {
 				totalCount = dao.GetOwnerCultureLookTotalRecordCount(mode);
 			} else {
 				totalCount = dao.GetOwnerCultureTotalRecordCount(mode, keyword);
+				System.out.println("totalCount : " + totalCount);
 			}
 			
 			String url = super.getUrlInfomation("ownerCultureActivitesList");
@@ -39,6 +40,7 @@ public class OwnerCultureActivitesListController extends SuperClass {
 				lists = dao.getOwnerCultureActivites(pageInfo);
 			} else {
 				lists = dao.getOwnerCultureSelectAll(pageInfo);
+				System.out.println("lists : " + lists);
 			}
 			request.setAttribute("ownerActivity", lists);
 			request.setAttribute("pageInfo", pageInfo);

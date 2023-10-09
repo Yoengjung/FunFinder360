@@ -546,8 +546,7 @@ public class ActivitesDao extends SuperDao {
 		System.out.println("최신, 조회수 mode를 보기 : " + mode);
 
 		String sql = "  SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate, content  ";
-		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY "
-				+ mode + " deSC) AS ranking  ";
+		sql += " FROM (SELECT activityId, userid, activityname, category, location, LOCATIONDETAIL, image, imageorder, readhit, postedDate,ROW_NUMBER() OVER (ORDER BY " + mode + " deSC) AS ranking  ";
 		sql += " FROM personal_activites ac JOIN activity_image im ON ac.activityid = im.personalActivityId ";
 		sql += " WHERE category = '문화 - 엔터테인먼트' ) tt JOIN activity_content con ON tt.activityid = con.personalActivityid ";
 		sql += " WHERE ranking BETWEEN ? AND ? ";
