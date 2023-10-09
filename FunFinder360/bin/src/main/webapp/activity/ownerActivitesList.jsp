@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 활동 데이터</title>
+<title>업주 활동</title>
 <style>
 .container {
 	margin-top: 130px;

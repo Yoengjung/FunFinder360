@@ -21,6 +21,12 @@ public class OwnerCultureActivitesListController extends SuperClass {
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
 
+		System.out.println("mode " + mode);
+		if (mode == null) {
+			mode = "all";
+		}
+		System.out.println("mode " + mode);
+		
 		OwnerActivitesDao dao = new OwnerActivitesDao();
 		List<OwnerActivitesList> lists = null;
 		int totalCount = 0;

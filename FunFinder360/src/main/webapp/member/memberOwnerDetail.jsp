@@ -50,7 +50,7 @@
 	margin-right: 10px;
 }
 
-.backBtn {
+.deleteUserBtn {
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
@@ -385,13 +385,33 @@
 	        }
 	    });
     }
-	
+	function deleteUser(event) {
+		event.preventDefault();
+		  const userId = $("#info-value-userId-hidden").val();
+		  if (confirm("정말 탈퇴하시겠습니까??")) {
+		    var url = "<%=notWithFormTag%>deleteOwnerUser&userId=" + userId;
+			var xhr = new XMLHttpRequest();
+
+			xhr.open("POST", url, true);
+
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+					window.location.replace("<%=notWithFormTag%>home");
+				} else {
+					console.error("요청 실패");
+				}
+			};
+			xhr.send();
+		} else {
+			return;
+		}
+	}
 	
 </script>
 </head>
 <body>
 	<div class="container">
-		<h2>${requestScope.bean.userName}회원정보</h2>
+		<h2>회원정보</h2>
 		<div class="info-container">
 			<div class="info-box">
 				<span class="info-key">아이디</span> 
@@ -402,7 +422,7 @@
 		<div class="info-container">
 			<div class="info-box">
 				<span class="info-key" id="info-key-password">비밀번호</span> 
-				<span class="info-value-password" id="info-value-password">${requestScope.bean.password}</span> 
+				<span class="info-value-password" id="info-value-password">---</span> 
 				<input class="info-value-change-input" id="info-value-change-input-password" type="password">
 				<button type="button" class="btn btn-dark" id="change-id-btn">비밀번호 변경</button>
 				<button type="button" class="btn btn-primary" id="change-id-success-btn">완료</button>
@@ -491,8 +511,7 @@
 		</div>
 
 		<div id="backButton">
-			<button type="button" class="btn btn-primary backBtn"
-				onclick="history.back();">돌아 가기</button>
+			<button  class="btn btn btn-danger deleteUserBtn" onclick="return deleteUser(event);">탈퇴하기</button>
 		</div>
 	</div>
 </body>

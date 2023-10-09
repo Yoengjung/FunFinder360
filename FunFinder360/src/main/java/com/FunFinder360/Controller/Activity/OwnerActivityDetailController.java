@@ -9,6 +9,7 @@ import com.FunFinder360.Bean.Dao.OwnerActivitesDao;
 import com.FunFinder360.Bean.Dao.ReviewDao;
 import com.FunFinder360.Bean.Model.OwnerActivityDetail;
 import com.FunFinder360.Bean.Model.Review;
+import com.FunFinder360.Bean.Model.TotalRating;
 import com.FunFinder360.Controller.SuperClass;
 
 import Utility.Paging;
@@ -40,8 +41,10 @@ public class OwnerActivityDetailController extends SuperClass {
 			ownerActivityDetail = dao.getOwnerActivityData(activityId);
 			//reviews = reviewDao.getReviewDataToActivityId(activityId);
 			
-			request.setAttribute("pageInfo", pageInfo);
+			List<TotalRating> totalRatings = dao.getTotalReting(activityId);
 			
+			request.setAttribute("pageInfo", pageInfo);
+			request.setAttribute("totalRatings", totalRatings);
 			request.setAttribute("ownerActivityData", ownerActivityDetail);
 			request.setAttribute("reviewData", reviews);
 		} catch(Exception e) {

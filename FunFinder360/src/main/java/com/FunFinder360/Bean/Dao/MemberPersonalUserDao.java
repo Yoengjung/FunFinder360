@@ -11,6 +11,7 @@ import com.FunFinder360.Bean.Model.MemberPersonalUser;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 
 import Utility.Paging;
+import oracle.jdbc.proxy.annotation.Pre;
 
 public class MemberPersonalUserDao extends SuperDao {
 
@@ -425,6 +426,27 @@ public class MemberPersonalUserDao extends SuperDao {
 		}
 
 		return lists;
+	}
+
+	public void deleteUser(String userId) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "delete from personal_users where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		pstmt.executeUpdate();
+		
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
 	}
 
 }

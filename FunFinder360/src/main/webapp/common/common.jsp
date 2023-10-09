@@ -183,10 +183,10 @@ String notWithFormTag = appName + mappingName + "?command=";
 			<c:if test="${empty sessionScope.loginfo && empty sessionScope.loginfoOwner}">
 				<ul>
 					<li>
-						<a href="<%=notWithFormTag%>loginSelect" class="a-tag">login</a>
+						<a href="<%=notWithFormTag%>loginSelect" class="a-tag" style="cursor: pointer">login</a>
 					</li>
 					<li>
-						<a href="<%=notWithFormTag%>joinSelect" class="a-tag">join</a>
+						<a href="<%=notWithFormTag%>joinSelect" class="a-tag" style="cursor: pointer">join</a>
 					</li>
 				</ul>
 			</c:if>

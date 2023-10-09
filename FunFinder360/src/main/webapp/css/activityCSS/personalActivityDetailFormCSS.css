@@ -277,3 +277,31 @@ textarea {
 	color: red;
 }
 
+.avg-rating-box {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+    width: 200px;
+    font-size: 30px;
+    margin-right:30px;
+}
+
+#avg-value {
+	text-align: center;
+}
+
+.totalRating-box {
+	position: relative;
+	display: inline-flex;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 20px;
+}
+
+#rating-score {
+	margin-right: 10px;
+}
+.ratings-box {
+	display:flex;
+	flex-direction: column;	
+}

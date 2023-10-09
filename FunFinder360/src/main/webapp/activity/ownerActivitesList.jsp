@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/activityCSS/personalCultureActivitesListFormCSS.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/activityCSS/activitesListCSS.css">
 <title>회원 활동 데이터</title>
 <style>
 </style>
@@ -47,8 +47,7 @@
 	<div class="container1">
 		<div class="container2">
 			<div class="img-box">
-				<img src="${pageContext.request.contextPath}/common/image/1991070551-huge.jpg">
-				<span>문화 - 엔터테인먼트</span>
+				<span>업주 활동</span>
 			</div>
 		</div>
 		<div class="container3">
@@ -78,7 +77,7 @@
 					<div class="search-container">
 						<div class="search-in-container">
 							<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
-								<input type="hidden" name="command" value="activitesList">
+								<input type="hidden" name="command" value=OwnerActivitesList>
 								<select id="mode" name="mode" class="form-select">
 									<option value="all" selected="selected">--- 선택해 주세요 ---
 									<option value="activityName">활동 제목
@@ -95,7 +94,7 @@
 					</div>
 				</div>
 				<form name="search-form1" action="<%=withFormTag%>" method="get" class="search-form1">
-					<input type="hidden" name="command" value="activitesList">
+					<input type="hidden" name="command" value="OwnerActivitesList">
 					<select id="mode" name="mode" class="form-select1">
 						<option value="readhit">조회수
 						<option value="postedDate">최신순

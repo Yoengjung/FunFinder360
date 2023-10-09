@@ -44,7 +44,7 @@
 	<div class="container1">
 		<div class="container2">
 			<div class="img-box">
-				<img src="${pageContext.request.contextPath}/common/image/shutterstock_2080987960.jpg">
+				<img src="${pageContext.request.contextPath}/common/image/Shutterstock_2083061809.jpg">
 				<span>게임 - 취미</span>
 			</div>
 		</div>

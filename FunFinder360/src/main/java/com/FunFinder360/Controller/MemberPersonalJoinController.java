@@ -33,7 +33,7 @@ public class MemberPersonalJoinController extends SuperClass {
 				bean.setBirth(request.getParameter("birthDate"));
 				bean.setPhoneNumber(request.getParameter("phoneNumber"));
 				bean.setEmail(request.getParameter("email"));
-				bean.setBio(request.getParameter("introduction"));
+				bean.setBio(request.getParameter("bao"));
 
 				try {
 					dao.insertJoinData(bean);

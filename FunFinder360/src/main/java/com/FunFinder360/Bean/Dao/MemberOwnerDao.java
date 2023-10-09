@@ -286,4 +286,26 @@ public class MemberOwnerDao extends SuperDao {
 		return lists;
 	}
 
+	public void deleteUser(String userId) throws Exception{
+		PreparedStatement pstmt = null;
+		Connection conn = super.getConnection();
+		
+		String sql = "delete from owner_users where userid = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		pstmt.executeUpdate();
+		
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		
+	}
+
 }

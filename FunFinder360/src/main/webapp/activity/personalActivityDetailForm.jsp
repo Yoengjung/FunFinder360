@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>
+<%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -176,6 +177,30 @@
 		<hr>
 		<div class="back-btn-box">
 			<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
+		</div>
+		<div>
+			<div class="totalRating-box">
+				<c:set var="totalRatingCount" value="0"></c:set>
+				<c:set var="totalScore" value="0"></c:set>
+				<c:forEach var="ratingCount" items="${requestScope.totalRatings}">
+					<c:set var="totalRatingCount" value="${totalRatingCount + ratingCount.totalRating}"></c:set>
+					<c:set var="totalScore" value="${totalScore + (ratingCount.totalRating * ratingCount.rating)}"></c:set>
+				</c:forEach>
+				<div class="avg-rating-box">
+					<c:set var="averageRating" value="${totalScore / totalRatingCount}" />
+					<span id="avg-value"><fmt:formatNumber value="${averageRating}" maxFractionDigits="1" /></span>
+					<div>
+						<c:forEach var="rating" begin="1" end="${averageRating}">
+							<img src="${pageContext.request.contextPath}/upload/star.png" id="star-icon-tag">
+						</c:forEach>
+					</div>
+				</div>
+				<div class="ratings-box">
+					<c:forEach var="rating" items="${requestScope.totalRatings}">
+						<div><span id="rating-score">${rating.rating}점</span>   <span>${rating.totalRating}개</span><br></div>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 		<c:if test="${not empty sessionScope.loginfo || not empty sessionScope.loginfoOwner}">
 			<div class="form-container">

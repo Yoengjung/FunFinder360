@@ -20,6 +20,7 @@ public class OwnerFoodActivitesListListController extends SuperClass {
 		String pageSize = request.getParameter("pageSize");
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
+		
 
 		OwnerActivitesDao dao = new OwnerActivitesDao();
 		List<OwnerActivitesList> lists = null;

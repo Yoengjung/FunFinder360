@@ -96,3 +96,7 @@ personalDeleteActivity=com.FunFinder360.Controller.ActivityDeleteController.Pers
 
 #업주 활동 삭제
 ownerDeleteActivity=com.FunFinder360.Controller.ActivityDeleteController.OwnerDeleteActivityListController
+
+#회원 탈퇴
+deletePersonalUser=com.FunFinder360.Controller.DeleteUser.DeletePersonalUserController
+deleteOwnerUser=com.FunFinder360.Controller.DeleteUser.DeleteOwnerUserController

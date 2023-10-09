@@ -13,6 +13,7 @@ import com.FunFinder360.Bean.Model.ImageObject;
 import com.FunFinder360.Bean.Model.PersonalActivitesList;
 import com.FunFinder360.Bean.Model.PersonalActivity;
 import com.FunFinder360.Bean.Model.PersonalActivityDetail;
+import com.FunFinder360.Bean.Model.TotalRating;
 
 import Utility.Paging;
 
@@ -1475,6 +1476,42 @@ public class ActivitesDao extends SuperDao {
 		}
 
 		return cnt;
+	}
+
+	public List<TotalRating> getTotalReting(int activityId) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Connection conn = super.getConnection();
+
+		String sql = "select count(rating) totalRating, rating from reviews where activityId = ? group by rating order by rating desc";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, activityId);
+		
+		rs = pstmt.executeQuery();
+		
+		List<TotalRating> lists = new ArrayList<TotalRating>();
+		while (rs.next()) {
+			TotalRating rating = new TotalRating();
+			
+			rating.setRating(rs.getInt("rating"));
+			rating.setTotalRating(rs.getInt("totalRating"));
+			
+			lists.add(rating);
+		}
+		
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+		
+		return lists;
 	}
 
 }

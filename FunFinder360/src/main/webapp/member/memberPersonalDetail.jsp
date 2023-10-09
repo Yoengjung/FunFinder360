@@ -7,147 +7,6 @@
 <title>개인 회원 정보 수정</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/memberCSS/memberPersonalDetailCSS.css" type="text/css">
 </head>
-<style>
-.container {
-	margin-top: 9%;
-	width: 100%;
-	height: 100%;
-}
-
-.container h2 {
-	margin-bottom: 65px;
-	text-align: center;
-}
-
-.info-box {
-	width: 830px;
-	transform: translateX(-50%);
-	left: 50%;
-	position: relative;
-	display: flex;
-	flex-direction: row;
-	margin-bottom: 10px;
-}
-
-.info-key {
-	text-align: center;
-	height: 40px;
-	line-height: 36px;
-	width: 150px;
-	border: 1px solid black;
-	border-radius: 10px;
-	font-size: 18px;
-	background-color: #EEEEEE;
-}
-
-.info-value {
-	height: 40px;
-	width: 521px;
-	line-height: 36px;
-	border: 1px solid black;
-	border-radius: 10px;
-	margin-left: 10px;
-	text-align: center;
-	margin-right: 10px;
-}
-
-.backBtn {
-	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
-	margin-top: 30px;
-}
-
-.info-value-change-input {
-	height: 40px;
-	width: 521px;
-	line-height: 36px;
-	border: 1px solid black;
-	border-radius: 10px;
-	margin-left: 10px;
-	text-align: center;
-	margin-right: 10px;
-	display: none;
-}
-
-.info-value-change-input-newPassword {
-	height: 40px;
-	width: 521px;
-	line-height: 36px;
-	border: 1px solid black;
-	border-radius: 10px;
-	margin-left: 10px;
-	text-align: center;
-	margin-right: 10px;
-}
-
-.info-value-password {
-	height: 40px;
-	width: 521px;
-	line-height: 36px;
-	border: 1px solid black;
-	border-radius: 10px;
-	margin-left: 10px;
-	text-align: center;
-	margin-right: 10px;
-}
-
-.info-container-newPassword {
-	display: none;
-}
-
-button {
-	left: 0px;
-	transform: translateX(0%);
-}
-
-#change-id-delete-btn {
-	margin-left: 5px;
-	display: none;
-}
-
-#change-id-success-btn {
-	display: none;
-}
-
-#info-value-change-input-phone {
-	display: none;
-}
-
-#change-phone-success-btn {
-	display: none;
-}
-
-#change-phone-delete-btn {
-	display: none;
-}
-
-#info-value-change-input-email {
-	display: none;
-}
-
-#change-email-success-btn {
-	display: none;
-}
-
-#change-email-delete-btn {
-	display: none;
-}
-
-#info-value-change-input-bio {
-	display: none;
-	height: 90px;
-	resize: none;
-}
-
-#change-bio-success-btn {
-	display: none;
-}
-
-#change-bio-delete-btn {
-	display: none;
-}
-</style>
 <script>
 $(document).ready(function() {
 	$("#change-id-btn").click(function() {
@@ -302,8 +161,7 @@ function changeBio(userId) {
 	const newBio = $("#info-value-change-input-bio").val();
     $.ajax({
         type: "POST",
-        url: '<%=notWithFormTag%>
-	personalUserChangeBio',
+        url: '<%=notWithFormTag%>personalUserChangeBio',
 			data : {
 				userId : userId,
 				newBio : newBio
@@ -331,12 +189,31 @@ function changeBio(userId) {
 			}
 		});
 	}
+	function deleteUser(event) {
+		event.preventDefault();
+		  const userId = $("#info-value-userId-hidden").val();
+		  if (confirm("정말 탈퇴하시겠습니까??")) {
+		    var url = "<%=notWithFormTag%>deletePersonalUser&userId=" + userId;
+			var xhr = new XMLHttpRequest();
+
+			xhr.open("POST", url, true);
+
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+					window.location.replace("<%=notWithFormTag%>home");
+				} else {
+					console.error("요청 실패");
+				}
+			};
+			xhr.send();
+		} else {
+			return;
+		}
+	}
 </script>
 <body>
-	<div id="check"></div>
-
 	<div class="container">
-		<h2>${requestScope.bean.username}회원정보</h2>
+		<h2>회원정보</h2>
 		<div class="info-container">
 			<div class="info-box">
 				<span class="info-key">아이디</span>
@@ -410,7 +287,7 @@ function changeBio(userId) {
 		</div>
 
 		<div id="backButton">
-			<button  class="btn btn-primary backBtn" onclick="history.back();">돌아 가기</button>
+			<button  class="btn btn btn-danger deleteUserBtn" onclick="return deleteUser(event);">탈퇴하기</button>
 		</div>
 	</div>
 </body>

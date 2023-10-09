@@ -41,7 +41,7 @@
 	margin-right: 10px;
 }
 
-.backBtn {
+.deleteUserBtn {
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
@@ -60,6 +60,17 @@
 	display: none;
 }
 
+.info-value-change-input-newPassword {
+	height: 40px;
+	width: 521px;
+	line-height: 36px;
+	border: 1px solid black;
+	border-radius: 10px;
+	margin-left: 10px;
+	text-align: center;
+	margin-right: 10px;
+}
+
 .info-value-password {
 	height: 40px;
 	width: 521px;
@@ -71,16 +82,15 @@
 	margin-right: 10px;
 }
 
-.info-value-change-input-businessName {
-	height: 40px;
-	width: 521px;
-	line-height: 36px;
-	border: 1px solid black;
-	border-radius: 10px;
-	margin-left: 10px;
-	text-align: center;
-	margin-right: 10px;
+.info-container-newPassword {
+	display: none;
 }
+
+button {
+	left: 0px;
+	transform: translateX(0%);
+}
+
 #change-id-delete-btn {
 	margin-left: 5px;
 	display: none;
@@ -101,6 +111,7 @@
 #change-phone-delete-btn {
 	display: none;
 }
+
 #info-value-change-input-email {
 	display: none;
 }
@@ -112,6 +123,7 @@
 #change-email-delete-btn {
 	display: none;
 }
+
 #info-value-change-input-bio {
 	display: none;
 	height: 90px;

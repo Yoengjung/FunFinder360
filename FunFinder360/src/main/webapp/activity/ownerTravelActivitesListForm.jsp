@@ -45,7 +45,7 @@
 		<div class="container2">
 			<div class="img-box">
 				<img src="${pageContext.request.contextPath}/common/image/shutterstock_2080987960.jpg">
-				<span>음식 - 요리</span>
+				<span>여행 - 모험</span>
 			</div>
 		</div>
 		<div class="container3">
@@ -75,7 +75,7 @@
 					<div class="search-container">
 						<div class="search-in-container">
 							<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
-								<input type="hidden" name="command" value="activitesList">
+								<input type="hidden" name="command" value="ownerTravelActivitesList">
 								<select id="mode" name="mode" class="form-select">
 									<option value="all" selected="selected">--- 선택해 주세요 ---
 									<option value="activityName">활동 제목
@@ -92,7 +92,7 @@
 					</div>
 				</div>
 				<form name="search-form1" action="<%=withFormTag%>" method="get" class="search-form1">
-					<input type="hidden" name="command" value="activitesList">
+					<input type="hidden" name="command" value="ownerTravelActivitesList">
 					<select id="mode" name="mode" class="form-select1">
 						<option value="readhit">조회수
 						<option value="postedDate">최신순

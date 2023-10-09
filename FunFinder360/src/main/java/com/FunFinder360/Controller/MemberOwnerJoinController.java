@@ -35,7 +35,7 @@ public class MemberOwnerJoinController extends SuperClass {
 				bean.setBusinessNumber(Integer.parseInt(request.getParameter("businessNumber")));
 				bean.setPhoneNumber(request.getParameter("phoneNumber"));
 				bean.setEmail(request.getParameter("email"));
-				bean.setBio(request.getParameter("bio"));
+				bean.setBio(request.getParameter("introduction"));
 
 				try {
 					dao.insertOwnerJoinData(bean);
