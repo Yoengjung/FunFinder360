@@ -39,6 +39,7 @@ public class OwnerFoodActivitesListListController extends SuperClass {
 				lists = dao.getOwnerFoodActivites(pageInfo);
 			} else {
 				lists = dao.getOwnerFoodSelectAll(pageInfo);
+				System.out.println("lists : " + lists);
 			}
 			request.setAttribute("ownerActivity", lists);
 			request.setAttribute("pageInfo", pageInfo);
