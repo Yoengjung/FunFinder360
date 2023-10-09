@@ -33,6 +33,7 @@ wbody {
 	transform: translateX(-50%);
 	margin-top: 30px;
 }
+
 #category-tag {
 	display: inline;
 	margin: 0px;
@@ -243,6 +244,11 @@ textarea {
 }
 
 .review-box {
+	margin-top: 10px;
+	width: 60%;
+	left: 50%;
+	position: relative;
+	transform: translateX(-50%);
 	border: 1px solid black;
 	border-radius: 5px;
 	margin-bottom: 10px;
@@ -265,10 +271,9 @@ textarea {
 	display: none;
 	color: red;
 }
+
 #reviewContent-tag {
 	display: none;
-	color:red;
+	color: red;
 }
-.review-box {
-	margin-top: 10px;
-}
+

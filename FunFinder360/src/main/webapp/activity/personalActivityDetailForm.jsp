@@ -8,9 +8,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/activityCSS/personalActivityDetailFormCSS.css">
 <title>활동 상세 보기</title>
 <script>
-	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-	  return new bootstrap.Tooltip(tooltipTriggerEl)
+	var tooltipTriggerList = [].slice.call(document
+			.querySelectorAll('[data-bs-toggle="tooltip"]'))
+	var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+		return new bootstrap.Tooltip(tooltipTriggerEl)
 	})
 	function backPage() {
 		window.history.back();
@@ -92,19 +93,19 @@
 			$("#reviewRating").val(5)
 		})
 	})
-	
-	function validation () {
+
+	function validation() {
 		var rating = $("#reviewRating").val()
 		var reviewContent = $("#reviewContent").val()
-		
+
 		console.log(rating);
 		console.log(reviewContent);
-		
+
 		if (rating == 0) {
 			$("#review-rating-tag").css("display", "block");
 			return false;
 		}
-		
+
 		if (reviewContent == "") {
 			$("#reviewContent-tag").css("display", "block");
 			return false;
@@ -116,12 +117,7 @@
 	<div class="container">
 		<div class="container-box">
 			<span id="category-tag">${requestScope.personalActivityData.category}</span>
-			<span class="material-symbols-outlined heart-icon-fav" data-bs-toggle="tooltip" data-bs-placement="top" title="좋아요"> favorite </span>
-			<span class="material-symbols-outlined star-icon-fav" data-bs-toggle="tooltip" data-bs-placement="top" title="즐겨찾기"> star </span>
-
 			<h2 id="activityName-tag">${requestScope.personalActivityData.activityName}</h2>
-
-
 			<div class="location-container" style="font-size: 17px;">
 				<span>장소 : ${requestScope.personalActivityData.location} </span>
 				<span> ${requestScope.personalActivityData.locationDetail}</span>
@@ -211,9 +207,9 @@
 				</form>
 			</div>
 		</c:if>
-		
+
 		<c:forEach var="reviewBean" items="${requestScope.reviewData}">
-			<div class="review-box">
+			<div class="review-box" style="left: 50%; transform: translate(-50%); position: relative; width: 70%;">
 				<div class="review-head">
 					<span>${reviewBean.userName}</span>
 					<c:forEach var="rating" begin="1" end="${reviewBean.rating}">
@@ -225,9 +221,9 @@
 				<span>${reviewBean.postedDate}</span>
 			</div>
 		</c:forEach>
-		
+
 		<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 	</div>
-	
+
 </body>
 </html>

@@ -554,6 +554,7 @@ public class OwnerActivitesDao extends SuperDao {
 		return cnt;
 	}
 
+	
 	public int GetOwnerCultureTotalRecordCount(String mode, String keyword) throws Exception{
 		PreparedStatement pstmt = null;
 		ResultSet resultSet = null;
@@ -561,10 +562,10 @@ public class OwnerActivitesDao extends SuperDao {
 
 		String sql = " select count(*) as cnt ";
 		sql += " from (select activityid, userId, activityName, category, location, locationdetail,duration, price, activitynumber,opentime, closetime, event, readhit, posteddate ";
-		sql += " from owner_activites where category = '문화 - 엔터테인먼트'";
+		sql += " from owner_activites where category = '문화 - 엔터테인먼트' ";
 		if (mode == null || mode.equals("all")) {
 		} else {
-			sql += " where " + mode + " like '%" + keyword + "%' ";
+			sql += " and " + mode + " like '%" + keyword + "%' ";
 		}
 		sql += " ) ";
 
@@ -594,11 +595,13 @@ public class OwnerActivitesDao extends SuperDao {
 	public List<OwnerActivitesList> getOwnerCultureActivites(Paging pageInfo) throws Exception{
 		PreparedStatement prtmt = null;
 		ResultSet resultSet = null;
+			
+		String mode = pageInfo.getMode();
 
 		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate , content "
-				+ "		 FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY "
-				+ "				 postedDate DESC) AS ranking FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '문화 - 엔터테인먼트' AND imageorder = 0) tt join activity_content on activity_content.ownerActivityId = tt.activityid "
-				+ " WHERE ranking BETWEEN ? AND ? ORDER BY ranking";
+				+ " FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY " + mode +" DESC) AS ranking "
+				+ " FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '문화 - 엔터테인먼트' AND imageorder = 0) tt join activity_content on activity_content.ownerActivityId = tt.activityid "
+				+ " WHERE ranking BETWEEN ? AND ? ORDER BY ranking ";
 
 		Connection connection = super.getConnection();
 
@@ -655,10 +658,21 @@ public class OwnerActivitesDao extends SuperDao {
 		ResultSet rs = null;
 
 		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+		
+		System.out.println("tset");
 
-		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, readhit, postedDate, content "
-				+ "			   FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY postedDate DESC) AS ranking "
-				+ "				FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '문화 - 엔터테인먼트' and imageorder = 0) tt join activity_content con on tt.activityid = con.ownerActivityid WHERE ranking BETWEEN ? AND ? ORDER BY ranking ";
+		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, content "
+				+ "	FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY "+ mode +" DESC) AS ranking  "
+				+ "	FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '문화 - 엔터테인먼트' and imageorder = 0 ";
+				if (mode == null || mode.equals("all")) {
+				} else {
+					sql += " and " + mode + " like '%" + keyword + "%' ";
+				}
+				sql += " ) tt join activity_content con on tt.activityid = con.ownerActivityid where ranking BETWEEN ? AND ? ";
+				sql += " ORDER BY ranking";
+				
+				System.out.println(sql);
 
 		Connection conn = super.getConnection();
 
@@ -728,7 +742,7 @@ public class OwnerActivitesDao extends SuperDao {
 		sql += " from owner_activites where category = '음식 - 요리'";
 		if (mode == null || mode.equals("all")) {
 		} else {
-			sql += " where " + mode + " like '%" + keyword + "%' ";
+			sql += " and " + mode + " like '%" + keyword + "%' ";
 		}
 		sql += " ) ";
 
@@ -758,11 +772,13 @@ public class OwnerActivitesDao extends SuperDao {
 	public List<OwnerActivitesList> getOwnerFoodActivites(Paging pageInfo) throws Exception{
 		PreparedStatement prtmt = null;
 		ResultSet resultSet = null;
+		
+		String mode = pageInfo.getMode();
 
 		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate , content "
-				+ "		 FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY "
-				+ "				 postedDate DESC) AS ranking FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '음식 - 요리' AND imageorder = 0) tt join activity_content on activity_content.ownerActivityId = tt.activityid "
-				+ " WHERE ranking BETWEEN ? AND ? ORDER BY ranking";
+				+ "	fROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY postedDate DESC) AS ranking "
+				+ " fROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '음식 - 요리' AND imageorder = 0) tt join activity_content on activity_content.ownerActivityId = tt.activityid "
+				+ " wHERE ranking BETWEEN ? AND ? ORDER BY ranking";
 
 		Connection connection = super.getConnection();
 
@@ -796,10 +812,12 @@ public class OwnerActivitesDao extends SuperDao {
 		ResultSet rs = null;
 
 		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
 
-		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, readhit, postedDate, content "
-				+ "			   FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY postedDate DESC) AS ranking "
-				+ "				FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '음식 - 요리' and imageorder = 0) tt join activity_content con on tt.activityid = con.ownerActivityid WHERE ranking BETWEEN ? AND ? ORDER BY ranking ";
+		String sql = " SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, readhit, postedDate, content "
+				+ "	FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY " + mode +" DESC) AS ranking "
+				+ "	FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '음식 - 요리' and imageorder = 0) tt join activity_content con on tt.activityid = con.ownerActivityid "
+				+ " WHERE ranking BETWEEN ? AND ? ORDER BY ranking ";
 
 		Connection conn = super.getConnection();
 
@@ -1151,7 +1169,7 @@ public class OwnerActivitesDao extends SuperDao {
 		sql += " from owner_activites where category = '게임 - 취미'";
 		if (mode == null || mode.equals("all")) {
 		} else {
-			sql += " where " + mode + " like '%" + keyword + "%' ";
+			sql += " and " + mode + " like '%" + keyword + "%' ";
 		}
 		sql += " ) ";
 
@@ -1181,10 +1199,12 @@ public class OwnerActivitesDao extends SuperDao {
 	public List<OwnerActivitesList> getOwnerGameActivites(Paging pageInfo) throws Exception{
 		PreparedStatement prtmt = null;
 		ResultSet resultSet = null;
+		
+		String mode = pageInfo.getMode();
 
 		String sql = "SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate , content "
-				+ "		 FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY "
-				+ "				 postedDate DESC) AS ranking FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '게임 - 취미' AND imageorder = 0) tt join activity_content on activity_content.ownerActivityId = tt.activityid "
+				+ "	FROM (SELECT activityid, userid, activityname, category, location, LOCATIONDETAIL, duration, price, openTime, closeTime, event, image, imageorder, readhit, postedDate, ROW_NUMBER() OVER(ORDER BY postedDate DESC) AS ranking "
+				+ " FROM owner_activites ow JOIN activity_image im ON ow.activityId = im.ownerActivityId where category = '게임 - 취미' AND imageorder = 0) tt join activity_content on activity_content.ownerActivityId = tt.activityid "
 				+ " WHERE ranking BETWEEN ? AND ? ORDER BY ranking";
 
 		Connection connection = super.getConnection();

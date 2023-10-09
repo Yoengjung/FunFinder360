@@ -39,6 +39,8 @@ public class OwnerCultureActivitesListController extends SuperClass {
 				lists = dao.getOwnerCultureActivites(pageInfo);
 			} else {
 				lists = dao.getOwnerCultureSelectAll(pageInfo);
+				
+				System.out.println("lists : " + lists);
 			}
 			request.setAttribute("ownerActivity", lists);
 			request.setAttribute("pageInfo", pageInfo);
