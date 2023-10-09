@@ -51,21 +51,10 @@ public class MemberActivityController extends SuperClass {
 
 					lists = dao.getPeronalSelectAll(pageInfo, userId);
 
-					/*
-					 * int readHitTotalCount = dao.getReadHitTotalCount(userId); int
-					 * reviewTotalCount = dao.getReviewTotalCount(userId);
-					 * 
-					 * List<PersonalActivity> dateReadHitCount = dao.getDateReadHitCount(userId);
-					 */
-
 					request.setAttribute("personalActivityList", lists);
 					request.setAttribute("pageInfo", pageInfo);
 					
-					/*
-					 * request.setAttribute("readHitTotalCount", readHitTotalCount);
-					 * request.setAttribute("reviewTotalCount", reviewTotalCount);
-					 * request.setAttribute("dateReadHitCount", dateReadHitCount);
-					 */
+					System.out.println("lists : " + lists);
 
 					super.goToPage("member/memberActivity.jsp");
 
@@ -84,21 +73,8 @@ public class MemberActivityController extends SuperClass {
 
 					lists = dao.getOwnerSelectAll(pageInfo, ownerId);
 
-					/*
-					 * int readHitTotalCount = dao.getOwnerReadHitTotalCount(ownerId); int
-					 * reviewTotalCount = dao.getOwnerReviewTotalCount(ownerId);
-					 * 
-					 * List<PersonalActivity> dateReadHitCount =
-					 * dao.getOwnerDateReadHitCount(ownerId);
-					 */
-
 					request.setAttribute("ownerActivityList", lists);
 					request.setAttribute("pageInfo", pageInfo);
-					/*
-					 * request.setAttribute("readHitTotalCount", readHitTotalCount);
-					 * request.setAttribute("reviewTotalCount", reviewTotalCount);
-					 * request.setAttribute("dateReadHitCount", dateReadHitCount);
-					 */
 
 					super.goToPage("member/memberActivity2.jsp");
 

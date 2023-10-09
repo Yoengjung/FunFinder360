@@ -1446,5 +1446,35 @@ public class ActivitesDao extends SuperDao {
 		}
 		return bean;
 	}
+	// 개인 활동 리스트 총 개수
+	public int GetLookTotalAllRecordCount(String mode) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		Connection connection = super.getConnection();
+
+		String sql = " SELECT count(*) as cnt FROM personal_activites ";
+
+		pstmt = connection.prepareStatement(sql);
+
+		resultSet = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (resultSet.next()) {
+			cnt = resultSet.getInt("cnt");
+		}
+
+		if (resultSet != null) {
+			resultSet.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (connection != null) {
+			connection.close();
+		}
+
+		return cnt;
+	}
 
 }
