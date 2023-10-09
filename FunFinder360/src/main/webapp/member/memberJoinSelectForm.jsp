@@ -7,12 +7,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <title>로그인</title>
 <style>
+html, body {
+	height: 100%;
+}
 .container {
-	position: absolute;
 	top: 130px;
 	width: 100%;
 	height: 100%;
-	max-width: none;
+	min-height: 100%;
+    position: relative;
+    padding-bottom: 100px;
 }
 
 .login-form-container {
@@ -78,11 +82,6 @@
 	height: 100%;
 }
 
-.foot-container {
-	position: absolute;
-	bottom: 100px;
-	width: 100%;
-}
 </style>
 </head>
 <body>
@@ -104,22 +103,4 @@
 		</div>
 
 	</div>
-	<div class="foot-container">
-		<hr>
-		<div class="company-info-container">
-			<ul>
-				<li>
-					<span>회사 이름: ${applicationScope.companyInfoMap.companyName}</span>
-					<span>회사 주소: ${applicationScope.companyInfoMap.address}</span>
-					<span>전화번호: ${applicationScope.companyInfoMap.phoneNumber}</span>
-				</li>
-				<li>
-					<span>이메일: ${applicationScope.companyInfoMap.email}</span>
-					<span>설립일: ${applicationScope.companyInfoMap.establishmentDate}</span>
-					<span>사업자등록번호: ${applicationScope.companyInfoMap.businessRegistrationNumber}</span>
-				</li>
-			</ul>
-		</div>
-	</div>
-</body>
-</html>
+	<%@ include file="../common/footer.jsp" %>
