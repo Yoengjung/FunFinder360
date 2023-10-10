@@ -8,8 +8,7 @@
 </head>
 <script>
 	function backPage() {
-		location.href = "<%=notWithFormTag%>
-	commonQuestionsList"
+		location.href = "<%=notWithFormTag%>commonQuestionsList"
 	}
 </script>
 <style>
