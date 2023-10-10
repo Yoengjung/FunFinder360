@@ -47,6 +47,8 @@ public class PersonalUserTotalDetailController extends SuperClass {
 			request.setAttribute("readHitTotalCount", readHitTotalCount);
 			request.setAttribute("reviewTotalCount", reviewTotalCount);
 			request.setAttribute("dateReadHitCount", dateReadHitCount);
+			
+			System.out.println("userData : " + bean );
 
 			super.goToPage("admin/personalUserTotalDetail.jsp");
 
