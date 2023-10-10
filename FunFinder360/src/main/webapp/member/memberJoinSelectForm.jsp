@@ -10,13 +10,13 @@
 html, body {
 	height: 100%;
 }
-.container {
-	top: 130px;
+
+.container1 {
 	width: 100%;
 	height: 100%;
-	min-height: 100%;
-    position: relative;
-    padding-bottom: 100px;
+	min-height: calc(100% - 100px);
+	padding-top: 100px;
+	position: relative;
 }
 
 .login-form-container {
@@ -24,7 +24,7 @@ html, body {
 	height: 200px;
 	position: absolute;
 	left: 50%;
-	top: 130px;
+	top: 270px;
 	transform: translateX(-50%);
 	text-align: center;
 }
@@ -82,19 +82,26 @@ html, body {
 	height: 100%;
 }
 
+.footer {
+	transform: translateY(-150px);
+}
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container1">
 		<div class="login-form-container">
 			<h2>회원가입</h2>
 			<div class="select-container">
 				<div class="select-container">
 					<div class="select-item1">
-						<a href="<%=notWithFormTag%>PersonalJoin" class="select-login-a"> <span class="material-symbols-outlined icon-tag" style="font-size: 80px;"> person</span> <span>개인 회원가입</span></a>
+						<a href="<%=notWithFormTag%>PersonalJoin" class="select-login-a">
+							<span class="material-symbols-outlined icon-tag" style="font-size: 80px;"> person</span>
+							<span>개인 회원가입</span>
+						</a>
 					</div>
 					<div class="select-item2">
-						<a href="<%=notWithFormTag%>OwnerJoin" class="select-login-a"> <span class="material-symbols-outlined" style="font-size: 80px;"> apartment </span>
+						<a href="<%=notWithFormTag%>OwnerJoin" class="select-login-a">
+							<span class="material-symbols-outlined" style="font-size: 80px;"> apartment </span>
 							<span>업주 회원가입</span>
 						</a>
 					</div>
@@ -103,4 +110,4 @@ html, body {
 		</div>
 
 	</div>
-	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp"%>

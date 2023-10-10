@@ -30,12 +30,16 @@ function validation () {
 </script>
 
 <style>
-.container {
-	position: absolute;
-	top: 130px;
+html, body {
+	height: 100%;
+}
+
+.container1 {
 	width: 100%;
 	height: 100%;
-	max-width: none;
+	min-height: calc(100% - 100px);
+	padding-top: 100px;
+	position: relative;
 }
 
 .login-form-container {
@@ -43,7 +47,7 @@ function validation () {
 	height: 500px;
 	position: absolute;
 	left: 50%;
-	top: 130px;
+	top: 270px;
 	transform: translateX(-50%);
 	text-align: center;
 }
@@ -86,11 +90,13 @@ function validation () {
 .login-fail-tag {
 	color: red;
 }
-
+.footer {
+	transform: translateY(-150px);
+}
 </style>
 </head>
-<body>
-	<div class="container">
+<body style="overflow-x: hidden">
+	<div class="container1">
 		<div class="login-form-container">
 			<c:if test="${empty sessionScope.alertMessage}">
 					<div class="alert alert-danger" style="display: none;">
@@ -133,5 +139,4 @@ function validation () {
 			</form>
 		</div>
 	</div>
-</body>
-</html>
+<%@ include file="../common/footer.jsp"%>

@@ -8,10 +8,16 @@
 <title>개인 활동</title>
 
 <style>
+html, body {
+	height: 100%;
+}
+
 .container1 {
 	width: 100%;
-	height: 100vh;
-	min-height: 100vh;
+	height: 100%;
+	min-height: calc(100% - 100px);
+	padding-top: 100px;
+	position: relative;
 }
 
 .container2 {
@@ -19,7 +25,7 @@
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
-	top: 25%;
+	top: 12%;
 }
 
 .container1 h2 {
@@ -90,6 +96,10 @@
 	color: blue;
 	text-decoration: underline;
 }
+
+.footer {
+	transform: translateY(-150px);
+}
 </style>
 <script type="text/javascript">
 	$(document)
@@ -116,7 +126,7 @@
 		  event.preventDefault();
 		  const activityId = $("#activityId-tag").val();
 		  if (confirm("정말 삭제하시겠습니까??")) {
-		    var url = "<%=notWithFormTag%>personalDeleteActivity&activityId=" + activityId;
+		    var url = "<%=notWithFormTag%>personalDeleteActivity&activityId="+ activityId;
 			var xhr = new XMLHttpRequest();
 
 			xhr.open("GET", url, true);
@@ -214,5 +224,4 @@
 			<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 		</div>
 	</div>
-</body>
-</html>
+	<%@ include file="../common/footer.jsp"%>

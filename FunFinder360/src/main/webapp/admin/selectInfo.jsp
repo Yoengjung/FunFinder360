@@ -8,7 +8,7 @@
 <title>관리자 정보 조회</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container1">
 		<div class="box-container">
 			<div class="box-1">
 				<div class="infoSelect-btn-1">
@@ -28,5 +28,4 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+<%@ include file="../common/footer.jsp"%>

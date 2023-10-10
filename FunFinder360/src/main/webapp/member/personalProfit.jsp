@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
 <meta charset="UTF-8">
 <title>개인 수익 활동</title>
 
@@ -372,13 +371,13 @@ am5.ready(function() {
 			<div class="total-container">
 				<div class="totalReadHit-container">
 					<div class="totalReadHit-box">
-						<span>총 조회수</span> 
+						<span>총 조회수</span>
 						<span>${requestScope.readHitTotalCount}</span>
 					</div>
 				</div>
 				<div class='totalReviewCount-container'>
 					<div class="totalReivewCount-box">
-						<span>총 댓글수</span> 
+						<span>총 댓글수</span>
 						<span>${requestScope.reviewTotalCount}</span>
 					</div>
 				</div>

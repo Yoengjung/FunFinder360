@@ -193,13 +193,17 @@
 	}
 </script>
 <style>
-.container {
-	position: absolute;
-	top: 130px;
+html, body {
+	height: 100%
+}
+
+.container1 {
+	position: relative;
 	width: 100%;
-	height: 150%;
+	height: 100vh;
 	padding: 0px;
 	max-width: none;
+	min-height: calc(100vh + 153px);
 }
 
 textarea {
@@ -211,18 +215,16 @@ textarea {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	justify-content: center;
-	align-items: center;
 }
 
 .join-form {
 	display: inline-block;
 	position: absolute;
 	width: 450px;
-	heiht: 700px;
+	height: 700px;
 	left: 50%;
 	transform: translateX(-50%);
-	top: 50px;
+	top: 170px;
 }
 
 .join-form h2 {
@@ -330,13 +332,14 @@ textarea {
 	bottom: 100px;
 	width: 100%;
 }
+
 .errorMessage {
 	color: red;
 }
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container1">
 		<div class="join-container">
 			<div class="join-form">
 				<h2>업주 회원가입</h2>
@@ -424,4 +427,4 @@ textarea {
 			</div>
 		</div>
 	</div>
-	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp"%>

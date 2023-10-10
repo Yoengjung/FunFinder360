@@ -165,12 +165,12 @@
 </script>
 <style>
 .container {
-	position: absolute;
-	top: 130px;
-	width: 100%;
-	height: 120%;
-	padding: 0px;
-	max-width: none;
+	position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 0px;
+    max-width: none;
+    min-height: calc(100vh - 120px);
 }
 
 textarea {
@@ -193,7 +193,7 @@ textarea {
 	heiht: 700px;
 	left: 50%;
 	transform: translateX(-50%);
-	top: 50px;
+	top: 170px;
 }
 
 .join-form h2 {
@@ -285,13 +285,6 @@ textarea {
 	display: none;
 	color: red;
 }
-
-.foot-container {
-	position: absolute;
-	bottom: 100px;
-	width: 100%;
-}
-
 .errorMessage {
 	color: red;
 }
@@ -319,7 +312,7 @@ textarea {
 							<input class="form-control" type="password" id="password" name="password" placeholder="비밀번호(영문 대/소문자, 숫자, 특수문자 중 2가지 조합, 8~20)">
 							<p id="password-alert-message-tag">비밀번호는 영문 대/소문자, 숫자, 특수문자 중 2가지 이상 조합으로 8 ~ 20자 이어야 합니다.</p>
 							<p id="password-empty-alert-masseage-tag">비밀번호는 필수 입력 사항입니다.</p>
-							
+
 							<input class="form-control" type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호 확인">
 							<p id="passwordConfirm-alert-message-tag">비밀번호가 일치하지 않습니다.</p>
 						</li>
@@ -365,24 +358,5 @@ textarea {
 				</form>
 			</div>
 		</div>
-		<div class="foot-container">
-			<hr>
-			<div class="company-info-container">
-				<ul>
-					<li>
-						<span>회사 이름: ${applicationScope.companyInfoMap.companyName}</span>
-						<span>회사 주소: ${applicationScope.companyInfoMap.address}</span>
-						<span>전화번호: ${applicationScope.companyInfoMap.phoneNumber}</span>
-					</li>
-					<li>
-						<span>이메일: ${applicationScope.companyInfoMap.email}</span>
-						<span>설립일: ${applicationScope.companyInfoMap.establishmentDate}</span>
-						<span>사업자등록번호: ${applicationScope.companyInfoMap.businessRegistrationNumber}</span>
-					</li>
-				</ul>
-			</div>
-
-		</div>
 	</div>
-</body>
-</html>
+	<%@ include file="../common/footer.jsp"%>

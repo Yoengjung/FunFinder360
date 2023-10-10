@@ -7,12 +7,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <title>로그인</title>
 <style>
-.container {
-	position: absolute;
-	top: 130px;
+body, html {
+	height: 100%;
+}
+
+.container1 {
 	width: 100%;
 	height: 100%;
-	max-width: none;
+	min-height: calc(100% - 100px);
+	padding-top: 100px;
+	position: relative;
 }
 
 .login-form-container {
@@ -20,7 +24,7 @@
 	height: 200px;
 	position: absolute;
 	left: 50%;
-	top: 130px;
+	top: 270px;
 	transform: translateX(-50%);
 	text-align: center;
 }
@@ -77,21 +81,17 @@
 	position: relative;
 	height: 100%;
 }
-
-.foot-container {
-	position: absolute;
-	bottom: 100px;
-	width: 100%;
-}
-
 .icon-tag {
 	font-size: 75px;
 	top: 35%;
 }
+.footer {
+	transform: translateY(-150px);
+}
 </style>
 </head>
-<body>
-	<div class="container">
+<body style="overflow-x: hidden">
+	<div class="container1">
 		<div class="login-form-container">
 			<c:if test="${empty sessionScope.alertMessage}">
 				<div class="alert alert-danger" style="display:none;">
@@ -121,24 +121,5 @@
 				</div>
 			</div>
 		</div>
-		<div class="foot-container">
-			<hr>
-			<div class="company-info-container">
-				<ul>
-					<li>
-						<span>회사 이름: ${applicationScope.companyInfoMap.companyName}</span>
-						<span>회사 주소: ${applicationScope.companyInfoMap.address}</span>
-						<span>전화번호: ${applicationScope.companyInfoMap.phoneNumber}</span>
-					</li>
-					<li>
-						<span>이메일: ${applicationScope.companyInfoMap.email}</span>
-						<span>설립일: ${applicationScope.companyInfoMap.establishmentDate}</span>
-						<span>사업자등록번호: ${applicationScope.companyInfoMap.businessRegistrationNumber}</span>
-					</li>
-				</ul>
-			</div>
-		</div>
 	</div>
-
-</body>
-</html>
+<%@ include file="../common/footer.jsp"%>
