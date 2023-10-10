@@ -7,13 +7,13 @@
 <meta charset="UTF-8">
 <title>개인 정보 수정</title>
 <style>
-.container {
+.container1 {
 	margin-top: 9%;
 	width: 100%;
 	height: 100%;
 }
 
-.container h2 {
+.container1 h2 {
 	margin-bottom: 65px;
 	text-align: center;
 }
@@ -410,7 +410,7 @@
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="container1">
 		<h2>회원정보</h2>
 		<div class="info-container">
 			<div class="info-box">

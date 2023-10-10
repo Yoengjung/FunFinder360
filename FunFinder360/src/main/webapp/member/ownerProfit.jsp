@@ -374,7 +374,7 @@ am5.ready(function() {
 </head>
 <body>
 	<div class="container">
-		<h2>기업 수익 모델</h2>
+		<h2 style="text-align: center;">기업 수익 모델</h2>
 		<div>
 			<h4 style="margin-top: 50px;">총계</h4>
 			<div class="total-container">
