@@ -38,6 +38,9 @@ textarea {
 .top-menu {
 	height: 50px;
 	text-align: center;
+	display : flex;
+	justify-content : center;
+	
 }
 
 .top-menu ul {
