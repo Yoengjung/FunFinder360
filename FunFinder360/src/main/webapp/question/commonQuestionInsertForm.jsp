@@ -5,7 +5,7 @@
 <head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/commonQuesionCSS/commonQuestionInsertFormCSS.css" type="text/css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공통질문 삽입</title>
 <script type="text/javascript">
   		$(document).ready(function(){
   	  		$('#postedDate').datepicker({dateFormat: "yy/mm/dd"});   	  	 	

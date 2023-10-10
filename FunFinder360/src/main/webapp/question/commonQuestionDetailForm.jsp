@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공통 질문 상세</title>
 </head>
 <script>
 	function backPage() {
