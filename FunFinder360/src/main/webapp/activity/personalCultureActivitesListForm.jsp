@@ -130,5 +130,3 @@
 			<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 		</div>
 	</div>
-</body>
-</html>

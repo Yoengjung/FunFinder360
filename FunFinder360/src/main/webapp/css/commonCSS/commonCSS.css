@@ -167,6 +167,7 @@ hr {
 	position: absolute;
 	display: block;
 	top: 5px;
+	z-index: 999;
 }
 
 #login-message {

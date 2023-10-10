@@ -7,100 +7,6 @@
 <meta charset="UTF-8">
 <title>개인 활동</title>
 
-<style>
-html, body {
-	height: 100%;
-}
-
-.container1 {
-	width: 100%;
-	height: 100%;
-	min-height: calc(100% - 100px);
-	padding-top: 100px;
-	position: relative;
-}
-
-.container2 {
-	width: 80%;
-	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
-	top: 12%;
-}
-
-.container1 h2 {
-	margin-bottom: 30px;
-	text-align: center;
-}
-
-.table-head-box {
-	text-align: center;
-}
-
-.table-body-box {
-	text-align: center;
-}
-
-.no-head {
-	width: 20%;
-}
-
-.title-head {
-	text-align: left;
-	width: 15%; /* 50% -> 20%로 수정함 */
-}
-
-.registrant-head {
-	width: 20%;
-}
-
-.posted-date-head {
-	width: 20%;
-}
-
-.readhit-head {
-	width: 10%;
-}
-
-.title-box {
-	text-align: left;
-}
-
-.title-box a {
-	color: #3366FF;
-}
-
-.title-box a:hover {
-	text-decoration: underline;
-}
-
-.input-group {
-	width: 300px;
-}
-
-.form-select {
-	width: 200px;
-}
-
-.search-form {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-
-.keyword-input-box {
-	margin: 0 20px;
-}
-
-.a-tag-1 {
-	color: blue;
-	text-decoration: underline;
-}
-
-.footer {
-	transform: translateY(-150px);
-}
-</style>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -148,7 +54,7 @@ html, body {
 </head>
 <body>
 	<div class="container1">
-		<div class="container2">
+		<div class="container2" style="padding: 0px 150px">
 			<h2>나의 활동</h2>
 			<table class="table">
 				<thead class="table-dark">
@@ -192,6 +98,7 @@ html, body {
 							<td class="table-body-box">${personalActivity.postedDate}</td>
 							<td class="table-body-box">
 								<button type="button" onclick="button_event(event);">삭제</button>
+								<a href="<%=notWithFormTag%>updatePersonalActivity&activityId=${personalActivity.activityId}"><button type="Button">수정</button></a>
 								<%-- <a href="<%=notWithFormTag%>personalDeleteActivity&activityId=${personalActivity.activityId}" onclick="return button_event()">삭제</a> --%>
 							</td>
 						</tr>
@@ -224,4 +131,3 @@ html, body {
 			<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 		</div>
 	</div>
-	<%@ include file="../common/footer.jsp"%>
