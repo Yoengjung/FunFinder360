@@ -67,7 +67,7 @@ textarea {
 .search-form {
 	display: inline-block;
 	position: absolute;
-	width: 450px;
+	width: 500px;
 	heiht: 500px;
 	left: 50%;
 	transform: translateX(-50%);
