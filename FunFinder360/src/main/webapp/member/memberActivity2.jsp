@@ -141,5 +141,4 @@ function button_event(event) {
 			<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 		</div>
 	</div>
-</body>
-</html>
+	<%@ include file="../common/footer.jsp"%>

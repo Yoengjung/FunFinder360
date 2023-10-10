@@ -75,10 +75,10 @@
 							<td class="table-body-box">
 								<c:choose>
 									<c:when test="${fn:length(personalActivity.activityName) >= 10}">
-										<a class="a-tag-1" href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${fn:substring(personalActivity.activityName, 0, 10)}...</a>
+										<a class="a-tag-1" href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}" style="color: blue; text-decoration: underline;">${fn:substring(personalActivity.activityName, 0, 10)}...</a>
 									</c:when>
 									<c:otherwise>
-										<a class="a-tag-1" href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}">${personalActivity.activityName}</a>
+										<a class="a-tag-1" href="<%=notWithFormTag%>personalMemberActivityDetail&activityId=${personalActivity.activityId}" style="color: blue; text-decoration: underline;">${personalActivity.activityName}</a>
 									</c:otherwise>
 								</c:choose>
 							</td>
@@ -131,3 +131,4 @@
 			<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 		</div>
 	</div>
+	<%@ include file="../common/footer.jsp"%>
