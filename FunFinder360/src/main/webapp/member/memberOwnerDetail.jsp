@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -7,15 +6,26 @@
 <meta charset="UTF-8">
 <title>개인 정보 수정</title>
 <style>
+html, body {
+	height: 100%;
+}
+
 .container1 {
-	margin-top: 9%;
 	width: 100%;
 	height: 100%;
+	min-height: calc(100% - 100px);
+	padding-top: 100px;
+	position: relative;
+	padding: 0px 150px;
 }
 
 .container1 h2 {
 	margin-bottom: 65px;
 	text-align: center;
+}
+.container2 {
+	position: relative;
+	top: 180px;
 }
 
 .info-box {
@@ -161,7 +171,6 @@
 .info-container-newPassword {
 	display: none;
 }
-
 </style>
 
 <script>
@@ -406,113 +415,104 @@
 			return;
 		}
 	}
-	
 </script>
 </head>
 <body>
 	<div class="container1">
-		<h2>회원정보</h2>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">아이디</span> 
-				<span class="info-value" id="info-value-userId">${requestScope.bean.userId}</span>
-				<input type="hidden" id="info-value-userId-hidden" value="${requestScope.bean.userId}">
+		<div class="container2">
+			<h2>회원정보</h2>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">아이디</span>
+					<span class="info-value" id="info-value-userId">${requestScope.bean.userId}</span>
+					<input type="hidden" id="info-value-userId-hidden" value="${requestScope.bean.userId}">
+				</div>
 			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key" id="info-key-password">비밀번호</span> 
-				<span class="info-value-password" id="info-value-password">---</span> 
-				<input class="info-value-change-input" id="info-value-change-input-password" type="password">
-				<button type="button" class="btn btn-dark" id="change-id-btn">비밀번호 변경</button>
-				<button type="button" class="btn btn-primary" id="change-id-success-btn">완료</button>
-				<button type="button" class="btn btn-danger" id="change-id-delete-btn">취소</button>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key" id="info-key-password">비밀번호</span>
+					<span class="info-value-password" id="info-value-password">---</span>
+					<input class="info-value-change-input" id="info-value-change-input-password" type="password">
+					<button type="button" class="btn btn-dark" id="change-id-btn">비밀번호 변경</button>
+					<button type="button" class="btn btn-primary" id="change-id-success-btn">완료</button>
+					<button type="button" class="btn btn-danger" id="change-id-delete-btn">취소</button>
+				</div>
 			</div>
-		</div>
-		<div class="info-container-newPassword">
-			<div class="info-box">
-				<span class="info-key">새로운 비밀번호</span>
-				<input class="info-value-change-input-newPassword" id="info-value-change-input-newPassword" type="password">
+			<div class="info-container-newPassword">
+				<div class="info-box">
+					<span class="info-key">새로운 비밀번호</span>
+					<input class="info-value-change-input-newPassword" id="info-value-change-input-newPassword" type="password">
+				</div>
 			</div>
-		</div>
-		
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">이름</span> <span class="info-value">${requestScope.bean.userName}</span>
-			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">사업이름</span> <span class="info-value"
-					id="info-value-businessName">${requestScope.bean.businessName}</span>
-				<input class="info-value-change-input"
-					id="info-value-change-input-businessName" type="text">
-				<button type="button" class="btn btn-dark"
-					id="change-businessName-btn">수정</button>
-				<button type="button" class="btn btn-primary"
-					id="change-businessName-success-btn">완료</button>
-				<button type="button" class="btn btn-danger"
-					id="change-businessName-delete-btn">취소</button>
-			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">사업 구분</span> <span class="info-value">${requestScope.bean.businessType}</span>
-			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">사업자 등록번호</span> <span class="info-value">${requestScope.bean.businessNumber}</span>
-			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">전화번호</span> <span class="info-value"
-					id="info-value-phone">${requestScope.bean.phoneNumber}</span> <input
-					class="info-value-change-input" id="info-value-change-input-phone"
-					type="text">
-				<button type="button" class="btn btn-dark" id="change-phone-btn">수정</button>
-				<button type="button" class="btn btn-primary"
-					id="change-phone-success-btn">완료</button>
-				<button type="button" class="btn btn-danger"
-					id="change-phone-delete-btn">취소</button>
-			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">이메일</span> <span class="info-value"
-					id="info-value-email">${requestScope.bean.email}</span> <input
-					class="info-value-change-input" id="info-value-change-input-email"
-					type="text">
-				<button type="button" class="btn btn-dark" id="change-email-btn">수정</button>
-				<button type="button" class="btn btn-primary"
-					id="change-email-success-btn">완료</button>
-				<button type="button" class="btn btn-danger"
-					id="change-email-delete-btn">취소</button>
-			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">사업소개</span> <span class="info-value"
-					id="info-value-bio">${requestScope.bean.bio}</span>
-				<textarea class="info-value-change-input"
-					id="info-value-change-input-bio"></textarea>
-				<button type="button" class="btn btn-dark" id="change-bio-btn">수정</button>
-				<button type="button" class="btn btn-primary"
-					id="change-bio-success-btn">완료</button>
-				<button type="button" class="btn btn-danger"
-					id="change-bio-delete-btn">취소</button>
-			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">가입 일자</span> <span class="info-value">${requestScope.bean.registrationDate}</span>
-			</div>
-		</div>
 
-		<div id="backButton">
-			<button  class="btn btn btn-danger deleteUserBtn" onclick="return deleteUser(event);">탈퇴하기</button>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">이름</span>
+					<span class="info-value">${requestScope.bean.userName}</span>
+				</div>
+			</div>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">사업이름</span>
+					<span class="info-value" id="info-value-businessName">${requestScope.bean.businessName}</span>
+					<input class="info-value-change-input" id="info-value-change-input-businessName" type="text">
+					<button type="button" class="btn btn-dark" id="change-businessName-btn">수정</button>
+					<button type="button" class="btn btn-primary" id="change-businessName-success-btn">완료</button>
+					<button type="button" class="btn btn-danger" id="change-businessName-delete-btn">취소</button>
+				</div>
+			</div>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">사업 구분</span>
+					<span class="info-value">${requestScope.bean.businessType}</span>
+				</div>
+			</div>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">사업자 등록번호</span>
+					<span class="info-value">${requestScope.bean.businessNumber}</span>
+				</div>
+			</div>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">전화번호</span>
+					<span class="info-value" id="info-value-phone">${requestScope.bean.phoneNumber}</span>
+					<input class="info-value-change-input" id="info-value-change-input-phone" type="text">
+					<button type="button" class="btn btn-dark" id="change-phone-btn">수정</button>
+					<button type="button" class="btn btn-primary" id="change-phone-success-btn">완료</button>
+					<button type="button" class="btn btn-danger" id="change-phone-delete-btn">취소</button>
+				</div>
+			</div>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">이메일</span>
+					<span class="info-value" id="info-value-email">${requestScope.bean.email}</span>
+					<input class="info-value-change-input" id="info-value-change-input-email" type="text">
+					<button type="button" class="btn btn-dark" id="change-email-btn">수정</button>
+					<button type="button" class="btn btn-primary" id="change-email-success-btn">완료</button>
+					<button type="button" class="btn btn-danger" id="change-email-delete-btn">취소</button>
+				</div>
+			</div>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">사업소개</span>
+					<span class="info-value" id="info-value-bio">${requestScope.bean.bio}</span>
+					<textarea class="info-value-change-input" id="info-value-change-input-bio"></textarea>
+					<button type="button" class="btn btn-dark" id="change-bio-btn">수정</button>
+					<button type="button" class="btn btn-primary" id="change-bio-success-btn">완료</button>
+					<button type="button" class="btn btn-danger" id="change-bio-delete-btn">취소</button>
+				</div>
+			</div>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">가입 일자</span>
+					<span class="info-value">${requestScope.bean.registrationDate}</span>
+				</div>
+			</div>
+
+			<div id="backButton">
+				<button class="btn btn btn-danger deleteUserBtn" onclick="return deleteUser(event);">탈퇴하기</button>
+			</div>
 		</div>
 	</div>
-</body>
-</html>
+<%@ include file="../common/footer.jsp" %>
