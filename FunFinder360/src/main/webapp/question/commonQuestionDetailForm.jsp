@@ -187,9 +187,6 @@
 					</li>
 				</ul>
 			</div>
-			<div class="content-box">
-				<p>${requestScope.commonQuestionData[index].content}</p>
-			</div>
 		</c:if>
 
 		<c:if test="${requestScope.commonQuestionData[0].ranking == requestScope.totalRecodeCount}">
@@ -220,6 +217,10 @@
 						</li>
 					</ul>
 				</div>
+				<div class="content-box">
+					<p>${requestScope.commonQuestionData[index].content}</p>
+				</div>
+
 			</div>
 
 			<div class="back-btn-box">
