@@ -187,6 +187,9 @@
 					</li>
 				</ul>
 			</div>
+			<div class="content-box">
+				<p>${requestScope.commonQuestionData[index].content}</p>
+			</div>
 		</c:if>
 
 		<c:if test="${requestScope.commonQuestionData[0].ranking == requestScope.totalRecodeCount}">
@@ -218,6 +221,7 @@
 					</ul>
 				</div>
 			</div>
+
 			<div class="back-btn-box">
 				<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
 				<c:set var="member" value="${sessionScope.loginfo}" />
@@ -266,7 +270,11 @@
 						</li>
 					</ul>
 				</div>
+				<div class="content-box">
+					<p>${requestScope.commonQuestionData[index].content}</p>
+				</div>
 			</div>
+
 			<div class="back-btn-box">
 				<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
 				<c:set var="member" value="${sessionScope.loginfo}" />
