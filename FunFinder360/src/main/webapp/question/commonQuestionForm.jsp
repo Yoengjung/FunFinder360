@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/commonQuesionCSS/commonQuestionFormCSS.css" type="text/css">
-<title>Insert title here</title>
+<title>공통질문</title>
 <script type="text/javascript">
 	$(document)
 			.ready(

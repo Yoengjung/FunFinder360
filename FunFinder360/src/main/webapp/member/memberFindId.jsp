@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>찾은 아이디</title>
 
 <script type="text/javascript">
 function backPage() {
