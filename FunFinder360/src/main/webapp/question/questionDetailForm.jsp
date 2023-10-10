@@ -183,7 +183,16 @@ textarea {
 							<span>등록자명</span>
 						</li>
 						<li class="post-span-user post-span">
-							<span>관리자</span>
+							<span>
+								<c:choose>
+									<c:when test="${not empty requestScope.questionData[index].personalUserId}">
+									${requestScope.questionData[index].personalUserId}
+								</c:when>
+									<c:otherwise>
+									${requestScope.questionData[index].personalUserId}
+								</c:otherwise>
+								</c:choose>
+							</span>
 						</li>
 						<li class="post-span-column">
 							<span>등록일</span>
@@ -251,7 +260,16 @@ textarea {
 							<span>등록자명</span>
 						</li>
 						<li class="post-span-user post-span">
-							<span>관리자</span>
+							<span>
+								<c:choose>
+									<c:when test="${not empty requestScope.questionData[index].personalUserId}">
+									${requestScope.questionData[index].personalUserId}
+								</c:when>
+									<c:otherwise>
+									${requestScope.questionData[index].personalUserId}
+								</c:otherwise>
+								</c:choose>
+							</span>
 						</li>
 						<li class="post-span-column">
 							<span>등록일</span>
