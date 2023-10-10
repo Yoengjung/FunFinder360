@@ -272,6 +272,7 @@ public class CommonQuestionDao extends SuperDao {
 		bean.setReadhit(rs.getInt("readHit"));
 		bean.setPostedDate(rs.getString("postedDate"));
 		bean.setRanking(rs.getInt("ranking"));
+		
 
 		return bean;
 	}

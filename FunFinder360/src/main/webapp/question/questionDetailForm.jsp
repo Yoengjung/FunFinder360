@@ -1,13 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/questionCSS/questionDetailFormCSS.css"
-	type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/questionCSS/questionDetailFormCSS.css" type="text/css">
 <title>개인 질문 상세 보기</title>
 </head>
 <script>
@@ -19,12 +16,9 @@ function validation () {
 		return false;
 	}
 }
-
-
 	function backPage() {
 		location.href = "<%=notWithFormTag%>questionsList"
 	}
-
 	$(document).ready(function() {
 		var isButtonVisible = true; // 초기에 버튼이 보이도록 설정
 
@@ -89,19 +83,23 @@ function validation () {
 textarea {
 	resize: none;
 }
+
 .respond {
 	width: 100%;
 	display: block;
 }
+
 .adminbtn {
 	position: relative;
-	left: 0px;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 30px;
 }
 </style>
 <body>
 
 	<div class="container">
-		<h2>자주 묻는 질문</h2>
+		<h2>개인 문의</h2>
 		<c:if test='${requestScope.questionData[0].ranking == 1}'>
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
@@ -110,40 +108,49 @@ textarea {
 				</div>
 				<div class="post-info-box">
 					<ul>
-						<li class="post-span-column"><span>등록자명</span></li>
+						<li class="post-span-column">
+							<span>등록자명</span>
+						</li>
 						<li class="post-span-user post-span">
-						<span>
-							<c:choose>
-								<c:when test="${not empty requestScope.questionData[index].personalUserId}">
+							<span>
+								<c:choose>
+									<c:when test="${not empty requestScope.questionData[index].personalUserId}">
 									${requestScope.questionData[index].personalUserId}
 								</c:when>
-								<c:otherwise>
+									<c:otherwise>
 									${requestScope.questionData[index].personalUserId}
 								</c:otherwise>
-							</c:choose>
-						</span></li>
-						<li class="post-span-column"><span>등록일</span></li>
-						<li class="post-span-postedDate post-span"><span>${requestScope.questionData[index].postedDate}</span>
+								</c:choose>
+							</span>
 						</li>
-						<li class="post-span-column"><span>조회수</span></li>
-						<li class="post-span-readhit post-span"><span>${requestScope.questionData[index].readhit}</span>
+						<li class="post-span-column">
+							<span>등록일</span>
+						</li>
+						<li class="post-span-postedDate post-span">
+							<span>${requestScope.questionData[index].postedDate}</span>
+						</li>
+						<li class="post-span-column">
+							<span>조회수</span>
+						</li>
+						<li class="post-span-readhit post-span">
+							<span>${requestScope.questionData[index].readhit}</span>
 						</li>
 					</ul>
 				</div>
 				<div class="content-box">
 					<p>${requestScope.questionData[index].content}</p>
-					
-				
+
+
 				</div>
 			</div>
 			<div class="list-btn-box">
-				<button class="btn btn-secondary back-btn" value="돌아가기"
-					onclick="backPage();">목록</button>
+				<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
 			</div>
 			<div class="page-control-container">
 				<ul>
-					<li><span>다음글</span> <a
-						href="<%=notWithFormTag%>questionsDetail&questionListId=${requestScope.questionData[index + 1].questionListId}">${requestScope.questionData[index + 1].title}</a>
+					<li>
+						<span>다음글</span>
+						<a href="<%=notWithFormTag%>questionsDetail&questionListId=${requestScope.questionData[index + 1].questionListId}">${requestScope.questionData[index + 1].title}</a>
 					</li>
 
 					<c:set var="member" value="${sessionScope.loginfo}" />
@@ -164,8 +171,7 @@ textarea {
 			</div>
 		</c:if>
 
-		<c:if
-			test="${requestScope.questionData[0].ranking == requestScope.totalRecodeCount}">
+		<c:if test="${requestScope.questionData[0].ranking == requestScope.totalRecodeCount}">
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
@@ -173,13 +179,23 @@ textarea {
 				</div>
 				<div class="post-info-box">
 					<ul>
-						<li class="post-span-column"><span>등록자명</span></li>
-						<li class="post-span-user post-span"><span>관리자</span></li>
-						<li class="post-span-column"><span>등록일</span></li>
-						<li class="post-span-postedDate post-span"><span>${requestScope.questionData[index].postedDate}</span>
+						<li class="post-span-column">
+							<span>등록자명</span>
 						</li>
-						<li class="post-span-column"><span>조회수</span></li>
-						<li class="post-span-readhit post-span"><span>${requestScope.questionData[index].readhit}</span>
+						<li class="post-span-user post-span">
+							<span>관리자</span>
+						</li>
+						<li class="post-span-column">
+							<span>등록일</span>
+						</li>
+						<li class="post-span-postedDate post-span">
+							<span>${requestScope.questionData[index].postedDate}</span>
+						</li>
+						<li class="post-span-column">
+							<span>조회수</span>
+						</li>
+						<li class="post-span-readhit post-span">
+							<span>${requestScope.questionData[index].readhit}</span>
 						</li>
 					</ul>
 				</div>
@@ -188,8 +204,7 @@ textarea {
 				</div>
 			</div>
 			<div class="list-btn-box">
-				<button class="btn btn-secondary back-btn" value="돌아가기"
-					onclick="backPage();">목록</button>
+				<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
 			</div>
 
 			<c:set var="member" value="${sessionScope.loginfo}" />
@@ -199,8 +214,9 @@ textarea {
 
 			<div class="page-control-container">
 				<ul>
-					<li><span>이전글</span> <a
-						href="<%=notWithFormTag%>questionsDetail&questionListId=${requestScope.questionData[index + 1].questionListId}">${requestScope.questionData[index + 1].title}</a>
+					<li>
+						<span>이전글</span>
+						<a href="<%=notWithFormTag%>questionsDetail&questionListId=${requestScope.questionData[index + 1].questionListId}">${requestScope.questionData[index + 1].title}</a>
 					</li>
 					<c:set var="member" value="${sessionScope.loginfo}" />
 					<c:if test="${not empty member and member.userId == 'admin1'}">
@@ -218,10 +234,12 @@ textarea {
 					</c:if>
 				</ul>
 			</div>
+			<div class="respond-container" style="width: 100%; height: auto; border: 1px solid black; padding: 10px; top: 120px; position:relative;">
+				<p>${requestScope.questionData[0].respond}</p>
+			</div>
 		</c:if>
 
-		<c:if
-			test="${requestScope.questionData[0].ranking != 1 && requestScope.questionData[0].ranking != requestScope.totalRecodeCount}">
+		<c:if test="${requestScope.questionData[0].ranking != 1 && requestScope.questionData[0].ranking != requestScope.totalRecodeCount}">
 			<c:set var="index" value="0"></c:set>
 			<div class="container-1">
 				<div class="title-box">
@@ -229,13 +247,23 @@ textarea {
 				</div>
 				<div class="post-info-box">
 					<ul>
-						<li class="post-span-column"><span>등록자명</span></li>
-						<li class="post-span-user post-span"><span>관리자</span></li>
-						<li class="post-span-column"><span>등록일</span></li>
-						<li class="post-span-postedDate post-span"><span>${requestScope.questionData[index].postedDate}</span>
+						<li class="post-span-column">
+							<span>등록자명</span>
 						</li>
-						<li class="post-span-column"><span>조회수</span></li>
-						<li class="post-span-readhit post-span"><span>${requestScope.questionData[index].readhit}</span>
+						<li class="post-span-user post-span">
+							<span>관리자</span>
+						</li>
+						<li class="post-span-column">
+							<span>등록일</span>
+						</li>
+						<li class="post-span-postedDate post-span">
+							<span>${requestScope.questionData[index].postedDate}</span>
+						</li>
+						<li class="post-span-column">
+							<span>조회수</span>
+						</li>
+						<li class="post-span-readhit post-span">
+							<span>${requestScope.questionData[index].readhit}</span>
 						</li>
 					</ul>
 				</div>
@@ -244,8 +272,7 @@ textarea {
 				</div>
 			</div>
 			<div class="list-btn-box">
-				<button class="btn btn-secondary back-btn" value="돌아가기"
-					onclick="backPage();">목록</button>
+				<button class="btn btn-secondary back-btn" value="돌아가기" onclick="backPage();">목록</button>
 			</div>
 
 			<c:set var="member" value="${sessionScope.loginfo}" />
@@ -259,11 +286,13 @@ textarea {
 			</c:if>
 			<div class="page-control-container">
 				<ul>
-					<li><span>이전글</span> <a
-						href="<%=notWithFormTag%>questionsDetail&questionListId=${requestScope.questionData[index + 1].questionListId}">${requestScope.questionData[index + 1].title}</a>
+					<li>
+						<span>이전글</span>
+						<a href="<%=notWithFormTag%>questionsDetail&questionListId=${requestScope.questionData[index + 1].questionListId}">${requestScope.questionData[index + 1].title}</a>
 					</li>
-					<li><span>다음글</span> <a
-						href="<%=notWithFormTag%>questionsDetail&questionListId=${requestScope.questionData[index + 2].questionListId}">${requestScope.questionData[index + 2].title}</a>
+					<li>
+						<span>다음글</span>
+						<a href="<%=notWithFormTag%>questionsDetail&questionListId=${requestScope.questionData[index + 2].questionListId}">${requestScope.questionData[index + 2].title}</a>
 					</li>
 					<c:set var="member" value="${sessionScope.loginfo}" />
 					<c:if test="${not empty member and member.userId == 'admin1'}">
@@ -280,6 +309,12 @@ textarea {
 						</div>
 					</c:if>
 				</ul>
+
+				<c:if test="${not empty requestScope.questionData[0].respond}">
+					<div class="respond-container" style="width: 100%; height: auto; border: 1px solid black; padding: 10px; top: 120px; position:relative;">
+						<p>${requestScope.questionData[0].respond}</p>
+					</div>
+				</c:if>
 			</div>
 		</c:if>
 	</div>

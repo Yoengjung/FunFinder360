@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="../common/common.jsp"%>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminCSS/personalUserTotalDetailCSS.css">
 <title>업주 유저 통합 상세 조회</title>
 </head>
 <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
@@ -266,165 +264,173 @@
 </script>
 
 <body>
-	<div class="container">
-		<h2>${requestScope.userData.userName}회원정보</h2>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">아이디</span> <span class="info-value"
-					id="info-value-userId">${requestScope.userData.userId}</span> <input
-					type="hidden" id="info-value-userId-hidden"
-					value="${requestScope.userData.userId}">
+	<div class="container1">
+		<div class="container2" style="padding: 0px 150px;">
+			<h2 style="text-align: center">${requestScope.userData.userName}회원정보</h2>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">아이디</span>
+					<span class="info-value" id="info-value-userId">${requestScope.userData.userId}</span>
+					<input type="hidden" id="info-value-userId-hidden" value="${requestScope.userData.userId}">
+				</div>
 			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">이름</span> <span class="info-value">${requestScope.userData.userName}</span>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">이름</span>
+					<span class="info-value">${requestScope.userData.userName}</span>
+				</div>
 			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">사업이름</span> <span class="info-value"
-					id="info-value-businessName">${requestScope.userData.businessName}</span>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">사업이름</span>
+					<span class="info-value" id="info-value-businessName">${requestScope.userData.businessName}</span>
+				</div>
 			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">사업 구분</span> <span class="info-value">${requestScope.userData.businessType}</span>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">사업 구분</span>
+					<span class="info-value">${requestScope.userData.businessType}</span>
+				</div>
 			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">사업자 등록번호</span> <span class="info-value">${requestScope.userData.businessNumber}</span>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">사업자 등록번호</span>
+					<span class="info-value">${requestScope.userData.businessNumber}</span>
+				</div>
 			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">전화번호</span> <span class="info-value"
-					id="info-value-phone">${requestScope.userData.phoneNumber}</span>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">전화번호</span>
+					<span class="info-value" id="info-value-phone">${requestScope.userData.phoneNumber}</span>
+				</div>
 			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">이메일</span> <span class="info-value"
-					id="info-value-email">${requestScope.userData.email}</span>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">이메일</span>
+					<span class="info-value" id="info-value-email">${requestScope.userData.email}</span>
+				</div>
 			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">사업소개</span> <span class="info-value"
-					id="info-value-bio">${requestScope.userData.bio}</span>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">사업소개</span>
+					<span class="info-value" id="info-value-bio">${requestScope.userData.bio}</span>
+				</div>
 			</div>
-		</div>
-		<div class="info-container">
-			<div class="info-box">
-				<span class="info-key">가입 일자</span> <span class="info-value">${requestScope.userData.registrationDate}</span>
+			<div class="info-container">
+				<div class="info-box">
+					<span class="info-key">가입 일자</span>
+					<span class="info-value">${requestScope.userData.registrationDate}</span>
+				</div>
 			</div>
-		</div>
-		<h4 style="margin-top: 40px">업주 게시물 리스트</h4>
-		<span id="pagingStatus-span">${requestScope.pageInfo.pagingStatus}</span>
-		<table class="table talbe-hover">
-			<thead class="table-dark">
-				<tr>
-					<th>번호</th>
-					<th>등록자</th>
-					<th>활동명</th>
-					<th>카테고리</th>
-					<th>지역</th>
-					<th>가격</th>
-					<th>인원</th>
-					<th>영업시간</th>
-					<th>이벤트</th>
-					<th>조회수</th>
-					<th>등록일자</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="bean" items="${requestScope.activityData}">
+			<h4 style="margin-top: 40px; text-align: center">업주 게시물 리스트</h4>
+			<span id="pagingStatus-span">${requestScope.pageInfo.pagingStatus}</span>
+			<table class="table talbe-hover">
+				<thead class="table-dark">
 					<tr>
-						<td>${bean.activityId}</td>
-						<td>${bean.userid}</td>
-						<td><c:choose>
-								<c:when test="${fn:length(bean.activitiyName) >= 10}">
+						<th>번호</th>
+						<th>등록자</th>
+						<th>활동명</th>
+						<th>카테고리</th>
+						<th>지역</th>
+						<th>가격</th>
+						<th>인원</th>
+						<th>영업시간</th>
+						<th>이벤트</th>
+						<th>조회수</th>
+						<th>등록일자</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="bean" items="${requestScope.activityData}">
+						<tr>
+							<td>${bean.activityId}</td>
+							<td>${bean.userid}</td>
+							<td>
+								<c:choose>
+									<c:when test="${fn:length(bean.activitiyName) >= 10}">
 				                    ${fn:substring(bean.activitiyName, 0, 10)}..
 				                </c:when>
-								<c:otherwise>
+									<c:otherwise>
 				                    ${bean.activitiyName}
 								</c:otherwise>
-							</c:choose></td>
+								</c:choose>
+							</td>
 
-						<td>${bean.category}</td>
-						<td><c:choose>
-								<c:when
-									test="${fn:length(bean.location) + fn:length(bean.locationDetail) > 15}">
+							<td>${bean.category}</td>
+							<td>
+								<c:choose>
+									<c:when test="${fn:length(bean.location) + fn:length(bean.locationDetail) > 15}">
 						        	${bean.location} ${fn:substring(bean.locationDetail, 0, 15 - fn:length(bean.location))}...
 						        </c:when>
-								<c:otherwise>
+									<c:otherwise>
 						            ${bean.location} ${bean.locationDetail}
 						        </c:otherwise>
-							</c:choose></td>
-						<td align="center">${bean.price}</td>
-						<td align="center">${bean.activitiyNumber}</td>
-						<td>${bean.openTime}~${bean.closeTime}</td>
-						<td><c:choose>
-								<c:when test="${fn:length(bean.event) >= 10}">
+								</c:choose>
+							</td>
+							<td align="center">${bean.price}</td>
+							<td align="center">${bean.activitiyNumber}</td>
+							<td>${bean.openTime}~${bean.closeTime}</td>
+							<td>
+								<c:choose>
+									<c:when test="${fn:length(bean.event) >= 10}">
 					                    ${fn:substring(bean.event, 0, 10)}..
 					                </c:when>
-								<c:otherwise>
+									<c:otherwise>
 					                    ${bean.event}
 									</c:otherwise>
-							</c:choose></td>
-						<td align="center">${bean.readHit}</td>
-						<td>${bean.postedDate}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<div class="search-container">
-			<div class="search-in-container">
-				<form name="search-form" action="<%=withFormTag%>" method="get"
-					class="search-form">
-					<input type="hidden" name="command" value="ownerMemberActivityList">
-					<select id="mode" name="mode" class="form-select">
-						<option value="all" selected="selected">--- 선택해 주세요 ---
-						<option value="activityId">번호
-						<option value="userId">등록자
-						<option value="activityName">활동명
-						<option value="category">카테고리
-						<option value="location">지역
-						<option value="openTime">영업시작
-						<option value="closeTime">영업종료
-						<option value="event">이벤트
-						<option value="readHit">조회수
-						<option value="postedDate">등록일자
-					</select>
-					<div class="input-group">
-						<input class="keyword-input-box form-control" type="text"
-							name="keyword" id="keyword" placeholder="키워드 입력"
-							autocomplete="off">
-					</div>
-					<button type="submit"
-						class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
-				</form>
+								</c:choose>
+							</td>
+							<td align="center">${bean.readHit}</td>
+							<td>${bean.postedDate}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<div class="search-container">
+				<div class="search-in-container">
+					<form name="search-form" action="<%=withFormTag%>" method="get" class="search-form">
+						<input type="hidden" name="command" value="ownerMemberActivityList">
+						<select id="mode" name="mode" class="form-select">
+							<option value="all" selected="selected">--- 선택해 주세요 ---
+							<option value="activityId">번호
+							<option value="userId">등록자
+							<option value="activityName">활동명
+							<option value="category">카테고리
+							<option value="location">지역
+							<option value="openTime">영업시작
+							<option value="closeTime">영업종료
+							<option value="event">이벤트
+							<option value="readHit">조회수
+							<option value="postedDate">등록일자
+						</select>
+						<div class="input-group">
+							<input class="keyword-input-box form-control" type="text" name="keyword" id="keyword" placeholder="키워드 입력" autocomplete="off">
+						</div>
+						<button type="submit" class="btn btn-success form-control-sm search-btn" onclick="">검색</button>
+					</form>
+				</div>
 			</div>
-		</div>
-		<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
+			<div class="paging-container">${requestScope.pageInfo.pagingHtml}</div>
 
-		<div>
-			<h4 style="margin-top: 50px;">총계</h4>
-			<div class="total-container">
-				<div class="totalReadHit-container">
-					<div class="totalReadHit-box">
-						<span>총 조회수</span> <span>${requestScope.readHitTotalCount}</span>
+			<div>
+				<h4 style="margin-top: 50px; text-align: center">총계</h4>
+				<div class="total-container">
+					<div class="totalReadHit-container">
+						<div class="totalReadHit-box">
+							<span>총 조회수</span>
+							<span>${requestScope.readHitTotalCount}</span>
+						</div>
 					</div>
-				</div>
-				<div class='totalReviewCount-container'>
-					<div class="totalReivewCount-box">
-						<span>총 댓글수</span> <span>${requestScope.reviewTotalCount}</span>
+					<div class='totalReviewCount-container'>
+						<div class="totalReivewCount-box">
+							<span>총 댓글수</span>
+							<span>${requestScope.reviewTotalCount}</span>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div id="chartdiv"></div>
 		</div>
-		<div id="chartdiv"></div>
 	</div>
 </body>
 </html>

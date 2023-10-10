@@ -58,7 +58,7 @@ public class QuestionListDao extends SuperDao {
 		List<QuestionsList> lists = new ArrayList<QuestionsList>();
 
 		try {
-			String sql = " select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate, ranking from (select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate, rank() over(order by questionListId asc) as ranking from questionList) where questionlistId = ?";
+			String sql = " select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate, respond, ranking from (select questionListId, personaluserid, owneruserId, title, content, readhit,  postedDate, respond, rank() over(order by questionListId asc) as ranking from questionList) where questionlistId = ?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, questionListId);
@@ -66,7 +66,7 @@ public class QuestionListDao extends SuperDao {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				lists.add(getBeanDataAndRanking(rs));
+				lists.add(getBeanData(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class QuestionListDao extends SuperDao {
 		System.out.println("targetRanking : " + targetRanking);
 		String sql = "";
 		if (targetRanking <= 0) {
-			sql = " select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate, ranking from (select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate, rank() over(order by questionListId asc) as ranking from questionList) where ranking = ? ";
+			sql = " select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate, respond, ranking from (select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate, respond, rank() over(order by questionListId asc) as ranking from questionList) where ranking = ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, targetRanking + 1);
 			rs = pstmt.executeQuery();
@@ -146,6 +146,7 @@ public class QuestionListDao extends SuperDao {
 		bean.setReadhit(rs.getInt("readHit"));
 		bean.setPostedDate(rs.getString("postedDate"));
 		bean.setRanking(rs.getInt("ranking"));
+		bean.setRespond(rs.getString("respond"));
 		
 		return bean;
 	}
@@ -191,8 +192,8 @@ public class QuestionListDao extends SuperDao {
 		ResultSet rs = null;
 		Connection conn = super.getConnection();
 
-		String sql = " select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate ";
-		sql += " from (select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate, rank() over(order by questionListId asc) as ranking ";
+		String sql = " select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate, respond ";
+		sql += " from (select questionListId, personaluserid, owneruserId, title, content, readhit, postedDate, respond, rank() over(order by questionListId asc) as ranking ";
 		sql += " from questionList";
 
 		String mode = pageInfo.getMode();
@@ -241,6 +242,7 @@ public class QuestionListDao extends SuperDao {
 		bean.setContent(rs.getString("content"));
 		bean.setReadhit(rs.getInt("readhit"));
 		bean.setPostedDate(rs.getString("postedDate"));
+		bean.setRespond(rs.getString("respond"));
 
 		return bean;
 	}

@@ -17,7 +17,6 @@ public class UpdatePersonalActivityController extends SuperClass {
 		ActivitesDao dao = new ActivitesDao();
 		
 		try {
-			PersonalActivity activity = dao.get
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
