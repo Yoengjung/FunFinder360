@@ -38,6 +38,9 @@ textarea {
 .top-menu {
 	height: 50px;
 	text-align: center;
+	display : flex;
+	justify-content : center;
+	
 }
 
 .top-menu ul {
@@ -106,7 +109,7 @@ textarea {
 				</c:if>
 				<h2>기업 아이디/비밀번호 찾기</h2>
 				<div class="top-menu">
-					<ul>
+					<ul class="find-id-pw">
 						<li class="id-item">
 							<a href="<%=notWithFormTag%>OwnerFindId">아이디 찾기</a>
 						</li>
