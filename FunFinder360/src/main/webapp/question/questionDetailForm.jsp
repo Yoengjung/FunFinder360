@@ -97,7 +97,6 @@ textarea {
 }
 </style>
 <body>
-
 	<div class="container">
 		<h2>개인 문의</h2>
 		<c:if test='${requestScope.questionData[0].ranking == 1}'>
