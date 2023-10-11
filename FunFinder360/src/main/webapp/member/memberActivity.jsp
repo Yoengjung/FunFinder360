@@ -28,10 +28,9 @@
 							}
 						});
 					});
-	function button_event(event) {
+	function button_event(event, activityId, activityName) {
 		  event.preventDefault();
-		  const activityId = $("#activityId-tag").val();
-		  if (confirm("정말 삭제하시겠습니까??")) {
+		  if (confirm(`\${activityName} 정말 삭제하시겠습니까?`)) {
 		    var url = "<%=notWithFormTag%>personalDeleteActivity&activityId="+ activityId;
 			var xhr = new XMLHttpRequest();
 
@@ -71,6 +70,7 @@
 				<tbody>
 					<c:forEach var="personalActivity" items="${requestScope.personalActivityList}">
 						<input type="hidden" value="${personalActivity.activityId}" id="activityId-tag">
+						<input type="hidden" value="${personalActivity.activityName}" id="activityName-tag">
 						<tr>
 							<td class="table-body-box">
 								<c:choose>
@@ -97,8 +97,7 @@
 							<td class="table-body-box">${personalActivity.readHit}</td>
 							<td class="table-body-box">${personalActivity.postedDate}</td>
 							<td class="table-body-box">
-								<button type="button" onclick="button_event(event);">삭제</button>
-								<a href="<%=notWithFormTag%>updatePersonalActivity&activityId=${personalActivity.activityId}"><button type="Button">수정</button></a>
+								<button type="button" onclick="button_event(event, ${personalActivity.activityId}, '${personalActivity.activityName}');">삭제</button>
 								<%-- <a href="<%=notWithFormTag%>personalDeleteActivity&activityId=${personalActivity.activityId}" onclick="return button_event()">삭제</a> --%>
 							</td>
 						</tr>

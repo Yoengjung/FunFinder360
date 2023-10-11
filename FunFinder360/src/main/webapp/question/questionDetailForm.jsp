@@ -138,8 +138,6 @@ textarea {
 				</div>
 				<div class="content-box">
 					<p>${requestScope.questionData[index].content}</p>
-
-
 				</div>
 			</div>
 			<div class="list-btn-box">
@@ -242,7 +240,7 @@ textarea {
 					</c:if>
 				</ul>
 			</div>
-			<div class="respond-container" style="width: 100%; height: auto; border: 1px solid black; padding: 10px; top: 120px; position:relative;">
+			<div class="respond-container" style="width: 100%; height: auto; border: 2px solid #7D7C7C; padding: 10px; top: 120px; position:relative; border-radius: 10px">
 				<p>${requestScope.questionData[0].respond}</p>
 			</div>
 		</c:if>
@@ -328,7 +326,7 @@ textarea {
 				</ul>
 
 				<c:if test="${not empty requestScope.questionData[0].respond}">
-					<div class="respond-container" style="width: 100%; height: auto; border: 1px solid black; padding: 10px; top: 120px; position:relative;">
+					<div class="respond-container" style="width: 100%; height: auto; border: 2px solid #7D7C7C; padding: 10px; top: 120px; position:relative; border-radius: 10px">
 						<p>${requestScope.questionData[0].respond}</p>
 					</div>
 				</c:if>
