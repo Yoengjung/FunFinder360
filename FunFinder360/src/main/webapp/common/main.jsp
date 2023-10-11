@@ -160,9 +160,6 @@ $(document).ready(function () {
 						<br>문화 - 엔터테인먼트
 					</a>
 				</div>
-				<div class="arrow-box">
-					<span class="material-symbols-outlined underArrow-tag2">keyboard_double_arrow_down </span>
-				</div>
 			</div>
 		</div>
 		<div class="info-4" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center">
